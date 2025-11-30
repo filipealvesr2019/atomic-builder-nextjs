@@ -346,7 +346,13 @@ export default function TemplateEditorPage() {
         <DragOverlay>
           {activeDragId ? (
             <div className={styles.dragOverlayItem}>
-              {activeDragId.startsWith('lib-') ? 'Novo Bloco' : 'Movendo Bloco'}
+              {activeDragId.startsWith('lib-element-text') ? '📝 Texto' :
+               activeDragId.startsWith('lib-element-image') ? '🖼️ Imagem' :
+               activeDragId.startsWith('lib-element-button') ? '🔘 Botão' :
+               activeDragId.startsWith('lib-element-container') ? '📦 Container' :
+               activeDragId.startsWith('lib-element-spacer') ? '↔️ Espaçador' :
+               activeDragId.startsWith('lib-section') ? '📄 Seção' :
+               'Movendo Bloco'}
             </div>
           ) : null}
         </DragOverlay>

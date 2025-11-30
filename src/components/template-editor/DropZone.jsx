@@ -7,40 +7,48 @@ import { CSS } from '@dnd-kit/utilities';
 import { Trash2, GripVertical } from 'lucide-react';
 import templates from '@/templates-cms/registry';
 
-// --- Elementos Básicos (Premium Styles) ---
+// --- Elementos Básicos (Com Placeholders Visuais) ---
 const BasicText = ({ content, align = 'left', color = '#1f2937' }) => (
   <div style={{ textAlign: align, color, padding: '1rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.6' }}>
-    {content || <span className="text-gray-400 italic">Comece a digitar seu texto aqui...</span>}
+    {content || (
+      <div className="p-2 border border-dashed border-gray-300 rounded bg-gray-50">
+        <div className="h-2 bg-gray-200 rounded w-3/4 mb-2"></div>
+        <div className="h-2 bg-gray-200 rounded w-1/2"></div>
+        <span className="text-xs text-gray-400 mt-1 block">Texto (Clique para editar)</span>
+      </div>
+    )}
   </div>
 );
 
 const BasicImage = ({ src, alt, width = '100%' }) => (
-  <div className="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow" style={{ padding: '0.5rem' }}>
-    <img 
-      src={src || 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80'} 
-      alt={alt || 'Imagem Decorativa'} 
-      className="w-full h-64 object-cover rounded-lg"
-      style={{ width }} 
-    />
-    {!src && <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-      <span className="text-white font-medium drop-shadow-md">Editar Imagem</span>
-    </div>}
+  <div style={{ padding: '0.5rem' }}>
+    {src ? (
+      <img 
+        src={src} 
+        alt={alt || 'Imagem'} 
+        style={{ width, maxWidth: '100%', borderRadius: '4px' }} 
+      />
+    ) : (
+      <div className="flex flex-col items-center justify-center h-32 bg-gray-100 border border-dashed border-gray-300 rounded-lg text-gray-400">
+        <svg className="w-8 h-8 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+        <span className="text-xs font-medium">Imagem</span>
+      </div>
+    )}
   </div>
 );
 
 const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb', color = '#fff' }) => (
-  <div style={{ textAlign: align, padding: '1.5rem' }}>
+  <div style={{ textAlign: align, padding: '1rem' }}>
     <a 
       href={url || '#'} 
-      className="inline-flex items-center justify-center px-6 py-3 text-base font-medium transition-all transform hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
+      className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium transition-all rounded-md shadow-sm"
       style={{ 
         backgroundColor, 
         color, 
         textDecoration: 'none', 
-        borderRadius: '8px',
       }}
     >
-      {text || 'Clique Aqui'}
+      {text || 'Botão'}
     </a>
   </div>
 );
@@ -71,8 +79,9 @@ const BasicContainer = ({ children }) => (
 );
 
 const BasicSpacer = ({ height = '50px' }) => (
-  <div style={{ height }} className="w-full relative group">
-    <div className="absolute inset-0 bg-stripes-gray opacity-0 group-hover:opacity-10 transition-opacity" />
+  <div style={{ height }} className="w-full relative group flex items-center justify-center">
+    <div className="absolute inset-0 border border-dashed border-transparent group-hover:border-gray-300 transition-colors" />
+    <span className="opacity-0 group-hover:opacity-100 text-[10px] text-gray-400 bg-white px-2">Espaçador</span>
   </div>
 );
 
