@@ -7,26 +7,29 @@ import { CSS } from '@dnd-kit/utilities';
 import { Trash2, GripVertical } from 'lucide-react';
 import templates from '@/templates-cms/registry';
 
-// --- Elementos Básicos (Limpos e Organizados) ---
+// --- Elementos Básicos (Estilizados e Alinhados) ---
 const BasicText = ({ content, align = 'left', color = '#1f2937' }) => (
   <div style={{ 
+    width: '100%',
+    padding: '20px 24px',
     textAlign: align, 
     color, 
-    padding: '16px 0',
     fontFamily: 'system-ui, -apple-system, sans-serif',
-    lineHeight: '1.6',
-    fontSize: '15px'
+    lineHeight: '1.7',
+    fontSize: '16px',
+    backgroundColor: '#ffffff',
+    borderRadius: '4px',
+    marginBottom: '4px'
   }}>
-    {content || (
-      <div style={{ color: '#9ca3af', fontStyle: 'italic' }}>
-        Clique para editar este texto
-      </div>
-    )}
+    {content || 'Novo texto'}
   </div>
 );
 
 const BasicImage = ({ src, alt, width = '100%' }) => (
-  <div style={{ padding: '8px 0' }}>
+  <div style={{ 
+    width: '100%',
+    marginBottom: '4px'
+  }}>
     {src ? (
       <img 
         src={src} 
@@ -35,43 +38,52 @@ const BasicImage = ({ src, alt, width = '100%' }) => (
           width: '100%', 
           height: 'auto',
           display: 'block',
-          borderRadius: '4px' 
+          borderRadius: '4px',
+          objectFit: 'cover'
         }} 
       />
     ) : (
       <div style={{ 
         width: '100%',
-        height: '200px',
+        height: '280px',
         background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
         borderRadius: '4px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#3b82f6'
+        color: '#60a5fa'
       }}>
-        <svg style={{ width: '40px', height: '40px', marginBottom: '8px', opacity: 0.5 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg style={{ width: '48px', height: '48px', marginBottom: '12px', opacity: 0.6 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
         </svg>
-        <span style={{ fontSize: '12px', fontWeight: '500', color: '#60a5fa' }}>Imagem</span>
+        <span style={{ fontSize: '13px', fontWeight: '500', color: '#3b82f6' }}>Imagem</span>
       </div>
     )}
   </div>
 );
 
 const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb', color = '#fff' }) => (
-  <div style={{ textAlign: align, padding: '12px 0' }}>
+  <div style={{ 
+    width: '100%',
+    padding: '16px 24px',
+    textAlign: align,
+    backgroundColor: '#ffffff',
+    borderRadius: '4px',
+    marginBottom: '4px'
+  }}>
     <a 
       href={url || '#'} 
       style={{ 
         display: 'inline-block',
-        padding: '10px 24px', 
+        padding: '12px 32px', 
         backgroundColor, 
         color, 
         textDecoration: 'none', 
         borderRadius: '6px',
-        fontWeight: '500',
-        fontSize: '14px',
+        fontWeight: '600',
+        fontSize: '15px',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
         transition: 'all 0.2s'
       }}
     >
@@ -82,12 +94,13 @@ const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb',
 
 const BasicContainer = ({ children }) => (
   <div style={{ 
-    padding: '24px', 
-    border: '2px dashed #e5e7eb',
+    width: '100%',
+    padding: '32px', 
+    border: '2px dashed #d1d5db',
     borderRadius: '8px',
-    minHeight: '100px',
-    backgroundColor: '#fafafa',
-    marginBottom: '8px'
+    minHeight: '120px',
+    backgroundColor: '#f9fafb',
+    marginBottom: '4px'
   }}>
     {children || (
       <div style={{
@@ -96,12 +109,12 @@ const BasicContainer = ({ children }) => (
         alignItems: 'center',
         justifyContent: 'center',
         color: '#9ca3af',
-        padding: '20px'
+        padding: '32px'
       }}>
-        <svg style={{ width: '32px', height: '32px', marginBottom: '8px', opacity: 0.5 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg style={{ width: '40px', height: '40px', marginBottom: '12px', opacity: 0.4 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
         </svg>
-        <p style={{ margin: 0, fontSize: '13px', fontWeight: '500' }}>Arraste elementos aqui</p>
+        <p style={{ margin: 0, fontSize: '14px', fontWeight: '500' }}>Arraste elementos aqui</p>
       </div>
     )}
   </div>
@@ -111,14 +124,14 @@ const BasicSpacer = ({ height = '40px' }) => (
   <div style={{ 
     height, 
     width: '100%',
-    position: 'relative',
-    margin: '8px 0'
+    marginBottom: '4px',
+    position: 'relative'
   }}>
     <div style={{
       position: 'absolute',
       top: '50%',
-      left: '0',
-      right: '0',
+      left: '24px',
+      right: '24px',
       height: '1px',
       background: '#e5e7eb',
       transform: 'translateY(-50%)'
