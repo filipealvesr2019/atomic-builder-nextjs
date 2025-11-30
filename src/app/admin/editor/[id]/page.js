@@ -24,7 +24,7 @@ export default function TemplateEditorPage() {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 5, // Requer mover 5px para iniciar o arraste (evita cliques acidentais)
+        distance: 5,
       },
     }),
     useSensor(KeyboardSensor, {
@@ -45,14 +45,10 @@ export default function TemplateEditorPage() {
         const data = await res.json();
         setTemplate(data);
         
-        // Se já tiver pageContent salvo, usa ele.
         if (data.pageContent && data.pageContent.length > 0) {
           setBlocks(data.pageContent);
-        } 
-        // Se não, carrega as seções padrão do template (definidas no template.json/registry)
-        else if (data.templateId) {
+        } else if (data.templateId) {
           let defaultBlocks = [];
-          
           if (data.templateId === 'rustic-store-cms') {
             defaultBlocks = [
               { id: 'hero-1', type: 'hero', category: 'section', props: {} },
@@ -74,7 +70,6 @@ export default function TemplateEditorPage() {
               { id: 'contact-1', type: 'contact', category: 'section', props: {} }
             ];
           }
-          
           setBlocks(defaultBlocks);
         } else {
           setBlocks([]);
@@ -92,19 +87,11 @@ export default function TemplateEditorPage() {
     setActiveDragId(event.active.id);
   };
 
-  // Função auxiliar para encontrar o container de um item
   const findContainer = (id, items) => {
-    // Se o item é um container raiz
-    if (items.find(item => item.id === id)) {
-      return 'root';
-    }
-
-    // Procura recursivamente
+    if (items.find(item => item.id === id)) return 'root';
     for (const item of items) {
       if (item.children) {
-        if (item.children.find(child => child.id === id)) {
-          return item.id;
-        }
+        if (item.children.find(child => child.id === id)) return item.id;
         const found = findContainer(id, item.children);
         if (found) return found;
       }
@@ -112,49 +99,15 @@ export default function TemplateEditorPage() {
     return null;
   };
 
-  const handleDragOver = (event) => {
-    const { active, over } = event;
-    const overId = over?.id;
-
-    if (!overId || active.id === overId) return;
-
-    // Se é um item da biblioteca, não faz nada no DragOver (só no DragEnd)
-    if (active.id.startsWith('lib-')) return;
-
-    const activeContainer = findContainer(active.id, blocks);
-    const overContainer = findContainer(overId, blocks);
-
-    if (!activeContainer || !overContainer) return;
-
-    // Se moveu para um container diferente
-    if (activeContainer !== overContainer) {
-      setBlocks((items) => {
-        const activeItems = activeContainer === 'root' ? items : findBlockById(items, activeContainer).children;
-        const overItems = overContainer === 'root' ? items : findBlockById(items, overContainer).children;
-        
-        const activeIndex = activeItems.findIndex((i) => i.id === active.id);
-        const overIndex = overItems.findIndex((i) => i.id === overId);
-
-        let newIndex;
-        if (overId in items) {
-          newIndex = overItems.length + 1;
-        } else {
-          const isBelowOverItem =
-            over &&
-            active.rect.current.translated &&
-            active.rect.current.translated.top >
-              over.rect.top + over.rect.height;
-
-          const modifier = isBelowOverItem ? 1 : 0;
-          newIndex = overIndex >= 0 ? overIndex + modifier : overItems.length + 1;
-        }
-
-        // Lógica complexa de mover entre arrays... 
-        // Para simplificar neste passo, vamos focar apenas no DragEnd para inserção inicial
-        // e deixar o reorder aninhado para o próximo passo se for muito complexo agora.
-        return items; 
-      });
+  const findBlockById = (items, id) => {
+    for (const item of items) {
+      if (item.id === id) return item;
+      if (item.children) {
+        const found = findBlockById(item.children, id);
+        if (found) return found;
+      }
     }
+    return null;
   };
 
   const handleDragEnd = (event) => {
@@ -163,20 +116,19 @@ export default function TemplateEditorPage() {
 
     if (!over) return;
 
-    // 1. Novo Bloco da Biblioteca
     if (active.id.startsWith('lib-')) {
       const parts = active.id.split('-');
       const category = parts[1];
       const type = parts.slice(2).join('-');
       
       let initialProps = {};
-      let children = []; // Containers podem ter filhos
+      let children = [];
 
       if (category === 'element') {
         if (type === 'text') initialProps = { content: 'Novo texto' };
         if (type === 'button') initialProps = { text: 'Clique Aqui' };
         if (type === 'container') {
-           initialProps = { padding: '20px', background: '#f9f9f9' };
+           initialProps = { padding: '20px', background: 'transparent' };
            children = [];
         }
       }
@@ -190,26 +142,20 @@ export default function TemplateEditorPage() {
       };
       
       setBlocks((items) => {
-        // Se soltou no container raiz (drop-zone)
         if (over.id === 'drop-zone') {
           return [...items, newBlock];
         }
 
-        // Achar o bloco sobre o qual soltamos
         const overBlock = findBlockById(items, over.id);
         
-        // CASO 1: Soltou DIRETAMENTE sobre um Container (inserir dentro)
         if (overBlock && overBlock.type === 'container') {
             const newItems = JSON.parse(JSON.stringify(items));
             const targetContainer = findBlockById(newItems, over.id);
-            
             if (!targetContainer.children) targetContainer.children = [];
             targetContainer.children.push(newBlock);
-            
             return newItems;
         }
 
-        // CASO 2: Soltou sobre um item normal (inserir depois dele, no mesmo nível)
         const overContainerId = findContainer(over.id, items);
         
         if (overContainerId === 'root') {
@@ -218,7 +164,6 @@ export default function TemplateEditorPage() {
              newItems.splice(overIndex + 1, 0, newBlock);
              return newItems;
         } else if (overContainerId) {
-            // Soltou sobre um item que está dentro de um container
             const newItems = JSON.parse(JSON.stringify(items));
             const parent = findBlockById(newItems, overContainerId);
             if (parent && parent.children) {
@@ -233,7 +178,6 @@ export default function TemplateEditorPage() {
       return;
     }
 
-    // 2. Reordenar Blocos Existentes (Lógica Simples por enquanto)
     if (active.id !== over.id) {
       setBlocks((items) => {
         const oldIndex = items.findIndex(item => item.id === active.id);
@@ -246,18 +190,6 @@ export default function TemplateEditorPage() {
     }
   };
 
-  // Função auxiliar para achar bloco por ID recursivamente
-  const findBlockById = (items, id) => {
-    for (const item of items) {
-      if (item.id === id) return item;
-      if (item.children) {
-        const found = findBlockById(item.children, id);
-        if (found) return found;
-      }
-    }
-    return null;
-  };
-
   const handleBlockClick = (block) => {
     console.log('[Editor] Bloco clicado:', block);
     setSelectedBlock(block);
@@ -265,18 +197,40 @@ export default function TemplateEditorPage() {
 
   const handlePropsChange = (blockId, newProps) => {
     console.log('[Editor] Props alteradas:', blockId, newProps);
-    setBlocks(blocks.map(block => 
-      block.id === blockId ? { ...block, props: { ...block.props, ...newProps } } : block
-    ));
     
-    // Atualiza também o selectedBlock para refletir no painel imediatamente
+    // Função recursiva para atualizar props em qualquer nível
+    const updateBlockProps = (items) => {
+      return items.map(block => {
+        if (block.id === blockId) {
+          return { ...block, props: { ...block.props, ...newProps } };
+        }
+        if (block.children) {
+          return { ...block, children: updateBlockProps(block.children) };
+        }
+        return block;
+      });
+    };
+
+    setBlocks(prevBlocks => updateBlockProps(prevBlocks));
+    
     if (selectedBlock && selectedBlock.id === blockId) {
       setSelectedBlock(prev => ({ ...prev, props: { ...prev.props, ...newProps } }));
     }
   };
 
   const handleDeleteBlock = (blockId) => {
-    setBlocks(blocks.filter(block => block.id !== blockId));
+    // Função recursiva para deletar
+    const deleteBlock = (items) => {
+      return items.filter(block => block.id !== blockId).map(block => {
+        if (block.children) {
+          return { ...block, children: deleteBlock(block.children) };
+        }
+        return block;
+      });
+    };
+
+    setBlocks(prevBlocks => deleteBlock(prevBlocks));
+    
     if (selectedBlock?.id === blockId) {
       setSelectedBlock(null);
     }
@@ -285,13 +239,11 @@ export default function TemplateEditorPage() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Salva o pageContent no template
       const res = await fetch(`/api/templates/${params.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           pageContent: blocks,
-          // Também podemos atualizar o 'content' ou 'sections' se necessário para retrocompatibilidade
         })
       });
 
@@ -309,25 +261,30 @@ export default function TemplateEditorPage() {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Carregando...</div>;
+    return <div className="flex items-center justify-center h-screen bg-gray-50 text-gray-500">Carregando editor...</div>;
   }
 
   if (!template) {
-    return <div className={styles.error}>Template não encontrado</div>;
+    return <div className="flex items-center justify-center h-screen bg-gray-50 text-red-500">Template não encontrado</div>;
   }
 
   return (
     <div className={styles.editorContainer}>
+      {/* Header Compacto */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <Link href="/admin/templates" className={styles.backLink}>
-            <ArrowLeft size={20} />
+            <ArrowLeft size={18} />
           </Link>
-          <h1>Editando: {template.name}</h1>
+          <h1>{template.name}</h1>
         </div>
-        <div className={styles.headerRight}>
-          <button onClick={handleSave} disabled={saving} className={styles.saveButton}>
-            <Save size={18} />
+        <div>
+          <button 
+            onClick={handleSave} 
+            disabled={saving} 
+            className={styles.saveButton}
+          >
+            <Save size={14} />
             {saving ? 'Salvando...' : 'Salvar'}
           </button>
         </div>
@@ -340,11 +297,38 @@ export default function TemplateEditorPage() {
         onDragEnd={handleDragEnd}
       >
         <div className={styles.mainContent}>
+          {/* Sidebar Dinâmica (Esquerda) */}
           <aside className={styles.sidebarLeft}>
-            <BlockLibrary templateId={template.templateId} />
+            {selectedBlock ? (
+              <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <div className={styles.sidebarHeader}>
+                  <h3 className={styles.sidebarTitle}>Editar {selectedBlock.type}</h3>
+                  <button 
+                    onClick={() => setSelectedBlock(null)}
+                    className={styles.backButton}
+                    title="Voltar para biblioteca"
+                  >
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', width: '16px', height: '16px' }}>
+                        {[...Array(9)].map((_, i) => <div key={i} style={{ background: 'currentColor', borderRadius: '1px' }} />)}
+                    </div>
+                  </button>
+                </div>
+                <div className={styles.sidebarContent}>
+                  <PropsPanel
+                    block={selectedBlock}
+                    templateId={template.templateId}
+                    onPropsChange={(newProps) => handlePropsChange(selectedBlock.id, newProps)}
+                  />
+                </div>
+              </div>
+            ) : (
+              <BlockLibrary templateId={template.templateId} />
+            )}
           </aside>
           
+          {/* Área de Preview (Direita) */}
           <main className={styles.previewArea}>
+            {/* Device Frame */}
             <div className={styles.deviceFrame}>
               <SortableContext items={blocks.map(b => b.id)} strategy={verticalListSortingStrategy}>
                 <DropZone
@@ -357,14 +341,6 @@ export default function TemplateEditorPage() {
               </SortableContext>
             </div>
           </main>
-
-          <aside className={styles.sidebarRight}>
-            <PropsPanel
-              block={selectedBlock}
-              templateId={template.templateId}
-              onPropsChange={(newProps) => handlePropsChange(selectedBlock.id, newProps)}
-            />
-          </aside>
         </div>
         
         <DragOverlay>

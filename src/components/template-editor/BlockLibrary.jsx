@@ -21,10 +21,12 @@ function DraggableLibraryItem({ id, label, icon: Icon, type }) {
       style={style} 
       {...listeners} 
       {...attributes}
-      className="flex flex-col items-center justify-center p-4 bg-white border border-gray-200 rounded cursor-move hover:border-blue-500 hover:shadow-md transition-all text-center gap-2 h-24"
+      className="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg cursor-grab hover:border-blue-500 hover:shadow-md hover:-translate-y-0.5 transition-all text-center gap-2 h-20 group"
     >
-      {Icon && <Icon size={24} className="text-gray-600" />}
-      <span className="text-xs font-medium text-gray-700">{label}</span>
+      <div className="p-2 bg-gray-50 rounded-full group-hover:bg-blue-50 transition-colors">
+        {Icon && <Icon size={20} className="text-gray-500 group-hover:text-blue-600" />}
+      </div>
+      <span className="text-xs font-medium text-gray-600 group-hover:text-gray-900">{label}</span>
     </div>
   );
 }
@@ -76,24 +78,24 @@ export default function BlockLibrary({ templateId }) {
   }, [templateId]);
 
   return (
-    <div className="flex flex-col h-full bg-white border-r border-gray-200">
+    <div className="flex flex-col h-full bg-white">
       {/* Abas */}
       <div className="flex border-b border-gray-200">
         <button
-          className={`flex-1 py-3 text-sm font-medium text-center transition-colors ${
+          className={`flex-1 py-3 text-xs font-medium text-center uppercase tracking-wide transition-colors ${
             activeTab === 'elements' 
-              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50' 
-              : 'text-gray-600 hover:bg-gray-50'
+              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/50' 
+              : 'text-gray-500 hover:bg-gray-50'
           }`}
           onClick={() => setActiveTab('elements')}
         >
           Elementos
         </button>
         <button
-          className={`flex-1 py-3 text-sm font-medium text-center transition-colors ${
+          className={`flex-1 py-3 text-xs font-medium text-center uppercase tracking-wide transition-colors ${
             activeTab === 'layouts' 
-              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50' 
-              : 'text-gray-600 hover:bg-gray-50'
+              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/50' 
+              : 'text-gray-500 hover:bg-gray-50'
           }`}
           onClick={() => setActiveTab('layouts')}
         >
@@ -102,7 +104,7 @@ export default function BlockLibrary({ templateId }) {
       </div>
 
       {/* Conteúdo */}
-      <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+      <div className="flex-1 overflow-y-auto p-4 bg-gray-50/50">
         <div className="grid grid-cols-2 gap-3">
           {activeTab === 'elements' ? (
             basicElements.map(el => (

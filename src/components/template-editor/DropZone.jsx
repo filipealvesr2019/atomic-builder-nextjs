@@ -7,35 +7,37 @@ import { CSS } from '@dnd-kit/utilities';
 import { Trash2, GripVertical } from 'lucide-react';
 import templates from '@/templates-cms/registry';
 
-// --- Elementos Básicos (Simples para MVP) ---
-const BasicText = ({ content, align = 'left', color = '#000' }) => (
-  <div style={{ textAlign: align, color, padding: '1rem' }}>
-    {content || 'Texto padrão. Clique para editar.'}
+// --- Elementos Básicos (Premium Styles) ---
+const BasicText = ({ content, align = 'left', color = '#1f2937' }) => (
+  <div style={{ textAlign: align, color, padding: '1rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.6' }}>
+    {content || <span className="text-gray-400 italic">Comece a digitar seu texto aqui...</span>}
   </div>
 );
 
 const BasicImage = ({ src, alt, width = '100%' }) => (
-  <div style={{ padding: '1rem' }}>
+  <div className="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow" style={{ padding: '0.5rem' }}>
     <img 
-      src={src || 'https://via.placeholder.com/400x200'} 
-      alt={alt || 'Imagem'} 
-      style={{ width, maxWidth: '100%', borderRadius: '4px' }} 
+      src={src || 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80'} 
+      alt={alt || 'Imagem Decorativa'} 
+      className="w-full h-64 object-cover rounded-lg"
+      style={{ width }} 
     />
+    {!src && <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+      <span className="text-white font-medium drop-shadow-md">Editar Imagem</span>
+    </div>}
   </div>
 );
 
 const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb', color = '#fff' }) => (
-  <div style={{ textAlign: align, padding: '1rem' }}>
+  <div style={{ textAlign: align, padding: '1.5rem' }}>
     <a 
       href={url || '#'} 
+      className="inline-flex items-center justify-center px-6 py-3 text-base font-medium transition-all transform hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
       style={{ 
-        display: 'inline-block', 
-        padding: '10px 20px', 
         backgroundColor, 
         color, 
         textDecoration: 'none', 
-        borderRadius: '4px',
-        fontWeight: '500'
+        borderRadius: '8px',
       }}
     >
       {text || 'Clique Aqui'}
@@ -44,13 +46,34 @@ const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb',
 );
 
 const BasicContainer = ({ children }) => (
-  <div style={{ padding: '2rem', border: '1px dashed #ccc', minHeight: '100px' }}>
-    {children || <p className="text-gray-400 text-center">Container Vazio</p>}
+  <div style={{ 
+    padding: '2rem', 
+    border: '1px dashed #e5e7eb',
+    borderRadius: '8px',
+    minHeight: '120px',
+    backgroundColor: children ? 'transparent' : '#f9fafb',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: children ? 'flex-start' : 'center',
+    transition: 'all 0.2s ease'
+  }}
+  className="hover:border-blue-300 hover:bg-blue-50/10"
+  >
+    {children || (
+      <div className="flex flex-col items-center justify-center text-gray-400">
+        <div className="w-8 h-8 mb-2 rounded-full bg-gray-100 flex items-center justify-center">
+          <span className="text-xl font-light">+</span>
+        </div>
+        <p className="text-xs font-medium">Solte elementos aqui</p>
+      </div>
+    )}
   </div>
 );
 
 const BasicSpacer = ({ height = '50px' }) => (
-  <div style={{ height, background: 'transparent' }} />
+  <div style={{ height }} className="w-full relative group">
+    <div className="absolute inset-0 bg-stripes-gray opacity-0 group-hover:opacity-10 transition-opacity" />
+  </div>
 );
 
 // Mapeamento de elementos básicos
@@ -92,31 +115,31 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, child
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative group mb-1 transition-all ${
-        isSelected ? 'ring-2 ring-blue-500 z-10' : 'hover:ring-1 hover:ring-blue-300'
+      className={`relative group mb-2 transition-all rounded-sm ${
+        isSelected ? 'ring-2 ring-blue-500 ring-offset-2 z-10' : 'hover:ring-1 hover:ring-blue-300 hover:bg-gray-50/50'
       } ${isOver ? 'border-b-4 border-blue-500' : ''}`}
       onClick={(e) => {
         e.stopPropagation();
         onClick(block);
       }}
     >
-      {/* Overlay de Ações */}
-      <div className={`absolute -top-3 left-1/2 transform -translate-x-1/2 z-20 flex items-center bg-blue-500 text-white rounded-full shadow-lg overflow-hidden transition-opacity ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} scale-75 hover:scale-100`}>
+      {/* Overlay de Ações (Moderno) */}
+      <div className={`absolute -top-3 right-2 z-20 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden transition-all ${isSelected ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0'}`}>
         <div 
           {...attributes} 
           {...listeners}
-          className="p-1.5 cursor-move hover:bg-blue-600 border-r border-blue-400"
+          className="p-1.5 cursor-grab hover:bg-gray-50 border-r border-gray-100 text-gray-500"
           title="Arrastar"
         >
           <GripVertical size={14} />
         </div>
-        <span className="px-2 text-xs font-bold uppercase">{block.type}</span>
+        <span className="px-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{block.type}</span>
         <button 
           onClick={(e) => {
             e.stopPropagation();
             onDelete(block.id);
           }}
-          className="p-1.5 hover:bg-red-500 transition-colors"
+          className="p-1.5 hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors border-l border-gray-100"
           title="Excluir"
         >
           <Trash2 size={14} />
@@ -124,7 +147,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, child
       </div>
 
       {/* Conteúdo do Bloco */}
-      <div className={isSelected ? "" : "" /* Remove pointer-events-none to allow interaction with children */}>
+      <div className={isSelected ? "" : ""}>
         {BlockComponent ? (
           <BlockComponent {...block.props}>
             {children}
