@@ -8,6 +8,9 @@ const createTemplateSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   type: z.enum(['page', 'section', 'block', 'theme']).default('page'),
   content: z.array(z.any()), // Array of blocks
+  templateId: z.string().optional(), // CMS-compatible template ID
+  sections: z.record(z.any()).optional(), // Props for template sections
+  url: z.string().optional(), // For iframe-based templates
   pages: z.array(z.object({
     name: z.string(),
     slug: z.string(),
@@ -66,7 +69,7 @@ export async function POST(req) {
       return new NextResponse(validation.error.errors[0].message, { status: 400 });
     }
 
-    const { name, type, content, pages, isPublic } = validation.data;
+    const { name, type, content, templateId, sections, url, pages, isPublic } = validation.data;
 
     await dbConnect();
 
@@ -74,6 +77,9 @@ export async function POST(req) {
       name,
       type,
       content,
+      templateId,
+      sections,
+      url,
       pages,
       isPublic,
       authorId: userId,

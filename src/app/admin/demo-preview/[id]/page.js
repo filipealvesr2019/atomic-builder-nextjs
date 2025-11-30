@@ -52,10 +52,16 @@ export default function DemoPreviewPage() {
 
   // Renderizar template CMS-compatível
   const renderContent = () => {
+    console.log('[PREVIEW] Template completo:', template);
+    console.log('[PREVIEW] templateId:', template.templateId);
+    console.log('[PREVIEW] type:', template.type);
+    
     if (template.type === 'theme' && template.templateId) {
       // Usar templates-cms registry
       const { getTemplateLayout } = require('@/templates-cms/registry');
       const LayoutComponent = getTemplateLayout(template.templateId, 'home');
+      
+      console.log('[PREVIEW] LayoutComponent encontrado?', !!LayoutComponent);
       
       if (!LayoutComponent) {
         return (
@@ -65,6 +71,8 @@ export default function DemoPreviewPage() {
             <p><strong>Templates disponíveis:</strong></p>
             <ul style={{ listStyle: 'none', padding: 0 }}>
               <li><code>minimal-business</code></li>
+              <li><code>business-theme-cms</code></li>
+              <li><code>rustic-store-cms</code></li>
             </ul>
           </div>
         );

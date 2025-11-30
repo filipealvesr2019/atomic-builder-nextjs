@@ -14,6 +14,15 @@ const TemplateSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Mixed, // The JSON structure of the template
     required: true,
   },
+  templateId: {
+    type: String, // ID for CMS-compatible templates (e.g., 'rustic-store-cms')
+  },
+  sections: {
+    type: mongoose.Schema.Types.Mixed, // Props for template sections
+  },
+  url: {
+    type: String, // URL for iframe-based templates
+  },
   pages: [
     {
       name: String,

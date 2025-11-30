@@ -1,0 +1,41 @@
+{
+  "name": "Rustic Store",
+  "version": "1.0.0",
+  "author": "CMS Templates",
+  "description": "Template moderno para loja virtual com estilo rústico",
+  "thumbnail": "preview.png",
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Hero Section",
+      "file": "sections/Hero.jsx"
+    },
+    {
+      "id": "products",
+      "name": "Products Grid",
+      "file": "sections/Products.jsx"
+    },
+    {
+      "id": "about",
+      "name": "About Section",
+      "file": "sections/About.jsx"
+    },
+    {
+      "id": "newsletter",
+      "name": "Newsletter",
+      "file": "sections/Newsletter.jsx"
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "file": "sections/Contact.jsx"
+    }
+  ],
+  "layouts": [
+    {
+      "id": "home",
+      "name": "Página Inicial",
+      "file": "layouts/HomePage.jsx"
+    }
+  ]
+}

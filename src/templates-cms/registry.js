@@ -1,8 +1,15 @@
 // Sistema de registro de templates CMS-compatíveis
 import MinimalBusinessHome from './minimal-business/layouts/HomePage';
 import business_theme_cms_home from './business-theme-cms/layouts/HomePage.jsx';
+import rustic_store_cms_home from './rustic-store-cms/layouts/HomePage.jsx';
 
 const templates = {
+  'rustic-store-cms': {
+    name: 'Rustic Store',
+    layouts: {
+      home: rustic_store_cms_home
+    }
+  },
   'business-theme-cms': {
     name: 'Business Theme',
     layouts: {
