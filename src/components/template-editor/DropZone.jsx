@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useSortable } from '@dnd-kit/sortable';
+import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Trash2, GripVertical } from 'lucide-react';
@@ -62,14 +62,14 @@ const BASIC_ELEMENTS = {
   spacer: BasicSpacer
 };
 
-function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
+function SortableBlock({ block, templateId, isSelected, onClick, onDelete, children }) {
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
-    isOver, // dnd-kit fornece isOver para saber se algo está sendo arrastado sobre este item
+    isOver,
   } = useSortable({ id: block.id });
 
   const style = {
@@ -79,12 +79,9 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
 
   let BlockComponent = null;
 
-  // 1. Verificar se é um Elemento Básico
   if (BASIC_ELEMENTS[block.type]) {
     BlockComponent = BASIC_ELEMENTS[block.type];
-  } 
-  // 2. Verificar se é uma Seção do Template
-  else {
+  } else {
     const templateConfig = templates[templateId];
     if (templateConfig && templateConfig.sections && templateConfig.sections[block.type]) {
       BlockComponent = templateConfig.sections[block.type];
@@ -97,13 +94,13 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
       style={style}
       className={`relative group mb-1 transition-all ${
         isSelected ? 'ring-2 ring-blue-500 z-10' : 'hover:ring-1 hover:ring-blue-300'
-      } ${isOver ? 'border-b-4 border-blue-500' : ''}`} // Indicador visual de inserção
+      } ${isOver ? 'border-b-4 border-blue-500' : ''}`}
       onClick={(e) => {
         e.stopPropagation();
         onClick(block);
       }}
     >
-      {/* Overlay de Ações (aparece no hover ou select) */}
+      {/* Overlay de Ações */}
       <div className={`absolute -top-3 left-1/2 transform -translate-x-1/2 z-20 flex items-center bg-blue-500 text-white rounded-full shadow-lg overflow-hidden transition-opacity ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} scale-75 hover:scale-100`}>
         <div 
           {...attributes} 
@@ -127,9 +124,11 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
       </div>
 
       {/* Conteúdo do Bloco */}
-      <div className={isSelected ? "" : "pointer-events-none"}>
+      <div className={isSelected ? "" : "" /* Remove pointer-events-none to allow interaction with children */}>
         {BlockComponent ? (
-          <BlockComponent {...block.props} />
+          <BlockComponent {...block.props}>
+            {children}
+          </BlockComponent>
         ) : (
           <div className="p-4 text-center bg-red-50 border border-red-200 text-red-600 rounded">
             Bloco desconhecido: {block.type}
@@ -139,6 +138,53 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
     </div>
   );
 }
+
+// Componente recursivo para renderizar blocos
+const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDeleteBlock }) => {
+    // Se for um Container, precisa renderizar seus filhos
+    if (block.type === 'container') {
+        return (
+            <SortableBlock
+                block={block}
+                templateId={templateId}
+                isSelected={selectedBlock?.id === block.id}
+                onClick={onBlockClick}
+                onDelete={onDeleteBlock}
+            >
+                <div className="mt-2">
+                    <SortableContext 
+                        items={block.children ? block.children.map(c => c.id) : []} 
+                        strategy={verticalListSortingStrategy}
+                        id={block.id}
+                    >
+                        {block.children && block.children.length > 0 ? (
+                            block.children.map(child => (
+                                <BlockRenderer 
+                                    key={child.id} 
+                                    block={child} 
+                                    templateId={templateId}
+                                    selectedBlock={selectedBlock}
+                                    onBlockClick={onBlockClick}
+                                    onDeleteBlock={onDeleteBlock}
+                                />
+                            ))
+                        ) : null}
+                    </SortableContext>
+                </div>
+            </SortableBlock>
+        );
+    }
+
+    return (
+        <SortableBlock
+            block={block}
+            templateId={templateId}
+            isSelected={selectedBlock?.id === block.id}
+            onClick={onBlockClick}
+            onDelete={onDeleteBlock}
+        />
+    );
+};
 
 export default function DropZone({ blocks, templateId, selectedBlock, onBlockClick, onDeleteBlock }) {
   const { setNodeRef, isOver } = useDroppable({ id: 'drop-zone' });
@@ -157,13 +203,13 @@ export default function DropZone({ blocks, templateId, selectedBlock, onBlockCli
       ) : (
         <div className="flex flex-col pb-20">
           {blocks.map((block) => (
-            <SortableBlock
+            <BlockRenderer
               key={block.id}
               block={block}
               templateId={templateId}
-              isSelected={selectedBlock?.id === block.id}
-              onClick={onBlockClick}
-              onDelete={onDeleteBlock}
+              selectedBlock={selectedBlock}
+              onBlockClick={onBlockClick}
+              onDeleteBlock={onDeleteBlock}
             />
           ))}
         </div>
