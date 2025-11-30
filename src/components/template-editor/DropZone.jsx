@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
+import { useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Trash2, GripVertical } from 'lucide-react';
 import templates from '@/templates-cms/registry';
@@ -139,17 +140,21 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
 }
 
 export default function DropZone({ blocks, templateId, selectedBlock, onBlockClick, onDeleteBlock }) {
-  const { setNodeRef } = useSortable({ id: 'drop-zone' });
+  const { setNodeRef, isOver } = useDroppable({ id: 'drop-zone' });
 
   return (
-    <div ref={setNodeRef} className="min-h-full bg-white shadow-sm">
+    <div 
+      ref={setNodeRef} 
+      className={`min-h-full bg-white shadow-sm transition-colors ${isOver ? 'bg-blue-50 ring-2 ring-blue-300' : ''}`}
+      style={{ minHeight: '400px' }}
+    >
       {blocks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center h-96 border-2 border-dashed border-gray-300 m-8 rounded-lg bg-gray-50 text-gray-400">
+        <div className="flex flex-col items-center justify-center h-96 border-2 border-dashed border-gray-300 m-8 rounded-lg bg-gray-50 text-gray-400 pointer-events-none">
           <p className="text-xl font-medium mb-2">Comece a construir</p>
           <p className="text-sm">Arraste layouts ou elementos da barra lateral para cá</p>
         </div>
       ) : (
-        <div className="flex flex-col">
+        <div className="flex flex-col pb-20">
           {blocks.map((block) => (
             <SortableBlock
               key={block.id}

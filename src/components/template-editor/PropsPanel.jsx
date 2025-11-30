@@ -8,15 +8,31 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
 
   useEffect(() => {
     if (block && templateId) {
+      console.log('[PropsPanel] Bloco selecionado:', block.type);
       const template = templates[templateId];
-      // Precisamos acessar a config do componente (cmsConfig)
-      // Como vamos atualizar o registry para ter as seções, vamos assumir que podemos acessar:
-      // template.sections[block.type].cmsConfig
       
+      // Verificar Elementos Básicos
+      // Precisamos de uma lista de configs para elementos básicos também, ou hardcoded aqui
+      if (['text', 'image', 'button', 'container', 'spacer'].includes(block.type)) {
+        // Configs básicas para elementos
+        const basicConfigs = {
+          text: { name: 'Texto', props: { content: { type: 'string', label: 'Conteúdo' }, align: { type: 'string', label: 'Alinhamento (left, center, right)' }, color: { type: 'string', label: 'Cor' } } },
+          button: { name: 'Botão', props: { text: { type: 'string', label: 'Texto' }, url: { type: 'string', label: 'Link' }, backgroundColor: { type: 'string', label: 'Cor de Fundo' } } },
+          image: { name: 'Imagem', props: { src: { type: 'image', label: 'URL da Imagem' }, width: { type: 'string', label: 'Largura' } } },
+          spacer: { name: 'Espaçador', props: { height: { type: 'string', label: 'Altura' } } },
+          container: { name: 'Container', props: {} }
+        };
+        setConfig(basicConfigs[block.type]);
+        return;
+      }
+
       if (template && template.sections && template.sections[block.type]) {
         const Component = template.sections[block.type];
+        console.log('[PropsPanel] Componente encontrado:', Component.name);
+        console.log('[PropsPanel] Config:', Component.cmsConfig);
         setConfig(Component.cmsConfig || null);
       } else {
+        console.warn('[PropsPanel] Componente ou config não encontrado para:', block.type);
         setConfig(null);
       }
     } else {

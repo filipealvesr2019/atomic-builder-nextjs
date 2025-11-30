@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragOverlay } from '@dnd-kit/core';
+import { DndContext, closestCorners, KeyboardSensor, PointerSensor, useSensor, useSensors, DragOverlay } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import BlockLibrary from '@/components/template-editor/BlockLibrary';
 import DropZone from '@/components/template-editor/DropZone';
@@ -117,7 +117,7 @@ export default function TemplateEditorPage() {
         if (type === 'button') initialProps = { text: 'Clique Aqui' };
       }
       
-      // Adicionar novo bloco
+      // Criar novo bloco
       const newBlock = {
         id: `block-${Date.now()}`,
         type: type,
@@ -125,7 +125,24 @@ export default function TemplateEditorPage() {
         props: initialProps
       };
       
-      setBlocks((items) => [...items, newBlock]);
+      setBlocks((items) => {
+        // Se soltou sobre a drop-zone vazia ou genérica, adiciona no final
+        if (over.id === 'drop-zone') {
+          return [...items, newBlock];
+        }
+
+        // Se soltou sobre um bloco existente, insere logo APÓS ele
+        const overIndex = items.findIndex((item) => item.id === over.id);
+        
+        if (overIndex !== -1) {
+          const newItems = [...items];
+          newItems.splice(overIndex + 1, 0, newBlock);
+          return newItems;
+        }
+
+        // Fallback: final da lista
+        return [...items, newBlock];
+      });
       return;
     }
 
@@ -140,10 +157,12 @@ export default function TemplateEditorPage() {
   };
 
   const handleBlockClick = (block) => {
+    console.log('[Editor] Bloco clicado:', block);
     setSelectedBlock(block);
   };
 
   const handlePropsChange = (blockId, newProps) => {
+    console.log('[Editor] Props alteradas:', blockId, newProps);
     setBlocks(blocks.map(block => 
       block.id === blockId ? { ...block, props: { ...block.props, ...newProps } } : block
     ));
@@ -214,7 +233,7 @@ export default function TemplateEditorPage() {
 
       <DndContext 
         sensors={sensors} 
-        collisionDetection={closestCenter} 
+        collisionDetection={closestCorners} 
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
