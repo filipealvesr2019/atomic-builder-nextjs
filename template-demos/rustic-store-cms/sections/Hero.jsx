@@ -12,7 +12,7 @@ export default function Hero({ title, subtitle, buttonText, backgroundImage }) {
           <p className={styles.subtitle}>
             {subtitle || "Móveis únicos feitos à mão para transformar sua casa"}
           </p>
-          <a href="#products" className={styles.button}>
+          <a href={buttonUrl || "#products"} className={styles.button}>
             {buttonText || "Ver Produtos"}
           </a>
         </div>
@@ -38,6 +38,11 @@ Hero.cmsConfig = {
       type: "string",
       label: "Texto do Botão",
       default: "Ver Produtos"
+    },
+    buttonUrl: {
+      type: "string",
+      label: "Link do Botão",
+      default: "#products"
     },
     backgroundImage: {
       type: "image",

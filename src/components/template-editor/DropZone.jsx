@@ -69,6 +69,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
     setNodeRef,
     transform,
     transition,
+    isOver, // dnd-kit fornece isOver para saber se algo está sendo arrastado sobre este item
   } = useSortable({ id: block.id });
 
   const style = {
@@ -96,7 +97,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
       style={style}
       className={`relative group mb-1 transition-all ${
         isSelected ? 'ring-2 ring-blue-500 z-10' : 'hover:ring-1 hover:ring-blue-300'
-      }`}
+      } ${isOver ? 'border-b-4 border-blue-500' : ''}`} // Indicador visual de inserção
       onClick={(e) => {
         e.stopPropagation();
         onClick(block);
