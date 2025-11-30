@@ -1,0 +1,97 @@
+{
+  "name": "Minimal Business",
+  "version": "1.0.0",
+  "author": "CMS Templates",
+  "description": "Template minimalista e moderno para negócios",
+  "thumbnail": "preview.png",
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Hero Section",
+      "file": "sections/Hero.jsx",
+      "props": {
+        "title": { 
+          "type": "string", 
+          "default": "Bem-vindo ao Futuro",
+          "label": "Título Principal"
+        },
+        "subtitle": { 
+          "type": "string", 
+          "default": "Soluções inovadoras para o seu negócio",
+          "label": "Subtítulo"
+        },
+        "buttonText": {
+          "type": "string",
+          "default": "Começar Agora",
+          "label": "Texto do Botão"
+        },
+        "buttonLink": {
+          "type": "string",
+          "default": "#contact",
+          "label": "Link do Botão"
+        }
+      }
+    },
+    {
+      "id": "features",
+      "name": "Features Section",
+      "file": "sections/Features.jsx",
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Nossos Serviços",
+          "label": "Título da Seção"
+        },
+        "features": {
+          "type": "array",
+          "default": [
+            { "title": "Rápido", "description": "Performance otimizada", "icon": "⚡" },
+            { "title": "Seguro", "description": "Proteção de dados", "icon": "🔒" },
+            { "title": "Escalável", "description": "Cresce com você", "icon": "📈" }
+          ],
+          "label": "Lista de Features"
+        }
+      }
+    },
+    {
+      "id": "footer",
+      "name": "Footer",
+      "file": "sections/Footer.jsx",
+      "props": {
+        "companyName": {
+          "type": "string",
+          "default": "Minha Empresa",
+          "label": "Nome da Empresa"
+        },
+        "links": {
+          "type": "array",
+          "default": [
+            { "text": "Sobre", "url": "/about" },
+            { "text": "Serviços", "url": "/services" },
+            { "text": "Contato", "url": "/contact" }
+          ],
+          "label": "Links do Footer"
+        }
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "id": "home",
+      "name": "Página Inicial",
+      "file": "layouts/HomePage.jsx"
+    }
+  ],
+  "config": {
+    "colors": {
+      "primary": "#2563eb",
+      "secondary": "#10b981",
+      "background": "#ffffff",
+      "text": "#1f2937"
+    },
+    "fonts": {
+      "heading": "Inter, sans-serif",
+      "body": "Inter, sans-serif"
+    }
+  }
+}

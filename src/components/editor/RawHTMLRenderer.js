@@ -13,57 +13,128 @@ export default function RawHTMLRenderer({ html, css }) {
     if (containerRef.current && html) {
       console.log('[RawHTMLRenderer] Input HTML length:', html.length);
       
-      // Limpar JSX syntax que não pode ser renderizado como HTML puro
       let cleanedHtml = html;
-      
-      // Remover imports
-      cleanedHtml = cleanedHtml.replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '');
-      
-      // Remover exports
-      cleanedHtml = cleanedHtml.replace(/export\s+(default\s+)?/g, '');
-      
-      // Tentar extrair o JSX do return statement
-      // Estratégia: Tentar capturar o bloco return mais externo possível
-      
       let extractedJsx = null;
-      
-      // 1. Tenta formato com parênteses: return ( ... ); (Greedy para pegar até o último parêntese)
-      const matchParens = cleanedHtml.match(/return\s*\(([\s\S]*)\)\s*;?\s*}/);
-      if (matchParens) {
-        extractedJsx = matchParens[1];
-        console.log('[RawHTMLRenderer] JSX extracted via greedy parens match');
+
+      // 0. Verificar se já é HTML/JSX limpo (não tem imports, exports ou return)
+      // Se começar com < e terminar com >, assumimos que é o conteúdo direto
+      const trimmed = cleanedHtml.trim();
+      if (trimmed.startsWith('<') && trimmed.endsWith('>')) {
+         // Verificar se NÃO tem "return " antes do primeiro < (pode ser um fragmento ou componente)
+         // Mas se o input for APENAS o JSX, não deve ter return
+         if (!trimmed.includes('export default') && !trimmed.includes('return (')) {
+             extractedJsx = trimmed;
+             console.log('[RawHTMLRenderer] Input appears to be already extracted JSX/HTML');
+         }
       }
       
-      // 2. Se não achou, tenta formato sem parênteses: return <...>; (Greedy)
       if (!extractedJsx) {
-        const matchNoParens = cleanedHtml.match(/return\s+(<[\s\S]*>)\s*;?\s*}/);
-        if (matchNoParens) {
-          extractedJsx = matchNoParens[1];
-          console.log('[RawHTMLRenderer] JSX extracted via greedy direct tag match');
+        // Limpar JSX syntax que não pode ser renderizado como HTML puro
+        // Remover imports
+        cleanedHtml = cleanedHtml.replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '');
+        
+        // Remover exports
+        cleanedHtml = cleanedHtml.replace(/export\s+(default\s+)?/g, '');
+        
+        // NOVA ESTRATÉGIA: Parser manual para encontrar o último return e balancear parênteses
+        
+        try {
+          // Encontrar todos os índices de "return"
+          const returnIndices = [];
+          const regexReturn = /return\s+/g;
+          let match;
+          while ((match = regexReturn.exec(cleanedHtml)) !== null) {
+            returnIndices.push(match.index);
+          }
+          
+          // Tentar do último para o primeiro
+          for (let i = returnIndices.length - 1; i >= 0; i--) {
+            const startIndex = returnIndices[i];
+            const afterReturn = cleanedHtml.substring(startIndex + 6).trimStart();
+            
+            // Se começa com '(', vamos balancear
+            if (afterReturn.startsWith('(')) {
+              let openCount = 0;
+              let endIndex = -1;
+              let foundStart = false;
+              
+              const openParenIndex = cleanedHtml.indexOf('(', startIndex);
+              
+              for (let j = openParenIndex; j < cleanedHtml.length; j++) {
+                if (cleanedHtml[j] === '(') {
+                  openCount++;
+                  foundStart = true;
+                } else if (cleanedHtml[j] === ')') {
+                  openCount--;
+                }
+                
+                if (foundStart && openCount === 0) {
+                  endIndex = j;
+                  break;
+                }
+              }
+              
+              if (endIndex !== -1) {
+                const content = cleanedHtml.substring(openParenIndex + 1, endIndex);
+                if (content.includes('<') || i === returnIndices.length - 1) {
+                   extractedJsx = content;
+                   console.log('[RawHTMLRenderer] JSX extracted via manual parser (parens)');
+                   break;
+                }
+              }
+            } 
+            // Se começa com '<', é return direto
+            else if (afterReturn.startsWith('<')) {
+               const firstTag = cleanedHtml.indexOf('<', startIndex);
+               const lastTag = cleanedHtml.lastIndexOf('>');
+               if (firstTag !== -1 && lastTag > firstTag) {
+                  extractedJsx = cleanedHtml.substring(firstTag, lastTag + 1);
+                  console.log('[RawHTMLRenderer] JSX extracted via manual parser (direct)');
+                  break;
+               }
+            }
+          }
+        } catch (e) {
+          console.error('[RawHTMLRenderer] Parser error:', e);
         }
-      }
-      
-      // 3. Arrow function implícita: => ( ... )
-      if (!extractedJsx) {
-        const matchArrow = cleanedHtml.match(/=>\s*\(([\s\S]*)\)\s*;?\s*$/);
-        if (matchArrow) {
-          extractedJsx = matchArrow[1];
-          console.log('[RawHTMLRenderer] JSX extracted via arrow function match');
+
+        // Fallback
+        if (!extractedJsx) {
+           const regexParens = /return\s*\(([\s\S]*?)\)\s*;?\s*}/g;
+           const matches = [...cleanedHtml.matchAll(regexParens)];
+           if (matches.length > 0) {
+               extractedJsx = matches[matches.length - 1][1];
+               console.log('[RawHTMLRenderer] JSX extracted via fallback regex (last match)');
+           }
         }
       }
 
       if (extractedJsx) {
         cleanedHtml = extractedJsx;
       } else {
-        console.log('[RawHTMLRenderer] Regex failed, using full content fallback');
-        cleanedHtml = `<div style="border:1px solid orange; padding:10px; margin-bottom:10px; color:orange;">⚠️ Falha ao extrair JSX. Exibindo conteúdo bruto:</div>` + cleanedHtml;
+        // Se ainda assim falhar, mas o conteúdo parecer HTML, use-o como último recurso
+        if (cleanedHtml.trim().startsWith('<')) {
+            console.log('[RawHTMLRenderer] Extraction failed but content looks like HTML, using as is');
+        } else {
+            console.log('[RawHTMLRenderer] Extraction failed completely');
+            cleanedHtml = `<div style="padding: 20px; border: 1px dashed red; color: red;">
+              <strong>Erro de Visualização</strong><br/>
+              Não foi possível extrair o conteúdo visual deste template.<br/>
+              <small>O código pode ser muito complexo para o preview simples.</small>
+            </div>`;
+        }
       }
       
       // Remover expressões JSX simples {variavel}
       cleanedHtml = cleanedHtml.replace(/\{[^{}]+\}/g, '');
       
       // Converter className para class
-      cleanedHtml = cleanedHtml.replace(/className=/g, 'class=');
+      // 1. className={styles.foo} -> class="foo"
+      cleanedHtml = cleanedHtml.replace(/className=\{styles\.(\w+)\}/g, 'class="$1"');
+      // 2. className="foo" -> class="foo"
+      cleanedHtml = cleanedHtml.replace(/className="([^"]+)"/g, 'class="$1"');
+      // 3. className={'foo'} -> class="foo"
+      cleanedHtml = cleanedHtml.replace(/className=\{'([^']+)'\}/g, 'class="$1"');
       
       // Converter componentes Next.js comuns
       // <Image /> -> <img />
@@ -73,11 +144,6 @@ export default function RawHTMLRenderer({ html, css }) {
       // <Link href="..."> -> <a href="...">
       cleanedHtml = cleanedHtml.replace(/<Link\s+([^>]*?)>/g, '<a $1>');
       cleanedHtml = cleanedHtml.replace(/<\/Link>/g, '</a>');
-      
-      // Converter tags de componentes genéricos (ex: <Header />) em divs visíveis
-      // DESABILITADO: O importador já faz inlining dos componentes reais
-      // cleanedHtml = cleanedHtml.replace(/<([A-Z][a-zA-Z0-9]*)([^>]*?)\/>/g, '<div data-component="$1" class="component-placeholder" style="border: 1px dashed #ccc; padding: 1rem; margin: 1rem 0; background: #f9fafb;"><strong>📦 Componente: $1</strong><br/><small>Conteúdo dinâmico não renderizado no preview</small></div>');
-      // cleanedHtml = cleanedHtml.replace(/<([A-Z][a-zA-Z0-9]*)([^>]*?)>([\s\S]*?)<\/\1>/g, '<div data-component="$1" class="component-placeholder" style="border: 1px dashed #ccc; padding: 1rem; margin: 1rem 0; background: #f9fafb;"><strong>📦 Componente: $1</strong><div style="margin-top:0.5rem">$3</div></div>');
       
       // Remover self-closing tags do JSX que não são válidas em HTML (exceto as tratadas acima)
       cleanedHtml = cleanedHtml.replace(/<(\w+)([^>]*?)\/>/g, '<$1$2></$1>');
@@ -105,7 +171,7 @@ export default function RawHTMLRenderer({ html, css }) {
 
   console.log('[RawHTMLRenderer] Rendered with HTML length:', html?.length);
 
-  const [showDebug, setShowDebug] = useState(false);
+  const [showDebug, setShowDebug] = useState(true);
   const [debugTab, setDebugTab] = useState('output'); // 'input' | 'output'
   const [error, setError] = useState(null);
 
@@ -123,10 +189,14 @@ export default function RawHTMLRenderer({ html, css }) {
         borderRadius: '0.5rem',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '0.5rem'
       }}>
-        <div style={{ fontSize: '0.875rem', color: '#374151' }}>
+        <div style={{ fontSize: '0.75rem', color: '#374151', fontFamily: 'monospace', wordBreak: 'break-all' }}>
           <strong>Status:</strong> {html ? `HTML carregado (${html.length} chars)` : 'Sem HTML'} 
+          <br/>
+          <strong>Snippet:</strong> {html ? html.substring(0, 100).replace(/</g, '&lt;') + '...' : 'N/A'}
           {error && <span style={{ color: 'red', marginLeft: '0.5rem' }}>❌ Erro: {error}</span>}
         </div>
         <button 

@@ -1,0 +1,61 @@
+{
+  "name": "Business Theme",
+  "version": "1.0.0",
+  "author": "CMS Templates",
+  "description": "Template profissional para negócios",  "thumbnail": "preview.png",
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Hero Section",
+      "file": "sections/Hero.jsx",
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Bem-vindo ao Nosso Site",
+          "label": "Título"
+        },
+        "subtitle": {
+          "type": "string",
+          "default": "Esta é uma landing page moderna e responsiva criada com Next.js",
+          "label": "Subtítulo"
+        },
+        "image": {
+          "type": "image",
+          "default": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
+          "label": "Imagem"
+        }
+      }
+    },
+    {
+      "id": "features",
+      "name": "Features Section",
+      "file": "sections/Features.jsx",
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Nossos Recursos",
+          "label": "Título"
+        }
+      }
+    },
+    {
+      "id": "contact",
+      "name": "Contact Section",
+      "file": "sections/Contact.jsx",
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Entre em Contato",
+          "label": "Título"
+        }
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "id": "home",
+      "name": "Página Inicial",
+      "file": "layouts/HomePage.jsx"
+    }
+  ]
+}

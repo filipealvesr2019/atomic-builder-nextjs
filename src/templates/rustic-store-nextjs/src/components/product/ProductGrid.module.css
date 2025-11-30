@@ -1,0 +1,410 @@
+/* src/components/product/ProductGrid.module.css */
+
+/* Container Principal */
+.productGridSection {
+  padding: 4rem 0;
+  background-color: #f9fafb;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  background-color: #ea580c;
+  margin: 0 auto;
+}
+
+/* Barra de Filtros */
+.filtersBar {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .filtersContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Filtros de Categoria */
+.categoryFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.categoryButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.categoryButton:hover {
+  border-color: #ea580c;
+  color: #ea580c;
+}
+
+.categoryButtonActive {
+  background-color: #ea580c;
+  border-color: #ea580c;
+  color: white;
+}
+
+/* Controles */
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.filterToggleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  color: #4b5563;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterToggleButton:hover {
+  border-color: #ea580c;
+  color: #ea580c;
+}
+
+.sortSelect {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  color: #4b5563;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sortSelect:hover {
+  border-color: #ea580c;
+}
+
+.sortSelect:focus {
+  outline: none;
+  border-color: #ea580c;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+/* Modo de Visualização */
+.viewModeToggle {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.viewModeButton {
+  padding: 0.5rem;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewModeButton:hover {
+  background-color: #f3f4f6;
+}
+
+.viewModeButtonActive {
+  background-color: #ea580c;
+  color: white;
+}
+
+.viewModeButton:not(:last-child) {
+  border-right: 1px solid #d1d5db;
+}
+
+/* Filtros Avançados */
+.advancedFilters {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Área Principal */
+.mainContentArea {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .mainContentArea {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 1rem;
+}
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebarTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+/* Grupo de Filtros */
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filterLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Inputs de Faixa de Preço - CORRIGIDO */
+.priceRangeInputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priceRangeInputs span {
+  color: #6b7280;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.priceInput {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  width: 100%;
+  min-width: 0; /* Importante para evitar overflow */
+}
+
+.priceInput:focus {
+  outline: none;
+  border-color: #ea580c;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+/* Display da Faixa de Preço - CORRIGIDO */
+.priceRangeDisplay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding-top: 0.5rem;
+}
+
+.priceRangeDisplay div {
+  white-space: nowrap;
+}
+
+/* Checkbox */
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.checkboxInput {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: #ea580c;
+}
+
+.checkboxText {
+  user-select: none;
+}
+
+/* Área de Produtos */
+.productsArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.resultsCount {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Grid de Produtos */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Lista de Produtos */
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Sem Produtos */
+.noProducts {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.noProducts p {
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.clearFiltersButton {
+  padding: 0.75rem 1.5rem;
+  background-color: #ea580c;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clearFiltersButton:hover {
+  background-color: #c2410c;
+}
+
+/* Ícones */
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Responsividade */
+.mobileOnly {
+  display: block;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .mobileOnly {
+    display: none;
+  }
+
+  .desktopOnly {
+    display: block;
+  }
+}
+
+/* Ajustes Mobile */
+@media (max-width: 640px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .categoryFilters {
+    width: 100%;
+  }
+
+  .categoryButton {
+    flex: 1;
+    min-width: fit-content;
+  }
+
+  .controls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .sortSelect {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+}

@@ -50,42 +50,49 @@ export default function DemoPreviewPage() {
     );
   }
 
-  // Renderizar apenas o conteúdo da primeira página (index/home) para temas
+  // Renderizar template CMS-compatível
   const renderContent = () => {
-    if (template.type === 'theme' && template.pages && template.pages.length > 0) {
-      console.log('[DEMO-PREVIEW] Páginas disponíveis:', template.pages.map(p => p.name));
+    if (template.type === 'theme' && template.templateId) {
+      // Usar templates-cms registry
+      const { getTemplateLayout } = require('@/templates-cms/registry');
+      const LayoutComponent = getTemplateLayout(template.templateId, 'home');
       
-      // Encontrar a página index/home com prioridade clara
-      let homePage = template.pages.find(page => page.name === 'index');
-      
-      if (!homePage) {
-        homePage = template.pages.find(page => {
-          const name = page.name.toLowerCase();
-          return name === 'home' || name === 'homepage';
-        });
+      if (!LayoutComponent) {
+        return (
+          <div style={{ padding: '2rem', textAlign: 'center', border: '2px dashed #f0ad4e' }}>
+            <h2>Template não encontrado</h2>
+            <p>O template <code>{template.templateId}</code> não está registrado.</p>
+            <p><strong>Templates disponíveis:</strong></p>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              <li><code>minimal-business</code></li>
+            </ul>
+          </div>
+        );
       }
       
-      // Se AINDA não encontrar, usar a primeira página
-      if (!homePage) {
-        console.log('[DEMO-PREVIEW] Página index não encontrada, usando primeira página:', template.pages[0].name);
-        homePage = template.pages[0];
-      } else {
-        console.log('[DEMO-PREVIEW] Página selecionada:', homePage.name);
-      }
+      // Renderizar com props do banco de dados ou defaults
+      const sectionProps = template.sections || {};
       
-      // Se a página tem HTML original, renderizá-lo
-      if (homePage.rawHtml) {
-        const RawHTMLRenderer = require('@/components/editor/RawHTMLRenderer').default;
-        return <RawHTMLRenderer html={homePage.rawHtml} css={homePage.rawCss} />;
-      }
-      
-      // Fallback: usar sistema de blocos
-      if (homePage.content && homePage.content.length > 0) {
-        return homePage.content.map((block) => (
-          <BlockRenderer key={block.id} block={block} readOnly={true} />
-        ));
-      }
-    } else if (template.content && template.content.length > 0) {
+      return <LayoutComponent sections={sectionProps} />;
+    }
+    
+    // Fallback: templates antigos (iframe)
+    if (template.url) {
+      return (
+        <iframe
+          src={template.url}
+          style={{
+            width: '100%',
+            height: '100vh',
+            border: 'none'
+          }}
+          title={template.name}
+        />
+      );
+    }
+    
+    // Fallback para templates com blocos
+    if (template.content && template.content.length > 0) {
       return template.content.map((block) => (
         <BlockRenderer key={block.id} block={block} readOnly={true} />
       ));
@@ -94,6 +101,9 @@ export default function DemoPreviewPage() {
     return (
       <div className={styles.emptyState}>
         <p>Nenhum conteúdo disponível</p>
+        <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem' }}>
+          Configure o template nas configurações
+        </p>
       </div>
     );
   };
