@@ -26,14 +26,25 @@ const BasicImage = ({ src, alt, width = '100%' }) => (
       <img 
         src={src} 
         alt={alt || 'Imagem'} 
-        style={{ width, maxWidth: '100%', borderRadius: '4px' }} 
+        style={{ width, maxWidth: '100%', borderRadius: '8px' }} 
       />
     ) : (
-      <div className="relative w-full bg-blue-50 border border-dashed border-blue-300 rounded-lg overflow-hidden" style={{ aspectRatio: '16/9' }}>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-blue-500">
-          <svg className="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-          <span className="text-sm font-medium text-blue-600">Imagem</span>
-        </div>
+      <div style={{ 
+        width: '100%',
+        height: '240px',
+        background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
+        border: '2px dashed #93c5fd',
+        borderRadius: '8px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#3b82f6'
+      }}>
+        <svg style={{ width: '48px', height: '48px', marginBottom: '8px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <span style={{ fontSize: '13px', fontWeight: '500', color: '#2563eb' }}>Clique para adicionar imagem</span>
       </div>
     )}
   </div>
