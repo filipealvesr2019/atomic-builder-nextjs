@@ -3,20 +3,63 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Trash2 } from 'lucide-react';
-import { getTemplate } from '@/templates-cms/registry'; // Note: This might fail on client side if registry uses fs
-// We need a way to render the component. Since we are in app dir, we can't easily dynamically import from a variable path in client component without some setup.
-// However, for this MVP, we might need to rely on a mapping or pass the component rendering logic differently.
-// Actually, registry.js imports components directly, so it bundles them. It should work if registry.js doesn't use Node.js APIs.
-// Let's check registry.js content again. It imports components. 
-// BUT, `getTemplate` is not exported for client usage usually if it's not a pure JS file.
-// Let's try to import it. If it fails, we'll need a different strategy (e.g. a mapping file safe for client).
-
-// Workaround: Create a client-safe registry or mapping. 
-// For now, let's assume we can import the registry if it doesn't use 'fs'.
-// The previous view of registry.js showed it just imports components and exports an object. That is client-safe!
-
+import { Trash2, GripVertical } from 'lucide-react';
 import templates from '@/templates-cms/registry';
+
+// --- Elementos Básicos (Simples para MVP) ---
+const BasicText = ({ content, align = 'left', color = '#000' }) => (
+  <div style={{ textAlign: align, color, padding: '1rem' }}>
+    {content || 'Texto padrão. Clique para editar.'}
+  </div>
+);
+
+const BasicImage = ({ src, alt, width = '100%' }) => (
+  <div style={{ padding: '1rem' }}>
+    <img 
+      src={src || 'https://via.placeholder.com/400x200'} 
+      alt={alt || 'Imagem'} 
+      style={{ width, maxWidth: '100%', borderRadius: '4px' }} 
+    />
+  </div>
+);
+
+const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb', color = '#fff' }) => (
+  <div style={{ textAlign: align, padding: '1rem' }}>
+    <a 
+      href={url || '#'} 
+      style={{ 
+        display: 'inline-block', 
+        padding: '10px 20px', 
+        backgroundColor, 
+        color, 
+        textDecoration: 'none', 
+        borderRadius: '4px',
+        fontWeight: '500'
+      }}
+    >
+      {text || 'Clique Aqui'}
+    </a>
+  </div>
+);
+
+const BasicContainer = ({ children }) => (
+  <div style={{ padding: '2rem', border: '1px dashed #ccc', minHeight: '100px' }}>
+    {children || <p className="text-gray-400 text-center">Container Vazio</p>}
+  </div>
+);
+
+const BasicSpacer = ({ height = '50px' }) => (
+  <div style={{ height, background: 'transparent' }} />
+);
+
+// Mapeamento de elementos básicos
+const BASIC_ELEMENTS = {
+  text: BasicText,
+  image: BasicImage,
+  button: BasicButton,
+  container: BasicContainer,
+  spacer: BasicSpacer
+};
 
 function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
   const {
@@ -32,67 +75,62 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
     transition,
   };
 
-  // Encontrar o componente correto para renderizar
-  const templateConfig = templates[templateId];
-  // O registry atual exporta layouts, mas precisamos das SEÇÕES individuais.
-  // O registry.js atual NÃO exporta as seções individualmente, apenas o layout 'home'.
-  // PRECISAREMOS ATUALIZAR O REGISTRY.JS para exportar as seções ou ter uma forma de acessá-las.
-  
-  // Por enquanto, vamos tentar carregar dinamicamente ou assumir que o layout exporta as seções?
-  // Não, o layout é um componente funcional.
-  
-  // SOLUÇÃO: Vamos atualizar o registry.js para incluir 'sections' no objeto do template.
-  // Mas primeiro, vamos fazer o código defensivo aqui.
-  
   let BlockComponent = null;
-  
-  // Tentar encontrar a seção no templateConfig se estiver disponível
-  if (templateConfig && templateConfig.sections && templateConfig.sections[block.type]) {
-    BlockComponent = templateConfig.sections[block.type];
+
+  // 1. Verificar se é um Elemento Básico
+  if (BASIC_ELEMENTS[block.type]) {
+    BlockComponent = BASIC_ELEMENTS[block.type];
+  } 
+  // 2. Verificar se é uma Seção do Template
+  else {
+    const templateConfig = templates[templateId];
+    if (templateConfig && templateConfig.sections && templateConfig.sections[block.type]) {
+      BlockComponent = templateConfig.sections[block.type];
+    }
   }
 
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative group mb-4 border-2 transition-all ${
-        isSelected ? 'border-blue-500 ring-2 ring-blue-200' : 'border-transparent hover:border-gray-300'
+      className={`relative group mb-1 transition-all ${
+        isSelected ? 'ring-2 ring-blue-500 z-10' : 'hover:ring-1 hover:ring-blue-300'
       }`}
       onClick={(e) => {
         e.stopPropagation();
         onClick(block);
       }}
     >
-      {/* Handle de arraste e botões de ação */}
-      <div className={`absolute top-0 right-0 z-10 flex items-center bg-white shadow-sm border rounded-bl-lg overflow-hidden ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}>
+      {/* Overlay de Ações (aparece no hover ou select) */}
+      <div className={`absolute -top-3 left-1/2 transform -translate-x-1/2 z-20 flex items-center bg-blue-500 text-white rounded-full shadow-lg overflow-hidden transition-opacity ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} scale-75 hover:scale-100`}>
         <div 
           {...attributes} 
           {...listeners}
-          className="p-2 cursor-move hover:bg-gray-100 border-r border-gray-200"
-          title="Arrastar para reordenar"
+          className="p-1.5 cursor-move hover:bg-blue-600 border-r border-blue-400"
+          title="Arrastar"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+          <GripVertical size={14} />
         </div>
+        <span className="px-2 text-xs font-bold uppercase">{block.type}</span>
         <button 
           onClick={(e) => {
             e.stopPropagation();
             onDelete(block.id);
           }}
-          className="p-2 text-red-500 hover:bg-red-50 hover:text-red-700"
-          title="Remover bloco"
+          className="p-1.5 hover:bg-red-500 transition-colors"
+          title="Excluir"
         >
-          <Trash2 size={16} />
+          <Trash2 size={14} />
         </button>
       </div>
 
-      {/* Renderização do Bloco */}
-      <div className="pointer-events-none"> {/* Desabilita interação interna para facilitar drag */}
+      {/* Conteúdo do Bloco */}
+      <div className={isSelected ? "" : "pointer-events-none"}>
         {BlockComponent ? (
           <BlockComponent {...block.props} />
         ) : (
-          <div className="p-8 text-center bg-gray-100 border border-dashed border-gray-300 rounded">
-            <p className="text-gray-500">Bloco: <strong>{block.type}</strong></p>
-            <p className="text-xs text-gray-400">Componente não encontrado no registry</p>
+          <div className="p-4 text-center bg-red-50 border border-red-200 text-red-600 rounded">
+            Bloco desconhecido: {block.type}
           </div>
         )}
       </div>
@@ -101,26 +139,28 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete }) {
 }
 
 export default function DropZone({ blocks, templateId, selectedBlock, onBlockClick, onDeleteBlock }) {
-  const { setNodeRef } = useSortable({ id: 'drop-zone' }); // Apenas para aceitar drops se necessário
+  const { setNodeRef } = useSortable({ id: 'drop-zone' });
 
   return (
-    <div ref={setNodeRef} className="min-h-full p-4 pb-20">
+    <div ref={setNodeRef} className="min-h-full bg-white shadow-sm">
       {blocks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center h-64 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 text-gray-400">
-          <p className="text-lg font-medium">Arraste blocos aqui</p>
-          <p className="text-sm">Selecione blocos da biblioteca à esquerda</p>
+        <div className="flex flex-col items-center justify-center h-96 border-2 border-dashed border-gray-300 m-8 rounded-lg bg-gray-50 text-gray-400">
+          <p className="text-xl font-medium mb-2">Comece a construir</p>
+          <p className="text-sm">Arraste layouts ou elementos da barra lateral para cá</p>
         </div>
       ) : (
-        blocks.map((block) => (
-          <SortableBlock
-            key={block.id}
-            block={block}
-            templateId={templateId}
-            isSelected={selectedBlock?.id === block.id}
-            onClick={onBlockClick}
-            onDelete={onDeleteBlock}
-          />
-        ))
+        <div className="flex flex-col">
+          {blocks.map((block) => (
+            <SortableBlock
+              key={block.id}
+              block={block}
+              templateId={templateId}
+              isSelected={selectedBlock?.id === block.id}
+              onClick={onBlockClick}
+              onDelete={onDeleteBlock}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

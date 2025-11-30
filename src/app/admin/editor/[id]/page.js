@@ -40,10 +40,45 @@ export default function TemplateEditorPage() {
       if (res.ok) {
         const data = await res.json();
         setTemplate(data);
-        // Se já tiver pageContent (salvo anteriormente), usa. Senão, usa content ou sections convertido.
-        // Para este MVP, vamos assumir que começamos do zero ou carregamos pageContent.
-        // Se for um template novo, blocks começa vazio.
-        setBlocks(data.pageContent || []);
+        
+        // Se já tiver pageContent salvo, usa ele.
+        if (data.pageContent && data.pageContent.length > 0) {
+          setBlocks(data.pageContent);
+        } 
+        // Se não, carrega as seções padrão do template (definidas no template.json/registry)
+        else if (data.templateId) {
+          // Precisamos saber quais são as seções padrão. 
+          // O registry tem layouts, mas não a ordem padrão das seções.
+          // Vamos inferir uma ordem padrão baseada nas seções disponíveis ou usar uma lista hardcoded para os demos.
+          
+          let defaultBlocks = [];
+          
+          if (data.templateId === 'rustic-store-cms') {
+            defaultBlocks = [
+              { id: 'hero-1', type: 'hero', category: 'section', props: {} },
+              { id: 'products-1', type: 'products', category: 'section', props: {} },
+              { id: 'about-1', type: 'about', category: 'section', props: {} },
+              { id: 'newsletter-1', type: 'newsletter', category: 'section', props: {} },
+              { id: 'contact-1', type: 'contact', category: 'section', props: {} }
+            ];
+          } else if (data.templateId === 'minimal-business') {
+            defaultBlocks = [
+              { id: 'hero-1', type: 'hero', category: 'section', props: {} },
+              { id: 'features-1', type: 'features', category: 'section', props: {} },
+              { id: 'footer-1', type: 'footer', category: 'section', props: {} }
+            ];
+          } else if (data.templateId === 'business-theme-cms') {
+            defaultBlocks = [
+              { id: 'hero-1', type: 'hero', category: 'section', props: {} },
+              { id: 'features-1', type: 'features', category: 'section', props: {} },
+              { id: 'contact-1', type: 'contact', category: 'section', props: {} }
+            ];
+          }
+          
+          setBlocks(defaultBlocks);
+        } else {
+          setBlocks([]);
+        }
       }
     } catch (error) {
       console.error('Erro ao carregar template:', error);
@@ -62,15 +97,26 @@ export default function TemplateEditorPage() {
 
     if (!over) return;
 
-    // Se arrastou da biblioteca para a DropZone
+    // Se arrastou da biblioteca (começa com lib-)
     if (active.id.startsWith('lib-')) {
-      const blockType = active.id.replace('lib-', '');
+      // Formato: lib-element-text ou lib-section-hero
+      const parts = active.id.split('-');
+      const category = parts[1]; // element ou section
+      const type = parts.slice(2).join('-'); // text, hero, etc
+
+      // Props iniciais dependendo do tipo
+      let initialProps = {};
+      if (category === 'element') {
+        if (type === 'text') initialProps = { content: 'Novo texto' };
+        if (type === 'button') initialProps = { text: 'Clique Aqui' };
+      }
       
       // Adicionar novo bloco
       const newBlock = {
         id: `block-${Date.now()}`,
-        type: blockType,
-        props: {} // Props iniciais vazias, serão preenchidas pelos defaults do componente
+        type: type,
+        category: category,
+        props: initialProps
       };
       
       setBlocks((items) => [...items, newBlock]);
