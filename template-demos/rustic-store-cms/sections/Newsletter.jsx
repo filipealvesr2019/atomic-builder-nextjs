@@ -1,12 +1,12 @@
 import styles from './Newsletter.module.css';
 
-export default function Newsletter() {
+export default function Newsletter({ title, description, buttonText }) {
   return (
     <section className={styles.newsletter}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Fique por Dentro das Novidades</h2>
+        <h2 className={styles.title}>{title || "Fique por Dentro das Novidades"}</h2>
         <p className={styles.description}>
-          Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos.
+          {description || "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos."}
         </p>
         <div className={styles.form}>
           <input
@@ -15,10 +15,31 @@ export default function Newsletter() {
             className={styles.input}
           />
           <button className={styles.button}>
-            Inscrever-se
+            {buttonText || "Inscrever-se"}
           </button>
         </div>
       </div>
     </section>
   );
 }
+
+Newsletter.cmsConfig = {
+  name: "Newsletter",
+  props: {
+    title: {
+      type: "string",
+      label: "Título",
+      default: "Fique por Dentro das Novidades"
+    },
+    description: {
+      type: "string",
+      label: "Descrição",
+      default: "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos."
+    },
+    buttonText: {
+      type: "string",
+      label: "Texto do Botão",
+      default: "Inscrever-se"
+    }
+  }
+};

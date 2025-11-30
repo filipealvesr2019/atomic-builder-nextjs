@@ -178,42 +178,14 @@ export default function TemplatesList() {
               </p>
             )}
             <div className={styles.actions}>
-              <button
-                onClick={() => {
-                  if (template.type === 'theme' && template.pages && template.pages.length > 0) {
-                    // Find home/index page
-                    let homePageIndex = template.pages.findIndex(page => {
-                      const name = page.name.toLowerCase();
-                      const slug = page.slug.toLowerCase();
-                      return name === 'index' || 
-                             name === 'home' ||
-                             name === 'homepage' ||
-                             name === 'hero' ||
-                             slug === 'index' ||
-                             slug === 'home' ||
-                             slug === 'homepage';
-                    });
-                    
-                    // If not found, use first page
-                    if (homePageIndex === -1) homePageIndex = 0;
-                    
-                    // For themes, edit the home/index page
-                    localStorage.setItem('templateEditData', JSON.stringify({
-                      templateId: template._id,
-                      pageIndex: homePageIndex,
-                      pageName: template.pages[homePageIndex].name,
-                      blocks: template.pages[homePageIndex].content || []
-                    }));
-                    window.location.href = '/admin/editor/template-edit';
-                  } else {
-                    alert('Edição de templates simples em breve!');
-                  }
-                }}
+              <Link
+                href={`/admin/editor/${template._id}`}
                 className={styles.actionButton}
+                style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
               >
                 <Edit size={18} />
                 Editar
-              </button>
+              </Link>
               
               <Link 
                 href={`/admin/demo-preview/${template._id}`}

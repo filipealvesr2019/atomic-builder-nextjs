@@ -1,14 +1,12 @@
 import styles from './About.module.css';
 
-export default function About() {
+export default function About({ title, description }) {
   return (
     <section id="about" className={styles.about}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Sobre a RusticStore</h2>
+        <h2 className={styles.title}>{title || "Sobre a RusticStore"}</h2>
         <p className={styles.description}>
-          Somos uma loja especializada em móveis e decoração rústica artesanal. 
-          Cada peça é cuidadosamente selecionada e produzida por artesãos experientes, 
-          garantindo qualidade e exclusividade para transformar sua casa em um lar aconchegante.
+          {description || "Somos uma loja especializada em móveis e decoração rústica artesanal. Cada peça é cuidadosamente selecionada e produzida por artesãos experientes, garantindo qualidade e exclusividade para transformar sua casa em um lar aconchegante."}
         </p>
         
         <div className={styles.grid}>
@@ -40,3 +38,19 @@ export default function About() {
     </section>
   );
 }
+
+About.cmsConfig = {
+  name: "About Section",
+  props: {
+    title: {
+      type: "string",
+      label: "Título",
+      default: "Sobre a RusticStore"
+    },
+    description: {
+      type: "string",
+      label: "Descrição",
+      default: "Somos uma loja especializada em móveis e decoração rústica artesanal..."
+    }
+  }
+};

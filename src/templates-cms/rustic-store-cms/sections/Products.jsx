@@ -1,6 +1,6 @@
 import styles from './Products.module.css';
 
-export default function Products() {
+export default function Products({ title }) {
   const products = [
     {
       id: 1,
@@ -43,7 +43,7 @@ export default function Products() {
   return (
     <section id="products" className={styles.products}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Nossos Produtos</h2>
+        <h2 className={styles.title}>{title || "Nossos Produtos"}</h2>
         <div className={styles.grid}>
           {products.map((product) => (
             <div key={product.id} className={styles.card}>
@@ -61,3 +61,14 @@ export default function Products() {
     </section>
   );
 }
+
+Products.cmsConfig = {
+  name: "Products Grid",
+  props: {
+    title: {
+      type: "string",
+      label: "Título da Seção",
+      default: "Nossos Produtos"
+    }
+  }
+};

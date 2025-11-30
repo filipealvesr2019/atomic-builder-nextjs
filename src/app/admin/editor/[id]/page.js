@@ -1,24 +1,25 @@
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import SortableBlock from '@/components/editor/SortableBlock';
+'use client';
 
-// ... (imports remain the same)
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragOverlay } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import BlockLibrary from '@/components/template-editor/BlockLibrary';
+import DropZone from '@/components/template-editor/DropZone';
+import PropsPanel from '@/components/template-editor/PropsPanel';
+import { Save, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import styles from './editor.module.css';
 
-export default function EditorPage({ params }) {
-  const [blocks, setBlocks] = useAtom(blocksAtom);
-  // ... (other state)
+export default function TemplateEditorPage() {
+  const params = useParams();
+  const router = useRouter();
+  const [template, setTemplate] = useState(null);
+  const [blocks, setBlocks] = useState([]);
+  const [selectedBlock, setSelectedBlock] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [activeDragId, setActiveDragId] = useState(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -27,64 +28,180 @@ export default function EditorPage({ params }) {
     })
   );
 
+  useEffect(() => {
+    if (params.id) {
+      fetchTemplate();
+    }
+  }, [params.id]);
+
+  const fetchTemplate = async () => {
+    try {
+      const res = await fetch(`/api/templates/${params.id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setTemplate(data);
+        // Se já tiver pageContent (salvo anteriormente), usa. Senão, usa content ou sections convertido.
+        // Para este MVP, vamos assumir que começamos do zero ou carregamos pageContent.
+        // Se for um template novo, blocks começa vazio.
+        setBlocks(data.pageContent || []);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar template:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDragStart = (event) => {
+    setActiveDragId(event.active.id);
+  };
+
   const handleDragEnd = (event) => {
     const { active, over } = event;
+    setActiveDragId(null);
 
+    if (!over) return;
+
+    // Se arrastou da biblioteca para a DropZone
+    if (active.id.startsWith('lib-')) {
+      const blockType = active.id.replace('lib-', '');
+      
+      // Adicionar novo bloco
+      const newBlock = {
+        id: `block-${Date.now()}`,
+        type: blockType,
+        props: {} // Props iniciais vazias, serão preenchidas pelos defaults do componente
+      };
+      
+      setBlocks((items) => [...items, newBlock]);
+      return;
+    }
+
+    // Se reordenou blocos existentes
     if (active.id !== over.id) {
       setBlocks((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
+        const oldIndex = items.findIndex(item => item.id === active.id);
+        const newIndex = items.findIndex(item => item.id === over.id);
         return arrayMove(items, oldIndex, newIndex);
       });
     }
   };
 
-  // ... (other functions)
+  const handleBlockClick = (block) => {
+    setSelectedBlock(block);
+  };
+
+  const handlePropsChange = (blockId, newProps) => {
+    setBlocks(blocks.map(block => 
+      block.id === blockId ? { ...block, props: { ...block.props, ...newProps } } : block
+    ));
+    
+    // Atualiza também o selectedBlock para refletir no painel imediatamente
+    if (selectedBlock && selectedBlock.id === blockId) {
+      setSelectedBlock(prev => ({ ...prev, props: { ...prev.props, ...newProps } }));
+    }
+  };
+
+  const handleDeleteBlock = (blockId) => {
+    setBlocks(blocks.filter(block => block.id !== blockId));
+    if (selectedBlock?.id === blockId) {
+      setSelectedBlock(null);
+    }
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      // Salva o pageContent no template
+      const res = await fetch(`/api/templates/${params.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          pageContent: blocks,
+          // Também podemos atualizar o 'content' ou 'sections' se necessário para retrocompatibilidade
+        })
+      });
+
+      if (res.ok) {
+        alert('Template salvo com sucesso!');
+      } else {
+        alert('Erro ao salvar template');
+      }
+    } catch (error) {
+      console.error('Erro ao salvar:', error);
+      alert('Erro ao salvar template');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return <div className={styles.loading}>Carregando...</div>;
+  }
+
+  if (!template) {
+    return <div className={styles.error}>Template não encontrado</div>;
+  }
 
   return (
-    <div className={styles.container}>
-      <BlockSidebar onAddBlock={addBlock} />
-      
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }} onClick={() => setSelectedBlockId(null)}>
-        <header className={styles.header}>
-          <span>Editando: <strong>{pageMeta.title}</strong></span>
-          <button onClick={(e) => { e.stopPropagation(); handleSave(); }} className={styles.saveButton} disabled={saving}>
+    <div className={styles.editorContainer}>
+      <header className={styles.header}>
+        <div className={styles.headerLeft}>
+          <Link href="/admin/templates" className={styles.backLink}>
+            <ArrowLeft size={20} />
+          </Link>
+          <h1>Editando: {template.name}</h1>
+        </div>
+        <div className={styles.headerRight}>
+          <button onClick={handleSave} disabled={saving} className={styles.saveButton}>
+            <Save size={18} />
             {saving ? 'Salvando...' : 'Salvar'}
           </button>
-        </header>
-        
-        <main className={styles.canvas}>
-          <div className={styles.canvasContent} style={{ padding: '2rem' }}>
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEnd}
-            >
-              <SortableContext
-                items={blocks}
-                strategy={verticalListSortingStrategy}
-              >
-                {blocks.length === 0 ? (
-                  <p style={{ textAlign: 'center', color: '#9ca3af' }}>Adicione blocos usando o menu lateral</p>
-                ) : (
-                  blocks.map((block) => (
-                    <SortableBlock key={block.id} id={block.id}>
-                      <BlockRenderer
-                        block={block}
-                        onUpdate={updateBlock}
-                        onSelect={handleSelectBlock}
-                        isSelected={selectedBlockId === block.id}
-                      />
-                    </SortableBlock>
-                  ))
-                )}
-              </SortableContext>
-            </DndContext>
-          </div>
-        </main>
-      </div>
+        </div>
+      </header>
 
-      <PropertiesPanel />
+      <DndContext 
+        sensors={sensors} 
+        collisionDetection={closestCenter} 
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
+        <div className={styles.mainContent}>
+          <aside className={styles.sidebarLeft}>
+            <BlockLibrary templateId={template.templateId} />
+          </aside>
+          
+          <main className={styles.previewArea}>
+            <div className={styles.deviceFrame}>
+              <SortableContext items={blocks.map(b => b.id)} strategy={verticalListSortingStrategy}>
+                <DropZone
+                  blocks={blocks}
+                  templateId={template.templateId}
+                  selectedBlock={selectedBlock}
+                  onBlockClick={handleBlockClick}
+                  onDeleteBlock={handleDeleteBlock}
+                />
+              </SortableContext>
+            </div>
+          </main>
+
+          <aside className={styles.sidebarRight}>
+            <PropsPanel
+              block={selectedBlock}
+              templateId={template.templateId}
+              onPropsChange={(newProps) => handlePropsChange(selectedBlock.id, newProps)}
+            />
+          </aside>
+        </div>
+        
+        <DragOverlay>
+          {activeDragId ? (
+            <div className={styles.dragOverlayItem}>
+              {activeDragId.startsWith('lib-') ? 'Novo Bloco' : 'Movendo Bloco'}
+            </div>
+          ) : null}
+        </DragOverlay>
+      </DndContext>
     </div>
   );
 }

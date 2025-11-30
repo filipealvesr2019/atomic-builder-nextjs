@@ -1,10 +1,10 @@
 import styles from './Contact.module.css';
 
-export default function Contact() {
+export default function Contact({ title, address, phone, email }) {
   return (
     <section id="contact" className={styles.contact}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Entre em Contato</h2>
+        <h2 className={styles.title}>{title || "Entre em Contato"}</h2>
         
         <div className={styles.grid}>
           <div className={styles.info}>
@@ -14,7 +14,7 @@ export default function Contact() {
               <span className={styles.icon}>📍</span>
               <div>
                 <p className={styles.label}>Endereço</p>
-                <p className={styles.text}>Rua das Flores, 123 - São Paulo, SP</p>
+                <p className={styles.text}>{address || "Rua das Flores, 123 - São Paulo, SP"}</p>
               </div>
             </div>
             
@@ -22,7 +22,7 @@ export default function Contact() {
               <span className={styles.icon}>📞</span>
               <div>
                 <p className={styles.label}>Telefone</p>
-                <p className={styles.text}>(11) 9999-9999</p>
+                <p className={styles.text}>{phone || "(11) 9999-9999"}</p>
               </div>
             </div>
             
@@ -30,7 +30,7 @@ export default function Contact() {
               <span className={styles.icon}>📧</span>
               <div>
                 <p className={styles.label}>E-mail</p>
-                <p className={styles.text}>contato@rusticstore.com</p>
+                <p className={styles.text}>{email || "contato@rusticstore.com"}</p>
               </div>
             </div>
           </div>
@@ -60,3 +60,29 @@ export default function Contact() {
     </section>
   );
 }
+
+Contact.cmsConfig = {
+  name: "Contact Section",
+  props: {
+    title: {
+      type: "string",
+      label: "Título",
+      default: "Entre em Contato"
+    },
+    address: {
+      type: "string",
+      label: "Endereço",
+      default: "Rua das Flores, 123 - São Paulo, SP"
+    },
+    phone: {
+      type: "string",
+      label: "Telefone",
+      default: "(11) 9999-9999"
+    },
+    email: {
+      type: "string",
+      label: "E-mail",
+      default: "contato@rusticstore.com"
+    }
+  }
+};
