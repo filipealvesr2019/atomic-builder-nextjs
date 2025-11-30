@@ -7,58 +7,72 @@ import { CSS } from '@dnd-kit/utilities';
 import { Trash2, GripVertical } from 'lucide-react';
 import templates from '@/templates-cms/registry';
 
-// --- Elementos Básicos (Com Placeholders Visuais) ---
+// --- Elementos Básicos (Limpos e Organizados) ---
 const BasicText = ({ content, align = 'left', color = '#1f2937' }) => (
-  <div style={{ textAlign: align, color, padding: '1rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.6' }}>
+  <div style={{ 
+    textAlign: align, 
+    color, 
+    padding: '16px 0',
+    fontFamily: 'system-ui, -apple-system, sans-serif',
+    lineHeight: '1.6',
+    fontSize: '15px'
+  }}>
     {content || (
-      <div className="p-2 border border-dashed border-gray-300 rounded bg-gray-50">
-        <div className="h-2 bg-gray-200 rounded w-3/4 mb-2"></div>
-        <div className="h-2 bg-gray-200 rounded w-1/2"></div>
-        <span className="text-xs text-gray-400 mt-1 block">Texto (Clique para editar)</span>
+      <div style={{ color: '#9ca3af', fontStyle: 'italic' }}>
+        Clique para editar este texto
       </div>
     )}
   </div>
 );
 
 const BasicImage = ({ src, alt, width = '100%' }) => (
-  <div style={{ padding: '0.5rem' }}>
+  <div style={{ padding: '8px 0' }}>
     {src ? (
       <img 
         src={src} 
         alt={alt || 'Imagem'} 
-        style={{ width, maxWidth: '100%', borderRadius: '8px' }} 
+        style={{ 
+          width: '100%', 
+          height: 'auto',
+          display: 'block',
+          borderRadius: '4px' 
+        }} 
       />
     ) : (
       <div style={{ 
         width: '100%',
-        height: '240px',
-        background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-        border: '2px dashed #93c5fd',
-        borderRadius: '8px',
+        height: '200px',
+        background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+        borderRadius: '4px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         color: '#3b82f6'
       }}>
-        <svg style={{ width: '48px', height: '48px', marginBottom: '8px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg style={{ width: '40px', height: '40px', marginBottom: '8px', opacity: 0.5 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
         </svg>
-        <span style={{ fontSize: '13px', fontWeight: '500', color: '#2563eb' }}>Clique para adicionar imagem</span>
+        <span style={{ fontSize: '12px', fontWeight: '500', color: '#60a5fa' }}>Imagem</span>
       </div>
     )}
   </div>
 );
 
 const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb', color = '#fff' }) => (
-  <div style={{ textAlign: align, padding: '1rem' }}>
+  <div style={{ textAlign: align, padding: '12px 0' }}>
     <a 
       href={url || '#'} 
-      className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium transition-all rounded-md shadow-sm"
       style={{ 
+        display: 'inline-block',
+        padding: '10px 24px', 
         backgroundColor, 
         color, 
         textDecoration: 'none', 
+        borderRadius: '6px',
+        fontWeight: '500',
+        fontSize: '14px',
+        transition: 'all 0.2s'
       }}
     >
       {text || 'Botão'}
@@ -68,33 +82,47 @@ const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb',
 
 const BasicContainer = ({ children }) => (
   <div style={{ 
-    padding: '2rem', 
-    border: '1px dashed #e5e7eb',
+    padding: '24px', 
+    border: '2px dashed #e5e7eb',
     borderRadius: '8px',
-    minHeight: '120px',
-    backgroundColor: children ? 'transparent' : '#f9fafb',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: children ? 'flex-start' : 'center',
-    transition: 'all 0.2s ease'
-  }}
-  className="hover:border-blue-300 hover:bg-blue-50/10"
-  >
+    minHeight: '100px',
+    backgroundColor: '#fafafa',
+    marginBottom: '8px'
+  }}>
     {children || (
-      <div className="flex flex-col items-center justify-center text-gray-400">
-        <div className="w-8 h-8 mb-2 rounded-full bg-gray-100 flex items-center justify-center">
-          <span className="text-xl font-light">+</span>
-        </div>
-        <p className="text-xs font-medium">Solte elementos aqui</p>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#9ca3af',
+        padding: '20px'
+      }}>
+        <svg style={{ width: '32px', height: '32px', marginBottom: '8px', opacity: 0.5 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <p style={{ margin: 0, fontSize: '13px', fontWeight: '500' }}>Arraste elementos aqui</p>
       </div>
     )}
   </div>
 );
 
-const BasicSpacer = ({ height = '50px' }) => (
-  <div style={{ height }} className="w-full relative group flex items-center justify-center">
-    <div className="absolute inset-0 border border-dashed border-transparent group-hover:border-gray-300 transition-colors" />
-    <span className="opacity-0 group-hover:opacity-100 text-[10px] text-gray-400 bg-white px-2">Espaçador</span>
+const BasicSpacer = ({ height = '40px' }) => (
+  <div style={{ 
+    height, 
+    width: '100%',
+    position: 'relative',
+    margin: '8px 0'
+  }}>
+    <div style={{
+      position: 'absolute',
+      top: '50%',
+      left: '0',
+      right: '0',
+      height: '1px',
+      background: '#e5e7eb',
+      transform: 'translateY(-50%)'
+    }}></div>
   </div>
 );
 
