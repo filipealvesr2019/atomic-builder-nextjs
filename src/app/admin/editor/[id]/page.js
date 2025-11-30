@@ -22,7 +22,11 @@ export default function TemplateEditorPage() {
   const [activeDragId, setActiveDragId] = useState(null);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5, // Requer mover 5px para iniciar o arraste (evita cliques acidentais)
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -47,10 +51,6 @@ export default function TemplateEditorPage() {
         } 
         // Se não, carrega as seções padrão do template (definidas no template.json/registry)
         else if (data.templateId) {
-          // Precisamos saber quais são as seções padrão. 
-          // O registry tem layouts, mas não a ordem padrão das seções.
-          // Vamos inferir uma ordem padrão baseada nas seções disponíveis ou usar uma lista hardcoded para os demos.
-          
           let defaultBlocks = [];
           
           if (data.templateId === 'rustic-store-cms') {
@@ -88,6 +88,7 @@ export default function TemplateEditorPage() {
   };
 
   const handleDragStart = (event) => {
+    console.log('[DnD] Drag Start:', event.active.id);
     setActiveDragId(event.active.id);
   };
 
@@ -95,7 +96,12 @@ export default function TemplateEditorPage() {
     const { active, over } = event;
     setActiveDragId(null);
 
-    if (!over) return;
+    console.log('[DnD] Drag End - Active:', active.id, 'Over:', over?.id);
+
+    if (!over) {
+      console.log('[DnD] Cancelado: Soltou fora de uma área válida');
+      return;
+    }
 
     // Se arrastou da biblioteca (começa com lib-)
     if (active.id.startsWith('lib-')) {
