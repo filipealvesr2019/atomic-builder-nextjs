@@ -1,11 +1,11 @@
-import React from 'react';
-import { useTheme } from '../theme/ThemeContext';
+import { useAtomValue } from 'jotai';
+import { themeAtom } from '@/store/themeStore';
 
 /**
  * Basic Button Widget
  */
 export default function ButtonWidget({ settings }) {
-  const { theme } = useTheme();
+  const theme = useAtomValue(themeAtom);
   
   const { 
     text = "Click Me", 

@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
-import { useTheme } from '@/components/builder/theme/ThemeContext';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { themeAtom, updateThemeAtom } from '@/store/themeStore';
 
 export default function ThemePanel() {
-  const { theme, updateTheme } = useTheme();
+  const theme = useAtomValue(themeAtom);
+  const updateTheme = useSetAtom(updateThemeAtom);
 
   const handleColorChange = (key, value) => {
     updateTheme({

@@ -9,9 +9,9 @@ import BlockLibrary from '@/components/template-editor/BlockLibrary';
 import DropZone from '@/components/template-editor/DropZone';
 import PropsPanel from '@/components/template-editor/PropsPanel';
 import ThemePanel from '@/components/template-editor/ThemePanel';
-import { ThemeProvider } from '@/components/builder/theme/ThemeContext';
 import { useAtom } from 'jotai';
 import { viewModeAtom } from '@/store/viewModeStore';
+import { themeAtom } from '@/store/themeStore';
 import ShopCart from '@/components/shop/ShopCart';
 import { Save, ArrowLeft, Palette, Layers, Settings, Monitor, Tablet, Smartphone, Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
@@ -27,7 +27,8 @@ export default function TemplateEditorPage() {
   const [saving, setSaving] = useState(false);
   const [activeDragId, setActiveDragId] = useState(null);
   const [activeSidebarTab, setActiveSidebarTab] = useState('add'); // 'add' | 'theme' | 'settings'
-  const [pageTheme, setPageTheme] = useState(null);
+  /* const [pageTheme, setPageTheme] = useState(null); // Removed in favor of Jotai */
+  const [theme, setTheme] = useAtom(themeAtom);
   const [viewMode, setViewMode] = useAtom(viewModeAtom); // 'desktop' | 'tablet' | 'mobile'
   
   // Undo/Redo History
@@ -57,7 +58,9 @@ export default function TemplateEditorPage() {
       if (res.ok) {
         const data = await res.json();
         setTemplate(data);
-        setPageTheme(data.theme || null); // Initialize theme state
+        if (data.theme) {
+            setTheme(data.theme); 
+        }
         
         if (data.pageContent && data.pageContent.length > 0) {
           setBlocks(data.pageContent);
@@ -275,7 +278,7 @@ export default function TemplateEditorPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           pageContent: blocks,
-          theme: pageTheme
+          theme: theme
         })
       });
 
@@ -329,7 +332,8 @@ export default function TemplateEditorPage() {
   }
 
   return (
-    <ThemeProvider initialTheme={template.theme} theme={pageTheme} onThemeChange={setPageTheme}>
+    <>
+      {/* Theme Provider removed. State is managed by Jotai themeAtom */}
 
         <div className={styles.editorContainer}>
         {/* Header Compacto */}
@@ -482,6 +486,6 @@ export default function TemplateEditorPage() {
       </div>
       <ShopCart />
 
-    </ThemeProvider>
+    </>
   );
 }

@@ -1,12 +1,12 @@
-import React from 'react';
-import { useTheme } from '../theme/ThemeContext';
+import { useAtomValue } from 'jotai';
+import { themeAtom } from '@/store/themeStore';
 
 /**
  * Basic Heading Widget
  * Renders an H1-H6 tag based on settings.
  */
 export default function HeadingWidget({ settings }) {
-  const { theme } = useTheme();
+  const theme = useAtomValue(themeAtom);
 
   const { 
     text = "Heading Text", 

@@ -1,4 +1,6 @@
-import { useViewMode, resolveResponsiveProp } from '@/components/builder/context/ViewModeContext';
+import { useAtomValue } from 'jotai';
+import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
+import { getWidgetComponent } from '../WidgetRegistry';
 
 /**
  * WidgetRenderer
@@ -6,7 +8,7 @@ import { useViewMode, resolveResponsiveProp } from '@/components/builder/context
  * It looks up the correct React component based on the widget type.
  */
 export default function WidgetRenderer({ widget }) {
-  const viewMode = useViewMode();
+  const viewMode = useAtomValue(viewModeAtom);
   
   if (!widget) return null;
 

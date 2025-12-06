@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useCart } from '@/components/builder/context/CartContext';
+import { useSetAtom } from 'jotai';
+import { addToCartAtom } from '@/store/cartStore';
 import { ShoppingBag } from 'lucide-react';
 
 export default function ProductListRenderer({ settings }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
+  const addToCart = useSetAtom(addToCartAtom);
   
   const { 
     limit = 8, 

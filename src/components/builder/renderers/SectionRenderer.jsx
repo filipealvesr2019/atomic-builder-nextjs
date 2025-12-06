@@ -1,13 +1,14 @@
 import React from 'react';
 import ContainerRenderer from './ContainerRenderer';
-import { useViewMode, resolveResponsiveProp } from '@/components/builder/context/ViewModeContext';
+import { useAtomValue } from 'jotai';
+import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
 
 /**
  * SectionRenderer
  * Renders a full-width section and iterates over its containers.
  */
 export default function SectionRenderer({ section }) {
-  const viewMode = useViewMode();
+  const viewMode = useAtomValue(viewModeAtom);
   
   if (!section) return null;
 

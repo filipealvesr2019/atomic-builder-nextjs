@@ -1,12 +1,12 @@
-import React from 'react';
-import { useTheme } from '../theme/ThemeContext';
+import { useAtomValue } from 'jotai';
+import { themeAtom } from '@/store/themeStore';
 
 /**
  * Basic Text Widget
  * Renders a paragraph.
  */
 export default function TextWidget({ settings }) {
-  const { theme } = useTheme();
+  const theme = useAtomValue(themeAtom);
 
   const { 
     content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 

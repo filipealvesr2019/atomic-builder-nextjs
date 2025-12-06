@@ -1,12 +1,12 @@
-import React from 'react';
-import { useTheme } from '../theme/ThemeContext';
+import { useAtomValue } from 'jotai';
+import { themeAtom } from '@/store/themeStore';
 
 /**
  * Image Widget
  * Renders an image with configurable source, dimensions, and styling.
  */
 export default function ImageWidget({ settings }) {
-  const { theme } = useTheme();
+  const theme = useAtomValue(themeAtom);
 
   const { 
     src = "https://via.placeholder.com/300x200", 

@@ -1,13 +1,15 @@
 import React from 'react';
 import WidgetRenderer from './WidgetRenderer';
-import { useViewMode, resolveResponsiveProp } from '@/components/builder/context/ViewModeContext';
+import { useAtomValue } from 'jotai';
+import { viewModeAtom } from '@/store/viewModeStore';
+import { resolveResponsiveProp } from '@/store/viewModeStore';
 
 /**
  * ContainerRenderer
  * Renders a container (usually a column or a flex box) and iterates over its children widgets.
  */
 export default function ContainerRenderer({ container }) {
-  const viewMode = useViewMode();
+  const viewMode = useAtomValue(viewModeAtom);
 
   if (!container) return null;
 
