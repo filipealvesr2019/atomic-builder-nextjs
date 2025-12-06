@@ -1,58 +1,146 @@
+import { useState, useMemo } from 'react';
+import { Grid, List, Filter, ShoppingCart } from 'lucide-react';
 import styles from './Products.module.css';
 
-export default function Products({ title }) {
-  const products = [
-    {
-      id: 1,
-      name: "Mesa Rústica",
-      price: "R$ 1.299,00",
-      image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=500"
-    },
-    {
-      id: 2,
-      name: "Cadeira de Madeira",
-      price: "R$ 449,00",
-      image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=500"
-    },
-    {
-      id: 3,
-      name: "Estante Artesanal",
-      price: "R$ 899,00",
-      image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=500"
-    },
-    {
-      id: 4,
-      name: "Banco Rústico",
-      price: "R$ 349,00",
-      image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=500"
-    },
-    {
-      id: 5,
-      name: "Aparador",
-      price: "R$ 749,00",
-      image: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=500"
-    },
-    {
-      id: 6,
-      name: "Rack de TV",
-      price: "R$ 1.099,00",
-      image: "https://images.unsplash.com/photo-1556228578-dd339a145dd9?w=500"
+const MOCK_PRODUCTS = [
+  {
+    id: 1,
+    name: 'Cadeira Artesanal',
+    category: 'moveis',
+    price: 349.99,
+    image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500&h=500&fit=crop'
+  },
+  {
+    id: 2,
+    name: 'Luminária Pendente Industrial',
+    category: 'iluminacao',
+    price: 129.99,
+    image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=500&h=500&fit=crop'
+  },
+  {
+    id: 3,
+    name: 'Mesa de Centro Rústica',
+    category: 'moveis',
+    price: 599.99,
+    image: 'https://images.unsplash.com/photo-1611486212557-88be5ff6f941?w=500&h=500&fit=crop'
+  },
+  {
+    id: 4,
+    name: 'Vaso de Cerâmica',
+    category: 'decoracao',
+    price: 89.99,
+    image: 'https://images.unsplash.com/photo-1612196808214-b7e239e5f6b7?w=500&h=500&fit=crop'
+  },
+  {
+    id: 5,
+    name: 'Espelho Vintage',
+    category: 'decoracao',
+    price: 249.99,
+    image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=500&h=500&fit=crop'
+  },
+  {
+    id: 6,
+    name: 'Poltrona de Couro',
+    category: 'moveis',
+    price: 1299.99,
+    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=500&fit=crop'
+  }
+];
+
+const CATEGORIES = [
+  { id: 'all', name: 'Todos' },
+  { id: 'moveis', name: 'Móveis' },
+  { id: 'iluminacao', name: 'Iluminação' },
+  { id: 'decoracao', name: 'Decoração' }
+];
+
+export default function Products(props) {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [viewMode, setViewMode] = useState('grid');
+  const [sortBy, setSortBy] = useState('name');
+
+  const filteredProducts = useMemo(() => {
+    let filtered = MOCK_PRODUCTS;
+    
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(p => p.category === selectedCategory);
     }
-  ];
+
+    return [...filtered].sort((a, b) => {
+      if (sortBy === 'price-low') return a.price - b.price;
+      if (sortBy === 'price-high') return b.price - a.price;
+      return a.name.localeCompare(b.name);
+    });
+  }, [selectedCategory, sortBy]);
 
   return (
-    <section id="products" className={styles.products}>
+    <section className={styles.productGridSection}>
       <div className={styles.container}>
-        <h2 className={styles.title}>{title || "Nossos Produtos"}</h2>
-        <div className={styles.grid}>
-          {products.map((product) => (
-            <div key={product.id} className={styles.card}>
-              <div className={styles.imageContainer}>
-                <img src={product.image} alt={product.name} className={styles.image} />
+        <div className={styles.header}>
+          <h2 className={styles.title}>Produtos em Destaque</h2>
+          <p className={styles.subtitle}>Confira nossa seleção exclusiva</p>
+          <div className={styles.divider}></div>
+        </div>
+
+        <div className={styles.filtersBar}>
+          <div className={styles.filtersContainer}>
+            <div className={styles.categoryFilters}>
+              {CATEGORIES.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`${styles.categoryButton} ${selectedCategory === cat.id ? styles.categoryButtonActive : ''}`}
+                >
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+
+            <div className={styles.controls}>
+              <select 
+                className={styles.sortSelect}
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="name">Nome (A-Z)</option>
+                <option value="price-low">Menor Preço</option>
+                <option value="price-high">Maior Preço</option>
+              </select>
+
+              <div className={styles.viewModeToggle}>
+                <button 
+                  className={`${styles.viewModeButton} ${viewMode === 'grid' ? styles.viewModeButtonActive : ''}`}
+                  onClick={() => setViewMode('grid')}
+                >
+                  <Grid size={18} />
+                </button>
+                <button 
+                  className={`${styles.viewModeButton} ${viewMode === 'list' ? styles.viewModeButtonActive : ''}`}
+                  onClick={() => setViewMode('list')}
+                >
+                  <List size={18} />
+                </button>
               </div>
-              <div className={styles.info}>
-                <h3 className={styles.name}>{product.name}</h3>
-                <p className={styles.price}>{product.price}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
+          {filteredProducts.map(product => (
+            <div key={product.id} className={styles.productCard}>
+              <div className={styles.imageContainer}>
+                <img src={product.image} alt={product.name} className={styles.productImage} />
+              </div>
+              <div className={styles.infoContainer}>
+                <p className={styles.category}>{CATEGORIES.find(c => c.id === product.category)?.name}</p>
+                <h3 className={styles.productName}>{product.name}</h3>
+                <div className={styles.priceContainer}>
+                  <span className={styles.price}>R$ {product.price.toFixed(2)}</span>
+                </div>
+                <button className={styles.addToCartButton}>
+                  <ShoppingCart size={16} />
+                  Adicionar ao Carrinho
+                </button>
               </div>
             </div>
           ))}
@@ -63,12 +151,8 @@ export default function Products({ title }) {
 }
 
 Products.cmsConfig = {
-  name: "Products Grid",
+  name: "Lista de Produtos",
   props: {
-    title: {
-      type: "string",
-      label: "Título da Seção",
-      default: "Nossos Produtos"
-    }
+    title: { type: 'string', label: 'Título' }
   }
 };

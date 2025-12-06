@@ -1,22 +1,31 @@
 import styles from './Newsletter.module.css';
 
-export default function Newsletter({ title, description, buttonText }) {
+export default function Newsletter(props) {
+  const {
+    title = "Fique por Dentro das Novidades",
+    description = "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos.",
+    buttonText = "Inscrever-se",
+    placeholder = "Seu melhor e-mail"
+  } = props;
+
   return (
-    <section className={styles.newsletter}>
+    <section className={styles.newsletterSection}>
       <div className={styles.container}>
-        <h2 className={styles.title}>{title || "Fique por Dentro das Novidades"}</h2>
-        <p className={styles.description}>
-          {description || "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos."}
-        </p>
-        <div className={styles.form}>
-          <input
-            type="email"
-            placeholder="Seu melhor e-mail"
-            className={styles.input}
-          />
-          <button className={styles.button}>
-            {buttonText || "Inscrever-se"}
-          </button>
+        <div className={styles.newsletterContent}>
+          <h2 className={styles.newsletterTitle}>{title}</h2>
+          <p className={styles.newsletterDescription}>
+            {description}
+          </p>
+          <div className={styles.newsletterForm}>
+            <input
+              type="email"
+              placeholder={placeholder}
+              className={styles.newsletterInput}
+            />
+            <button className={styles.newsletterButton}>
+              {buttonText}
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -26,20 +35,9 @@ export default function Newsletter({ title, description, buttonText }) {
 Newsletter.cmsConfig = {
   name: "Newsletter",
   props: {
-    title: {
-      type: "string",
-      label: "Título",
-      default: "Fique por Dentro das Novidades"
-    },
-    description: {
-      type: "string",
-      label: "Descrição",
-      default: "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos."
-    },
-    buttonText: {
-      type: "string",
-      label: "Texto do Botão",
-      default: "Inscrever-se"
-    }
+    title: { type: 'string', label: 'Título' },
+    description: { type: 'string', label: 'Descrição' },
+    buttonText: { type: 'string', label: 'Texto do Botão' },
+    placeholder: { type: 'string', label: 'Placeholder do Input' }
   }
 };

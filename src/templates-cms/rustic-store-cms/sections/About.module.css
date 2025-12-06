@@ -1,51 +1,89 @@
-.about {
-  padding: 6rem 2rem;
-  background: #f5f5f0;
+/* src/templates-cms/rustic-store-cms/sections/About.module.css */
+
+.sectionGray {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  background-color: #f3f4f6; /* gray-100 */
 }
 
 .container {
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.aboutContent {
+  max-width: 48rem; /* max-w-4xl */
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 
-.title {
-  font-size: 2.5rem;
+.aboutTitle {
+  font-size: 1.875rem; /* text-3xl */
   font-weight: 700;
+  color: #1f2937; /* gray-800 */
   margin-bottom: 2rem;
-  color: #2d1810;
 }
 
-.description {
-  font-size: 1.125rem;
-  line-height: 1.8;
-  color: #555;
-  margin-bottom: 4rem;
+.aboutDivider {
+  width: 6rem; /* w-24 */
+  height: 0.25rem; /* h-1 */
+  background-color: #ea580c; /* amber-600 */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
 }
 
-.grid {
+.aboutDescription {
+  font-size: 1.125rem; /* text-lg */
+  color: #4b5563; /* gray-600 */
+  line-height: 1.625; /* leading-relaxed */
+  margin-bottom: 2rem;
+}
+
+.aboutGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
-.item {
+@media (min-width: 768px) {
+  .aboutGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.aboutItem {
   text-align: center;
 }
 
-.icon {
-  font-size: 4rem;
+.aboutIconContainer {
+  background-color: #fffbeb; /* amber-100 */
+  width: 4rem; /* w-16 */
+  height: 4rem; /* h-16 */
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 1rem;
 }
 
-.itemTitle {
-  font-size: 1.5rem;
+.aboutIcon {
+  color: #ea580c; /* amber-600 */
+}
+
+.aboutItemTitle {
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: #2d1810;
+  color: #1f2937; /* gray-800 */
+  margin-bottom: 0.5rem;
 }
 
-.itemDescription {
-  color: #666;
-  line-height: 1.6;
+.aboutItemDescription {
+  color: #4b5563; /* gray-600 */
 }
