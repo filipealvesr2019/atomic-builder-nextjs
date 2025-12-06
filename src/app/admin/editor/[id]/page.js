@@ -10,8 +10,8 @@ import DropZone from '@/components/template-editor/DropZone';
 import PropsPanel from '@/components/template-editor/PropsPanel';
 import ThemePanel from '@/components/template-editor/ThemePanel';
 import { ThemeProvider } from '@/components/builder/theme/ThemeContext';
-import { ViewModeProvider } from '@/components/builder/context/ViewModeContext';
-import { CartProvider } from '@/components/builder/context/CartContext';
+import { useAtom } from 'jotai';
+import { viewModeAtom } from '@/store/viewModeStore';
 import ShopCart from '@/components/shop/ShopCart';
 import { Save, ArrowLeft, Palette, Layers, Settings, Monitor, Tablet, Smartphone, Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
@@ -28,7 +28,7 @@ export default function TemplateEditorPage() {
   const [activeDragId, setActiveDragId] = useState(null);
   const [activeSidebarTab, setActiveSidebarTab] = useState('add'); // 'add' | 'theme' | 'settings'
   const [pageTheme, setPageTheme] = useState(null);
-  const [viewMode, setViewMode] = useState('desktop'); // 'desktop' | 'tablet' | 'mobile'
+  const [viewMode, setViewMode] = useAtom(viewModeAtom); // 'desktop' | 'tablet' | 'mobile'
   
   // Undo/Redo History
   const [history, setHistory] = useState([[]]);
@@ -330,8 +330,7 @@ export default function TemplateEditorPage() {
 
   return (
     <ThemeProvider initialTheme={template.theme} theme={pageTheme} onThemeChange={setPageTheme}>
-      <CartProvider>
-      <ViewModeProvider value={viewMode}>
+
         <div className={styles.editorContainer}>
         {/* Header Compacto */}
         <header className={styles.header}>
@@ -482,8 +481,7 @@ export default function TemplateEditorPage() {
         </DndContext>
       </div>
       <ShopCart />
-      </ViewModeProvider>
-      </CartProvider>
+
     </ThemeProvider>
   );
 }

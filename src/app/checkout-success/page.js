@@ -4,12 +4,13 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
-import { useCart } from '@/components/builder/context/CartContext';
+import { useSetAtom } from 'jotai';
+import { clearCartAtom } from '@/store/cartStore';
 
 export default function CheckoutSuccess() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
-  const { clearCart } = useCart();
+  const clearCart = useSetAtom(clearCartAtom);
 
   // Clear cart on mount if successful
   useEffect(() => {

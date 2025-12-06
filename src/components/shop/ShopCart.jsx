@@ -1,19 +1,39 @@
 'use client';
 
 import React from 'react';
-import { useCart } from '@/components/builder/context/CartContext';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { 
+    cartItemsAtom, 
+    isCartOpenAtom, 
+    cartTotalAtom, 
+    removeFromCartAtom, 
+    updateQuantityAtom, 
+    clearCartAtom 
+} from '@/store/cartStore';
 import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 
 export default function ShopCart() {
-  const { 
-    cartItems, 
-    isCartOpen, 
-    closeCart, 
-    updateQuantity, 
-    removeFromCart, 
-    cartTotal,
-    clearCart 
-  } = useCart();
+  const cartItems = useAtomValue(cartItemsAtom);
+  const [isCartOpen, setIsCartOpen] = useAtom(isCartOpenAtom);
+  const cartTotal = useAtomValue(cartTotalAtom);
+  
+  const updateQuantityAction = useSetAtom(updateQuantityAtom);
+  const removeFromCartAction = useSetAtom(removeFromCartAtom);
+  const clearCartAction = useSetAtom(clearCartAtom);
+
+  const closeCart = () => setIsCartOpen(false);
+  
+  const updateQuantity = (id, quantity) => {
+    updateQuantityAction({ productId: id, newQuantity: quantity });
+  };
+
+  const removeFromCart = (id) => {
+    removeFromCartAction(id);
+  };
+
+  const clearCart = () => {
+    clearCartAction();
+  };
 
   const [isCheckingOut, setIsCheckingOut] = React.useState(false);
 
