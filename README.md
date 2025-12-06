@@ -1,4 +1,4 @@
-# Atomic Builder ⚛️ (Work in Construction 🚧)
+# Atomic Builder ⚛️
 
 ![Status: Alpha](https://img.shields.io/badge/Status-In_Development-orange?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-14+-black?style=for-the-badge&logo=next.js)
@@ -15,8 +15,10 @@ Unlike complex site builders that generate messy bloatware code, Atomic Builder 
 ### ✨ Key Features
 
 *   **🎨 DOM-based Visual Editor**: Build layouts by dragging elements directly into the page structure.
+*   **🛒 E-commerce Ready**: Native Stripe checkout integration (mock) and product management.
+*   **🔌 Plugin System**: Extensible architecture with a dedicated Plugins Marketplace ("SEO Booster", "Analytics", etc.).
+*   **🏬 Template Store**: Browse, preview, and install professional themes like **Rustic Store** in one click.
 *   **⚛️ Atomic Widgets**: Granular control over atomic elements like Headings, Texts, Buttons, and Images.
-*   **🧩 Theme Registry**: Pluggable template system. Import full themes (like the *Rustic Store*) and customize them visually.
 *   **💅 Global Styling**: Define your brand identity (Colors, Typography) once and apply it everywhere.
 *   **⚡ Performance First**: Built on top of Next.js App Router for maximum speed and SEO.
 
@@ -28,11 +30,14 @@ We are building the future of visual editing in Next.js. Here is the current sta
 
 - [x] **Rendering Engine**: Core builder logic (`src/components/builder`).
 - [x] **Atomic Widgets**: Text, Heading, Button, Image Container.
-- [x] **Custom Sections**: Support for complex logic blocks (Headers, Product Grids).
-- [x] **Theme Manager**: Easy template switching and registry.
-- [ ] **📱 Responsive Editing**: Mobile/Tablet view modes (Coming Soon).
-- [ ] **⏪ History System**: Undo/Redo functionality (Coming Soon).
-- [ ] **🛒 E-commerce**: Native integration with cart/products (In Planning).
+- [x] **Custom Sections**: Complex blocks (Headers, Product Grids, Sliders).
+- [x] **Template Store**: Live previews and one-click installation.
+- [x] **Plugins Marketplace**: System to enable/disable extensions.
+- [x] **Stripe Integration**: Checkout flow with success page (Mock).
+- [x] **Themes**: Fully ported **Rustic Store** theme (English/Portuguese ready).
+- [ ] **📱 Responsive Editing**: Advanced mobile/tablet view controls.
+- [ ] **⏪ History System**: Undo/Redo functionality.
+- [ ] **� Auth & Roles**: Multi-user permissions with Clerk.
 
 ---
 
@@ -70,12 +75,11 @@ Want to test or contribute? Follow these steps:
 
 The project follows a modular structure designed for scalability:
 
-*   **`src/components/builder`**: **The Engine**. Contains the core Logic, `WidgetRegistry`, and Renderers (like `BlockRenderer`) that transform JSON into React Components.
-*   **`src/app/admin/editor`**: **The Interface**. Orchestrates the UI:
-    *   **Sidebar (`BlockLibrary`)**: Where you pick your components.
-    *   **DropZone**: The main editing area where blocks are dropped and sorted.
-    *   **PropsPanel**: The right sidebar for editing properties (colors, text, links).
-*   **`src/templates-cms`**: **The Themes**. A registry of pluggable templates (e.g., `RusticStore`) with their specific sections and layouts.
+*   **`src/components/builder`**: **The Engine**. Core logic, `WidgetRegistry`, and Renderers.
+*   **`src/app/admin/editor`**: **The Editor Interface**. Sidebar, DropZone, and PropsPanel.
+*   **`src/app/admin/store`**: **Template Store**. Browse and install new designs.
+*   **`src/app/admin/plugins`**: **Plugins System**. Manage integrations.
+*   **`src/templates-cms`**: **Theme Registry**. Pluggable templates (e.g., `RusticStore`) with specific sections.
 
 ### JSON Structure
 *Example of how a page is stored:*
@@ -95,7 +99,7 @@ The project follows a modular structure designed for scalability:
 
 ## 🤝 Contributing
 
-Open Source projects live by their community! If you found a bug or have a feature idea (like a new cool Widget), feel free to open an **Issue** or submit a **Pull Request**.
+Open Source projects live by their community! If you found a bug or have a feature idea, feel free to open an **Issue** or submit a **Pull Request**.
 
 ---
 *Built with ❤️ for the Next.js Community.*
