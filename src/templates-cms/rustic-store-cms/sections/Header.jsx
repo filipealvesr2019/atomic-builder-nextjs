@@ -5,7 +5,7 @@ import { ShoppingCart, Menu, X, Search, User } from 'lucide-react';
 import styles from './Header.module.css';
 
 export default function Header({ 
-  topBarText = "Frete grátis para compras acima de R$ 299",
+  topBarText = "Free shipping on orders over $299",
   phoneNumber = "(11) 9999-9999",
   logoText = "Rustic",
   logoAccent = "Store",
@@ -21,7 +21,7 @@ export default function Header({
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log('Buscar por:', searchQuery);
+    console.log('Search for:', searchQuery);
   };
 
   return (
@@ -33,7 +33,7 @@ export default function Header({
             <p style={{ margin: 0 }}>{topBarText}</p>
           </div>
           <div className={styles.topBarActions}>
-            <span>Atendimento: {phoneNumber}</span>
+            <span>Support: {phoneNumber}</span>
             <button className={styles.iconButton}>
               <User className="h-4 w-4" size={16} />
             </button>
@@ -63,7 +63,7 @@ export default function Header({
             <form onSubmit={handleSearch} className={styles.searchForm}>
               <input
                 type="text"
-                placeholder="Buscar produtos..."
+                placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={styles.searchInput}
@@ -98,7 +98,7 @@ export default function Header({
           <form onSubmit={handleSearch} className={styles.searchForm}>
             <input
               type="text"
-              placeholder="Buscar produtos..."
+              placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className={styles.searchInput}
@@ -132,18 +132,18 @@ export default function Header({
 }
 
 Header.cmsConfig = {
-  name: "Cabeçalho Rústico",
-  description: "Cabeçalho completo com busca e carrinho",
+  name: "Rustic Header",
+  description: "Complete header with search and cart",
   props: {
-    topBarText: { type: 'string', label: 'Texto do Topo' },
-    phoneNumber: { type: 'string', label: 'Telefone' },
-    logoText: { type: 'string', label: 'Texto Logo' },
-    logoAccent: { type: 'string', label: 'Texto Destaque Logo' },
+    topBarText: { type: 'string', label: 'Top Bar Text' },
+    phoneNumber: { type: 'string', label: 'Phone Number' },
+    logoText: { type: 'string', label: 'Logo Text' },
+    logoAccent: { type: 'string', label: 'Logo Accent' },
     links: { 
       type: 'list', 
       label: 'Links',
       itemType: {
-        text: { type: 'string', label: 'Texto' },
+        text: { type: 'string', label: 'Text' },
         href: { type: 'string', label: 'URL' }
       }
     }

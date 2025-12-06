@@ -5,53 +5,53 @@ import styles from './Products.module.css';
 const MOCK_PRODUCTS = [
   {
     id: 1,
-    name: 'Cadeira Artesanal',
-    category: 'moveis',
+    name: 'Handcrafted Chair',
+    category: 'furniture',
     price: 349.99,
     image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500&h=500&fit=crop'
   },
   {
     id: 2,
-    name: 'Luminária Pendente Industrial',
-    category: 'iluminacao',
+    name: 'Industrial Pendant Lamp',
+    category: 'lighting',
     price: 129.99,
     image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=500&h=500&fit=crop'
   },
   {
     id: 3,
-    name: 'Mesa de Centro Rústica',
-    category: 'moveis',
+    name: 'Rustic Coffee Table',
+    category: 'furniture',
     price: 599.99,
     image: 'https://images.unsplash.com/photo-1611486212557-88be5ff6f941?w=500&h=500&fit=crop'
   },
   {
     id: 4,
-    name: 'Vaso de Cerâmica',
-    category: 'decoracao',
+    name: 'Ceramic Vase',
+    category: 'decor',
     price: 89.99,
     image: 'https://images.unsplash.com/photo-1612196808214-b7e239e5f6b7?w=500&h=500&fit=crop'
   },
   {
     id: 5,
-    name: 'Espelho Vintage',
-    category: 'decoracao',
+    name: 'Vintage Mirror',
+    category: 'decor',
     price: 249.99,
     image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=500&h=500&fit=crop'
   },
   {
     id: 6,
-    name: 'Poltrona de Couro',
-    category: 'moveis',
+    name: 'Leather Armchair',
+    category: 'furniture',
     price: 1299.99,
     image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=500&fit=crop'
   }
 ];
 
 const CATEGORIES = [
-  { id: 'all', name: 'Todos' },
-  { id: 'moveis', name: 'Móveis' },
-  { id: 'iluminacao', name: 'Iluminação' },
-  { id: 'decoracao', name: 'Decoração' }
+  { id: 'all', name: 'All' },
+  { id: 'furniture', name: 'Furniture' },
+  { id: 'lighting', name: 'Lighting' },
+  { id: 'decor', name: 'Decor' }
 ];
 
 export default function Products(props) {
@@ -77,8 +77,8 @@ export default function Products(props) {
     <section className={styles.productGridSection}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Produtos em Destaque</h2>
-          <p className={styles.subtitle}>Confira nossa seleção exclusiva</p>
+          <h2 className={styles.title}>Featured Products</h2>
+          <p className={styles.subtitle}>Check out our exclusive selection</p>
           <div className={styles.divider}></div>
         </div>
 
@@ -102,9 +102,9 @@ export default function Products(props) {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="name">Nome (A-Z)</option>
-                <option value="price-low">Menor Preço</option>
-                <option value="price-high">Maior Preço</option>
+                <option value="name">Name (A-Z)</option>
+                <option value="price-low">Lowest Price</option>
+                <option value="price-high">Highest Price</option>
               </select>
 
               <div className={styles.viewModeToggle}>
@@ -135,11 +135,11 @@ export default function Products(props) {
                 <p className={styles.category}>{CATEGORIES.find(c => c.id === product.category)?.name}</p>
                 <h3 className={styles.productName}>{product.name}</h3>
                 <div className={styles.priceContainer}>
-                  <span className={styles.price}>R$ {product.price.toFixed(2)}</span>
+                  <span className={styles.price}>${product.price.toFixed(2)}</span>
                 </div>
                 <button className={styles.addToCartButton}>
                   <ShoppingCart size={16} />
-                  Adicionar ao Carrinho
+                  Add to Cart
                 </button>
               </div>
             </div>
@@ -151,8 +151,8 @@ export default function Products(props) {
 }
 
 Products.cmsConfig = {
-  name: "Lista de Produtos",
+  name: "Product List",
   props: {
-    title: { type: 'string', label: 'Título' }
+    title: { type: 'string', label: 'Title' }
   }
 };

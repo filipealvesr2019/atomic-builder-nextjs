@@ -1,122 +1,81 @@
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 import styles from './Footer.module.css';
 
-export default function Footer({
-  logoText = "Rustic",
-  logoAccent = "Store",
-  description = "Sua loja online de móveis e decoração rústica. Produtos artesanais de alta qualidade para transformar sua casa em um lar aconchegante.",
-  address = "Rua das Flores, 123 \nSão Paulo - SP",
-  phone = "(11) 9999-9999",
-  email = "contato@rusticstore.com"
-}) {
+export default function Footer(props) {
+  const {
+    logoText = "Rustic",
+    logoAccent = "Store",
+    description = "Transforming houses into homes with unique handmade pieces. Quality, design, and tradition in every detail.",
+    companyTitle = "Company",
+    supportTitle = "Support",
+    contactTitle = "Contact"
+  } = props;
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.grid}>
-          {/* Logo e Descrição */}
-          <div className={styles.section}>
-            <h3 className={styles.logoText}>
-              {logoText}<span className={styles.logoAccent}>{logoAccent}</span>
-            </h3>
+          {/* Brand Column */}
+          <div className={styles.brandColumn}>
+            <div className={styles.logo}>
+              <h2 className={styles.logoText}>
+                {logoText}<span className={styles.logoAccent}>{logoAccent}</span>
+              </h2>
+            </div>
             <p className={styles.description}>
               {description}
             </p>
             <div className={styles.socialLinks}>
-              <a href="#" className={styles.socialLink}>
-                <Facebook size={20} />
-              </a>
-              <a href="#" className={styles.socialLink}>
-                <Instagram size={20} />
-              </a>
-              <a href="#" className={styles.socialLink}>
-                <Twitter size={20} />
-              </a>
+              <a href="#" className={styles.socialLink}><Facebook size={20} /></a>
+              <a href="#" className={styles.socialLink}><Instagram size={20} /></a>
+              <a href="#" className={styles.socialLink}><Twitter size={20} /></a>
             </div>
           </div>
 
-          {/* Links Rápidos */}
-          <div className={styles.section}>
-            <h4 className={styles.heading}>Links Rápidos</h4>
-            <ul className={styles.list}>
-              <li className={styles.listItem}>
-                <a href="/">Início</a>
-              </li>
-              <li className={styles.listItem}>
-                <a href="#products">Produtos</a>
-              </li>
-              <li className={styles.listItem}>
-                <a href="#about">Sobre Nós</a>
-              </li>
-              <li className={styles.listItem}>
-                <a href="#contact">Contato</a>
-              </li>
+          {/* Links Column */}
+          <div className={styles.linksColumn}>
+            <h3 className={styles.columnTitle}>{companyTitle}</h3>
+            <ul className={styles.linkList}>
+              <li><a href="#" className={styles.link}>About Us</a></li>
+              <li><a href="#" className={styles.link}>Our Story</a></li>
+              <li><a href="#" className={styles.link}>Blog</a></li>
+              <li><a href="#" className={styles.link}>Careers</a></li>
             </ul>
           </div>
 
-          {/* Categorias */}
-          <div className={styles.section}>
-            <h4 className={styles.heading}>Categorias</h4>
-            <ul className={styles.list}>
-              <li className={styles.listItem}>
-                <a href="#">Móveis</a>
-              </li>
-              <li className={styles.listItem}>
-                <a href="#">Iluminação</a>
-              </li>
-              <li className={styles.listItem}>
-                <a href="#">Decoração</a>
-              </li>
-              <li className={styles.listItem}>
-                <a href="#">Artesanato</a>
-              </li>
-              <li className={styles.listItem}>
-                <a href="#">Ofertas</a>
-              </li>
+          {/* Support Column */}
+          <div className={styles.linksColumn}>
+            <h3 className={styles.columnTitle}>{supportTitle}</h3>
+            <ul className={styles.linkList}>
+              <li><a href="#" className={styles.link}>FAQ</a></li>
+              <li><a href="#" className={styles.link}>Shipping & Returns</a></li>
+              <li><a href="#" className={styles.link}>Privacy Policy</a></li>
+              <li><a href="#" className={styles.link}>Terms of Service</a></li>
             </ul>
           </div>
 
-          {/* Contato */}
-          <div className={styles.section}>
-            <h4 className={styles.heading}>Contato</h4>
-            <div className={styles.list}>
-              <div className={styles.contactItem}>
-                <MapPin className={styles.contactIcon} size={20} />
-                <p className={styles.contactText}>
-                  {address.split('\n').map((line, i) => (
-                    <span key={i}>{line}<br/></span>
-                  ))}
-                </p>
-              </div>
-              <div className={styles.contactItem}>
-                <Phone className={styles.contactIcon} size={20} />
-                <span className={styles.contactText}>{phone}</span>
-              </div>
-              <div className={styles.contactItem}>
-                <Mail className={styles.contactIcon} size={20} />
-                <span className={styles.contactText}>{email}</span>
-              </div>
-            </div>
+          {/* Contact Column */}
+          <div className={styles.contactColumn}>
+            <h3 className={styles.columnTitle}>{contactTitle}</h3>
+            <ul className={styles.contactList}>
+              <li className={styles.contactItem}>
+                <MapPin size={18} className={styles.contactIcon} />
+                <span>123 Flowers St, New York</span>
+              </li>
+              <li className={styles.contactItem}>
+                <Phone size={18} className={styles.contactIcon} />
+                <span>(555) 123-4567</span>
+              </li>
+              <li className={styles.contactItem}>
+                <Mail size={18} className={styles.contactIcon} />
+                <span>contact@rusticstore.com</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Linha de Separação */}
-        <div className={styles.separator}>
-          <div className={styles.bottomBar}>
-            <p className={styles.copyright}>
-              © 2024 RusticStore. Todos os direitos reservados.
-            </p>
-            <div className={styles.bottomLinks}>
-              <a href="#" className={styles.bottomLink}>
-                Política de Privacidade
-              </a>
-              <a href="#" className={styles.bottomLink}>
-                Termos de Uso
-              </a>
-              <a href="#" className={styles.bottomLink}>
-                Trocas e Devoluções
-              </a>
-            </div>
-          </div>
+        <div className={styles.bottomBar}>
+          <p>© {new Date().getFullYear()} {logoText}{logoAccent}. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -124,14 +83,10 @@ export default function Footer({
 }
 
 Footer.cmsConfig = {
-  name: "Rodapé",
-  description: "Rodapé com links, contato e copyright",
+  name: "Footer",
   props: {
-    logoText: { type: 'string', label: 'Texto Logo', default: "Rustic" },
-    logoAccent: { type: 'string', label: 'Texto Destaque', default: "Store" },
-    description: { type: 'string', label: 'Descrição' },
-    address: { type: 'string', label: 'Endereço', default: "Rua das Flores, 123 \nSão Paulo - SP" },
-    phone: { type: 'string', label: 'Telefone', default: "(11) 9999-9999" },
-    email: { type: 'string', label: 'Email', default: "contato@rusticstore.com" }
+    logoText: { type: 'string', label: 'Logo Text' },
+    logoAccent: { type: 'string', label: 'Logo Accent' },
+    description: { type: 'string', label: 'Description', multiline: true }
   }
 };

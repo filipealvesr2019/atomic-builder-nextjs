@@ -3,23 +3,23 @@ import styles from './About.module.css';
 
 export default function About(props) {
   const {
-    title = "Sobre a RusticStore",
-    description = "Somos uma loja especializada em móveis e decoração rústica artesanal. Cada peça é cuidadosamente selecionada e produzida por artesãos experientes, garantindo qualidade e exclusividade para transformar sua casa em um lar aconchegante.",
+    title = "About RusticStore",
+    description = "We are a store specialized in handmade rustic furniture and decoration. Each piece is carefully selected and produced by experienced artisans, ensuring quality and exclusivity to transform your house into a cozy home.",
     items = [
       {
         icon: "home", // Map string to icon component
-        title: "Qualidade Artesanal",
-        description: "Produtos únicos feitos à mão com materiais de primeira qualidade."
+        title: "Handmade Quality",
+        description: "Unique handmade products with premium quality materials."
       },
       {
         icon: "truck",
-        title: "Entrega Rápida",
-        description: "Frete grátis para todo o Brasil em compras acima de R$ 299."
+        title: "Fast Delivery",
+        description: "Free shipping nationwide on orders over $299."
       },
       {
         icon: "shield",
-        title: "Garantia Total",
-        description: "1 ano de garantia e 30 dias para trocas sem complicações."
+        title: "Full Warranty",
+        description: "1 year warranty and 30 days for hassle-free exchanges."
       }
     ]
   } = props;
@@ -60,10 +60,10 @@ export default function About(props) {
 }
 
 About.cmsConfig = {
-  name: "Sobre Nós",
+  name: "About Us",
   props: {
-    title: { type: 'string', label: 'Título' },
-    description: { type: 'string', label: 'Descrição', multiline: true },
+    title: { type: 'string', label: 'Title' },
+    description: { type: 'string', label: 'Description', multiline: true },
     // Simplified item configuration for now
   }
 };

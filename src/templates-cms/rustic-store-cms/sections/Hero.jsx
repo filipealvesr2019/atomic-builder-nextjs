@@ -9,30 +9,30 @@ export default function Hero(props) {
   const defaultSlides = [
     {
       id: 1,
-      title: "Móveis Rústicos Artesanais",
-      subtitle: "Transforme sua casa com peças únicas",
-      description: "Descubra nossa coleção exclusiva de móveis feitos à mão com madeira de qualidade superior.",
+      title: "Handmade Rustic Furniture",
+      subtitle: "Transform your home with unique pieces",
+      description: "Discover our exclusive collection of handmade furniture with superior quality wood.",
       image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=600&fit=crop",
-      buttonText: "Ver Coleção",
-      offer: "Até 30% OFF"
+      buttonText: "View Collection",
+      offer: "Up to 30% OFF"
     },
     {
       id: 2,
-      title: "Iluminação Industrial",
-      subtitle: "Estilo moderno para ambientes únicos",
-      description: "Luminárias e pendentes que combinam design industrial com funcionalidade.",
+      title: "Industrial Lighting",
+      subtitle: "Modern style for unique environments",
+      description: "Lamps and pendants that combine industrial design with functionality.",
       image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=1200&h=600&fit=crop",
-      buttonText: "Explorar",
-      offer: "Frete Grátis"
+      buttonText: "Explore",
+      offer: "Free Shipping"
     },
     {
       id: 3,
-      title: "Decoração Artesanal",
-      subtitle: "Detalhes que fazem a diferença",
-      description: "Vasos, espelhos e objetos decorativos únicos para personalizar seu espaço.",
+      title: "Handmade Decor",
+      subtitle: "Details that make the difference",
+      description: "Vases, mirrors, and unique decorative objects to personalize your space.",
       image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=600&fit=crop",
-      buttonText: "Comprar Agora",
-      offer: "Novidades"
+      buttonText: "Shop Now",
+      offer: "New Arrivals"
     }
   ];
 
@@ -113,7 +113,7 @@ export default function Hero(props) {
                     <button
                       className={styles.secondaryButton}
                     >
-                      Saiba Mais
+                      Learn More
                     </button>
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function Hero(props) {
       {/* Scroll Indicator */}
       <div className={styles.scrollIndicator}>
         <div className={styles.scrollIndicatorContent}>
-          <span className={styles.scrollText}>Role para baixo</span>
+          <span className={styles.scrollText}>Scroll Down</span>
           <div className={styles.scrollIcon}>
             <div className={styles.scrollInnerDot}></div>
           </div>
@@ -163,19 +163,19 @@ export default function Hero(props) {
 
 Hero.cmsConfig = {
   name: "Hero Section (Slider)",
-  description: "Slider de destaque com autoplay e animações",
+  description: "Featured slider with autoplay and animations",
   props: {
     // Basic props configuration, although 'slides' list is complex to edit individually right now
     // We can expose the first slide's properties for simple editing as a fallback
     title: {
         type: "string",
-        label: "Título (Slide 1)",
-        default: "Móveis Rústicos Artesanais"
+        label: "Title (Slide 1)",
+        default: "Handmade Rustic Furniture"
     },
     subtitle: {
         type: "string",
-        label: "Subtítulo (Slide 1)",
-        default: "Transforme sua casa com peças únicas"
+        label: "Subtitle (Slide 1)",
+        default: "Transform your home with unique pieces"
     }
   }
 };

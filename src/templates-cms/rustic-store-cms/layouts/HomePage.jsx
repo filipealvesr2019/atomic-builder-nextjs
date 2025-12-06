@@ -21,6 +21,6 @@ export default function HomePage({ sections = {} }) {
 }
 
 HomePage.cmsConfig = {
-  name: "Página Inicial",
+  name: "Home Page",
   sections: ['header', 'hero', 'products', 'about', 'newsletter', 'contact', 'footer']
 };
