@@ -10,6 +10,7 @@ import DropZone from '@/components/template-editor/DropZone';
 import PropsPanel from '@/components/template-editor/PropsPanel';
 import ThemePanel from '@/components/template-editor/ThemePanel';
 import { ThemeProvider } from '@/components/builder/theme/ThemeContext';
+import { ViewModeProvider } from '@/components/builder/context/ViewModeContext';
 import { Save, ArrowLeft, Palette, Layers, Settings, Monitor, Tablet, Smartphone, Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
 import styles from './editor.module.css';
@@ -327,7 +328,8 @@ export default function TemplateEditorPage() {
 
   return (
     <ThemeProvider initialTheme={template.theme} theme={pageTheme} onThemeChange={setPageTheme}>
-      <div className={styles.editorContainer}>
+      <ViewModeProvider value={viewMode}>
+        <div className={styles.editorContainer}>
         {/* Header Compacto */}
         <header className={styles.header}>
           <div className={styles.headerLeft}>
