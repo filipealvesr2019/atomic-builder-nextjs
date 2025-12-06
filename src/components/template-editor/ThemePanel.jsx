@@ -28,18 +28,18 @@ export default function ThemePanel() {
     <div className="flex flex-col h-full bg-white">
       <div className="p-4 border-b border-gray-200 bg-gray-50">
         <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
-          Estilo Global
+          Global Style
         </h2>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
         {/* Colors Section */}
         <div className="space-y-3">
-          <h3 className="text-xs font-semibold text-gray-500 uppercase">Cores</h3>
+          <h3 className="text-xs font-semibold text-gray-500 uppercase">Colors</h3>
           
           <div className="space-y-2">
             <div>
-              <label className="text-sm text-gray-700 block mb-1">Primária</label>
+              <label className="text-sm text-gray-700 block mb-1">Primary</label>
               <div className="flex gap-2">
                 <input 
                   type="color" 
@@ -57,7 +57,7 @@ export default function ThemePanel() {
             </div>
 
             <div>
-              <label className="text-sm text-gray-700 block mb-1">Secundária</label>
+              <label className="text-sm text-gray-700 block mb-1">Secondary</label>
               <div className="flex gap-2">
                 <input 
                   type="color" 
@@ -75,7 +75,7 @@ export default function ThemePanel() {
             </div>
 
             <div>
-                <label className="text-sm text-gray-700 block mb-1">Fundo (Background)</label>
+                <label className="text-sm text-gray-700 block mb-1">Background</label>
                 <div className="flex gap-2">
                   <input 
                     type="color" 
@@ -93,7 +93,7 @@ export default function ThemePanel() {
             </div>
 
              <div>
-                <label className="text-sm text-gray-700 block mb-1">Texto</label>
+                <label className="text-sm text-gray-700 block mb-1">Text</label>
                 <div className="flex gap-2">
                   <input 
                     type="color" 
@@ -114,9 +114,9 @@ export default function ThemePanel() {
 
         {/* Typography Section */}
         <div className="space-y-3 pt-4 border-t border-gray-100">
-            <h3 className="text-xs font-semibold text-gray-500 uppercase">Tipografia</h3>
+            <h3 className="text-xs font-semibold text-gray-500 uppercase">Typography</h3>
              <div>
-                <label className="text-sm text-gray-700 block mb-1">Fonte Base</label>
+                <label className="text-sm text-gray-700 block mb-1">Base Font</label>
                 <select 
                     value={theme.typography.fontFamily}
                     onChange={(e) => handleTypographyChange('fontFamily', e.target.value)}

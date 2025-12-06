@@ -13,60 +13,60 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
       // Mapeamento de Configuração para Widgets Atômicos
       const atomicConfigs = {
         [WIDGET_TYPES.TEXT]: { 
-            name: 'Texto', 
+            name: 'Text', 
             props: { 
-                content: { type: 'string', label: 'Conteúdo' }, 
-                align: { type: 'string', label: 'Alinhamento', default: 'left' }, 
-                color: { type: 'string', label: 'Cor' },
-                fontSize: { type: 'string', label: 'Tamanho da Fonte' }
+                content: { type: 'string', label: 'Content' }, 
+                align: { type: 'string', label: 'Alignment', default: 'left' }, 
+                color: { type: 'string', label: 'Color' },
+                fontSize: { type: 'string', label: 'Font Size' }
             } 
         },
         [WIDGET_TYPES.HEADING]: { 
-            name: 'Título', 
+            name: 'Heading', 
             props: { 
-                text: { type: 'string', label: 'Texto' }, 
-                tag: { type: 'string', label: 'Tag HTML (h1-h6)', default: 'h2' }, 
-                align: { type: 'string', label: 'Alinhamento' }, 
-                color: { type: 'string', label: 'Cor' } 
+                text: { type: 'string', label: 'Text' }, 
+                tag: { type: 'string', label: 'HTML Tag (h1-h6)', default: 'h2' }, 
+                align: { type: 'string', label: 'Alignment' }, 
+                color: { type: 'string', label: 'Color' } 
             } 
         },
         [WIDGET_TYPES.BUTTON]: { 
-            name: 'Botão', 
+            name: 'Button', 
             props: { 
-                text: { type: 'string', label: 'Texto' }, 
+                text: { type: 'string', label: 'Text' }, 
                 url: { type: 'string', label: 'URL' }, 
-                variant: { type: 'string', label: 'Variante (primary, outline)', default: 'primary' },
-                align: { type: 'string', label: 'Alinhamento' }
+                variant: { type: 'string', label: 'Variant (primary, outline)', default: 'primary' },
+                align: { type: 'string', label: 'Alignment' }
             } 
         },
         [WIDGET_TYPES.IMAGE]: {
-            name: 'Imagem',
+            name: 'Image',
             props: {
-                src: { type: 'string', label: 'URL da Imagem' },
+                src: { type: 'string', label: 'Image URL' },
                 alt: { type: 'string', label: 'Alt Text' },
-                width: { type: 'string', label: 'Largura', default: '100%' },
-                borderRadius: { type: 'string', label: 'Arredondamento', default: '0px' },
-                align: { type: 'string', label: 'Alinhamento', default: 'center' },
-                caption: { type: 'string', label: 'Legenda' }
+                width: { type: 'string', label: 'Width', default: '100%' },
+                borderRadius: { type: 'string', label: 'Border Radius', default: '0px' },
+                align: { type: 'string', label: 'Alignment', default: 'center' },
+                caption: { type: 'string', label: 'Caption' }
             }
         },
         [NODE_TYPES.CONTAINER]: { 
             name: 'Container', 
             props: { 
-                width: { type: 'string', label: 'Largura', default: '100%' }, 
+                width: { type: 'string', label: 'Width', default: '100%' }, 
                 padding: { type: 'string', label: 'Padding', default: '0px' }, 
-                backgroundColor: { type: 'string', label: 'Cor de Fundo', default: 'transparent' },
-                direction: { type: 'string', label: 'Direção (row/column)', default: 'column' },
-                gap: { type: 'string', label: 'Espaçamento (Gap)', default: '10px' },
-                alignItems: { type: 'string', label: 'Alinhamento Itens', default: 'start' }
+                backgroundColor: { type: 'string', label: 'Background Color', default: 'transparent' },
+                direction: { type: 'string', label: 'Direction (row/column)', default: 'column' },
+                gap: { type: 'string', label: 'Gap', default: '10px' },
+                alignItems: { type: 'string', label: 'Align Items', default: 'start' }
             } 
         },
         [NODE_TYPES.SECTION]: {
-            name: 'Seção',
+            name: 'Section',
             props: {
                 padding: { type: 'string', label: 'Padding', default: '40px 0' },
-                backgroundColor: { type: 'string', label: 'Cor de Fundo', default: '#ffffff' },
-                backgroundImage: { type: 'string', label: 'Imagem de Fundo', default: 'none' }
+                backgroundColor: { type: 'string', label: 'Background Color', default: '#ffffff' },
+                backgroundImage: { type: 'string', label: 'Background Image', default: 'none' }
             }
         }
       };
@@ -93,7 +93,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
   if (!block) {
     return (
       <div className="p-6 text-center text-gray-500 mt-10">
-        <p>Selecione um bloco para editar suas propriedades</p>
+        <p>Select a block to edit its properties</p>
       </div>
     );
   }
@@ -106,14 +106,14 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
     <div className="flex flex-col h-full">
       <div className="p-4 border-b border-gray-200 bg-gray-50">
         <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
-          Editar: {config?.name || block.type}
+          Edit: {config?.name || block.type}
         </h2>
       </div>
       
       <div className="flex-1 overflow-y-auto p-4">
         {!config ? (
           <div className="text-sm text-yellow-600 bg-yellow-50 p-3 rounded">
-            Este componente não possui configurações definidas (cmsConfig).
+            This component does not have defined settings (cmsConfig).
           </div>
         ) : (
           <div className="space-y-4">

@@ -45,16 +45,16 @@ export default function BlockLibrary({ templateId }) {
   const templateSections = currentTemplate ? Object.entries(currentTemplate.sections || {}) : [];
 
   const atomicBlocks = [
-    { id: WIDGET_TYPES.HEADING, name: 'Título', icon: Type, category: NODE_TYPES.WIDGET },
-    { id: WIDGET_TYPES.TEXT, name: 'Texto', icon: Type, category: NODE_TYPES.WIDGET },
-    { id: WIDGET_TYPES.BUTTON, name: 'Botão', icon: Square, category: NODE_TYPES.WIDGET },
-    { id: WIDGET_TYPES.IMAGE, name: 'Imagem', icon: ImageIcon, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.HEADING, name: 'Heading', icon: Type, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.TEXT, name: 'Text', icon: Type, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.BUTTON, name: 'Button', icon: Square, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.IMAGE, name: 'Image', icon: ImageIcon, category: NODE_TYPES.WIDGET },
     { id: NODE_TYPES.CONTAINER, name: 'Container', icon: Box, category: NODE_TYPES.CONTAINER },
   ];
 
   return (
     <div className={styles.libraryContainer}>
-      <h3 className={styles.libraryTitle}>Elementos</h3>
+      <h3 className={styles.libraryTitle}>Elements</h3>
       
       {/* Tabs */}
       <div className="flex border-b border-gray-200 mb-4">
@@ -62,14 +62,14 @@ export default function BlockLibrary({ templateId }) {
           className={`flex-1 py-2 text-sm font-medium ${activeTab === 'atomic' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
           onClick={() => setActiveTab('atomic')}
         >
-          Básicos
+          Basic
         </button>
         {templateSections.length > 0 && (
           <button
             className={`flex-1 py-2 text-sm font-medium ${activeTab === 'sections' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
             onClick={() => setActiveTab('sections')}
           >
-            Seções
+            Sections
           </button>
         )}
       </div>

@@ -8,10 +8,10 @@ import { clsx } from 'clsx';
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
-  { icon: FileText, label: 'Páginas', href: '/admin/pages' },
+  { icon: FileText, label: 'Pages', href: '/admin/pages' },
   { icon: Layers, label: 'Templates', href: '/admin/templates' },
-  { icon: ShoppingBag, label: 'Produtos', href: '/admin/products' },
-  { icon: Settings, label: 'Configurações', href: '/admin/settings' },
+  { icon: ShoppingBag, label: 'Products', href: '/admin/products' },
+  { icon: Settings, label: 'Settings', href: '/admin/settings' },
 ];
 
 export default function Sidebar() {
@@ -19,7 +19,7 @@ export default function Sidebar() {
 
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.logo}>CMS Nextjs</div>
+      <div className={styles.logo}>Atomic Builder</div>
       <nav className={styles.nav}>
         {menuItems.map((item) => {
           const Icon = item.icon;

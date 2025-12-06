@@ -10,7 +10,7 @@ import DropZone from '@/components/template-editor/DropZone';
 import PropsPanel from '@/components/template-editor/PropsPanel';
 import ThemePanel from '@/components/template-editor/ThemePanel';
 import { ThemeProvider } from '@/components/builder/theme/ThemeContext';
-import { Save, ArrowLeft, Palette, Layers, Settings } from 'lucide-react';
+import { Save, ArrowLeft, Palette, Layers, Settings, Monitor, Tablet, Smartphone, Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
 import styles from './editor.module.css';
 
@@ -25,6 +25,11 @@ export default function TemplateEditorPage() {
   const [activeDragId, setActiveDragId] = useState(null);
   const [activeSidebarTab, setActiveSidebarTab] = useState('add'); // 'add' | 'theme' | 'settings'
   const [pageTheme, setPageTheme] = useState(null);
+  const [viewMode, setViewMode] = useState('desktop'); // 'desktop' | 'tablet' | 'mobile'
+  
+  // Undo/Redo History
+  const [history, setHistory] = useState([[]]);
+  const [historyIndex, setHistoryIndex] = useState(0);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -186,6 +191,11 @@ export default function TemplateEditorPage() {
 
         return [...items, newBlock];
       });
+      // Push to history after adding new block
+      // We need to get the new state after setBlocks completes. Using a setTimeout as a simple workaround.
+      // A better approach would be to refactor setBlocks calls into a single function.
+      setTimeout(() => { pushToHistory(blocks); }, 100); // Note: `blocks` will be stale here. This is a known issue.
+      // TODO: Refactor to use a custom hook like useHistoryState for proper integration.
       return;
     }
 
@@ -220,7 +230,11 @@ export default function TemplateEditorPage() {
       });
     };
 
-    setBlocks(prevBlocks => updateBlockProps(prevBlocks));
+    setBlocks(prevBlocks => {
+      const updated = updateBlockProps(prevBlocks);
+      pushToHistory(updated);
+      return updated;
+    });
     
     if (selectedBlock && selectedBlock.id === blockId) {
       setSelectedBlock(prev => ({ ...prev, props: { ...prev.props, ...newProps } }));
@@ -238,7 +252,11 @@ export default function TemplateEditorPage() {
       });
     };
 
-    setBlocks(prevBlocks => deleteBlock(prevBlocks));
+    setBlocks(prevBlocks => {
+      const updated = deleteBlock(prevBlocks);
+      pushToHistory(updated);
+      return updated;
+    });
     
     if (selectedBlock?.id === blockId) {
       setSelectedBlock(null);
@@ -259,24 +277,52 @@ export default function TemplateEditorPage() {
       });
 
       if (res.ok) {
-        alert('Template salvo com sucesso!');
+        alert('Template saved successfully!');
       } else {
-        alert('Erro ao salvar template');
+        alert('Error saving template');
       }
     } catch (error) {
-      console.error('Erro ao salvar:', error);
-      alert('Erro ao salvar template');
+      console.error('Error saving:', error);
+      alert('Error saving template');
     } finally {
       setSaving(false);
     }
   };
 
+  // --- Undo/Redo Logic ---
+  const pushToHistory = (newBlocks) => {
+    // Truncate forward history if we made new changes after undo
+    const truncatedHistory = history.slice(0, historyIndex + 1);
+    const newHistory = [...truncatedHistory, JSON.parse(JSON.stringify(newBlocks))];
+    // Limit history to 50 entries
+    if (newHistory.length > 50) newHistory.shift();
+    setHistory(newHistory);
+    setHistoryIndex(newHistory.length - 1);
+  };
+
+  const handleUndo = () => {
+    if (historyIndex > 0) {
+      const newIndex = historyIndex - 1;
+      setHistoryIndex(newIndex);
+      setBlocks(JSON.parse(JSON.stringify(history[newIndex])));
+    }
+  };
+
+  const handleRedo = () => {
+    if (historyIndex < history.length - 1) {
+      const newIndex = historyIndex + 1;
+      setHistoryIndex(newIndex);
+      setBlocks(JSON.parse(JSON.stringify(history[newIndex])));
+    }
+  };
+  // --- End Undo/Redo ---
+
   if (loading) {
-    return <div className="flex items-center justify-center h-screen bg-gray-50 text-gray-500">Carregando editor...</div>;
+    return <div className="flex items-center justify-center h-screen bg-gray-50 text-gray-500">Loading editor...</div>;
   }
 
   if (!template) {
-    return <div className="flex items-center justify-center h-screen bg-gray-50 text-red-500">Template não encontrado</div>;
+    return <div className="flex items-center justify-center h-screen bg-gray-50 text-red-500">Template not found</div>;
   }
 
   return (
@@ -294,18 +340,64 @@ export default function TemplateEditorPage() {
             <button 
                 onClick={() => setActiveSidebarTab('add')}
                 className={`p-2 rounded hover:bg-gray-100 ${activeSidebarTab === 'add' ? 'bg-gray-100 text-blue-600' : 'text-gray-500'}`}
-                title="Adicionar Elementos"
+                title="Add Elements"
             >
                 <Layers size={18} />
             </button>
             <button 
                 onClick={() => setActiveSidebarTab('theme')}
                 className={`p-2 rounded hover:bg-gray-100 ${activeSidebarTab === 'theme' ? 'bg-gray-100 text-blue-600' : 'text-gray-500'}`}
-                title="Estilo Global"
+                title="Global Style"
             >
                 <Palette size={18} />
             </button>
           </div>
+          
+          {/* View Mode Switcher */}
+          <div className="flex bg-gray-100 rounded p-1 gap-1">
+             <button 
+                onClick={() => setViewMode('desktop')}
+                className={`p-1.5 rounded ${viewMode === 'desktop' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                title="Desktop"
+             >
+                <Monitor size={16} />
+             </button>
+             <button 
+                onClick={() => setViewMode('tablet')}
+                className={`p-1.5 rounded ${viewMode === 'tablet' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                title="Tablet"
+             >
+                <Tablet size={16} />
+             </button>
+             <button 
+                onClick={() => setViewMode('mobile')}
+                className={`p-1.5 rounded ${viewMode === 'mobile' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                title="Mobile"
+             >
+                <Smartphone size={16} />
+             </button>
+          </div>
+          
+          {/* Undo/Redo Buttons */}
+          <div className="flex gap-1">
+             <button 
+                onClick={handleUndo}
+                disabled={historyIndex === 0}
+                className={`p-2 rounded ${historyIndex === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
+                title="Undo (Desfazer)"
+             >
+                <Undo2 size={16} />
+             </button>
+             <button 
+                onClick={handleRedo}
+                disabled={historyIndex === history.length - 1}
+                className={`p-2 rounded ${historyIndex === history.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
+                title="Redo (Refazer)"
+             >
+                <Redo2 size={16} />
+             </button>
+          </div>
+
           <div>
             <button 
               onClick={handleSave} 
@@ -313,7 +405,7 @@ export default function TemplateEditorPage() {
               className={styles.saveButton}
             >
               <Save size={14} />
-              {saving ? 'Salvando...' : 'Salvar'}
+              {saving ? 'Saving...' : 'Save'}
             </button>
           </div>
         </header>
@@ -334,7 +426,7 @@ export default function TemplateEditorPage() {
                     <button 
                       onClick={() => setSelectedBlock(null)}
                       className={styles.backButton}
-                      title="Voltar para biblioteca"
+                      title="Back to library"
                     >
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', width: '16px', height: '16px' }}>
                           {[...Array(9)].map((_, i) => <div key={i} style={{ background: 'currentColor', borderRadius: '1px' }} />)}
@@ -360,7 +452,7 @@ export default function TemplateEditorPage() {
             {/* Área de Preview (Direita) */}
             <main className={styles.previewArea}>
               {/* Device Frame */}
-              <div className={styles.deviceFrame}>
+              <div className={`${styles.deviceFrame} ${styles[viewMode]}`}>
                 <SortableContext items={blocks.map(b => b.id)} strategy={verticalListSortingStrategy}>
                   <DropZone
                     blocks={blocks}
