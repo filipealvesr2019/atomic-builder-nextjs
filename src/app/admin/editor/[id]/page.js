@@ -56,7 +56,8 @@ export default function TemplateEditorPage() {
               { id: 'products-1', type: 'products', category: 'section', props: {} },
               { id: 'about-1', type: 'about', category: 'section', props: {} },
               { id: 'newsletter-1', type: 'newsletter', category: 'section', props: {} },
-              { id: 'contact-1', type: 'contact', category: 'section', props: {} }
+              { id: 'contact-1', type: 'contact', category: 'section', props: {} },
+              { id: 'footer-1', type: 'footer', category: 'section', props: {} }
             ];
           } else if (data.templateId === 'minimal-business') {
             defaultBlocks = [

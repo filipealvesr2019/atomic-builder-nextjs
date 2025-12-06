@@ -18,6 +18,7 @@ import RusticStoreAbout from './rustic-store-cms/sections/About';
 import RusticStoreNewsletter from './rustic-store-cms/sections/Newsletter';
 import RusticStoreContact from './rustic-store-cms/sections/Contact';
 import RusticStoreHeader from './rustic-store-cms/sections/Header';
+import RusticStoreFooter from './rustic-store-cms/sections/Footer';
 
 const templates = {
   'rustic-store-cms': {
@@ -32,7 +33,8 @@ const templates = {
       newsletter: RusticStoreNewsletter,
       newsletter: RusticStoreNewsletter,
       contact: RusticStoreContact,
-      header: RusticStoreHeader
+      header: RusticStoreHeader,
+      footer: RusticStoreFooter
     }
   },
   'business-theme-cms': {

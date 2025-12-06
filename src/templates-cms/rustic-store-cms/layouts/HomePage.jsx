@@ -4,6 +4,7 @@ import Products from '../sections/Products';
 import About from '../sections/About';
 import Newsletter from '../sections/Newsletter';
 import Contact from '../sections/Contact';
+import Footer from '../sections/Footer';
 
 export default function HomePage({ sections = {} }) {
   return (
@@ -14,6 +15,7 @@ export default function HomePage({ sections = {} }) {
       <About {...(sections.about || {})} />
       <Newsletter {...(sections.newsletter || {})} />
       <Contact {...(sections.contact || {})} />
+      <Footer {...(sections.footer || {})} />
     </div>
   );
 }
