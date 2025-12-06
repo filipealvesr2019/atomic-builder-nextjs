@@ -1,3 +1,4 @@
+import Header from '../sections/Header';
 import Hero from '../sections/Hero';
 import Products from '../sections/Products';
 import About from '../sections/About';
@@ -7,6 +8,7 @@ import Contact from '../sections/Contact';
 export default function HomePage({ sections = {} }) {
   return (
     <div>
+      <Header {...(sections.header || {})} />
       <Hero {...(sections.hero || {})} />
       <Products {...(sections.products || {})} />
       <About {...(sections.about || {})} />

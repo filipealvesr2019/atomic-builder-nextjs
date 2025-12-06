@@ -51,6 +51,7 @@ export default function TemplateEditorPage() {
           let defaultBlocks = [];
           if (data.templateId === 'rustic-store-cms') {
             defaultBlocks = [
+              { id: 'header-1', type: 'header', category: 'section', props: {} },
               { id: 'hero-1', type: 'hero', category: 'section', props: {} },
               { id: 'products-1', type: 'products', category: 'section', props: {} },
               { id: 'about-1', type: 'about', category: 'section', props: {} },
@@ -59,12 +60,14 @@ export default function TemplateEditorPage() {
             ];
           } else if (data.templateId === 'minimal-business') {
             defaultBlocks = [
+              { id: 'header-1', type: 'header', category: 'section', props: {} },
               { id: 'hero-1', type: 'hero', category: 'section', props: {} },
               { id: 'features-1', type: 'features', category: 'section', props: {} },
               { id: 'footer-1', type: 'footer', category: 'section', props: {} }
             ];
           } else if (data.templateId === 'business-theme-cms') {
             defaultBlocks = [
+              { id: 'header-1', type: 'header', category: 'section', props: {} },
               { id: 'hero-1', type: 'hero', category: 'section', props: {} },
               { id: 'features-1', type: 'features', category: 'section', props: {} },
               { id: 'contact-1', type: 'contact', category: 'section', props: {} }

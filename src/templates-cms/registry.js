@@ -3,11 +3,13 @@ import MinimalBusinessHome from './minimal-business/layouts/HomePage';
 import MinimalBusinessHero from './minimal-business/sections/Hero';
 import MinimalBusinessFeatures from './minimal-business/sections/Features';
 import MinimalBusinessFooter from './minimal-business/sections/Footer';
+import MinimalBusinessHeader from './minimal-business/sections/Header';
 
 import BusinessThemeHome from './business-theme-cms/layouts/HomePage';
 import BusinessThemeHero from './business-theme-cms/sections/Hero';
 import BusinessThemeFeatures from './business-theme-cms/sections/Features';
 import BusinessThemeContact from './business-theme-cms/sections/Contact';
+import BusinessThemeHeader from './business-theme-cms/sections/Header';
 
 import RusticStoreHome from './rustic-store-cms/layouts/HomePage';
 import RusticStoreHero from './rustic-store-cms/sections/Hero';
@@ -15,6 +17,7 @@ import RusticStoreProducts from './rustic-store-cms/sections/Products';
 import RusticStoreAbout from './rustic-store-cms/sections/About';
 import RusticStoreNewsletter from './rustic-store-cms/sections/Newsletter';
 import RusticStoreContact from './rustic-store-cms/sections/Contact';
+import RusticStoreHeader from './rustic-store-cms/sections/Header';
 
 const templates = {
   'rustic-store-cms': {
@@ -27,7 +30,9 @@ const templates = {
       products: RusticStoreProducts,
       about: RusticStoreAbout,
       newsletter: RusticStoreNewsletter,
-      contact: RusticStoreContact
+      newsletter: RusticStoreNewsletter,
+      contact: RusticStoreContact,
+      header: RusticStoreHeader
     }
   },
   'business-theme-cms': {
@@ -38,7 +43,8 @@ const templates = {
     sections: {
       hero: BusinessThemeHero,
       features: BusinessThemeFeatures,
-      contact: BusinessThemeContact
+      contact: BusinessThemeContact,
+      header: BusinessThemeHeader
     }
   },
   'minimal-business': {
@@ -49,7 +55,8 @@ const templates = {
     sections: {
       hero: MinimalBusinessHero,
       features: MinimalBusinessFeatures,
-      footer: MinimalBusinessFooter
+      footer: MinimalBusinessFooter,
+      header: MinimalBusinessHeader
     }
   }
 };
