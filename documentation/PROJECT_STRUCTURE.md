@@ -56,17 +56,48 @@ Modelos de dados (Schemas) do Mongoose.
 - `Template.js`: Definição de templates disponíveis.
 - `User.js`: Dados de usuários (complementar ao Clerk).
 
-#### `src/store/`
-Gerenciamento de estado global utilizando **Jotai**.
-- `editorStore.js`: Estado do editor visual (blocos selecionados, lista de blocos, metadados da página).
 
-#### `src/templates/` & `src/templates-cms/`
-Lógica de renderização e registro dos templates.
-- **templates-cms/**: Registro dos componentes disponíveis para uso no CMS.
-- **templates/**: Implementação dos temas (ex: Rustic Store, Business Theme), contendo os componentes visuais reais que são renderizados nas páginas.
+### src/store/
+Gerenciamento de estado global utilizando **Jotai**.
+- `cartStore.js`: Gerencia o estado do carrinho de compras (itens, total, abrir/fechar) com persistência no LocalStorage via `atomWithStorage`.
+- `editorStore.js`: Estado do editor visual (blocos selecionados, lista de blocos, metadados da página).
+- `themeStore.js`: Gerencia o tema global do site (cores, tipografia) e permite atualizações em tempo real no editor.
+- `viewModeStore.js`: Controla o modo de visualização do editor (desktop, tablet, mobile) e auxilia na resolução de propriedades responsivas.
+
+## Árvore de Arquivos (Resumo)
+
+```bash
+/
+├── public/                     # Arquivos estáticos (imagens, favicons)
+├── src/
+│   ├── app/                    # Rotas da aplicação (Next.js App Router)
+│   │   ├── (admin)/            # Grupo de rotas administrativas
+│   │   ├── api/                # Endpoints da API (Backend)
+│   │   ├── checkout-success/   # Página de sucesso do checkout
+│   │   ├── layout.js           # Layout raiz
+│   │   └── page.js             # Página inicial
+│   ├── components/             # Componentes React
+│   │   ├── admin/              # UI do painel administrativo
+│   │   ├── builder/            # Núcleo do construtor de páginas
+│   │   │   ├── renderers/      # Renderizadores de componentes (Container, Section, Widget)
+│   │   │   └── widgets/        # Componentes atômicos (Button, Text, Image, etc.)
+│   │   ├── shop/               # Componentes de e-commerce (ShopCart, ProductCard)
+│   │   ├── template-editor/    # Interface do editor visual (DropZone, PropsPanel)
+│   │   └── ui/                 # Componentes genéricos de UI
+│   ├── lib/                    # Utilitários (db.js, cloudinary.js)
+│   ├── models/                 # Schemas do Mongoose (Page, Product, Template)
+│   ├── store/                  # Estado global (Jotai atoms)
+│   ├── templates/              # Implementação dos temas (ex: rustic-store-nextjs)
+│   └── templates-cms/          # Registro de templates para o CMS
+├── template-demos/             # Arquivos de demonstração
+├── next.config.mjs             # Configuração do Next.js
+├── package.json                # Dependências
+└── README.md                   # Instruções do projeto
+```
 
 ## Fluxo de Dados Principal
 
-1.  **Editor Visual**: Usa `src/store/editorStore.js` para manter o estado da página sendo editada.
-2.  **Persistência**: Ao salvar, os dados são enviados para rotas em `src/app/api/` e salvos no MongoDB usando os modelos de `src/models/`.
-3.  **Renderização**: O Next.js renderiza as páginas usando os componentes de `src/templates/` baseados na configuração salva no banco.
+1.  **Editor Visual**: Usa `src/store/editorStore.js`, `src/store/viewModeStore.js` e `src/store/themeStore.js` para manter o estado da página, visualização e tema.
+2.  **Persistência**: Ao salvar, os dados são sent para `src/app/api/` e salvos no MongoDB (Schemas em `src/models/`).
+3.  **Renderização**: O `DropZone` e os "Renderers" (`ContainerRenderer`, `WidgetRenderer`) leem a estrutura de blocos e renderizam os componentes correspondentes dinamicamente.
+4.  **E-commerce**: O estado do carrinho (`src/store/cartStore.js`) é persistido localmente e compartilhado entre o ícone do carrinho e o checkout.
