@@ -4,6 +4,7 @@ import HeadingWidget from './widgets/Heading';
 import TextWidget from './widgets/Text';
 import ButtonWidget from './widgets/Button';
 import ImageWidget from './widgets/Image';
+import ProductListRenderer from './renderers/ProductListRenderer';
 
 /**
  * Widget Registry
@@ -14,6 +15,7 @@ export const EVENT_WIDGETS = {
   [WIDGET_TYPES.TEXT]: TextWidget,
   [WIDGET_TYPES.BUTTON]: ButtonWidget,
   [WIDGET_TYPES.IMAGE]: ImageWidget,
+  [WIDGET_TYPES.PRODUCT_LIST]: ProductListRenderer,
   // Add new widgets here
 };
 

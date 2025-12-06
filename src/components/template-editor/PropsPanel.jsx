@@ -147,6 +147,16 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                 caption: { type: 'string', label: 'Caption' }
             }
         },
+        [WIDGET_TYPES.PRODUCT_LIST]: {
+            name: 'Product List',
+            props: {
+                limit: { type: 'string', label: 'Limit (Qty)', default: '8' },
+                columns: { type: 'string', label: 'Columns (1-4)', default: '4' },
+                gap: { type: 'string', label: 'Gap', default: '20px' },
+                showPrice: { type: 'string', label: 'Show Price (true/false)', default: 'true' },
+                showButton: { type: 'string', label: 'Show Button (true/false)', default: 'true' }
+            }
+        },
         [NODE_TYPES.CONTAINER]: { 
             name: 'Container', 
             props: { 

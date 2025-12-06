@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import { Type, Image as ImageIcon, Square, Box, Layout } from 'lucide-react'; 
+import { Type, Image as ImageIcon, Square, Box, Layout, ShoppingBag } from 'lucide-react'; 
 import styles from './BlockLibrary.module.css';
 import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
 import templates from '@/templates-cms/registry';
@@ -50,6 +50,7 @@ export default function BlockLibrary({ templateId }) {
     { id: WIDGET_TYPES.BUTTON, name: 'Button', icon: Square, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.IMAGE, name: 'Image', icon: ImageIcon, category: NODE_TYPES.WIDGET },
     { id: NODE_TYPES.CONTAINER, name: 'Container', icon: Box, category: NODE_TYPES.CONTAINER },
+    { id: WIDGET_TYPES.PRODUCT_LIST, name: 'Product List', icon: ShoppingBag, category: NODE_TYPES.WIDGET },
   ];
 
   return (

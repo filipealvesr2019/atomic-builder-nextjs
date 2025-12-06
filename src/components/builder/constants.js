@@ -12,5 +12,6 @@ export const WIDGET_TYPES = {
   HEADING: 'heading',
   TEXT: 'text',
   BUTTON: 'button',
-  IMAGE: 'image'
+  IMAGE: 'image',
+  PRODUCT_LIST: 'product_list'
 };

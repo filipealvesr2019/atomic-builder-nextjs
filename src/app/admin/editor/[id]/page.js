@@ -11,6 +11,8 @@ import PropsPanel from '@/components/template-editor/PropsPanel';
 import ThemePanel from '@/components/template-editor/ThemePanel';
 import { ThemeProvider } from '@/components/builder/theme/ThemeContext';
 import { ViewModeProvider } from '@/components/builder/context/ViewModeContext';
+import { CartProvider } from '@/components/builder/context/CartContext';
+import ShopCart from '@/components/shop/ShopCart';
 import { Save, ArrowLeft, Palette, Layers, Settings, Monitor, Tablet, Smartphone, Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
 import styles from './editor.module.css';
@@ -328,6 +330,7 @@ export default function TemplateEditorPage() {
 
   return (
     <ThemeProvider initialTheme={template.theme} theme={pageTheme} onThemeChange={setPageTheme}>
+      <CartProvider>
       <ViewModeProvider value={viewMode}>
         <div className={styles.editorContainer}>
         {/* Header Compacto */}
@@ -478,7 +481,9 @@ export default function TemplateEditorPage() {
           </DragOverlay>
         </DndContext>
       </div>
+      <ShopCart />
       </ViewModeProvider>
+      </CartProvider>
     </ThemeProvider>
   );
 }
