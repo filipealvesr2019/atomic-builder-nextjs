@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, ShoppingBag, Settings, Layers } from 'lucide-react';
+import { LayoutDashboard, FileText, ShoppingBag, Settings, Layers, DownloadCloud } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { clsx } from 'clsx';
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
+  { icon: DownloadCloud, label: 'Store', href: '/admin/store' },
   { icon: FileText, label: 'Pages', href: '/admin/pages' },
   { icon: Layers, label: 'Templates', href: '/admin/templates' },
   { icon: ShoppingBag, label: 'Products', href: '/admin/products' },
