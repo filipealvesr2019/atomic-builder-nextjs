@@ -4,7 +4,7 @@
 ![Next.js](https://img.shields.io/badge/Next.js-14+-black?style=for-the-badge&logo=next.js)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-> **Note:** This project is in active development (Alpha). Features are being pushed daily! 🚀
+> **Note:** This project is in active development (Alpha). Features are being pushed weekly! 🚀
 
 ## What is Atomic Builder?
 
