@@ -1,27 +1,22 @@
 import styles from './Newsletter.module.css';
 
-export default function Newsletter({
-  title = "Fique por Dentro das Novidades",
-  description = "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos."
-}) {
+export default function Newsletter({ title, description, buttonText }) {
   return (
-    <section className={styles.newsletterSection}>
+    <section className={styles.newsletter}>
       <div className={styles.container}>
-        <div className={styles.newsletterContent}>
-          <h2 className={styles.newsletterTitle}>{title}</h2>
-          <p className={styles.newsletterDescription}>
-            {description}
-          </p>
-          <div className={styles.newsletterForm}>
-            <input
-              type="email"
-              placeholder="Seu melhor e-mail"
-              className={styles.newsletterInput}
-            />
-            <button className={styles.newsletterButton}>
-              Inscrever-se
-            </button>
-          </div>
+        <h2 className={styles.title}>{title || "Fique por Dentro das Novidades"}</h2>
+        <p className={styles.description}>
+          {description || "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos."}
+        </p>
+        <div className={styles.form}>
+          <input
+            type="email"
+            placeholder="Seu melhor e-mail"
+            className={styles.input}
+          />
+          <button className={styles.button}>
+            {buttonText || "Inscrever-se"}
+          </button>
         </div>
       </div>
     </section>
@@ -30,9 +25,21 @@ export default function Newsletter({
 
 Newsletter.cmsConfig = {
   name: "Newsletter",
-  description: "Formulário de inscrição de newsletter",
   props: {
-    title: { type: 'string', label: 'Título', default: "Fique por Dentro das Novidades" },
-    description: { type: 'string', label: 'Descrição' }
+    title: {
+      type: "string",
+      label: "Título",
+      default: "Fique por Dentro das Novidades"
+    },
+    description: {
+      type: "string",
+      label: "Descrição",
+      default: "Receba ofertas exclusivas e seja o primeiro a conhecer nossos novos produtos."
+    },
+    buttonText: {
+      type: "string",
+      label: "Texto do Botão",
+      default: "Inscrever-se"
+    }
   }
 };

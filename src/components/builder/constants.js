@@ -1,0 +1,16 @@
+/**
+ * Constants for the Page Builder Node Types
+ * This helps avoid typos and makes the code cleaner to read.
+ */
+export const NODE_TYPES = {
+  SECTION: 'section',
+  CONTAINER: 'container',
+  WIDGET: 'widget'
+};
+
+export const WIDGET_TYPES = {
+  HEADING: 'heading',
+  TEXT: 'text',
+  BUTTON: 'button',
+  IMAGE: 'image'
+};

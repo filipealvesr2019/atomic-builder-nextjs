@@ -19,10 +19,12 @@ import RusticStoreNewsletter from './rustic-store-cms/sections/Newsletter';
 import RusticStoreContact from './rustic-store-cms/sections/Contact';
 import RusticStoreHeader from './rustic-store-cms/sections/Header';
 import RusticStoreFooter from './rustic-store-cms/sections/Footer';
+import { rusticStoreDefaultContent } from './rustic-store-cms/default-content';
 
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
+    defaultContent: rusticStoreDefaultContent,
     layouts: {
       home: RusticStoreHome
     },

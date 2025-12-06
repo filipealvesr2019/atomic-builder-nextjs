@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import templates from '@/templates-cms/registry';
+import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
 
 export default function PropsPanel({ block, templateId, onPropsChange }) {
   const [config, setConfig] = useState(null);
@@ -11,28 +10,79 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
       console.log('[PropsPanel] Bloco selecionado:', block.type);
       const template = templates[templateId];
       
-      // Verificar Elementos Básicos
-      // Precisamos de uma lista de configs para elementos básicos também, ou hardcoded aqui
-      if (['text', 'image', 'button', 'container', 'spacer'].includes(block.type)) {
-        // Configs básicas para elementos
-        const basicConfigs = {
-          text: { name: 'Texto', props: { content: { type: 'string', label: 'Conteúdo' }, align: { type: 'string', label: 'Alinhamento (left, center, right)' }, color: { type: 'string', label: 'Cor' } } },
-          button: { name: 'Botão', props: { text: { type: 'string', label: 'Texto' }, url: { type: 'string', label: 'Link' }, backgroundColor: { type: 'string', label: 'Cor de Fundo' } } },
-          image: { name: 'Imagem', props: { src: { type: 'image', label: 'URL da Imagem' }, width: { type: 'string', label: 'Largura' } } },
-          spacer: { name: 'Espaçador', props: { height: { type: 'string', label: 'Altura' } } },
-          container: { name: 'Container', props: {} }
-        };
-        setConfig(basicConfigs[block.type]);
-        return;
+      // Mapeamento de Configuração para Widgets Atômicos
+      const atomicConfigs = {
+        [WIDGET_TYPES.TEXT]: { 
+            name: 'Texto', 
+            props: { 
+                content: { type: 'string', label: 'Conteúdo' }, 
+                align: { type: 'string', label: 'Alinhamento', default: 'left' }, 
+                color: { type: 'string', label: 'Cor' },
+                fontSize: { type: 'string', label: 'Tamanho da Fonte' }
+            } 
+        },
+        [WIDGET_TYPES.HEADING]: { 
+            name: 'Título', 
+            props: { 
+                text: { type: 'string', label: 'Texto' }, 
+                tag: { type: 'string', label: 'Tag HTML (h1-h6)', default: 'h2' }, 
+                align: { type: 'string', label: 'Alinhamento' }, 
+                color: { type: 'string', label: 'Cor' } 
+            } 
+        },
+        [WIDGET_TYPES.BUTTON]: { 
+            name: 'Botão', 
+            props: { 
+                text: { type: 'string', label: 'Texto' }, 
+                url: { type: 'string', label: 'URL' }, 
+                variant: { type: 'string', label: 'Variante (primary, outline)', default: 'primary' },
+                align: { type: 'string', label: 'Alinhamento' }
+            } 
+        },
+        [WIDGET_TYPES.IMAGE]: {
+            name: 'Imagem',
+            props: {
+                src: { type: 'string', label: 'URL da Imagem' },
+                alt: { type: 'string', label: 'Alt Text' },
+                width: { type: 'string', label: 'Largura', default: '100%' },
+                borderRadius: { type: 'string', label: 'Arredondamento', default: '0px' },
+                align: { type: 'string', label: 'Alinhamento', default: 'center' },
+                caption: { type: 'string', label: 'Legenda' }
+            }
+        },
+        [NODE_TYPES.CONTAINER]: { 
+            name: 'Container', 
+            props: { 
+                width: { type: 'string', label: 'Largura', default: '100%' }, 
+                padding: { type: 'string', label: 'Padding', default: '0px' }, 
+                backgroundColor: { type: 'string', label: 'Cor de Fundo', default: 'transparent' },
+                direction: { type: 'string', label: 'Direção (row/column)', default: 'column' },
+                gap: { type: 'string', label: 'Espaçamento (Gap)', default: '10px' },
+                alignItems: { type: 'string', label: 'Alinhamento Itens', default: 'start' }
+            } 
+        },
+        [NODE_TYPES.SECTION]: {
+            name: 'Seção',
+            props: {
+                padding: { type: 'string', label: 'Padding', default: '40px 0' },
+                backgroundColor: { type: 'string', label: 'Cor de Fundo', default: '#ffffff' },
+                backgroundImage: { type: 'string', label: 'Imagem de Fundo', default: 'none' }
+            }
+        }
+      };
+
+      if (atomicConfigs[block.type] || block.category === NODE_TYPES.CONTAINER || block.category === NODE_TYPES.SECTION) {
+          // Se for um container ou seção atômica, usa a config apropriada
+          if (block.category === NODE_TYPES.CONTAINER) setConfig(atomicConfigs[NODE_TYPES.CONTAINER]);
+          else if (block.category === NODE_TYPES.SECTION) setConfig(atomicConfigs[NODE_TYPES.SECTION]);
+          else setConfig(atomicConfigs[block.type]);
+          return;
       }
 
       if (template && template.sections && template.sections[block.type]) {
         const Component = template.sections[block.type];
-        console.log('[PropsPanel] Componente encontrado:', Component.name);
-        console.log('[PropsPanel] Config:', Component.cmsConfig);
         setConfig(Component.cmsConfig || null);
       } else {
-        console.warn('[PropsPanel] Componente ou config não encontrado para:', block.type);
         setConfig(null);
       }
     } else {

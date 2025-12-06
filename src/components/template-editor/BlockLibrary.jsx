@@ -1,14 +1,20 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import { GripVertical, Plus, Type, Image as ImageIcon, Box, Layout, Square } from 'lucide-react';
+import { Type, Image as ImageIcon, Square, Box, Layout } from 'lucide-react'; 
+import styles from './BlockLibrary.module.css';
+import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
+import templates from '@/templates-cms/registry';
 
-// Componente para um item arrastável da biblioteca
-function DraggableLibraryItem({ id, label, icon: Icon, type }) {
+function DraggableLibraryItem({ id, title, icon: Icon, category }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: `lib-${type}-${id}`, // Ex: lib-element-text ou lib-section-hero
-    data: { type: id, category: type }
+    id: `lib-${category}-${id}`, 
+    data: { 
+        type: id, 
+        category: category,
+        isLibraryItem: true 
+    }
   });
 
   const style = transform ? {
@@ -18,122 +24,78 @@ function DraggableLibraryItem({ id, label, icon: Icon, type }) {
   return (
     <div 
       ref={setNodeRef} 
-      style={style} 
       {...listeners} 
-      {...attributes}
-      className="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg cursor-grab hover:border-blue-500 hover:shadow-md hover:-translate-y-0.5 transition-all text-center gap-2 h-20 group"
+      {...attributes} 
+      className={styles.libraryItem}
+      style={style}
     >
-      <div className="p-2 bg-gray-50 rounded-full group-hover:bg-blue-50 transition-colors">
-        {Icon && <Icon size={20} className="text-gray-500 group-hover:text-blue-600" />}
+      <div className={styles.iconContainer}>
+        {Icon && <Icon size={20} />}
       </div>
-      <span className="text-xs font-medium text-gray-600 group-hover:text-gray-900">{label}</span>
+      <span className={styles.itemTitle}>{title}</span>
     </div>
   );
 }
 
 export default function BlockLibrary({ templateId }) {
-  const [activeTab, setActiveTab] = useState('elements'); // 'elements' | 'layouts'
-  const [sections, setSections] = useState([]);
+  const [activeTab, setActiveTab] = useState('atomic'); // 'atomic' | 'sections'
 
-  // Elementos básicos estáticos
-  const basicElements = [
-    { id: 'text', name: 'Texto', icon: Type },
-    { id: 'image', name: 'Imagem', icon: ImageIcon },
-    { id: 'button', name: 'Botão', icon: Square },
-    { id: 'container', name: 'Container', icon: Box },
-    { id: 'spacer', name: 'Espaçador', icon: Layout },
+  // Get current template config
+  const currentTemplate = templateId ? templates[templateId] : null;
+  const templateSections = currentTemplate ? Object.entries(currentTemplate.sections || {}) : [];
+
+  const atomicBlocks = [
+    { id: WIDGET_TYPES.HEADING, name: 'Título', icon: Type, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.TEXT, name: 'Texto', icon: Type, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.BUTTON, name: 'Botão', icon: Square, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.IMAGE, name: 'Imagem', icon: ImageIcon, category: NODE_TYPES.WIDGET },
+    { id: NODE_TYPES.CONTAINER, name: 'Container', icon: Box, category: NODE_TYPES.CONTAINER },
   ];
 
-  useEffect(() => {
-    // Carregar seções do template (Layouts)
-    const loadSections = () => {
-      let availableSections = [];
-      
-      if (templateId === 'rustic-store-cms') {
-        availableSections = [
-          { id: 'hero', name: 'Hero Section' },
-          { id: 'products', name: 'Products Grid' },
-          { id: 'about', name: 'About Section' },
-          { id: 'newsletter', name: 'Newsletter' },
-          { id: 'contact', name: 'Contact' }
-        ];
-      } else if (templateId === 'minimal-business') {
-        availableSections = [
-          { id: 'hero', name: 'Hero Section' },
-          { id: 'features', name: 'Features' },
-          { id: 'footer', name: 'Footer' }
-        ];
-      } else if (templateId === 'business-theme-cms') {
-        availableSections = [
-          { id: 'hero', name: 'Hero Section' },
-          { id: 'features', name: 'Features' },
-          { id: 'contact', name: 'Contact' }
-        ];
-      }
-
-      setSections(availableSections);
-    };
-
-    loadSections();
-  }, [templateId]);
-
   return (
-    <div className="flex flex-col h-full bg-white">
-      {/* Abas */}
-      <div className="flex border-b border-gray-200">
+    <div className={styles.libraryContainer}>
+      <h3 className={styles.libraryTitle}>Elementos</h3>
+      
+      {/* Tabs */}
+      <div className="flex border-b border-gray-200 mb-4">
         <button
-          className={`flex-1 py-3 text-xs font-medium text-center uppercase tracking-wide transition-colors ${
-            activeTab === 'elements' 
-              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/50' 
-              : 'text-gray-500 hover:bg-gray-50'
-          }`}
-          onClick={() => setActiveTab('elements')}
+          className={`flex-1 py-2 text-sm font-medium ${activeTab === 'atomic' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+          onClick={() => setActiveTab('atomic')}
         >
-          Elementos
+          Básicos
         </button>
-        <button
-          className={`flex-1 py-3 text-xs font-medium text-center uppercase tracking-wide transition-colors ${
-            activeTab === 'layouts' 
-              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50/50' 
-              : 'text-gray-500 hover:bg-gray-50'
-          }`}
-          onClick={() => setActiveTab('layouts')}
-        >
-          Layouts
-        </button>
+        {templateSections.length > 0 && (
+          <button
+            className={`flex-1 py-2 text-sm font-medium ${activeTab === 'sections' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+            onClick={() => setActiveTab('sections')}
+          >
+            Seções
+          </button>
+        )}
       </div>
 
-      {/* Conteúdo */}
-      <div className="flex-1 overflow-y-auto p-4 bg-gray-50/50">
-        <div className="grid grid-cols-2 gap-3">
-          {activeTab === 'elements' ? (
-            basicElements.map(el => (
-              <DraggableLibraryItem 
-                key={el.id} 
-                id={el.id} 
-                label={el.name} 
-                icon={el.icon} 
-                type="element"
-              />
-            ))
-          ) : (
-            sections.length === 0 ? (
-              <p className="col-span-2 text-sm text-gray-500 text-center py-4">
-                Nenhum layout disponível para este tema.
-              </p>
-            ) : (
-              sections.map(section => (
-                <DraggableLibraryItem 
-                  key={section.id} 
-                  id={section.id} 
-                  label={section.name} 
-                  icon={Layout}
-                  type="section"
-                />
-              ))
-            )
-          )}
-        </div>
+      <div className={styles.libraryGrid}>
+        {activeTab === 'atomic' ? (
+          atomicBlocks.map((block) => (
+            <DraggableLibraryItem 
+              key={block.id} 
+              id={block.id} 
+              title={block.name} 
+              icon={block.icon} 
+              category={block.category} 
+            />
+          ))
+        ) : (
+          templateSections.map(([key, Component]) => (
+            <DraggableLibraryItem 
+                key={key} 
+                id={key} // ID used for type
+                title={Component.cmsConfig?.name || key} 
+                icon={Layout} 
+                category={NODE_TYPES.SECTION} 
+            />
+          ))
+        )}
       </div>
     </div>
   );

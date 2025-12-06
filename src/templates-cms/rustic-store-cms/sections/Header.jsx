@@ -9,13 +9,7 @@ export default function Header({
   phoneNumber = "(11) 9999-9999",
   logoText = "Rustic",
   logoAccent = "Store",
-  links = [
-    { text: "Início", href: "/" },
-    { text: "Produtos", href: "#products" },
-    { text: "Sobre", href: "#about" },
-    { text: "Blog", href: "#blog" },
-    { text: "Contato", href: "#contact" }
-  ]
+  links = []
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');

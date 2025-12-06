@@ -6,149 +6,12 @@ import { useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Trash2, GripVertical } from 'lucide-react';
 import templates from '@/templates-cms/registry';
+import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
+import { getWidgetComponent } from '@/components/builder/WidgetRegistry';
+import ContainerRenderer from '@/components/builder/renderers/ContainerRenderer';
+import SectionRenderer from '@/components/builder/renderers/SectionRenderer';
 
-// --- Elementos Básicos (Estilizados e Alinhados) ---
-const BasicText = ({ content, align = 'left', color = '#1f2937' }) => (
-  <div style={{ 
-    width: '100%',
-    padding: '20px 24px',
-    textAlign: align, 
-    color, 
-    fontFamily: 'system-ui, -apple-system, sans-serif',
-    lineHeight: '1.7',
-    fontSize: '16px',
-    backgroundColor: '#ffffff',
-    borderRadius: '4px',
-    marginBottom: '4px'
-  }}>
-    {content || 'Novo texto'}
-  </div>
-);
-
-const BasicImage = ({ src, alt, width = '100%' }) => (
-  <div style={{ 
-    width: '100%',
-    marginBottom: '4px'
-  }}>
-    {src ? (
-      <img 
-        src={src} 
-        alt={alt || 'Imagem'} 
-        style={{ 
-          width: '100%', 
-          height: 'auto',
-          display: 'block',
-          borderRadius: '4px',
-          objectFit: 'cover'
-        }} 
-      />
-    ) : (
-      <div style={{ 
-        width: '100%',
-        height: '280px',
-        background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
-        borderRadius: '4px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#60a5fa'
-      }}>
-        <svg style={{ width: '48px', height: '48px', marginBottom: '12px', opacity: 0.6 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-        </svg>
-        <span style={{ fontSize: '13px', fontWeight: '500', color: '#3b82f6' }}>Imagem</span>
-      </div>
-    )}
-  </div>
-);
-
-const BasicButton = ({ text, url, align = 'center', backgroundColor = '#2563eb', color = '#fff' }) => (
-  <div style={{ 
-    width: '100%',
-    padding: '16px 24px',
-    textAlign: align,
-    backgroundColor: '#ffffff',
-    borderRadius: '4px',
-    marginBottom: '4px'
-  }}>
-    <a 
-      href={url || '#'} 
-      style={{ 
-        display: 'inline-block',
-        padding: '12px 32px', 
-        backgroundColor, 
-        color, 
-        textDecoration: 'none', 
-        borderRadius: '6px',
-        fontWeight: '600',
-        fontSize: '15px',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-        transition: 'all 0.2s'
-      }}
-    >
-      {text || 'Botão'}
-    </a>
-  </div>
-);
-
-const BasicContainer = ({ children }) => (
-  <div style={{ 
-    width: '100%',
-    padding: '32px', 
-    border: '2px dashed #d1d5db',
-    borderRadius: '8px',
-    minHeight: '120px',
-    backgroundColor: '#f9fafb',
-    marginBottom: '4px'
-  }}>
-    {children || (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#9ca3af',
-        padding: '32px'
-      }}>
-        <svg style={{ width: '40px', height: '40px', marginBottom: '12px', opacity: 0.4 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
-        </svg>
-        <p style={{ margin: 0, fontSize: '14px', fontWeight: '500' }}>Arraste elementos aqui</p>
-      </div>
-    )}
-  </div>
-);
-
-const BasicSpacer = ({ height = '40px' }) => (
-  <div style={{ 
-    height, 
-    width: '100%',
-    marginBottom: '4px',
-    position: 'relative'
-  }}>
-    <div style={{
-      position: 'absolute',
-      top: '50%',
-      left: '24px',
-      right: '24px',
-      height: '1px',
-      background: '#e5e7eb',
-      transform: 'translateY(-50%)'
-    }}></div>
-  </div>
-);
-
-// Mapeamento de elementos básicos
-const BASIC_ELEMENTS = {
-  text: BasicText,
-  image: BasicImage,
-  button: BasicButton,
-  container: BasicContainer,
-  spacer: BasicSpacer
-};
-
-function SortableBlock({ block, templateId, isSelected, onClick, onDelete, children }) {
+function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpdateBlock, children }) {
   const {
     attributes,
     listeners,
@@ -165,14 +28,31 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, child
 
   let BlockComponent = null;
 
-  if (BASIC_ELEMENTS[block.type]) {
-    BlockComponent = BASIC_ELEMENTS[block.type];
+  // Determine which component to render
+  if (block.category === NODE_TYPES.WIDGET) {
+    BlockComponent = getWidgetComponent(block.type);
+  } else if (block.category === NODE_TYPES.CONTAINER) {
+    // For container, we use the ContainerRenderer but pass children (which are the DnD wrappers)
+    BlockComponent = ContainerRenderer;
+  } else if (block.category === NODE_TYPES.SECTION && block.type === 'section') { // Atomic Section
+     BlockComponent = SectionRenderer;
   } else {
+    // Legacy/Old Section-Blocks from Registry
     const templateConfig = templates[templateId];
     if (templateConfig && templateConfig.sections && templateConfig.sections[block.type]) {
       BlockComponent = templateConfig.sections[block.type];
     }
   }
+
+  // Wrapper Props for atomic components
+  const componentProps = {
+    id: block.id,
+    settings: block.props, // Atomic components expect 'settings'
+    ...block.props,       // Legacy components expect spread props
+    container: block.category === NODE_TYPES.CONTAINER ? block : undefined,
+    section: block.category === NODE_TYPES.SECTION ? block : undefined,
+    onUpdateBlock: onUpdateBlock // Pass update function
+  };
 
   return (
     <div
@@ -186,7 +66,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, child
         onClick(block);
       }}
     >
-      {/* Overlay de Ações (Moderno) */}
+      {/* Action Overlay */}
       <div className={`absolute -top-3 right-2 z-20 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden transition-all ${isSelected ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0'}`}>
         <div 
           {...attributes} 
@@ -209,15 +89,15 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, child
         </button>
       </div>
 
-      {/* Conteúdo do Bloco */}
+      {/* Render Block Content */}
       <div className={isSelected ? "" : ""}>
         {BlockComponent ? (
-          <BlockComponent {...block.props}>
+          <BlockComponent {...componentProps}>
             {children}
           </BlockComponent>
         ) : (
           <div className="p-4 text-center bg-red-50 border border-red-200 text-red-600 rounded">
-            Bloco desconhecido: {block.type}
+            Unknown Block: {block.type}
           </div>
         )}
       </div>
@@ -225,10 +105,44 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, child
   );
 }
 
-// Componente recursivo para renderizar blocos
-const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDeleteBlock }) => {
-    // Se for um Container, precisa renderizar seus filhos
-    if (block.type === 'container') {
+// Recursive Block Renderer
+import ResizeHandle from './ResizeHandle';
+
+const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDeleteBlock, onUpdateBlock }) => {
+    const parentRef = React.useRef(null);
+
+    // Resize Handler
+    const handleResize = (index, deltaX) => {
+        if (!parentRef.current) return;
+        
+        const leftChild = block.children[index];
+        const rightChild = block.children[index + 1];
+        
+        const parentWidth = parentRef.current.offsetWidth;
+        const deltaPercentage = (deltaX / parentWidth) * 100;
+        
+        // Helper to get numeric width
+        const getWidth = (w) => parseFloat(w) || (100 / block.children.length); // Default to equal share if undefined
+
+        let leftWidth = getWidth(leftChild.props.width);
+        let rightWidth = getWidth(rightChild.props.width);
+        
+        const newLeftWidth = Math.max(5, Math.min(95, leftWidth + deltaPercentage)); // Min 5%, Max 95%
+        const newRightWidth = Math.max(5, Math.min(95, rightWidth - deltaPercentage)); // Adjust right neighbor to keep total same?
+        // Actually, flexbox handles remaining space if we only set one?
+        // Better: Adjust both to maintain ratio?
+        // Simple approach: Update left child width. Flexbox 'grow' defaults might interfere.
+        // We should ensure all children have explicit widths if we start resizing.
+        
+        // Safe update: Update both neighbors
+        onUpdateBlock(leftChild.id, { width: `${newLeftWidth}%` });
+        onUpdateBlock(rightChild.id, { width: `${newRightWidth}%` });
+    };
+
+    // If it's a Container or Section, render children
+    if (block.children && (block.category === NODE_TYPES.CONTAINER || block.category === NODE_TYPES.SECTION)) {
+        const isRow = block.props?.direction === 'row';
+
         return (
             <SortableBlock
                 block={block}
@@ -236,31 +150,50 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
                 isSelected={selectedBlock?.id === block.id}
                 onClick={onBlockClick}
                 onDelete={onDeleteBlock}
+                onUpdateBlock={onUpdateBlock}
             >
-                <div className="mt-2">
+                {/* We need a min-height or padding to have a drop area if empty */}
+                <div 
+                    ref={parentRef}
+                    style={{ 
+                        minHeight: '50px', 
+                        width: '100%', 
+                        border: block.children.length === 0 ? '1px dashed #ccc' : 'none',
+                        display: isRow ? 'flex' : 'block',
+                        flexDirection: isRow ? 'row' : 'column'
+                    }}
+                >
                     <SortableContext 
-                        items={block.children ? block.children.map(c => c.id) : []} 
+                        items={block.children.map(c => c.id)} 
                         strategy={verticalListSortingStrategy}
                         id={block.id}
                     >
-                        {block.children && block.children.length > 0 ? (
-                            block.children.map(child => (
+                        {block.children.map((child, index) => (
+                            <React.Fragment key={child.id}>
                                 <BlockRenderer 
-                                    key={child.id} 
                                     block={child} 
                                     templateId={templateId}
                                     selectedBlock={selectedBlock}
                                     onBlockClick={onBlockClick}
                                     onDeleteBlock={onDeleteBlock}
+                                    onUpdateBlock={onUpdateBlock}
                                 />
-                            ))
-                        ) : null}
+                                {isRow && index < block.children.length - 1 && (
+                                    <ResizeHandle 
+                                        leftBlockId={child.id}
+                                        rightBlockId={block.children[index+1].id}
+                                        onResize={(deltaX) => handleResize(index, deltaX)}
+                                    />
+                                )}
+                            </React.Fragment>
+                        ))}
                     </SortableContext>
                 </div>
             </SortableBlock>
         );
     }
-
+    
+    // ... (leaf node return)
     return (
         <SortableBlock
             block={block}
@@ -268,11 +201,13 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
             isSelected={selectedBlock?.id === block.id}
             onClick={onBlockClick}
             onDelete={onDeleteBlock}
+            onUpdateBlock={onUpdateBlock}
         />
     );
 };
 
-export default function DropZone({ blocks, templateId, selectedBlock, onBlockClick, onDeleteBlock }) {
+
+export default function DropZone({ blocks, templateId, selectedBlock, onBlockClick, onDeleteBlock, onUpdateBlock }) {
   const { setNodeRef, isOver } = useDroppable({ id: 'drop-zone' });
 
   return (
@@ -287,17 +222,23 @@ export default function DropZone({ blocks, templateId, selectedBlock, onBlockCli
           <p className="text-sm">Arraste layouts ou elementos da barra lateral para cá</p>
         </div>
       ) : (
-        <div className="flex flex-col pb-20">
-          {blocks.map((block) => (
-            <BlockRenderer
-              key={block.id}
-              block={block}
-              templateId={templateId}
-              selectedBlock={selectedBlock}
-              onBlockClick={onBlockClick}
-              onDeleteBlock={onDeleteBlock}
-            />
-          ))}
+        <div className="flex flex-col pb-20 p-4">
+          <SortableContext 
+             items={blocks.map(b => b.id)} 
+             strategy={verticalListSortingStrategy}
+          >
+            {blocks.map((block) => (
+                <BlockRenderer
+                key={block.id}
+                block={block}
+                templateId={templateId}
+                selectedBlock={selectedBlock}
+                onBlockClick={onBlockClick}
+                onDeleteBlock={onDeleteBlock}
+                onUpdateBlock={onUpdateBlock}
+                />
+            ))}
+          </SortableContext>
         </div>
       )}
     </div>
