@@ -1,37 +1,37 @@
 import React from 'react';
 import WidgetRenderer from './WidgetRenderer';
+import { useViewMode, resolveResponsiveProp } from '@/components/builder/context/ViewModeContext';
 
 /**
  * ContainerRenderer
  * Renders a container (usually a column or a flex box) and iterates over its children widgets.
  */
 export default function ContainerRenderer({ container }) {
+  const viewMode = useViewMode();
+
   if (!container) return null;
 
-  const { settings, widgets = [], id } = container;
-  const { 
-    width = '100%', 
-    padding = '0', 
-    backgroundColor = 'transparent',
-    direction = 'column', // row or column
-    gap = '10px'
-  } = settings || {};
+  const { settings, widgets = [], children, id } = container;
+
+  const getProp = (key, fallback) => {
+    return resolveResponsiveProp(settings?.[key], viewMode) || fallback;
+  };
 
   const style = {
-    width: width,
-    padding: padding,
-    backgroundColor: backgroundColor,
+    width: getProp('width', '100%'),
+    padding: getProp('padding', '0'),
+    backgroundColor: getProp('backgroundColor', 'transparent'),
     display: 'flex',
-    flexDirection: direction,
-    gap: gap,
+    flexDirection: getProp('direction', 'column'),
+    gap: getProp('gap', '10px'),
     minHeight: '50px', // Visual cue for empty containers
     boxSizing: 'border-box',
-    backgroundImage: settings?.backgroundImage,
-    backgroundSize: settings?.backgroundSize || 'cover',
-    backgroundPosition: settings?.backgroundPosition || 'center',
-    alignItems: settings?.alignItems || 'flex-start',
-    justifyContent: settings?.justifyContent || 'flex-start',
-    textAlign: settings?.textAlign || 'left',
+    backgroundImage: getProp('backgroundImage'),
+    backgroundSize: getProp('backgroundSize', 'cover'),
+    backgroundPosition: getProp('backgroundPosition', 'center'),
+    alignItems: getProp('alignItems', 'flex-start'),
+    justifyContent: getProp('justifyContent', 'flex-start'),
+    textAlign: getProp('textAlign', 'left'),
   };
 
   return (

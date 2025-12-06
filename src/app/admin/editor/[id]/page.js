@@ -478,6 +478,7 @@ export default function TemplateEditorPage() {
           </DragOverlay>
         </DndContext>
       </div>
+      </ViewModeProvider>
     </ThemeProvider>
   );
 }

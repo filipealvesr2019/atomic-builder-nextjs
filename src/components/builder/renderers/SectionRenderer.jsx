@@ -1,24 +1,26 @@
 import React from 'react';
 import ContainerRenderer from './ContainerRenderer';
+import { useViewMode, resolveResponsiveProp } from '@/components/builder/context/ViewModeContext';
 
 /**
  * SectionRenderer
  * Renders a full-width section and iterates over its containers.
  */
 export default function SectionRenderer({ section }) {
+  const viewMode = useViewMode();
+  
   if (!section) return null;
 
-  const { settings, containers = [], id } = section;
-  const { 
-    padding = '40px 0', 
-    backgroundColor = '#ffffff',
-    backgroundImage = 'none'
-  } = settings || {};
+  const { settings, containers = [], children, id } = section;
+
+  const getProp = (key, fallback) => {
+    return resolveResponsiveProp(settings?.[key], viewMode) || fallback;
+  };
 
   const style = {
-    padding: padding,
-    backgroundColor: backgroundColor,
-    backgroundImage: backgroundImage !== 'none' ? `url(${backgroundImage})` : 'none',
+    padding: getProp('padding', '40px 0'),
+    backgroundColor: getProp('backgroundColor', '#ffffff'),
+    backgroundImage: getProp('backgroundImage', 'none') !== 'none' ? `url(${getProp('backgroundImage')})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     width: '100%',
@@ -39,7 +41,7 @@ export default function SectionRenderer({ section }) {
   return (
     <section data-section-id={id} className="builder-section" style={style}>
       <div style={contentWrapperStyle}>
-        {section.children ? section.children : containers.map(container => (
+        {children ? children : containers.map(container => (
           <ContainerRenderer key={container.id} container={container} />
         ))}
       </div>

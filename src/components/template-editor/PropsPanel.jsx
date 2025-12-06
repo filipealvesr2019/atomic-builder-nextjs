@@ -1,6 +1,103 @@
-'use client';
-
+import React, { useState, useEffect } from 'react';
 import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
+import templates from '@/templates-cms/registry';
+import { Monitor, Tablet, Smartphone, Globe, Laptop } from 'lucide-react';
+
+function ResponsiveControl({ label, value, onChange, placeholder }) {
+  const isResponsive = typeof value === 'object' && value !== null;
+
+  const toggleResponsive = () => {
+    if (isResponsive) {
+      // Switch back to simple mode (keep desktop value)
+      onChange(value.desktop || '');
+    } else {
+      // Switch to responsive mode
+      const currentVal = value || '';
+      onChange({ desktop: currentVal, tablet: currentVal, mobile: currentVal });
+    }
+  };
+
+  const handleChange = (breakpoint, newValue) => {
+    onChange({
+      ...value,
+      [breakpoint]: newValue
+    });
+  };
+
+  if (isResponsive) {
+    return (
+      <div className="flex flex-col gap-2 p-2 border border-blue-100 rounded bg-blue-50/30">
+        <div className="flex items-center justify-between">
+            <label className="text-sm font-medium text-gray-700">{label}</label>
+            <button 
+                onClick={toggleResponsive}
+                className="text-blue-600 p-1 hover:bg-blue-100 rounded"
+                title="Switch to Simple Mode"
+            >
+                <Laptop size={14} />
+            </button>
+        </div>
+        
+        {/* Desktop */}
+        <div className="flex items-center gap-2">
+            <Monitor size={14} className="text-gray-400 min-w-[14px]" />
+            <input
+                type="text"
+                value={value.desktop || ''}
+                onChange={(e) => handleChange('desktop', e.target.value)}
+                className="flex-1 p-1.5 text-sm border border-gray-300 rounded focus:border-blue-500 outline-none"
+                placeholder="Desktop"
+            />
+        </div>
+        {/* Tablet */}
+        <div className="flex items-center gap-2">
+            <Tablet size={14} className="text-gray-400 min-w-[14px]" />
+            <input
+                type="text"
+                value={value.tablet || ''}
+                onChange={(e) => handleChange('tablet', e.target.value)}
+                className="flex-1 p-1.5 text-sm border border-gray-300 rounded focus:border-blue-500 outline-none"
+                placeholder="Tablet"
+            />
+        </div>
+        {/* Mobile */}
+        <div className="flex items-center gap-2">
+            <Smartphone size={14} className="text-gray-400 min-w-[14px]" />
+            <input
+                type="text"
+                value={value.mobile || ''}
+                onChange={(e) => handleChange('mobile', e.target.value)}
+                className="flex-1 p-1.5 text-sm border border-gray-300 rounded focus:border-blue-500 outline-none"
+                placeholder="Mobile"
+            />
+        </div>
+      </div>
+    );
+  }
+
+  // Simple Mode
+  return (
+    <div className="flex flex-col gap-1">
+        <div className="flex items-center justify-between">
+            <label className="text-sm font-medium text-gray-700">{label}</label>
+            <button 
+                onClick={toggleResponsive}
+                className="text-gray-400 p-1 hover:bg-gray-100 rounded hover:text-blue-600 transition-colors"
+                title="Switch to Responsive Mode"
+            >
+                <Smartphone size={14} />
+            </button>
+        </div>
+        <input
+            type="text"
+            value={value || ''}
+            onChange={(e) => onChange(e.target.value)}
+            className="p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            placeholder={placeholder}
+        />
+    </div>
+  );
+}
 
 export default function PropsPanel({ block, templateId, onPropsChange }) {
   const [config, setConfig] = useState(null);
@@ -118,23 +215,19 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
         ) : (
           <div className="space-y-4">
             {config.props && Object.entries(config.props).map(([key, propConfig]) => (
-              <div key={key} className="flex flex-col gap-1">
-                <label className="text-sm font-medium text-gray-700">
-                  {propConfig.label || key}
-                </label>
-                
+              <div key={key}>
                 {propConfig.type === 'string' && (
-                  <input
-                    type="text"
-                    value={block.props[key] || ''}
-                    onChange={(e) => handleInputChange(key, e.target.value)}
-                    className="p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                  <ResponsiveControl
+                    label={propConfig.label || key}
+                    value={block.props[key]}
+                    onChange={(val) => handleInputChange(key, val)}
                     placeholder={propConfig.default || ''}
                   />
                 )}
                 
                 {propConfig.type === 'image' && (
                   <div className="flex flex-col gap-2">
+                    <label className="text-sm font-medium text-gray-700">{propConfig.label || key}</label>
                     <input
                       type="text"
                       value={block.props[key] || ''}
@@ -154,8 +247,6 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                     )}
                   </div>
                 )}
-                
-                {/* Adicionar outros tipos conforme necessário (number, boolean, color, etc) */}
               </div>
             ))}
           </div>

@@ -1,5 +1,4 @@
-import React from 'react';
-import { getWidgetComponent } from '../WidgetRegistry';
+import { useViewMode, resolveResponsiveProp } from '@/components/builder/context/ViewModeContext';
 
 /**
  * WidgetRenderer
@@ -7,6 +6,8 @@ import { getWidgetComponent } from '../WidgetRegistry';
  * It looks up the correct React component based on the widget type.
  */
 export default function WidgetRenderer({ widget }) {
+  const viewMode = useViewMode();
+  
   if (!widget) return null;
 
   const { type, settings, id } = widget;
@@ -17,10 +18,16 @@ export default function WidgetRenderer({ widget }) {
     return <div style={{ color: 'red', padding: '10px', border: '1px dashed red' }}>Unknown Widget: {type}</div>;
   }
 
-  // Pass settings and id to the actual component
+  // Resolve responsive settings
+  const resolvedSettings = settings ? Object.entries(settings).reduce((acc, [key, value]) => {
+    acc[key] = resolveResponsiveProp(value, viewMode);
+    return acc;
+  }, {}) : {};
+
+  // Pass resolved settings and id to the actual component
   return (
     <div data-widget-id={id} className="widget-wrapper" style={{ marginBottom: '1rem' }}>
-      <WidgetComponent settings={settings} />
+      <WidgetComponent settings={resolvedSettings} />
     </div>
   );
 }
