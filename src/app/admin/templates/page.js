@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Edit, Trash, X, Eye } from 'lucide-react';
+import { Plus, Edit, Trash, X, Eye, Settings } from 'lucide-react';
 import styles from './templates.module.css';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 
@@ -196,6 +196,15 @@ export default function TemplatesList() {
               >
                 <Eye size={18} />
                 Ver Tema
+              </Link>
+
+              <Link
+                href={`/admin/templates/${template._id}/settings`}
+                className={styles.actionButton}
+                style={{ background: '#6366f1', color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              >
+                <Settings size={18} />
+                Config
               </Link>
               
               <button
