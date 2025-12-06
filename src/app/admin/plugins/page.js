@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Plug, Zap, BarChart, ShoppingBag, Mail, Settings, Check, Download } from 'lucide-react';
+import { Plug, Zap, BarChart, ShoppingBag, Mail, Settings, Check, Download, CreditCard } from 'lucide-react';
 import styles from './plugins.module.css';
 
 const MOCK_PLUGINS = [
@@ -40,6 +40,15 @@ const MOCK_PLUGINS = [
     version: '3.1.0',
     installed: false,
     author: 'Atomic Builder'
+  },
+  {
+    id: 'stripe-payments',
+    name: 'Stripe Payments',
+    description: 'Accept credit card payments securely with Stripe Checkout integration.',
+    icon: CreditCard,
+    version: '1.0.0',
+    installed: false,
+    author: 'Stripe Inc'
   }
 ];
 

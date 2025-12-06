@@ -15,6 +15,33 @@ export default function ShopCart() {
     clearCart 
   } = useCart();
 
+  const [isCheckingOut, setIsCheckingOut] = React.useState(false);
+
+  const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    try {
+        const res = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: cartItems })
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            if (data.url) {
+                window.location.href = data.url;
+            }
+        } else {
+            alert('Checkout failed. Please try again.');
+        }
+    } catch (error) {
+        console.error('Checkout error:', error);
+        alert('An error occurred.');
+    } finally {
+        setIsCheckingOut(false);
+    }
+  };
+
   if (!isCartOpen) return null;
 
   return (
@@ -121,10 +148,18 @@ export default function ShopCart() {
                     Clear Cart
                 </button>
                 <button 
-                    // onClick={handleCheckout} 
-                    className="py-3 px-4 bg-blue-600 text-white rounded font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200 text-center"
+                    onClick={handleCheckout} 
+                    disabled={isCheckingOut}
+                    className="py-3 px-4 bg-blue-600 text-white rounded font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200 text-center disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                    Checkout
+                    {isCheckingOut ? (
+                        <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            Processing...
+                        </>
+                    ) : (
+                        'Checkout'
+                    )}
                 </button>
             </div>
           </div>
