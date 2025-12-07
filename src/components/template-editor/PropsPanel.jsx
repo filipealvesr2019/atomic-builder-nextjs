@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Monitor, Tablet, Smartphone, Laptop, 
+  Monitor, Tablet, Smartphone, 
   Layout, Circle, Settings,
   ArrowRight, ArrowDown, ArrowLeft, ArrowUp,
   AlignStartVertical, AlignCenterVertical, AlignEndVertical,
@@ -10,15 +10,18 @@ import {
 import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
 import templates from '@/templates-cms/registry';
 import styles from './PropsPanel.module.css';
+import { useAtomValue } from 'jotai';
+import { viewModeAtom } from '@/store/viewModeStore';
 
 // Icon Button Group Component (for Direction, Justify, Align)
-function IconButtonGroup({ label, value, onChange, options }) {
+function IconButtonGroup({ label, value, onChange, options, activeViewMode }) {
+  const isResponsive = activeViewMode !== 'desktop';
   return (
     <div className={styles.iconButtonGroup}>
       <div className={styles.formLabel}>
         <span className={styles.labelText}>{label}</span>
-        <button className={styles.responsiveButton}>
-          <Monitor size={14} />
+        <button className={`${styles.responsiveButton} ${isResponsive ? styles.responsiveActive : ''}`}>
+           {activeViewMode === 'mobile' ? <Smartphone size={14} /> : activeViewMode === 'tablet' ? <Tablet size={14} /> : <Monitor size={14} />}
         </button>
       </div>
       <div className={styles.iconButtonContainer}>
@@ -38,14 +41,15 @@ function IconButtonGroup({ label, value, onChange, options }) {
 }
 
 // Styled Select Component
-function StyledSelect({ label, value, onChange, options, responsive = true }) {
+function StyledSelect({ label, value, onChange, options, responsive = true, activeViewMode = 'desktop' }) {
+  const isResponsive = responsive && activeViewMode !== 'desktop';
   return (
     <div className={styles.formGroup}>
       <div className={styles.formLabel}>
         <span className={styles.labelText}>{label}</span>
         {responsive && (
-          <button className={styles.responsiveButton}>
-            <Monitor size={14} />
+          <button className={`${styles.responsiveButton} ${isResponsive ? styles.responsiveActive : ''}`}>
+             {activeViewMode === 'mobile' ? <Smartphone size={14} /> : activeViewMode === 'tablet' ? <Tablet size={14} /> : <Monitor size={14} />}
           </button>
         )}
       </div>
@@ -66,14 +70,15 @@ function StyledSelect({ label, value, onChange, options, responsive = true }) {
 }
 
 // Styled Input Component
-function StyledInput({ label, value, onChange, placeholder, unit = '', responsive = true }) {
+function StyledInput({ label, value, onChange, placeholder, unit = '', responsive = true, activeViewMode = 'desktop' }) {
+  const isResponsive = responsive && activeViewMode !== 'desktop';
   return (
     <div className={styles.formGroup}>
       <div className={styles.formLabel}>
         <span className={styles.labelText}>{label}</span>
         {responsive && (
-          <button className={styles.responsiveButton}>
-            <Monitor size={14} />
+          <button className={`${styles.responsiveButton} ${isResponsive ? styles.responsiveActive : ''}`}>
+             {activeViewMode === 'mobile' ? <Smartphone size={14} /> : activeViewMode === 'tablet' ? <Tablet size={14} /> : <Monitor size={14} />}
           </button>
         )}
       </div>
@@ -120,6 +125,7 @@ function Section({ title, children, defaultOpen = true }) {
 export default function PropsPanel({ block, templateId, onPropsChange }) {
   const [config, setConfig] = useState(null);
   const [activeTab, setActiveTab] = useState('layout');
+  const viewMode = useAtomValue(viewModeAtom);
 
   useEffect(() => {
     if (block && templateId) {
@@ -162,7 +168,37 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
   }
 
   const handleChange = (key, value) => {
-    onPropsChange({ [key]: value });
+    const currentProp = block.props?.[key];
+    let newValue = value;
+
+    if (viewMode !== 'desktop') {
+        // Modo responsivo (tablet/mobile)
+        if (typeof currentProp === 'object' && currentProp !== null) {
+            newValue = { ...currentProp, [viewMode]: value };
+        } else {
+            // Tenta preservar valor anterior como desktop se existia, senão usa o value
+            const desktopValue = currentProp !== undefined ? currentProp : value; 
+            newValue = { desktop: desktopValue, [viewMode]: value };
+        }
+    } else {
+         // Modo Desktop
+         if (typeof currentProp === 'object' && currentProp !== null) {
+            newValue = { ...currentProp, desktop: value };
+         } else {
+            newValue = value;
+         }
+    }
+    onPropsChange({ [key]: newValue });
+  };
+
+  // Helper para ler valor responsivo (visualização)
+  const getValue = (key, defaultVal) => {
+    const val = block.props?.[key];
+    if (typeof val === 'object' && val !== null) {
+        // Fallback hierarchy: current mode -> desktop -> default
+        return val[viewMode] || val.desktop || defaultVal;
+    }
+    return val !== undefined ? val : defaultVal;
   };
 
   const isContainer = block.category === NODE_TYPES.CONTAINER;
@@ -203,10 +239,20 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
           <>
             {/* Container Section */}
             <Section title="Container">
+              {/* Moved Min Height to top for better visibility */}
+              <StyledInput
+                label="Min Height"
+                value={getValue('minHeight', 'auto')}
+                onChange={(val) => handleChange('minHeight', val)}
+                placeholder="Ex: 350px"
+                activeViewMode={viewMode}
+              />
+
               <StyledSelect
                 label="Container Layout"
-                value={block.props?.layoutType || 'flex'}
+                value={getValue('layoutType', 'flex')}
                 onChange={(val) => handleChange('layoutType', val)}
+                activeViewMode={viewMode}
                 options={[
                   { label: 'Flexbox', value: 'flex' },
                   { label: 'Grid', value: 'grid' }
@@ -215,26 +261,21 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
 
               <StyledInput
                 label="Content Width"
-                value={block.props?.width || '100%'}
+                value={getValue('width', '100%')}
                 onChange={(val) => handleChange('width', val)}
                 placeholder="100%"
-              />
-
-              <StyledInput
-                label="Min Height"
-                value={block.props?.minHeight || '50px'}
-                onChange={(val) => handleChange('minHeight', val)}
-                placeholder="50px"
+                activeViewMode={viewMode}
               />
             </Section>
 
             {/* Items Section (Flex properties) */}
-            {block.props?.layoutType !== 'grid' && (
+            {getValue('layoutType', 'flex') !== 'grid' && (
               <Section title="Items">
                 <IconButtonGroup
                   label="Direction"
-                  value={block.props?.direction || 'row'}
+                  value={getValue('direction', 'column')}
                   onChange={(val) => handleChange('direction', val)}
+                  activeViewMode={viewMode}
                   options={[
                     { value: 'row', label: 'Row', icon: <ArrowRight size={16} /> },
                     { value: 'column', label: 'Column', icon: <ArrowDown size={16} /> },
@@ -244,9 +285,10 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                 />
 
                 <IconButtonGroup
-                  label="Justify Content"
-                  value={block.props?.justifyContent || 'flex-start'}
+                  label="Justify Content (Vertical)"
+                  value={getValue('justifyContent', 'flex-start')}
                   onChange={(val) => handleChange('justifyContent', val)}
+                  activeViewMode={viewMode}
                   options={[
                     { value: 'flex-start', label: 'Start', icon: <AlignStartVertical size={16} /> },
                     { value: 'center', label: 'Center', icon: <AlignCenterVertical size={16} /> },
@@ -257,9 +299,10 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                 />
 
                 <IconButtonGroup
-                  label="Align Items"
-                  value={block.props?.alignItems || 'flex-start'}
+                  label="Align Items (Horizontal)"
+                  value={getValue('alignItems', 'stretch')}
                   onChange={(val) => handleChange('alignItems', val)}
+                  activeViewMode={viewMode}
                   options={[
                     { value: 'flex-start', label: 'Start', icon: <AlignStartHorizontal size={16} /> },
                     { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
@@ -270,15 +313,17 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
 
                 <StyledInput
                   label="Gap"
-                  value={block.props?.gap || '10px'}
+                  value={getValue('gap', '10px')}
                   onChange={(val) => handleChange('gap', val)}
                   placeholder="10px"
+                  activeViewMode={viewMode}
                 />
 
                 <IconButtonGroup
                   label="Wrap"
-                  value={block.props?.wrap || 'nowrap'}
+                  value={getValue('wrap', 'nowrap')}
                   onChange={(val) => handleChange('wrap', val)}
+                  activeViewMode={viewMode}
                   options={[
                     { value: 'nowrap', label: 'No Wrap', icon: <ArrowRight size={16} /> },
                     { value: 'wrap', label: 'Wrap', icon: <ArrowDown size={16} /> }
@@ -288,27 +333,28 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
             )}
 
             {/* Grid Section */}
-            {block.props?.layoutType === 'grid' && (
+            {getValue('layoutType', 'flex') === 'grid' && (
               <Section title="Grid">
                 <StyledInput
                   label="Columns"
-                  value={block.props?.gridTemplateColumns || '1fr'}
+                  value={getValue('gridTemplateColumns', '1fr')}
                   onChange={(val) => handleChange('gridTemplateColumns', val)}
                   placeholder="1fr 1fr"
                   responsive={false}
                 />
                 <StyledInput
                   label="Rows"
-                  value={block.props?.gridTemplateRows || 'auto'}
+                  value={getValue('gridTemplateRows', 'auto')}
                   onChange={(val) => handleChange('gridTemplateRows', val)}
                   placeholder="auto"
                   responsive={false}
                 />
                 <StyledInput
                   label="Gap"
-                  value={block.props?.gap || '10px'}
+                  value={getValue('gap', '10px')}
                   onChange={(val) => handleChange('gap', val)}
                   placeholder="10px"
+                  activeViewMode={viewMode}
                 />
               </Section>
             )}
@@ -331,7 +377,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
           <Section title="Background">
             <StyledInput
               label="Background Color"
-              value={block.props?.backgroundColor || 'transparent'}
+              value={getValue('backgroundColor', 'transparent')}
               onChange={(val) => handleChange('backgroundColor', val)}
               placeholder="#ffffff"
               responsive={false}
@@ -342,31 +388,34 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
         {activeTab === 'advanced' && (
           <>
             <Section title="Layout">
+              {/* IMPORTANT: Default width is now empty (auto), not 100% */}
               <StyledInput
                 label="Width"
-                value={block.props?.width || '100%'}
+                value={getValue('width', '')} 
                 onChange={(val) => handleChange('width', val)}
-                placeholder="100%"
+                placeholder="auto"
+                activeViewMode={viewMode}
               />
               <StyledInput
                 label="Padding"
-                value={block.props?.padding || '0px'}
+                value={getValue('padding', '0px')}
                 onChange={(val) => handleChange('padding', val)}
-                placeholder="10px"
+                placeholder="0px"
+                activeViewMode={viewMode}
               />
             </Section>
             
             <Section title="Flex Child">
               <StyledInput
                 label="Flex Grow"
-                value={block.props?.flexGrow || '0'}
+                value={getValue('flexGrow', '0')}
                 onChange={(val) => handleChange('flexGrow', val)}
                 placeholder="0"
                 responsive={false}
               />
               <StyledSelect
                 label="Align Self"
-                value={block.props?.alignSelf || 'auto'}
+                value={getValue('alignSelf', 'auto')}
                 onChange={(val) => handleChange('alignSelf', val)}
                 options={[
                   { label: 'Auto', value: 'auto' },

@@ -1,119 +1,92 @@
 import React from 'react';
 import WidgetRenderer from './WidgetRenderer';
 import { useAtomValue } from 'jotai';
-import { viewModeAtom } from '@/store/viewModeStore';
-import { resolveResponsiveProp } from '@/store/viewModeStore';
-import { Plus, FolderPlus, Settings, Trash2 } from 'lucide-react';
-import styles from './ContainerRenderer.module.css';
+import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
+import { Plus } from 'lucide-react';
 
 /**
- * ContainerRenderer
- * Renders a container (Flexbox or Grid) with Elementor-style visual cues.
+ * CONTAINER RENDERER - ZERO BASED REWRITE
+ * Implementação puramente baseada em CSS Flexbox.
+ * Sem lógicas ocultas. O que está nas props é aplicado no style.
  */
 export default function ContainerRenderer({ container, children }) {
   const viewMode = useAtomValue(viewModeAtom);
 
   if (!container) return null;
 
+  // 1. Extrair settings
   const { settings, widgets = [], id } = container;
-
-  const getProp = (key, fallback) => {
-    return resolveResponsiveProp(settings?.[key], viewMode) || fallback;
+  
+  // 2. Helper para responsividade
+  const getProp = (key, defaultValue) => {
+    const val = resolveResponsiveProp(settings?.[key], viewMode);
+    return val !== undefined && val !== null && val !== '' ? val : defaultValue;
   };
 
-  const layoutType = getProp('layoutType', 'flex');
-
-  // Check if empty (no children passed from DnD wrapper and no widgets)
+  // 3. Determinar se está vazio
   const isEmpty = !children && (!widgets || widgets.length === 0);
 
-  // Base Container Styles
-  const containerStyle = {
+  // 4. Construir estilo do Container (CSS Puro)
+  const flexStyles = {
+    display: 'flex',
+    // Flex Direction (row/column) - Padrão Column
+    flexDirection: getProp('direction', 'column'),
+    // Justify Content (Main Axis) - Padrão Flex Start
+    justifyContent: getProp('justifyContent', 'flex-start'),
+    // Align Items (Cross Axis) - Padrão Stretch (Elementor Behavior)
+    alignItems: getProp('alignItems', 'stretch'),
+    // Wrap
+    flexWrap: getProp('wrap', 'nowrap'),
+    // Gap
+    gap: getProp('gap', '10px'),
+  };
+
+  const boxStyles = {
     width: getProp('width', '100%'),
-    minHeight: isEmpty ? '120px' : getProp('minHeight', '50px'),
+    minHeight: getProp('minHeight', 'auto'), // Sem altura mínima forçada se não estiver vazio
     padding: getProp('padding', '20px'),
     backgroundColor: getProp('backgroundColor', 'transparent'),
-    backgroundImage: getProp('backgroundImage'),
-    backgroundSize: getProp('backgroundSize', 'cover'),
-    backgroundPosition: getProp('backgroundPosition', 'center'),
     boxSizing: 'border-box',
-    textAlign: getProp('textAlign', 'left'),
     position: 'relative',
   };
 
-  // Layout Styles (Flex or Grid)
-  let layoutStyle = {};
-  if (layoutType === 'grid') {
-    layoutStyle = {
-      display: 'grid',
-      gridTemplateColumns: getProp('gridTemplateColumns', '1fr'),
-      gridTemplateRows: getProp('gridTemplateRows', 'auto'),
-      gap: getProp('gap', '10px'),
-    };
-  } else {
-    layoutStyle = {
-      display: 'flex',
-      flexDirection: getProp('direction', 'column'),
-      flexWrap: getProp('wrap', 'nowrap'),
-      alignItems: isEmpty ? 'center' : getProp('alignItems', 'flex-start'),
-      justifyContent: isEmpty ? 'center' : getProp('justifyContent', 'flex-start'),
-      gap: getProp('gap', '10px'),
-    };
-  }
-
-  // Merge Styles
-  const style = { ...containerStyle, ...layoutStyle };
-
-  // Empty Placeholder Style (Elementor-like)
-  const emptyPlaceholderStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-    minHeight: '100px',
-    border: '2px dashed #d0d5dd',
-    borderRadius: '8px',
-    backgroundColor: '#fafafa',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-  };
-
-  // If empty, render the Elementor-style placeholder
+  // 5. Placeholder se estiver vazio
   if (isEmpty) {
     return (
       <div 
-        data-container-id={id} 
-        className="builder-container is-empty"
-        style={style}
+        data-container-id={id}
+        className="builder-container empty"
+        style={{
+          ...boxStyles,
+          ...flexStyles,
+          minHeight: '100px', // Altura visual para drop zone
+          border: '1px dashed #ccc',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
       >
-        <div 
-          style={emptyPlaceholderStyle}
-          className={styles.emptyPlaceholder}
-        >
-          {/* Action Icons Row */}
-          <div className={styles.actionRow}>
-            <button className={styles.actionButton}>
-              <Plus size={18} />
-            </button>
-            <button className={styles.actionButton}>
-              <FolderPlus size={16} />
-            </button>
-          </div>
-          {/* Text */}
-          <span className={styles.placeholderText}>Arraste widget aqui</span>
-        </div>
+        <Plus size={24} color="#ccc" />
+        <span style={{ color: '#ccc', fontSize: '12px' }}>Container Vazio</span>
       </div>
     );
   }
 
-  // If has content, render normally
+  // 6. Debug Log (para o usuário ver o que está acontecendo)
+  console.log(`[Container ${id}] Styles Applied:`, flexStyles);
+
+  // 7. Renderização Normal
   return (
     <div 
-      data-container-id={id} 
+      data-container-id={id}
       className="builder-container"
-      style={style}
+      style={{
+        ...boxStyles,
+        ...flexStyles,
+        // Bordas de debug opcionais (remova em produção)
+        // outline: '1px solid rgba(0,0,0,0.1)'
+      }}
     >
+      {/* Se children existir (durante drag), renderiza children. Senão mapeia widgets */}
       {children ? children : widgets.map(widget => (
         <WidgetRenderer key={widget.id} widget={widget} />
       ))}
