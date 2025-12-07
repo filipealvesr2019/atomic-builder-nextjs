@@ -20,20 +20,48 @@ export default function ContainerRenderer({ container, children }) {
   };
 
   // Resolve Values
+  const layoutType = getProp('layoutType', 'flex'); // 'flex' | 'grid'
+  
+  // Flex Props
   const direction = getProp('direction', 'column');
   const justifyContent = getProp('justifyContent', 'flex-start');
   const alignItems = getProp('alignItems', 'stretch');
+  
+  // Grid Props
+  const gridColumns = getProp('gridTemplateColumns', '1fr');
+  const gridRows = getProp('gridTemplateRows', 'auto');
+  const gridGap = getProp('gap', '10px');
+
   const width = getProp('width', '100%');
   const minHeight = getProp('minHeight', '350px');
 
-  const flexStyles = {
-    display: 'flex',
-    flexDirection: direction,
-    justifyContent: justifyContent,
-    alignItems: alignItems,
-    flexWrap: getProp('wrap', 'nowrap'),
+  // Base Styles
+  const baseStyles = {
+    display: layoutType === 'grid' ? 'grid' : 'flex',
     gap: getProp('gap', '10px'),
   };
+
+  // Conditional Styles
+  let layoutStyles = {};
+
+  if (layoutType === 'grid') {
+      layoutStyles = {
+          ...baseStyles,
+          gridTemplateColumns: gridColumns,
+          gridTemplateRows: gridRows,
+          // alignItems in Grid behaves slightly differently (align-items vs justify-items), 
+          // but for basic compatibility we can map concepts if needed, or just let CSS Grid defaults handle it.
+      };
+  } else {
+      // Flex Defaults
+      layoutStyles = {
+          ...baseStyles,
+          flexDirection: direction,
+          justifyContent: justifyContent,
+          alignItems: alignItems,
+          flexWrap: getProp('wrap', 'nowrap'),
+      };
+  }
 
   // Restore the "Visual Marking" that was lost from DropZone
   const visualStyles = {
@@ -70,7 +98,7 @@ export default function ContainerRenderer({ container, children }) {
         className="builder-container empty"
         style={{
           ...boxStyles,
-          ...flexStyles,
+          ...layoutStyles,
           minHeight: '100px', // Visual specific for empty drop target
           borderColor: isOver ? '#2196f3' : '#ccc', // Visual feedback
           backgroundColor: isOver ? 'rgba(33, 150, 243, 0.1)' : boxStyles.backgroundColor,
@@ -111,7 +139,7 @@ export default function ContainerRenderer({ container, children }) {
       className="builder-container"
       style={{
         ...boxStyles,
-        ...flexStyles,
+        ...layoutStyles,
         position: 'relative', // Ensure relative positioning for absolute overlays if needed
       }}
     >
