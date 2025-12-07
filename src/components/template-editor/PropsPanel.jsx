@@ -140,6 +140,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
         [WIDGET_TYPES.PRODUCT_LIST]: { name: 'Product List', props: {} },
         [WIDGET_TYPES.ICON_BOX]: { name: 'Icon Box', props: {} },
         [WIDGET_TYPES.ICON_LIST]: { name: 'Icon List', props: {} },
+        [WIDGET_TYPES.IMAGE_BOX]: { name: 'Image Box', props: {} },
         [NODE_TYPES.CONTAINER]: { name: 'Container', props: {} },
         [NODE_TYPES.SECTION]: { name: 'Section', props: {} }
       };
@@ -525,6 +526,60 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                       placeholder="10px"
                       activeViewMode={viewMode}
                   />
+                  <StyledInput
+                      label="Gap"
+                      value={getValue('gap', '10px')}
+                      onChange={(val) => handleChange('gap', val)}
+                      placeholder="10px"
+                      activeViewMode={viewMode}
+                  />
+                </>
+            ) : block.type === WIDGET_TYPES.IMAGE_BOX ? (
+                /* IMAGE BOX SPECIFIC CONTENT */
+                <>
+                    <StyledInput
+                        label="Image URL"
+                        value={getValue('imageSrc', 'https://placehold.co/600x400?text=Image')}
+                        onChange={(val) => handleChange('imageSrc', val)}
+                        placeholder="https://..."
+                        responsive={false}
+                    />
+                    <StyledInput
+                        label="Title"
+                        value={getValue('title', 'Título do Serviço')}
+                        onChange={(val) => handleChange('title', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Description"
+                        value={getValue('description', 'Descrição...')}
+                        onChange={(val) => handleChange('description', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                     <IconButtonGroup
+                        label="Image Position"
+                        value={getValue('imagePosition', 'top')}
+                        onChange={(val) => handleChange('imagePosition', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'top', label: 'Top', icon: <ArrowUp size={16} /> },
+                            { value: 'left', label: 'Left', icon: <ArrowLeft size={16} /> },
+                            { value: 'right', label: 'Right', icon: <ArrowRight size={16} /> }
+                        ]}
+                    />
+                     <IconButtonGroup
+                        label="Text Alignment"
+                        value={getValue('textAlign', 'center')}
+                        onChange={(val) => handleChange('textAlign', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                        ]}
+                    />
                 </>
             ) : (
                 /* GENERIC WIDGET CONTENT */
@@ -614,6 +669,49 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                         value={getValue('textSize', '14px')}
                         onChange={(val) => handleChange('textSize', val)}
                         placeholder="14px"
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                </Section>
+            )}
+
+            {block.type === WIDGET_TYPES.IMAGE_BOX && (
+                <Section title="Image Box Styles">
+                    <StyledInput
+                        label="Image Width"
+                        value={getValue('imageWidth', '100%')}
+                        onChange={(val) => handleChange('imageWidth', val)}
+                        placeholder="e.g. 100% or 300px"
+                        responsive={true}
+                         activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Border Radius"
+                        value={getValue('borderRadius', '8px')}
+                        onChange={(val) => handleChange('borderRadius', val)}
+                        placeholder="8px"
+                        responsive={true}
+                         activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Title Color"
+                        value={getValue('titleColor', '#1f2937')}
+                        onChange={(val) => handleChange('titleColor', val)}
+                        placeholder="#1f2937"
+                        responsive={false}
+                    />
+                     <StyledInput
+                        label="Description Color"
+                        value={getValue('descColor', '#6b7280')}
+                        onChange={(val) => handleChange('descColor', val)}
+                        placeholder="#6b7280"
+                        responsive={false}
+                    />
+                    <StyledInput
+                        label="Gap"
+                        value={getValue('gap', '15px')}
+                        onChange={(val) => handleChange('gap', val)}
+                        placeholder="15px"
                         responsive={true}
                         activeViewMode={viewMode}
                     />
