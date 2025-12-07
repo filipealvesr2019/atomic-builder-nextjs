@@ -35,7 +35,6 @@ export default function ContainerRenderer({ container, children }) {
     backgroundImage: getProp('backgroundImage'),
     backgroundSize: getProp('backgroundSize', 'cover'),
     backgroundPosition: getProp('backgroundPosition', 'center'),
-    gap: getProp('gap', '10px'),
     boxSizing: 'border-box',
     textAlign: getProp('textAlign', 'left'),
     position: 'relative',
@@ -48,6 +47,7 @@ export default function ContainerRenderer({ container, children }) {
       display: 'grid',
       gridTemplateColumns: getProp('gridTemplateColumns', '1fr'),
       gridTemplateRows: getProp('gridTemplateRows', 'auto'),
+      gap: getProp('gap', '10px'),
     };
   } else {
     layoutStyle = {
@@ -56,6 +56,7 @@ export default function ContainerRenderer({ container, children }) {
       flexWrap: getProp('wrap', 'nowrap'),
       alignItems: isEmpty ? 'center' : getProp('alignItems', 'flex-start'),
       justifyContent: isEmpty ? 'center' : getProp('justifyContent', 'flex-start'),
+      gap: getProp('gap', '10px'),
     };
   }
 
