@@ -60,6 +60,9 @@ export default function ContainerRenderer({ container, children }) {
     };
   }
 
+  // Merge Styles
+  const style = { ...containerStyle, ...layoutStyle };
+
   // Empty Placeholder Style (Elementor-like)
   const emptyPlaceholderStyle = {
     display: 'flex',
@@ -75,8 +78,6 @@ export default function ContainerRenderer({ container, children }) {
     cursor: 'pointer',
     transition: 'all 0.2s ease',
   };
-
-  const style = { ...containerStyle, ...layoutStyle };
 
   // If empty, render the Elementor-style placeholder
   if (isEmpty) {

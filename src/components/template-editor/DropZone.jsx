@@ -50,7 +50,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     id: block.id,
     settings: block.props, // Atomic components expect 'settings'
     ...block.props,       // Legacy components expect spread props
-    container: block.category === NODE_TYPES.CONTAINER ? block : undefined,
+    container: block.category === NODE_TYPES.CONTAINER ? { ...block, settings: block.props } : undefined,
     section: block.category === NODE_TYPES.SECTION ? block : undefined,
     onUpdateBlock: onUpdateBlock // Pass update function
   };

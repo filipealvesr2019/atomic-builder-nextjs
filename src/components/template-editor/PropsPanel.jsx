@@ -248,10 +248,10 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                   value={block.props?.justifyContent || 'flex-start'}
                   onChange={(val) => handleChange('justifyContent', val)}
                   options={[
-                    { value: 'flex-start', label: 'Start', icon: <AlignStartHorizontal size={16} /> },
-                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
-                    { value: 'flex-end', label: 'End', icon: <AlignEndHorizontal size={16} /> },
-                    { value: 'space-between', label: 'Space Between', icon: <Columns size={16} /> },
+                    { value: 'flex-start', label: 'Start', icon: <AlignStartVertical size={16} /> },
+                    { value: 'center', label: 'Center', icon: <AlignCenterVertical size={16} /> },
+                    { value: 'flex-end', label: 'End', icon: <AlignEndVertical size={16} /> },
+                    { value: 'space-between', label: 'Space Between', icon: <Rows size={16} /> },
                     { value: 'space-around', label: 'Space Around', icon: <Rows size={16} /> }
                   ]}
                 />
@@ -261,10 +261,10 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                   value={block.props?.alignItems || 'flex-start'}
                   onChange={(val) => handleChange('alignItems', val)}
                   options={[
-                    { value: 'flex-start', label: 'Start', icon: <AlignStartVertical size={16} /> },
-                    { value: 'center', label: 'Center', icon: <AlignCenterVertical size={16} /> },
-                    { value: 'flex-end', label: 'End', icon: <AlignEndVertical size={16} /> },
-                    { value: 'stretch', label: 'Stretch', icon: <Rows size={16} /> }
+                    { value: 'flex-start', label: 'Start', icon: <AlignStartHorizontal size={16} /> },
+                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                    { value: 'flex-end', label: 'End', icon: <AlignEndHorizontal size={16} /> },
+                    { value: 'stretch', label: 'Stretch', icon: <Columns size={16} /> }
                   ]}
                 />
 

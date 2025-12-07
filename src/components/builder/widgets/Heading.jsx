@@ -22,7 +22,7 @@ export default function HeadingWidget({ settings }) {
     color: color || theme.colors.text,
     fontFamily: theme.typography.headings.fontFamily,
     fontWeight: theme.typography.headings.fontWeight,
-    margin: 0 // Reset margin to let container handle spacing if needed
+    margin: 0, // Reset margin to let container handle spacing
   };
 
   return <Tag style={style}>{text}</Tag>;
