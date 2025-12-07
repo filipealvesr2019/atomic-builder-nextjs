@@ -163,8 +163,13 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
                         flexDirection: isRow ? 'row' : 'column',
                         alignItems: isEmpty ? 'center' : 'stretch',
                         justifyContent: isEmpty ? 'center' : 'flex-start',
-                        padding: isEmpty ? '20px' : '0',
+                        padding: isEmpty ? '20px' : '10px',
+                        border: '1px dashed #e0e0e0',
+                        borderRadius: '4px',
+                        backgroundColor: isEmpty ? 'transparent' : 'rgba(250, 250, 250, 0.3)',
+                        position: 'relative',
                     }}
+                    className="group/container hover:border-blue-300 transition-colors"
                 >
                     {isEmpty ? (
                         /* Elementor-style Empty Placeholder */
