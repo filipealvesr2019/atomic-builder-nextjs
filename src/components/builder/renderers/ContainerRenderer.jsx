@@ -11,15 +11,11 @@ export default function ContainerRenderer({ container, children }) {
 
   const { settings, widgets = [], id } = container;
   
-  // Revised getProp to be strictly generic
+  // Revised getProp: defaults if value is empty string
   const getProp = (key, defaultValue) => {
     const raw = settings?.[key];
     const val = resolveResponsiveProp(raw, viewMode);
-    
-    // Explicitly allow empty string if that's what's passed (meaning 'auto' usually)
-    // But for Flex props, we usually want explicit values.
-    // If val is strictly undefined or null, use default.
-    return val !== undefined && val !== null ? val : defaultValue;
+    return val !== undefined && val !== null && val !== '' ? val : defaultValue;
   };
 
   // Resolve Values
@@ -38,22 +34,28 @@ export default function ContainerRenderer({ container, children }) {
     gap: getProp('gap', '10px'),
   };
 
+  // Restore the "Visual Marking" that was lost from DropZone
+  const visualStyles = {
+    border: '1px dashed #e0e0e0',
+    borderRadius: '4px',
+    backgroundColor: 'rgba(250, 250, 250, 0.3)',
+    transition: 'border-color 0.2s ease',
+  };
+
   const boxStyles = {
     width: width,
     minHeight: minHeight,
     padding: getProp('padding', '20px'),
-    backgroundColor: getProp('backgroundColor', 'transparent'),
     boxSizing: 'border-box',
     position: 'relative',
+    ...visualStyles // Apply the markings
   };
 
   const isEmpty = !children && (!widgets || widgets.length === 0);
 
   // DEBUG LOG
-  console.log(`[Container ${container.id}] Mode: ${viewMode}`);
-  console.log(`-- AlignItems Raw:`, settings?.alignItems);
-  console.log(`-- AlignItems Resolved:`, alignItems);
-  console.log(`-- Styles:`, flexStyles);
+  console.log(`[Container ${container.id}]`);
+  console.log(`-- Height applied:`, minHeight);
 
   if (isEmpty) {
     return (
@@ -63,8 +65,8 @@ export default function ContainerRenderer({ container, children }) {
         style={{
           ...boxStyles,
           ...flexStyles,
-          minHeight: '100px',
-          border: '1px dashed #ccc',
+          minHeight: '100px', // Visual specific for empty drop target
+          borderColor: '#ccc',
           justifyContent: 'center',
           alignItems: 'center'
         }}
