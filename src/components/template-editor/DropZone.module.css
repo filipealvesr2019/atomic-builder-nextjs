@@ -1,0 +1,207 @@
+/* ============================================
+   DROP ZONE - CSS Module
+   ============================================ */
+
+/* Sortable Block Wrapper */
+.blockWrapper {
+  position: relative;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.blockWrapper:hover {
+  box-shadow: 0 0 0 1px #3b82f6;
+  background-color: rgba(249, 250, 251, 0.5);
+}
+
+.blockWrapperSelected {
+  box-shadow: 0 0 0 2px #3b82f6;
+  z-index: 10;
+}
+
+.blockWrapperOver {
+  border-bottom: 4px solid #3b82f6;
+}
+
+/* Action Overlay */
+.actionOverlay {
+  position: absolute;
+  top: -12px;
+  right: 8px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.2s ease;
+}
+
+.blockWrapperSelected .actionOverlay,
+.blockWrapper:hover .actionOverlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dragHandle {
+  padding: 6px;
+  cursor: grab;
+  border-right: 1px solid #f3f4f6;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.dragHandle:hover {
+  background-color: #f9fafb;
+}
+
+.blockType {
+  padding: 0 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.deleteButton {
+  padding: 6px;
+  color: #9ca3af;
+  border-left: 1px solid #f3f4f6;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+/* Unknown Block */
+.unknownBlock {
+  padding: 16px;
+  text-align: center;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 6px;
+}
+
+/* Container Styles */
+.containerContent {
+  border: 1px dashed #e0e0e0;
+  border-radius: 4px;
+  background-color: rgba(250, 250, 250, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.containerContent:hover {
+  border-color: #93c5fd;
+}
+
+/* Empty Placeholder (Elementor Style) */
+.emptyPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100px;
+  border: 2px dashed #d0d5dd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.emptyPlaceholder:hover {
+  border-color: #60a5fa;
+  background-color: rgba(239, 246, 255, 0.3);
+}
+
+.actionIconsRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.iconButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #374151;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: #3b82f6;
+}
+
+.placeholderText {
+  font-size: 14px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* Drop Zone */
+.dropZone {
+  min-height: 100%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.dropZoneOver {
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+
+.emptyDropZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 384px;
+  border: 2px dashed #d1d5db;
+  margin: 32px;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.emptyDropZoneTitle {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.emptyDropZoneText {
+  font-size: 14px;
+}
+
+.dropZoneContent {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  padding-bottom: 80px;
+}

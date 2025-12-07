@@ -1,0 +1,101 @@
+/* ============================================
+   PRODUCT LIST RENDERER - CSS Module
+   ============================================ */
+
+.loadingState {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.emptyState {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+  background-color: #f9fafb;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  padding: 16px;
+}
+
+.productCard {
+  background-color: #ffffff;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.productCard:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 1;
+  background-color: #f3f4f6;
+  overflow: hidden;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.productCard:hover .productImage {
+  transform: scale(1.05);
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d1d5db;
+}
+
+.productInfo {
+  padding: 16px;
+}
+
+.productName {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.productPrice {
+  color: #3b82f6;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.addToCartButton {
+  width: 100%;
+  padding: 8px;
+  background-color: #111827;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.addToCartButton:hover {
+  background-color: #000000;
+}

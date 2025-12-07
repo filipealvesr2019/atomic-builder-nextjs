@@ -1,5 +1,6 @@
 import React from 'react';
 import SectionRenderer from './SectionRenderer';
+import styles from './PageRenderer.module.css';
 
 /**
  * PageRenderer
@@ -8,11 +9,11 @@ import SectionRenderer from './SectionRenderer';
  */
 export default function PageRenderer({ pageData }) {
   if (!pageData || !pageData.sections) {
-    return <div className="p-10 text-center text-gray-500">Empty Page or Invalid Data</div>;
+    return <div className={styles.emptyPage}>Empty Page or Invalid Data</div>;
   }
 
   return (
-      <div className="builder-page-root" style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+      <div className={styles.pageRoot}>
         {pageData.sections.map(section => (
           <SectionRenderer key={section.id} section={section} />
         ))}

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSetAtom } from 'jotai';
 import { addToCartAtom } from '@/store/cartStore';
 import { ShoppingBag } from 'lucide-react';
+import styles from './ProductListRenderer.module.css';
 
 export default function ProductListRenderer({ settings }) {
   const [products, setProducts] = useState([]);
@@ -37,11 +38,11 @@ export default function ProductListRenderer({ settings }) {
   }, []);
 
   if (loading) {
-    return <div className="p-10 text-center text-gray-500">Loading products...</div>;
+    return <div className={styles.loadingState}>Loading products...</div>;
   }
 
   if (products.length === 0) {
-     return <div className="p-10 text-center text-gray-500 bg-gray-50 border border-dashed rounded">No products found.</div>;
+     return <div className={styles.emptyState}>No products found.</div>;
   }
 
   // Grid Style
@@ -52,24 +53,24 @@ export default function ProductListRenderer({ settings }) {
   };
 
   return (
-    <div style={gridStyle}>
+    <div style={gridStyle} className={styles.productGrid}>
       {products.slice(0, Number(limit)).map(product => (
-        <div key={product._id} className="bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-          <div className="relative aspect-square bg-gray-100 overflow-hidden">
+        <div key={product._id} className={styles.productCard}>
+          <div className={styles.imageContainer}>
              {product.images && product.images[0] ? (
-                 <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                 <img src={product.images[0]} alt={product.name} className={styles.productImage} />
              ) : (
-                 <div className="w-full h-full flex items-center justify-center text-gray-300">
+                 <div className={styles.imagePlaceholder}>
                      <ShoppingBag size={32} />
                  </div>
              )}
           </div>
           
-          <div className="p-4">
-             <h3 className="font-semibold text-gray-900 mb-1">{product.name}</h3>
+          <div className={styles.productInfo}>
+             <h3 className={styles.productName}>{product.name}</h3>
              
              {showPrice !== 'false' && (
-                 <p className="text-blue-600 font-bold mb-3">
+                 <p className={styles.productPrice}>
                      R$ {product.price?.toFixed(2)}
                  </p>
              )}
@@ -77,7 +78,7 @@ export default function ProductListRenderer({ settings }) {
              {showButton !== 'false' && (
                  <button 
                     onClick={() => addToCart({ id: product._id, ...product })}
-                    className="w-full py-2 bg-gray-900 text-white text-sm font-medium rounded hover:bg-black transition-colors flex items-center justify-center gap-2"
+                    className={styles.addToCartButton}
                  >
                     <ShoppingBag size={14} />
                     Add to Cart

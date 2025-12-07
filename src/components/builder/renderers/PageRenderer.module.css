@@ -1,0 +1,14 @@
+/* ============================================
+   PAGE RENDERER - CSS Module
+   ============================================ */
+
+.emptyPage {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.pageRoot {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}

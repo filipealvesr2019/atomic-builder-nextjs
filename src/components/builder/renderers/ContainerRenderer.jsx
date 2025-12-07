@@ -4,6 +4,7 @@ import { useAtomValue } from 'jotai';
 import { viewModeAtom } from '@/store/viewModeStore';
 import { resolveResponsiveProp } from '@/store/viewModeStore';
 import { Plus, FolderPlus, Settings, Trash2 } from 'lucide-react';
+import styles from './ContainerRenderer.module.css';
 
 /**
  * ContainerRenderer
@@ -81,24 +82,24 @@ export default function ContainerRenderer({ container, children }) {
     return (
       <div 
         data-container-id={id} 
-        className="builder-container is-empty group"
+        className="builder-container is-empty"
         style={style}
       >
         <div 
           style={emptyPlaceholderStyle}
-          className="hover:border-blue-400 hover:bg-blue-50/30"
+          className={styles.emptyPlaceholder}
         >
           {/* Action Icons Row */}
-          <div className="flex items-center gap-2 mb-2">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-blue-600 transition-colors shadow-md">
+          <div className={styles.actionRow}>
+            <button className={styles.actionButton}>
               <Plus size={18} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-blue-600 transition-colors shadow-md">
+            <button className={styles.actionButton}>
               <FolderPlus size={16} />
             </button>
           </div>
           {/* Text */}
-          <span className="text-sm text-gray-400 font-medium">Arraste widget aqui</span>
+          <span className={styles.placeholderText}>Arraste widget aqui</span>
         </div>
       </div>
     );

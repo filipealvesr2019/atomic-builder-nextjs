@@ -2,6 +2,7 @@
 
 import { useAtomValue, useSetAtom } from 'jotai';
 import { themeAtom, updateThemeAtom } from '@/store/themeStore';
+import styles from './ThemePanel.module.css';
 
 export default function ThemePanel() {
   const theme = useAtomValue(themeAtom);
@@ -26,110 +27,108 @@ export default function ThemePanel() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white">
-      <div className="p-4 border-b border-gray-200 bg-gray-50">
-        <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h2 className={styles.headerTitle}>
           Global Style
         </h2>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-6">
+      <div className={styles.content}>
         {/* Colors Section */}
-        <div className="space-y-3">
-          <h3 className="text-xs font-semibold text-gray-500 uppercase">Colors</h3>
+        <div className={styles.section}>
+          <h3 className={styles.sectionTitle}>Colors</h3>
           
-          <div className="space-y-2">
-            <div>
-              <label className="text-sm text-gray-700 block mb-1">Primary</label>
-              <div className="flex gap-2">
-                <input 
-                  type="color" 
-                  value={theme.colors.primary}
-                  onChange={(e) => handleColorChange('primary', e.target.value)}
-                  className="h-8 w-8 rounded cursor-pointer border border-gray-300"
-                />
-                <input 
-                  type="text"
-                  value={theme.colors.primary}
-                  onChange={(e) => handleColorChange('primary', e.target.value)}
-                  className="flex-1 text-sm border border-gray-300 rounded px-2"
-                />
-              </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Primary</label>
+            <div className={styles.colorInputGroup}>
+              <input 
+                type="color" 
+                value={theme.colors.primary}
+                onChange={(e) => handleColorChange('primary', e.target.value)}
+                className={styles.colorPicker}
+              />
+              <input 
+                type="text"
+                value={theme.colors.primary}
+                onChange={(e) => handleColorChange('primary', e.target.value)}
+                className={styles.textInput}
+              />
             </div>
+          </div>
 
-            <div>
-              <label className="text-sm text-gray-700 block mb-1">Secondary</label>
-              <div className="flex gap-2">
-                <input 
-                  type="color" 
-                  value={theme.colors.secondary}
-                  onChange={(e) => handleColorChange('secondary', e.target.value)}
-                  className="h-8 w-8 rounded cursor-pointer border border-gray-300"
-                />
-                <input 
-                  type="text"
-                  value={theme.colors.secondary}
-                  onChange={(e) => handleColorChange('secondary', e.target.value)}
-                  className="flex-1 text-sm border border-gray-300 rounded px-2"
-                />
-              </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Secondary</label>
+            <div className={styles.colorInputGroup}>
+              <input 
+                type="color" 
+                value={theme.colors.secondary}
+                onChange={(e) => handleColorChange('secondary', e.target.value)}
+                className={styles.colorPicker}
+              />
+              <input 
+                type="text"
+                value={theme.colors.secondary}
+                onChange={(e) => handleColorChange('secondary', e.target.value)}
+                className={styles.textInput}
+              />
             </div>
+          </div>
 
-            <div>
-                <label className="text-sm text-gray-700 block mb-1">Background</label>
-                <div className="flex gap-2">
-                  <input 
-                    type="color" 
-                    value={theme.colors.background}
-                    onChange={(e) => handleColorChange('background', e.target.value)}
-                    className="h-8 w-8 rounded cursor-pointer border border-gray-300"
-                  />
-                  <input 
-                    type="text"
-                    value={theme.colors.background}
-                    onChange={(e) => handleColorChange('background', e.target.value)}
-                    className="flex-1 text-sm border border-gray-300 rounded px-2"
-                  />
-                </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Background</label>
+            <div className={styles.colorInputGroup}>
+              <input 
+                type="color" 
+                value={theme.colors.background}
+                onChange={(e) => handleColorChange('background', e.target.value)}
+                className={styles.colorPicker}
+              />
+              <input 
+                type="text"
+                value={theme.colors.background}
+                onChange={(e) => handleColorChange('background', e.target.value)}
+                className={styles.textInput}
+              />
             </div>
+          </div>
 
-             <div>
-                <label className="text-sm text-gray-700 block mb-1">Text</label>
-                <div className="flex gap-2">
-                  <input 
-                    type="color" 
-                    value={theme.colors.text}
-                    onChange={(e) => handleColorChange('text', e.target.value)}
-                    className="h-8 w-8 rounded cursor-pointer border border-gray-300"
-                  />
-                  <input 
-                    type="text"
-                    value={theme.colors.text}
-                    onChange={(e) => handleColorChange('text', e.target.value)}
-                    className="flex-1 text-sm border border-gray-300 rounded px-2"
-                  />
-                </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Text</label>
+            <div className={styles.colorInputGroup}>
+              <input 
+                type="color" 
+                value={theme.colors.text}
+                onChange={(e) => handleColorChange('text', e.target.value)}
+                className={styles.colorPicker}
+              />
+              <input 
+                type="text"
+                value={theme.colors.text}
+                onChange={(e) => handleColorChange('text', e.target.value)}
+                className={styles.textInput}
+              />
             </div>
           </div>
         </div>
 
         {/* Typography Section */}
-        <div className="space-y-3 pt-4 border-t border-gray-100">
-            <h3 className="text-xs font-semibold text-gray-500 uppercase">Typography</h3>
-             <div>
-                <label className="text-sm text-gray-700 block mb-1">Base Font</label>
-                <select 
-                    value={theme.typography.fontFamily}
-                    onChange={(e) => handleTypographyChange('fontFamily', e.target.value)}
-                    className="w-full text-sm border border-gray-300 rounded px-2 py-1"
-                >
-                    <option value="system-ui, -apple-system, sans-serif">System UI</option>
-                    <option value="'Inter', sans-serif">Inter</option>
-                    <option value="'Roboto', sans-serif">Roboto</option>
-                    <option value="'Open Sans', sans-serif">Open Sans</option>
-                    <option value="'Playfair Display', serif">Playfair Display</option>
-                </select>
-            </div>
+        <div className={`${styles.section} ${styles.sectionBorder}`}>
+          <h3 className={styles.sectionTitle}>Typography</h3>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Base Font</label>
+            <select 
+              value={theme.typography.fontFamily}
+              onChange={(e) => handleTypographyChange('fontFamily', e.target.value)}
+              className={styles.select}
+            >
+              <option value="system-ui, -apple-system, sans-serif">System UI</option>
+              <option value="'Inter', sans-serif">Inter</option>
+              <option value="'Roboto', sans-serif">Roboto</option>
+              <option value="'Open Sans', sans-serif">Open Sans</option>
+              <option value="'Playfair Display', serif">Playfair Display</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>

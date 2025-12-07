@@ -10,6 +10,7 @@ import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
 import { getWidgetComponent } from '@/components/builder/WidgetRegistry';
 import ContainerRenderer from '@/components/builder/renderers/ContainerRenderer';
 import SectionRenderer from '@/components/builder/renderers/SectionRenderer';
+import styles from './DropZone.module.css';
 
 function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpdateBlock, children }) {
   const {
@@ -58,31 +59,31 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative group mb-2 transition-all rounded-sm ${
-        isSelected ? 'ring-2 ring-blue-500 ring-offset-2 z-10' : 'hover:ring-1 hover:ring-blue-300 hover:bg-gray-50/50'
-      } ${isOver ? 'border-b-4 border-blue-500' : ''}`}
+      className={`${styles.blockWrapper} ${
+        isSelected ? styles.blockWrapperSelected : ''
+      } ${isOver ? styles.blockWrapperOver : ''}`}
       onClick={(e) => {
         e.stopPropagation();
         onClick(block);
       }}
     >
       {/* Action Overlay */}
-      <div className={`absolute -top-3 right-2 z-20 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden transition-all ${isSelected ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0'}`}>
+      <div className={styles.actionOverlay}>
         <div 
           {...attributes} 
           {...listeners}
-          className="p-1.5 cursor-grab hover:bg-gray-50 border-r border-gray-100 text-gray-500"
+          className={styles.dragHandle}
           title="Arrastar"
         >
           <GripVertical size={14} />
         </div>
-        <span className="px-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{block.type}</span>
+        <span className={styles.blockType}>{block.type}</span>
         <button 
           onClick={(e) => {
             e.stopPropagation();
             onDelete(block.id);
           }}
-          className="p-1.5 hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors border-l border-gray-100"
+          className={styles.deleteButton}
           title="Excluir"
         >
           <Trash2 size={14} />
@@ -90,13 +91,13 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
       </div>
 
       {/* Render Block Content */}
-      <div className={isSelected ? "" : ""}>
+      <div>
         {BlockComponent ? (
           <BlockComponent {...componentProps}>
             {children}
           </BlockComponent>
         ) : (
-          <div className="p-4 text-center bg-red-50 border border-red-200 text-red-600 rounded">
+          <div className={styles.unknownBlock}>
             Unknown Block: {block.type}
           </div>
         )}
@@ -169,7 +170,7 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
                         backgroundColor: isEmpty ? 'transparent' : 'rgba(250, 250, 250, 0.3)',
                         position: 'relative',
                     }}
-                    className="group/container hover:border-blue-300 transition-colors"
+                    className={styles.containerContent}
                 >
                     {isEmpty ? (
                         /* Elementor-style Empty Placeholder */
@@ -187,19 +188,19 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease',
                             }}
-                            className="hover:border-blue-400 hover:bg-blue-50/30"
+                            className={styles.emptyPlaceholder}
                         >
                             {/* Action Icons Row */}
-                            <div className="flex items-center gap-2 mb-2">
-                                <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-blue-600 transition-colors shadow-md">
+                            <div className={styles.actionIconsRow}>
+                                <button className={styles.iconButton}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                                 </button>
-                                <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-blue-600 transition-colors shadow-md">
+                                <button className={styles.iconButton}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><line x1="12" x2="12" y1="10" y2="16"/><line x1="9" x2="15" y1="13" y2="13"/></svg>
                                 </button>
                             </div>
                             {/* Text */}
-                            <span className="text-sm text-gray-400 font-medium">Arraste widget aqui</span>
+                            <span className={styles.placeholderText}>Arraste widget aqui</span>
                         </div>
                     ) : (
                         /* Render children normally */
@@ -254,16 +255,16 @@ export default function DropZone({ blocks, templateId, selectedBlock, onBlockCli
   return (
     <div 
       ref={setNodeRef} 
-      className={`min-h-full bg-white shadow-sm transition-colors ${isOver ? 'bg-blue-50 ring-2 ring-blue-300' : ''}`}
+      className={`${styles.dropZone} ${isOver ? styles.dropZoneOver : ''}`}
       style={{ minHeight: '400px' }}
     >
       {blocks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center h-96 border-2 border-dashed border-gray-300 m-8 rounded-lg bg-gray-50 text-gray-400 pointer-events-none">
-          <p className="text-xl font-medium mb-2">Comece a construir</p>
-          <p className="text-sm">Arraste layouts ou elementos da barra lateral para cá</p>
+        <div className={styles.emptyDropZone}>
+          <p className={styles.emptyDropZoneTitle}>Comece a construir</p>
+          <p className={styles.emptyDropZoneText}>Arraste layouts ou elementos da barra lateral para cá</p>
         </div>
       ) : (
-        <div className="flex flex-col pb-20 p-4">
+        <div className={styles.dropZoneContent}>
           <SortableContext 
              items={blocks.map(b => b.id)} 
              strategy={verticalListSortingStrategy}
