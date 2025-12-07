@@ -12,6 +12,7 @@ import templates from '@/templates-cms/registry';
 import styles from './PropsPanel.module.css';
 import { useAtomValue } from 'jotai';
 import { viewModeAtom } from '@/store/viewModeStore';
+import Repeater from './Repeater';
 
 // Icon Button Group Component (for Direction, Justify, Align)
 function IconButtonGroup({ label, value, onChange, options, activeViewMode }) {
@@ -138,6 +139,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
         [WIDGET_TYPES.IMAGE]: { name: 'Image', props: {} },
         [WIDGET_TYPES.PRODUCT_LIST]: { name: 'Product List', props: {} },
         [WIDGET_TYPES.ICON_BOX]: { name: 'Icon Box', props: {} },
+        [WIDGET_TYPES.ICON_LIST]: { name: 'Icon List', props: {} },
         [NODE_TYPES.CONTAINER]: { name: 'Container', props: {} },
         [NODE_TYPES.SECTION]: { name: 'Section', props: {} }
       };
@@ -460,6 +462,66 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                         ]}
                     />
                 </>
+            ) : block.type === WIDGET_TYPES.ICON_LIST ? (
+                /* ICON LIST SPECIFIC CONTENT */
+                <>
+                  <Repeater
+                    label="List Items"
+                    items={block.props?.items || []}
+                    onChange={(newItems) => handleChange('items', newItems)}
+                    defaultItem={{ text: 'New Item', icon: 'Check', link: '' }}
+                    renderItem={(item, index, onChangeItem) => (
+                      <div className={styles.formGroup}>
+                         <input 
+                            className={styles.input} 
+                            value={item.text} 
+                            onChange={(e) => onChangeItem({ text: e.target.value })}
+                            placeholder="Text"
+                         />
+                         <div style={{ display: 'flex', gap: '8px' }}>
+                            <select 
+                                className={styles.select}
+                                value={item.icon || 'Check'}
+                                onChange={(e) => onChangeItem({ icon: e.target.value })}
+                            >
+                                <option value="Check">Check</option>
+                                <option value="Star">Star</option>
+                                <option value="ArrowRight">Arrow Right</option>
+                                <option value="Dot">Dot</option>
+                                <option value="Phone">Phone</option>
+                                <option value="Mail">Mail</option>
+                                <option value="MapPin">MapPin</option>
+                            </select>
+                            <input 
+                                className={styles.input} 
+                                value={item.link || ''} 
+                                onChange={(e) => onChangeItem({ link: e.target.value })}
+                                placeholder="Link (optional)"
+                             />
+                         </div>
+                      </div>
+                    )}
+                  />
+
+                  <IconButtonGroup
+                      label="Layout"
+                      value={getValue('layout', 'vertical')}
+                      onChange={(val) => handleChange('layout', val)}
+                      activeViewMode={viewMode}
+                      options={[
+                          { value: 'vertical', label: 'Vertical', icon: <ArrowDown size={16} /> },
+                          { value: 'horizontal', label: 'Horizontal', icon: <ArrowRight size={16} /> }
+                      ]}
+                  />
+
+                  <StyledInput
+                      label="Gap"
+                      value={getValue('gap', '10px')}
+                      onChange={(val) => handleChange('gap', val)}
+                      placeholder="10px"
+                      activeViewMode={viewMode}
+                  />
+                </>
             ) : (
                 /* GENERIC WIDGET CONTENT */
                 <StyledInput
@@ -515,6 +577,41 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                         onChange={(val) => handleChange('descColor', val)}
                         placeholder="#6b7280"
                         responsive={false}
+                    />
+                </Section>
+            )}
+
+            {block.type === WIDGET_TYPES.ICON_LIST && (
+                <Section title="Icon List Styles">
+                    <StyledInput
+                        label="Icon Color"
+                        value={getValue('iconColor', '#3b82f6')}
+                        onChange={(val) => handleChange('iconColor', val)}
+                        placeholder="#3b82f6"
+                        responsive={false}
+                    />
+                     <StyledInput
+                        label="Icon Size"
+                        value={getValue('iconSize', '16px')}
+                        onChange={(val) => handleChange('iconSize', val)}
+                        placeholder="16px"
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Text Color"
+                        value={getValue('textColor', '#374151')}
+                        onChange={(val) => handleChange('textColor', val)}
+                        placeholder="#374151"
+                        responsive={false}
+                    />
+                     <StyledInput
+                        label="Text Size"
+                        value={getValue('textSize', '14px')}
+                        onChange={(val) => handleChange('textSize', val)}
+                        placeholder="14px"
+                        responsive={true}
+                        activeViewMode={viewMode}
                     />
                 </Section>
             )}

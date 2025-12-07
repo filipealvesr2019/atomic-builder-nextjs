@@ -7,6 +7,7 @@ import ImageWidget from './widgets/Image';
 import ProductListRenderer from './renderers/ProductListRenderer';
 
 import IconBox from './widgets/IconBox';
+import IconList from './widgets/IconList';
 
 /**
  * Widget Registry
@@ -19,6 +20,7 @@ export const EVENT_WIDGETS = {
   [WIDGET_TYPES.IMAGE]: ImageWidget,
   [WIDGET_TYPES.PRODUCT_LIST]: ProductListRenderer,
   [WIDGET_TYPES.ICON_BOX]: IconBox,
+  [WIDGET_TYPES.ICON_LIST]: IconList,
   // Add new widgets here
 };
 
