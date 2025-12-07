@@ -467,7 +467,11 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                 <>
                   <Repeater
                     label="List Items"
-                    items={block.props?.items || []}
+                    items={block.props?.items || [
+                        { id: 1, text: 'List Item #1', icon: 'Check', link: '#' },
+                        { id: 2, text: 'List Item #2', icon: 'Check', link: '#' },
+                        { id: 3, text: 'List Item #3', icon: 'Check', link: '#' }
+                    ]}
                     onChange={(newItems) => handleChange('items', newItems)}
                     defaultItem={{ text: 'New Item', icon: 'Check', link: '' }}
                     renderItem={(item, index, onChangeItem) => (
