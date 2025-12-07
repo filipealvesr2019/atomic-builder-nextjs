@@ -130,10 +130,6 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
         
         const newLeftWidth = Math.max(5, Math.min(95, leftWidth + deltaPercentage)); // Min 5%, Max 95%
         const newRightWidth = Math.max(5, Math.min(95, rightWidth - deltaPercentage)); // Adjust right neighbor to keep total same?
-        // Actually, flexbox handles remaining space if we only set one?
-        // Better: Adjust both to maintain ratio?
-        // Simple approach: Update left child width. Flexbox 'grow' defaults might interfere.
-        // We should ensure all children have explicit widths if we start resizing.
         
         // Safe update: Update both neighbors
         onUpdateBlock(leftChild.id, { width: `${newLeftWidth}%` });
@@ -143,7 +139,9 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
     // If it's a Container or Section, render children
     if (block.children && (block.category === NODE_TYPES.CONTAINER || block.category === NODE_TYPES.SECTION)) {
         const isRow = block.props?.direction === 'row';
-        const isEmpty = block.children.length === 0;
+        // Note: We removed the 'isEmpty' check here because ContainerRenderer handles it (rendering 'PlaceHere' etc).
+        // Actually, for better UX, we might want to keep some placeholder logic, but it MUST NOT interfere with layout.
+        // For now, let's keep it simple: Pass children to SortableBlock. ContainerRenderer will render them.
 
         return (
             <SortableBlock
@@ -154,88 +152,49 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
                 onDelete={onDeleteBlock}
                 onUpdateBlock={onUpdateBlock}
             >
-                {/* Container Content Area */}
-                <div 
-                    ref={parentRef}
-                    style={{ 
-                        minHeight: isEmpty ? '120px' : '50px', 
-                        width: '100%', 
-                        display: isRow ? 'flex' : 'flex',
-                        flexDirection: isRow ? 'row' : 'column',
-                        alignItems: isEmpty ? 'center' : 'stretch',
-                        justifyContent: isEmpty ? 'center' : 'flex-start',
-                        padding: isEmpty ? '20px' : '10px',
-                        border: '1px dashed #e0e0e0',
-                        borderRadius: '4px',
-                        backgroundColor: isEmpty ? 'transparent' : 'rgba(250, 250, 250, 0.3)',
-                        position: 'relative',
-                    }}
-                    className={styles.containerContent}
+                {/* 
+                   CRITICAL FIX: 
+                   Removed the ghost wrapper 'div' that was here.
+                   Now we directly render SortableContext.
+                   This allows 'BlockComponent' (ContainerRenderer) in SortableBlock
+                   to receive these children and apply its OWN styles (flex, align, etc.)
+                   without being overridden by a parent div with hardcoded styles.
+                */}
+                 <SortableContext 
+                    items={block.children.map(c => c.id)} 
+                    strategy={verticalListSortingStrategy}
+                    id={block.id}
                 >
-                    {isEmpty ? (
-                        /* Elementor-style Empty Placeholder */
-                        <div 
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                width: '100%',
-                                minHeight: '100px',
-                                border: '2px dashed #d0d5dd',
-                                borderRadius: '8px',
-                                backgroundColor: '#fafafa',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease',
-                            }}
-                            className={styles.emptyPlaceholder}
-                        >
-                            {/* Action Icons Row */}
-                            <div className={styles.actionIconsRow}>
-                                <button className={styles.iconButton}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                                </button>
-                                <button className={styles.iconButton}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><line x1="12" x2="12" y1="10" y2="16"/><line x1="9" x2="15" y1="13" y2="13"/></svg>
-                                </button>
-                            </div>
-                            {/* Text */}
-                            <span className={styles.placeholderText}>Arraste widget aqui</span>
-                        </div>
-                    ) : (
-                        /* Render children normally */
-                        <SortableContext 
-                            items={block.children.map(c => c.id)} 
-                            strategy={verticalListSortingStrategy}
-                            id={block.id}
-                        >
-                            {block.children.map((child, index) => (
-                                <React.Fragment key={child.id}>
-                                    <BlockRenderer 
-                                        block={child} 
-                                        templateId={templateId}
-                                        selectedBlock={selectedBlock}
-                                        onBlockClick={onBlockClick}
-                                        onDeleteBlock={onDeleteBlock}
-                                        onUpdateBlock={onUpdateBlock}
-                                    />
-                                    {isRow && index < block.children.length - 1 && (
-                                        <ResizeHandle 
-                                            leftBlockId={child.id}
-                                            rightBlockId={block.children[index+1].id}
-                                            onResize={(deltaX) => handleResize(index, deltaX)}
-                                        />
-                                    )}
-                                </React.Fragment>
-                            ))}
-                        </SortableContext>
-                    )}
-                </div>
+                    {/* 
+                       We need a fragment or a display:contents div because SortableContext needs a parent? 
+                       Actually SortableContext just provides context. The children are rendered below.
+                       We map them directly.
+                    */}
+                    {block.children.map((child, index) => (
+                        <React.Fragment key={child.id}>
+                            <BlockRenderer 
+                                block={child} 
+                                templateId={templateId}
+                                selectedBlock={selectedBlock}
+                                onBlockClick={onBlockClick}
+                                onDeleteBlock={onDeleteBlock}
+                                onUpdateBlock={onUpdateBlock}
+                            />
+                            {isRow && index < block.children.length - 1 && (
+                                <ResizeHandle 
+                                    leftBlockId={child.id}
+                                    rightBlockId={block.children[index+1].id}
+                                    onResize={(deltaX) => handleResize(index, deltaX)}
+                                />
+                            )}
+                        </React.Fragment>
+                    ))}
+                </SortableContext>
             </SortableBlock>
         );
     }
     
-    // ... (leaf node return)
+    // Leaf node return
     return (
         <SortableBlock
             block={block}
