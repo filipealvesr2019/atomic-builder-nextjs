@@ -203,6 +203,10 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
 
   const isContainer = block.category === NODE_TYPES.CONTAINER;
 
+  // Helpers for Dynamic Logic
+  const currentDirection = getValue('direction', 'column') || 'column';
+  const isRow = currentDirection.includes('row');
+
   // Tab Button
   const TabButton = ({ id, icon: Icon, label }) => (
     <button
@@ -242,9 +246,9 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
               {/* Moved Min Height to top for better visibility */}
               <StyledInput
                 label="Min Height"
-                value={getValue('minHeight', 'auto')}
+                value={getValue('minHeight', '350px')}
                 onChange={(val) => handleChange('minHeight', val)}
-                placeholder="Ex: 350px"
+                placeholder="350px"
                 activeViewMode={viewMode}
               />
 
@@ -285,28 +289,32 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                 />
 
                 <IconButtonGroup
-                  label="Justify Content (Vertical)"
+                  // Dynamic Label: If Column (default), Justify handles Vertical. If Row, it handles Horizontal.
+                  label={isRow ? 'Horizontal Alignment' : 'Vertical Alignment'}
                   value={getValue('justifyContent', 'flex-start')}
                   onChange={(val) => handleChange('justifyContent', val)}
                   activeViewMode={viewMode}
                   options={[
-                    { value: 'flex-start', label: 'Start', icon: <AlignStartVertical size={16} /> },
-                    { value: 'center', label: 'Center', icon: <AlignCenterVertical size={16} /> },
-                    { value: 'flex-end', label: 'End', icon: <AlignEndVertical size={16} /> },
+                    // Dynamic Icons too
+                    { value: 'flex-start', label: 'Start', icon: isRow ? <AlignStartHorizontal size={16} /> : <AlignStartVertical size={16} /> },
+                    { value: 'center', label: 'Center', icon: isRow ? <AlignCenterHorizontal size={16} /> : <AlignCenterVertical size={16} /> },
+                    { value: 'flex-end', label: 'End', icon: isRow ? <AlignEndHorizontal size={16} /> : <AlignEndVertical size={16} /> },
                     { value: 'space-between', label: 'Space Between', icon: <Rows size={16} /> },
                     { value: 'space-around', label: 'Space Around', icon: <Rows size={16} /> }
                   ]}
                 />
 
                 <IconButtonGroup
-                  label="Align Items (Horizontal)"
+                  // Dynamic Label: If Column (default), AlignItems handles Horizontal. If Row, it handles Vertical.
+                  label={isRow ? 'Vertical Alignment' : 'Horizontal Alignment'}
                   value={getValue('alignItems', 'stretch')}
                   onChange={(val) => handleChange('alignItems', val)}
                   activeViewMode={viewMode}
                   options={[
-                    { value: 'flex-start', label: 'Start', icon: <AlignStartHorizontal size={16} /> },
-                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
-                    { value: 'flex-end', label: 'End', icon: <AlignEndHorizontal size={16} /> },
+                     // Dynamic Icons too
+                    { value: 'flex-start', label: 'Start', icon: isRow ? <AlignStartVertical size={16} /> : <AlignStartHorizontal size={16} /> },
+                    { value: 'center', label: 'Center', icon: isRow ? <AlignCenterVertical size={16} /> : <AlignCenterHorizontal size={16} /> },
+                    { value: 'flex-end', label: 'End', icon: isRow ? <AlignEndVertical size={16} /> : <AlignEndHorizontal size={16} /> },
                     { value: 'stretch', label: 'Stretch', icon: <Columns size={16} /> }
                   ]}
                 />

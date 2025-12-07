@@ -43,7 +43,9 @@ export default function ContainerRenderer({ container, children }) {
 
   const boxStyles = {
     width: getProp('width', '100%'),
-    minHeight: getProp('minHeight', 'auto'), // Sem altura mínima forçada se não estiver vazio
+    // Change: Enforce 350px default if undefined/empty, per user request "not auto"
+    // This allows Justify Content (Vertical) to work immediately.
+    minHeight: getProp('minHeight', '350px'), 
     padding: getProp('padding', '20px'),
     backgroundColor: getProp('backgroundColor', 'transparent'),
     boxSizing: 'border-box',
