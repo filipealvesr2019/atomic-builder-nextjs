@@ -342,14 +342,15 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
 
             {/* Grid Section */}
             {getValue('layoutType', 'flex') === 'grid' && (
-              <Section title="Grid">
+              <Section title="Grid Layout">
                 <StyledInput
-                  label="Columns"
+                  label="Columns (Count or Template)"
                   value={getValue('gridTemplateColumns', '1fr')}
                   onChange={(val) => handleChange('gridTemplateColumns', val)}
-                  placeholder="1fr 1fr"
+                  placeholder="e.g. 3 or 1fr 1fr 1fr"
                   responsive={false}
                 />
+                
                 <StyledInput
                   label="Rows"
                   value={getValue('gridTemplateRows', 'auto')}
@@ -357,12 +358,39 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                   placeholder="auto"
                   responsive={false}
                 />
+                
                 <StyledInput
                   label="Gap"
                   value={getValue('gap', '10px')}
                   onChange={(val) => handleChange('gap', val)}
                   placeholder="10px"
                   activeViewMode={viewMode}
+                />
+
+                <IconButtonGroup
+                  label="Horizontal Align (Justify Items)"
+                  value={getValue('justifyItems', 'stretch')}
+                  onChange={(val) => handleChange('justifyItems', val)}
+                  activeViewMode={viewMode}
+                  options={[
+                    { value: 'start', label: 'Start', icon: <AlignStartHorizontal size={16} /> },
+                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                    { value: 'end', label: 'End', icon: <AlignEndHorizontal size={16} /> },
+                    { value: 'stretch', label: 'Stretch', icon: <Columns size={16} /> }
+                  ]}
+                />
+
+                <IconButtonGroup
+                  label="Vertical Align (Align Items)"
+                  value={getValue('alignItems', 'stretch')}
+                  onChange={(val) => handleChange('alignItems', val)}
+                  activeViewMode={viewMode}
+                  options={[
+                    { value: 'start', label: 'Start', icon: <AlignStartVertical size={16} /> },
+                    { value: 'center', label: 'Center', icon: <AlignCenterVertical size={16} /> },
+                    { value: 'end', label: 'End', icon: <AlignEndVertical size={16} /> },
+                    { value: 'stretch', label: 'Stretch', icon: <Columns size={16} /> }
+                  ]}
                 />
               </Section>
             )}

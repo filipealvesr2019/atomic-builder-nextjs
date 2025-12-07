@@ -28,9 +28,16 @@ export default function ContainerRenderer({ container, children }) {
   const alignItems = getProp('alignItems', 'stretch');
   
   // Grid Props
-  const gridColumns = getProp('gridTemplateColumns', '1fr');
+  let gridColumns = getProp('gridTemplateColumns', '1fr');
   const gridRows = getProp('gridTemplateRows', 'auto');
   const gridGap = getProp('gap', '10px');
+  const gridJustifyItems = getProp('justifyItems', 'stretch');
+  const gridAlignItems = getProp('alignItems', 'stretch');
+
+  // Smart Grid Logic: If user provides a raw number (e.g. "3") for columns, convert to repeat(3, 1fr)
+  if (layoutType === 'grid' && gridColumns && !isNaN(gridColumns)) {
+      gridColumns = `repeat(${gridColumns}, 1fr)`;
+  }
 
   const width = getProp('width', '100%');
   const minHeight = getProp('minHeight', '350px');
@@ -49,8 +56,8 @@ export default function ContainerRenderer({ container, children }) {
           ...baseStyles,
           gridTemplateColumns: gridColumns,
           gridTemplateRows: gridRows,
-          // alignItems in Grid behaves slightly differently (align-items vs justify-items), 
-          // but for basic compatibility we can map concepts if needed, or just let CSS Grid defaults handle it.
+          justifyItems: gridJustifyItems,
+          alignItems: gridAlignItems,
       };
   } else {
       // Flex Defaults
