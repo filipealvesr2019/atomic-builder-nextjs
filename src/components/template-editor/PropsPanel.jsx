@@ -246,9 +246,9 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
               {/* Moved Min Height to top for better visibility */}
               <StyledInput
                 label="Min Height"
-                value={getValue('minHeight', '350px')}
+                value={getValue('minHeight', '100px')}
                 onChange={(val) => handleChange('minHeight', val)}
-                placeholder="350px"
+                placeholder="100px"
                 activeViewMode={viewMode}
               />
 
