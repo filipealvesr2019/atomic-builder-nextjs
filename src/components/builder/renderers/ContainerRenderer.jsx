@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDroppable } from '@dnd-kit/core';
 import WidgetRenderer from './WidgetRenderer';
 import { useAtomValue } from 'jotai';
 import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
@@ -57,6 +58,11 @@ export default function ContainerRenderer({ container, children }) {
   console.log(`[Container ${container.id}]`);
   console.log(`-- Height applied:`, minHeight);
 
+  const { setNodeRef, isOver } = useDroppable({
+    id: `temp-drop-${container.id}`,
+    disabled: !isEmpty, // Only active when empty
+  });
+
   if (isEmpty) {
     return (
       <div 
@@ -66,16 +72,38 @@ export default function ContainerRenderer({ container, children }) {
           ...boxStyles,
           ...flexStyles,
           minHeight: '100px', // Visual specific for empty drop target
-          borderColor: '#ccc',
+          borderColor: isOver ? '#2196f3' : '#ccc', // Visual feedback
+          backgroundColor: isOver ? 'rgba(33, 150, 243, 0.1)' : boxStyles.backgroundColor,
           justifyContent: 'center',
           alignItems: 'center'
         }}
       >
-        <Plus size={24} color="#ccc" />
-        <span style={{ color: '#ccc', fontSize: '12px' }}>Container Vazio</span>
+        {/* The droppable target is THIS inner area */}
+        <div 
+            ref={setNodeRef}
+            style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column'
+            }}
+        >
+            <Plus size={24} color={isOver ? '#2196f3' : '#ccc'} />
+            <span style={{ color: isOver ? '#2196f3' : '#ccc', fontSize: '12px', marginTop: '8px' }}>
+                Arraste aqui para aninhar
+            </span>
+        </div>
       </div>
     );
   }
+
+  // Append Zone Droppable
+  const { setNodeRef: setAppendRef, isOver: isAppendOver } = useDroppable({
+    id: `append-zone-${container.id}`,
+    disabled: isEmpty, // Only needed when NOT empty (empty handles it via temp-drop)
+  });
 
   return (
     <div 
@@ -84,11 +112,40 @@ export default function ContainerRenderer({ container, children }) {
       style={{
         ...boxStyles,
         ...flexStyles,
+        position: 'relative', // Ensure relative positioning for absolute overlays if needed
       }}
     >
       {children ? children : widgets.map(widget => (
         <WidgetRenderer key={widget.id} widget={widget} />
       ))}
+      
+      {/* Append Zone - Always available at the end */}
+      {!isEmpty && (
+        <div
+            ref={setAppendRef}
+            className="append-zone"
+            style={{
+                flexShrink: 0, // Prevent shrinking
+                width: direction === 'row' ? '20px' : '100%',
+                height: direction === 'row' ? 'auto' : '20px',
+                minWidth: '20px',
+                minHeight: '20px',
+                margin: '4px',
+                borderRadius: '4px',
+                border: '1px dashed transparent',
+                backgroundColor: isAppendOver ? 'rgba(33, 150, 243, 0.2)' : 'transparent',
+                borderColor: isAppendOver ? '#2196f3' : 'transparent',
+                transition: 'all 0.2s ease',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'copy'
+            }}
+            title="Adicionar ao final"
+        >
+             {isAppendOver && <Plus size={14} color="#2196f3" />}
+        </div>
+      )}
     </div>
   );
 }

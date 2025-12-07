@@ -170,13 +170,26 @@ export default function TemplateEditorPage() {
 
         const overBlock = findBlockById(items, over.id);
         
-        if (overBlock && overBlock.type === 'container') {
+        // MOFIFIED: Check for explicit Nesting Target (Empty OR Append)
+        if (over.id.toString().startsWith('temp-drop-') || over.id.toString().startsWith('append-zone-')) {
+            const containerId = over.id.replace('temp-drop-', '').replace('append-zone-', '');
             const newItems = JSON.parse(JSON.stringify(items));
-            const targetContainer = findBlockById(newItems, over.id);
-            if (!targetContainer.children) targetContainer.children = [];
-            targetContainer.children.push(newBlock);
-            return newItems;
+            const targetContainer = findBlockById(newItems, containerId);
+            
+            if (targetContainer) {
+                 if (!targetContainer.children) targetContainer.children = [];
+                 targetContainer.children.push(newBlock);
+                 return newItems;
+            }
         }
+
+        // If dropping on the container BLOCK itself (the sortable item), treat as sibling logic
+        // We do NOT force nesting here anymore.
+        /* 
+        if (overBlock && overBlock.type === 'container' && (!overBlock.children || overBlock.children.length === 0)) {
+           // Old logic removed
+        } 
+        */
 
         const overContainerId = findContainer(over.id, items);
         
