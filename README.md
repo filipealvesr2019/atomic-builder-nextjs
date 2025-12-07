@@ -14,7 +14,7 @@ Unlike complex site builders that generate messy bloatware code, Atomic Builder 
 
 ### ✨ Key Features
 
-*   **🎨 DOM-based Visual Editor**: Build layouts by dragging elements directly into the page structure.
+*   **🎨 DOM-based Visual Editor**: Build layouts by dragging elements directly into the page. Features an intelligent "Drop Zone" system for explicit nesting (inside) versus sibling placement (side-by-side).
 *   **🛒 E-commerce Ready**: Native Stripe checkout integration (mock) and product management.
 *   **🔌 Plugin System**: Extensible architecture with a dedicated Plugins Marketplace ("SEO Booster", "Analytics", etc.).
 *   **🏬 Template Store**: Browse, preview, and install professional themes like **Rustic Store** in one click.
@@ -35,9 +35,9 @@ We are building the future of visual editing in Next.js. Here is the current sta
 - [x] **Plugins Marketplace**: System to enable/disable extensions.
 - [x] **Stripe Integration**: Checkout flow with success page (Mock).
 - [x] **Themes**: Fully ported **Rustic Store** theme (English/Portuguese ready).
-- [ ] **📱 Responsive Editing**: Advanced mobile/tablet view controls.
-- [ ] **⏪ History System**: Undo/Redo functionality.
-- [ ] **� Auth & Roles**: Multi-user permissions with Clerk.
+- [x] **📱 Responsive Editing**: Desktop/Tablet/Mobile views with adaptive property resolution.
+- [x] **⏪ History System**: Basic Undo/Redo functionality implemented for block operations.
+- [ ] ** Auth & Roles**: Multi-user permissions with Clerk.
 
 ---
 

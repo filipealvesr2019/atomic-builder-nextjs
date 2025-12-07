@@ -2,7 +2,7 @@
 
 Desde a versão Elementor 3.12+, o editor ganhou o sistema chamado:
 
-⭐ **Container-Based Layout (Flexbox e Grid)**
+⭐ **Container-Based Layout (Flexbox)**
 
 Isso substitui:
 - Sections (Seções)
@@ -18,7 +18,6 @@ Agora tudo é baseado em:
 
 É o bloco estrutural base. Funciona como:
 - Flexbox container (padrão)
-- Grid container (opcional)
 
 Um container pode conter:
 - widgets (texto, imagem, botões)
@@ -41,19 +40,22 @@ Controle:
 **Usado para:**
 Sidebars, cabeçalhos, seções horizontais ou verticais, separação de blocos.
 
-### B) Grid Container
-Layout em grade, estilo CSS Grid.
+### B) Grid Container (Em Breve)
+*Nota: Funcionalidade planejada. No momento, foque no uso do Flexbox para atingir seus layouts.*
 
-Controle:
-- **Columns** → Número de colunas
-- **Rows** → Automático / Manual
-- **Gap** → Espaços horizontais/verticais
-- **Minmax** → Largura mínima e máxima das células
-- **Auto-flow** → Como os itens são distribuídos
-- **Item placement** → Cada widget pode ocupar 1×1, 1×2, 2×2, etc.
+## 3. Comportamento de Drag & Drop (Novo)
 
-**Usado para:**
-Galerias, cards, vitrines, listagens responsivas.
+Para resolver a ambiguidade de arrastar elementos para dentro ou ao lado de containers, o sistema adota zonas explícitas:
+
+### 1. Aninhar (Colocar Dentro)
+- **Container Vazio**: Arraste para o **CENTRO** (onde há o ícone `+`). O item será aninhado.
+- **Container com Itens**: Arraste para a **BARRA DE ADIÇÃO** (Append Zone) que aparece no final da lista de itens (abaixo ou à direita). O item será adicionado ao final da lista interna.
+
+### 2. Posicionar ao Lado (Sibling)
+- Arraste para as **BORDAS** ou **LATERAIS** do container (fora das zonas de adição).
+- O item será posicionado como **irmão** do container (lado a lado ou acima/abaixo, dependendo do pai).
+
+Isso garante precisão total ao construir layouts complexos.
 
 ## 4. E onde entram os “itens”?
 
