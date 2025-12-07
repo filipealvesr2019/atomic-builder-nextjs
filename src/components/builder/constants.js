@@ -15,3 +15,8 @@ export const WIDGET_TYPES = {
   IMAGE: 'image',
   PRODUCT_LIST: 'product_list'
 };
+
+export const LAYOUT_TYPES = {
+  FLEX: 'flex',
+  GRID: 'grid'
+};

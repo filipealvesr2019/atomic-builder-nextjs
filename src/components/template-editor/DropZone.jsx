@@ -142,6 +142,7 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
     // If it's a Container or Section, render children
     if (block.children && (block.category === NODE_TYPES.CONTAINER || block.category === NODE_TYPES.SECTION)) {
         const isRow = block.props?.direction === 'row';
+        const isEmpty = block.children.length === 0;
 
         return (
             <SortableBlock
@@ -152,42 +153,77 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
                 onDelete={onDeleteBlock}
                 onUpdateBlock={onUpdateBlock}
             >
-                {/* We need a min-height or padding to have a drop area if empty */}
+                {/* Container Content Area */}
                 <div 
                     ref={parentRef}
                     style={{ 
-                        minHeight: '50px', 
+                        minHeight: isEmpty ? '120px' : '50px', 
                         width: '100%', 
-                        border: block.children.length === 0 ? '1px dashed #ccc' : 'none',
-                        display: isRow ? 'flex' : 'block',
-                        flexDirection: isRow ? 'row' : 'column'
+                        display: isRow ? 'flex' : 'flex',
+                        flexDirection: isRow ? 'row' : 'column',
+                        alignItems: isEmpty ? 'center' : 'stretch',
+                        justifyContent: isEmpty ? 'center' : 'flex-start',
+                        padding: isEmpty ? '20px' : '0',
                     }}
                 >
-                    <SortableContext 
-                        items={block.children.map(c => c.id)} 
-                        strategy={verticalListSortingStrategy}
-                        id={block.id}
-                    >
-                        {block.children.map((child, index) => (
-                            <React.Fragment key={child.id}>
-                                <BlockRenderer 
-                                    block={child} 
-                                    templateId={templateId}
-                                    selectedBlock={selectedBlock}
-                                    onBlockClick={onBlockClick}
-                                    onDeleteBlock={onDeleteBlock}
-                                    onUpdateBlock={onUpdateBlock}
-                                />
-                                {isRow && index < block.children.length - 1 && (
-                                    <ResizeHandle 
-                                        leftBlockId={child.id}
-                                        rightBlockId={block.children[index+1].id}
-                                        onResize={(deltaX) => handleResize(index, deltaX)}
+                    {isEmpty ? (
+                        /* Elementor-style Empty Placeholder */
+                        <div 
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '100%',
+                                minHeight: '100px',
+                                border: '2px dashed #d0d5dd',
+                                borderRadius: '8px',
+                                backgroundColor: '#fafafa',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                            }}
+                            className="hover:border-blue-400 hover:bg-blue-50/30"
+                        >
+                            {/* Action Icons Row */}
+                            <div className="flex items-center gap-2 mb-2">
+                                <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-blue-600 transition-colors shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                </button>
+                                <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-blue-600 transition-colors shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><line x1="12" x2="12" y1="10" y2="16"/><line x1="9" x2="15" y1="13" y2="13"/></svg>
+                                </button>
+                            </div>
+                            {/* Text */}
+                            <span className="text-sm text-gray-400 font-medium">Arraste widget aqui</span>
+                        </div>
+                    ) : (
+                        /* Render children normally */
+                        <SortableContext 
+                            items={block.children.map(c => c.id)} 
+                            strategy={verticalListSortingStrategy}
+                            id={block.id}
+                        >
+                            {block.children.map((child, index) => (
+                                <React.Fragment key={child.id}>
+                                    <BlockRenderer 
+                                        block={child} 
+                                        templateId={templateId}
+                                        selectedBlock={selectedBlock}
+                                        onBlockClick={onBlockClick}
+                                        onDeleteBlock={onDeleteBlock}
+                                        onUpdateBlock={onUpdateBlock}
                                     />
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </SortableContext>
+                                    {isRow && index < block.children.length - 1 && (
+                                        <ResizeHandle 
+                                            leftBlockId={child.id}
+                                            rightBlockId={block.children[index+1].id}
+                                            onResize={(deltaX) => handleResize(index, deltaX)}
+                                        />
+                                    )}
+                                </React.Fragment>
+                            ))}
+                        </SortableContext>
+                    )}
                 </div>
             </SortableBlock>
         );

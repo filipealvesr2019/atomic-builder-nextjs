@@ -20,19 +20,6 @@ O projeto é construído utilizando as seguintes tecnologias principais:
 
 | Arquivo / Pasta | Descrição |
 | :--- | :--- |
-| `.env` / `.env.local` | Variáveis de ambiente (chaves de API, conexão com DB, etc). |
-| `next.config.mjs` | Configurações do compilador Next.js. |
-| `package.json` | Dependências e scripts do projeto (`npm run dev`, etc). |
-| `public/` | Arquivos estáticos acessíveis publicamente (imagens, ícones, SVGs). |
-| `src/` | Código fonte principal da aplicação. |
-| `template-demos/` | Arquivos de demonstração para templates (HTML estático ou exemplos). |
-| `documentation/` | Documentação do projeto (este arquivo). |
-
-### Diretório `src/`
-
-O diretório `src` contém a lógica da aplicação.
-
-#### `src/app/`
 Utiliza o **App Router** do Next.js. Cada pasta representa uma rota na URL.
 - `api/`: Rotas de API (Backend) executadas no servidor (ex: CRUD de produtos, usuários).
 - `(admin)/`: Grupo de rotas protegidas ou administrativas (painel de controle).

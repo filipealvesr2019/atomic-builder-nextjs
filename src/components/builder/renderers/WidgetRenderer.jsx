@@ -26,9 +26,21 @@ export default function WidgetRenderer({ widget }) {
     return acc;
   }, {}) : {};
 
+  // Extract Layout Props to apply to wrapper
+  const wrapperStyle = {
+    // Layout
+    width: resolvedSettings.width || '100%',
+    flexGrow: resolvedSettings.flexGrow || 0,
+    alignSelf: resolvedSettings.alignSelf || 'auto',
+    gridColumn: resolvedSettings.gridColumn || 'auto',
+    gridRow: resolvedSettings.gridRow || 'auto',
+    // Visual
+    boxSizing: 'border-box'
+  };
+
   // Pass resolved settings and id to the actual component
   return (
-    <div data-widget-id={id} className="widget-wrapper" style={{ marginBottom: '1rem' }}>
+    <div data-widget-id={id} className="widget-wrapper" style={wrapperStyle}>
       <WidgetComponent settings={resolvedSettings} />
     </div>
   );
