@@ -519,6 +519,29 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                       ]}
                   />
 
+                  <IconButtonGroup
+                        label="Alignment"
+                        value={getValue('align', 'left')}
+                        onChange={(val) => handleChange('align', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                        ]}
+                    />
+
+                   <StyledSelect
+                        label="Divider"
+                        value={getValue('divider', 'no')}
+                        onChange={(val) => handleChange('divider', val)}
+                        responsive={false}
+                        options={[
+                           { label: 'No', value: 'no' },
+                           { label: 'Yes', value: 'yes' }
+                        ]}
+                    />
+
                   <StyledInput
                       label="Gap"
                       value={getValue('gap', '10px')}
@@ -656,6 +679,14 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                         placeholder="16px"
                         responsive={true}
                         activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Icon/Text Gap"
+                        value={getValue('iconGap', '8px')}
+                        onChange={(val) => handleChange('iconGap', val)}
+                        placeholder="8px"
+                        responsive={true}
+                         activeViewMode={viewMode}
                     />
                      <StyledInput
                         label="Text Color"
