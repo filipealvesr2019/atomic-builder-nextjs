@@ -137,6 +137,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
         [WIDGET_TYPES.BUTTON]: { name: 'Button', props: {} },
         [WIDGET_TYPES.IMAGE]: { name: 'Image', props: {} },
         [WIDGET_TYPES.PRODUCT_LIST]: { name: 'Product List', props: {} },
+        [WIDGET_TYPES.ICON_BOX]: { name: 'Icon Box', props: {} },
         [NODE_TYPES.CONTAINER]: { name: 'Container', props: {} },
         [NODE_TYPES.SECTION]: { name: 'Section', props: {} }
       };
@@ -399,26 +400,125 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
 
         {activeTab === 'layout' && !isContainer && (
           <Section title={config?.name || 'Content'}>
-            <StyledInput
-              label="Content"
-              value={block.props?.text || block.props?.content || ''}
-              onChange={(val) => handleChange(block.props?.text !== undefined ? 'text' : 'content', val)}
-              placeholder="Digite o texto..."
-              responsive={false}
-            />
+            
+            {/* ICON BOX SPECIFIC CONTENT */}
+            {block.type === WIDGET_TYPES.ICON_BOX ? (
+                <>
+                    <StyledInput
+                        label="Title"
+                        value={getValue('title', 'Título do Serviço')}
+                        onChange={(val) => handleChange('title', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Description"
+                        value={getValue('description', 'Descrição...')}
+                        onChange={(val) => handleChange('description', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                    <StyledSelect
+                        label="Icon"
+                        value={getValue('icon', 'Star')}
+                        onChange={(val) => handleChange('icon', val)}
+                        responsive={false}
+                        options={[
+                           { label: 'Star', value: 'Star' },
+                           { label: 'User', value: 'User' },
+                           { label: 'Check', value: 'Check' },
+                           { label: 'Truck', value: 'Truck' },
+                           { label: 'Shield', value: 'Shield' },
+                           { label: 'Settings', value: 'Settings' },
+                           { label: 'Heart', value: 'Heart' },
+                           { label: 'Home', value: 'Home' },
+                           { label: 'ShoppingBag', value: 'ShoppingBag' },
+                           { label: 'Phone', value: 'Phone' },
+                           { label: 'Mail', value: 'Mail' }
+                        ]}
+                    />
+                     <IconButtonGroup
+                        label="Icon Position"
+                        value={getValue('iconPosition', 'top')}
+                        onChange={(val) => handleChange('iconPosition', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'top', label: 'Top', icon: <ArrowUp size={16} /> },
+                            { value: 'left', label: 'Left', icon: <ArrowLeft size={16} /> },
+                            { value: 'right', label: 'Right', icon: <ArrowRight size={16} /> }
+                        ]}
+                    />
+                     <IconButtonGroup
+                        label="Text Alignment"
+                        value={getValue('textAlign', 'center')}
+                        onChange={(val) => handleChange('textAlign', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                        ]}
+                    />
+                </>
+            ) : (
+                /* GENERIC WIDGET CONTENT */
+                <StyledInput
+                label="Content"
+                value={block.props?.text || block.props?.content || ''}
+                onChange={(val) => handleChange(block.props?.text !== undefined ? 'text' : 'content', val)}
+                placeholder="Digite o texto..."
+                responsive={false}
+                />
+            )}
           </Section>
         )}
 
         {activeTab === 'style' && (
-          <Section title="Background">
-            <StyledInput
-              label="Background Color"
-              value={getValue('backgroundColor', 'transparent')}
-              onChange={(val) => handleChange('backgroundColor', val)}
-              placeholder="#ffffff"
-              responsive={false}
-            />
-          </Section>
+          <>
+            <Section title="Background">
+                <StyledInput
+                label="Background Color"
+                value={getValue('backgroundColor', 'transparent')}
+                onChange={(val) => handleChange('backgroundColor', val)}
+                placeholder="#ffffff"
+                responsive={false}
+                />
+            </Section>
+
+            {block.type === WIDGET_TYPES.ICON_BOX && (
+                <Section title="Icon Box Styles">
+                    <StyledInput
+                        label="Icon Color"
+                        value={getValue('iconColor', '#3b82f6')}
+                        onChange={(val) => handleChange('iconColor', val)}
+                        placeholder="#3b82f6"
+                        responsive={false}
+                    />
+                    <StyledInput
+                        label="Icon Size"
+                        value={getValue('iconSize', '40px')}
+                        onChange={(val) => handleChange('iconSize', val)}
+                        placeholder="40px"
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Title Color"
+                        value={getValue('titleColor', '#1f2937')}
+                        onChange={(val) => handleChange('titleColor', val)}
+                        placeholder="#1f2937"
+                        responsive={false}
+                    />
+                     <StyledInput
+                        label="Description Color"
+                        value={getValue('descColor', '#6b7280')}
+                        onChange={(val) => handleChange('descColor', val)}
+                        placeholder="#6b7280"
+                        responsive={false}
+                    />
+                </Section>
+            )}
+          </>
         )}
 
         {activeTab === 'advanced' && (

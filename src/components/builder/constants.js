@@ -13,7 +13,8 @@ export const WIDGET_TYPES = {
   TEXT: 'text',
   BUTTON: 'button',
   IMAGE: 'image',
-  PRODUCT_LIST: 'product_list'
+  PRODUCT_LIST: 'product_list',
+  ICON_BOX: 'icon_box'
 };
 
 export const LAYOUT_TYPES = {
