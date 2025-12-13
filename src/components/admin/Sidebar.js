@@ -10,9 +10,7 @@ const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
   { icon: DownloadCloud, label: 'Store', href: '/admin/store' },
   { icon: Plug, label: 'Plugins', href: '/admin/plugins' },
-  { icon: FileText, label: 'Pages', href: '/admin/pages' },
   { icon: Layers, label: 'Templates', href: '/admin/templates' },
-  { icon: ShoppingBag, label: 'Products', href: '/admin/products' },
   { icon: Settings, label: 'Settings', href: '/admin/settings' },
 ];
 

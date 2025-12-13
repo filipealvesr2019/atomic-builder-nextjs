@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, Store, Globe, Share2, Code, Save, Settings, Package, FileDown, Upload, Palette, Ruler, Image as ImageIcon, Plus, X, Inbox, Trash } from 'lucide-react';
+import { ArrowLeft, Store, Globe, Share2, Code, Save, Settings, Package, FileDown, Upload, Palette, Ruler, Image as ImageIcon, Plus, X, Inbox, Trash, AlertTriangle } from 'lucide-react';
 import styles from './settings.module.css';
 
 export default function TemplateSettings() {
@@ -18,6 +18,7 @@ export default function TemplateSettings() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('physical'); // 'physical' | 'digital'
   const [currentProduct, setCurrentProduct] = useState({});
+  const [validationErrors, setValidationErrors] = useState({});
 
   // Product Lists State
   const [physicalProducts, setPhysicalProducts] = useState([]);
@@ -89,15 +90,23 @@ export default function TemplateSettings() {
   const handleOpenModal = (type) => {
     setModalType(type);
     setCurrentProduct({}); // Reset form
+    setValidationErrors({});
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setValidationErrors({});
   };
 
   const handleProductChange = (e) => {
       const { name, value, files } = e.target;
+      
+      // Clear specific error when user interacts
+      if (validationErrors[name]) {
+          setValidationErrors(prev => ({ ...prev, [name]: null }));
+      }
+
       if (files) {
           setCurrentProduct(prev => ({ ...prev, [name]: files[0] }));
       } else {
@@ -107,9 +116,24 @@ export default function TemplateSettings() {
 
   const handleSaveProduct = async (e) => {
       e.preventDefault();
-      // Simple validation mock
-      if (!currentProduct.name || !currentProduct.price) {
-          alert('Please fill Name and Price');
+      
+      // Validation
+      const errors = {};
+      
+      if (!currentProduct.name) errors.name = 'Nome é obrigatório';
+      if (!currentProduct.price) errors.price = 'Preço é obrigatório';
+
+      if (modalType === 'digital') {
+          if (!currentProduct.digitalProductFile) {
+              errors.digitalProductFile = 'É necessário enviar o arquivo ZIP do produto.';
+          }
+          if (!currentProduct.digitalProductCover) {
+              errors.digitalProductCover = 'É necessário adicionar uma imagem de capa.';
+          }
+      }
+
+      if (Object.keys(errors).length > 0) {
+          setValidationErrors(errors);
           return;
       }
 
@@ -121,10 +145,6 @@ export default function TemplateSettings() {
           setPhysicalProducts(newList);
           updatedList = [...newList, ...digitalProducts];
       } else {
-          if (!currentProduct.digitalProductFile || !currentProduct.digitalProductCover) {
-             alert('Warning: Digital products require a ZIP file and a Cover image.');
-             // Proceeding for demo
-          }
            const newList = [...digitalProducts, newProduct];
            setDigitalProducts(newList);
            updatedList = [...physicalProducts, ...newList];
@@ -201,15 +221,19 @@ export default function TemplateSettings() {
                            {/* Row 1: Name (6), Category (3), Subcategory (3) */}
                            <div className={styles.colSpan6}>
                                 <div className={styles.formGroup}>
-                                    <label className={styles.label}>Product Name</label>
+                                    <label className={styles.label}>Product Name *</label>
                                     <input 
                                         type="text" 
                                         name="name"
                                         value={currentProduct.name || ''}
                                         onChange={handleProductChange}
-                                        className={styles.input} 
+                                        className={styles.input}
+                                        style={validationErrors.name ? { borderColor: '#ef4444' } : {}}
                                         placeholder="e.g. Handmade Chair"
                                     />
+                                    {validationErrors.name && (
+                                        <div style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.25rem' }}>{validationErrors.name}</div>
+                                    )}
                                 </div>
                             </div>
                            <div className={styles.colSpan3}>
@@ -242,15 +266,19 @@ export default function TemplateSettings() {
                            {/* Row 2: Price, Currency, Unit */}
                            <div className={styles.colSpan3}>
                               <div className={styles.formGroup}>
-                                  <label className={styles.label}>Price</label>
+                                  <label className={styles.label}>Price *</label>
                                   <input 
                                     type="number" 
                                     name="price"
                                     value={currentProduct.price || ''}
                                     onChange={handleProductChange}
-                                    className={styles.input} 
+                                    className={styles.input}
+                                    style={validationErrors.price ? { borderColor: '#ef4444' } : {}}
                                     placeholder="0.00"
                                   />
+                                   {validationErrors.price && (
+                                        <div style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.25rem' }}>{validationErrors.price}</div>
+                                    )}
                               </div>
                            </div>
                            <div className={styles.colSpan3}>
@@ -367,22 +395,42 @@ export default function TemplateSettings() {
                                     </h4>
                                     <div className={styles.fileInputGrid}>
                                         <div className={styles.formGroup}>
-                                            <label className={styles.label}>Product File (ZIP)</label>
+                                            <label className={styles.label}>
+                                                Product File (ZIP) <span style={{color: '#ef4444'}}>*</span>
+                                            </label>
                                             <div className={styles.fileInputWrapper}>
                                                 <input type="file" name="digitalProductFile" className={styles.fileInput} onChange={handleProductChange} />
-                                                <div className={styles.fileInputButton}>
+                                                <div 
+                                                    className={styles.fileInputButton}
+                                                    style={validationErrors.digitalProductFile ? { borderColor: '#ef4444', backgroundColor: '#fef2f2' } : {}}
+                                                >
                                                     <Upload size={16} /> {currentProduct.digitalProductFile ? currentProduct.digitalProductFile.name : 'Upload ZIP'}
                                                 </div>
                                             </div>
+                                            {validationErrors.digitalProductFile && (
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#ef4444', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                                                    <AlertTriangle size={12} /> {validationErrors.digitalProductFile}
+                                                </div>
+                                            )}
                                         </div>
                                          <div className={styles.formGroup}>
-                                            <label className={styles.label}>Cover Image</label>
+                                            <label className={styles.label}>
+                                                Cover Image <span style={{color: '#ef4444'}}>*</span>
+                                            </label>
                                             <div className={styles.fileInputWrapper}>
                                                 <input type="file" name="digitalProductCover" className={styles.fileInput} onChange={handleProductChange} />
-                                                <div className={styles.fileInputButton}>
+                                                <div 
+                                                    className={styles.fileInputButton}
+                                                    style={validationErrors.digitalProductCover ? { borderColor: '#ef4444', backgroundColor: '#fef2f2' } : {}}
+                                                >
                                                     <Upload size={16} /> {currentProduct.digitalProductCover ? currentProduct.digitalProductCover.name : 'Upload Cover'}
                                                 </div>
                                             </div>
+                                            {validationErrors.digitalProductCover && (
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#ef4444', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                                                    <AlertTriangle size={12} /> {validationErrors.digitalProductCover}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                </div>
