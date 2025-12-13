@@ -615,6 +615,166 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                         ]}
                     />
                 </>
+            ) : block.type === WIDGET_TYPES.HEADING ? (
+                <>
+                    <StyledInput
+                        label="Text"
+                        value={getValue('text', 'Heading Text')}
+                        onChange={(val) => handleChange('text', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                    <StyledSelect
+                        label="Tag"
+                        value={getValue('tag', 'h2')}
+                        onChange={(val) => handleChange('tag', val)}
+                        options={[
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' }
+                        ]}
+                    />
+                     <IconButtonGroup
+                        label="Alignment"
+                        value={getValue('align', 'left')}
+                        onChange={(val) => handleChange('align', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
+                            { value: 'justify', label: 'Justify', icon: <Columns size={16} /> }
+                        ]}
+                    />
+                    <StyledInput
+                        label="Color"
+                        value={getValue('color', '')}
+                        onChange={(val) => handleChange('color', val)}
+                        placeholder="Inherit"
+                    />
+                </>
+            ) : block.type === WIDGET_TYPES.TEXT ? (
+                <>
+                     <StyledInput
+                        label="Content"
+                        value={getValue('content', 'Lorem ipsum...')}
+                        onChange={(val) => handleChange('content', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                     <IconButtonGroup
+                        label="Alignment"
+                        value={getValue('align', 'left')}
+                        onChange={(val) => handleChange('align', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
+                            { value: 'justify', label: 'Justify', icon: <Columns size={16} /> }
+                        ]}
+                    />
+                     <StyledInput
+                        label="Font Size"
+                        value={getValue('fontSize', '')}
+                        onChange={(val) => handleChange('fontSize', val)}
+                        placeholder="Default"
+                         activeViewMode={viewMode}
+                    />
+                    <StyledInput
+                        label="Color"
+                        value={getValue('color', '')}
+                        onChange={(val) => handleChange('color', val)}
+                        placeholder="Inherit"
+                    />
+                </>
+            ) : block.type === WIDGET_TYPES.BUTTON ? (
+                <>
+                    <StyledInput
+                        label="Text"
+                        value={getValue('text', 'Click Me')}
+                        onChange={(val) => handleChange('text', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                    <StyledInput
+                        label="Link URL"
+                        value={getValue('url', '#')}
+                        onChange={(val) => handleChange('url', val)}
+                        placeholder="https://..."
+                    />
+                    <StyledSelect
+                        label="Variant"
+                        value={getValue('variant', 'primary')}
+                        onChange={(val) => handleChange('variant', val)}
+                        options={[
+                            { label: 'Primary', value: 'primary' },
+                            { label: 'Secondary', value: 'secondary' },
+                            { label: 'Accent', value: 'accent' },
+                            { label: 'Outline', value: 'outline' },
+                            { label: 'Text Only', value: 'text' }
+                        ]}
+                    />
+                     <IconButtonGroup
+                        label="Alignment"
+                        value={getValue('align', 'left')}
+                        onChange={(val) => handleChange('align', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                        ]}
+                    />
+                </>
+            ) : block.type === WIDGET_TYPES.IMAGE ? (
+                <>
+                     <StyledInput
+                        label="Image URL"
+                        value={getValue('src', 'https://via.placeholder.com/300x200')}
+                        onChange={(val) => handleChange('src', val)}
+                        placeholder="https://..."
+                    />
+                    <StyledInput
+                        label="Alt Text"
+                        value={getValue('alt', 'Image')}
+                        onChange={(val) => handleChange('alt', val)}
+                    />
+                     <StyledInput
+                        label="Width"
+                        value={getValue('width', '100%')}
+                        onChange={(val) => handleChange('width', val)}
+                        placeholder="100% or 300px"
+                         activeViewMode={viewMode}
+                    />
+                     <StyledInput
+                        label="Border Radius"
+                        value={getValue('borderRadius', '0px')}
+                        onChange={(val) => handleChange('borderRadius', val)}
+                        placeholder="0px"
+                         activeViewMode={viewMode}
+                    />
+                     <IconButtonGroup
+                        label="Alignment"
+                        value={getValue('align', 'left')}
+                        onChange={(val) => handleChange('align', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                        ]}
+                    />
+                    <StyledInput
+                        label="Caption"
+                        value={getValue('caption', '')}
+                        onChange={(val) => handleChange('caption', val)}
+                        placeholder="Optional caption"
+                    />
+                </>
             ) : (
                 /* GENERIC WIDGET CONTENT */
                 <StyledInput
