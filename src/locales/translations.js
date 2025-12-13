@@ -147,7 +147,7 @@ export const translations = {
   },
   pt: {
     sidebar: {
-      dashboard: 'Painel',
+      dashboard: 'Dashboard',
       store: 'Loja',
       plugins: 'Plugins',
       templates: 'Templates',
