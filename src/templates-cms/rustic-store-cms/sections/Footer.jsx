@@ -23,6 +23,14 @@ export default function Footer(props) {
     contactTitle = "Contact"
   } = props;
 
+  console.log('[Footer] Render Props:', { 
+      companyLinks, 
+      supportLinks, 
+      companyType: typeof companyLinks,
+      supportType: typeof supportLinks,
+      isArrayCompany: Array.isArray(companyLinks)
+  });
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -48,7 +56,7 @@ export default function Footer(props) {
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{companyTitle}</h3>
             <ul className={styles.linkList}>
-              {companyLinks.map((link, index) => (
+              {Array.isArray(companyLinks) && companyLinks.map((link, index) => (
                 <li key={index}>
                   <a href={link.url} className={styles.link}>{link.text}</a>
                 </li>
@@ -60,7 +68,7 @@ export default function Footer(props) {
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{supportTitle}</h3>
             <ul className={styles.linkList}>
-              {supportLinks.map((link, index) => (
+              {Array.isArray(supportLinks) && supportLinks.map((link, index) => (
                  <li key={index}>
                     <a href={link.url} className={styles.link}>{link.text}</a>
                  </li>

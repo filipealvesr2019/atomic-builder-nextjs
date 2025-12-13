@@ -64,6 +64,9 @@ export default function DemoPreviewPage() {
         activeBlocks = template.pageContent || template.content || [];
     }
 
+    console.log('[DemoPreview] Active Slug:', pageSlug);
+    console.log('[DemoPreview] Active Blocks:', activeBlocks);
+
     if (template.type === 'theme' && template.templateId) {
       // Usar templates-cms registry
       const { getTemplateLayout } = require('@/templates-cms/registry');
@@ -90,6 +93,7 @@ export default function DemoPreviewPage() {
               // e.g. type='header' -> sections.header
               sectionProps[block.type] = block.props;
           });
+          console.log('[DemoPreview] Section Props:', sectionProps);
       } else {
          // Fallback to template.sections if no blocks (e.g. freshly installed)
          Object.assign(sectionProps, template.sections || {});

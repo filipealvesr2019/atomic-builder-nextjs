@@ -13,6 +13,9 @@ const updateTemplateSchema = z.object({
     rawCss: z.string().optional(),
     componentCode: z.string().optional()
   })).optional(),
+  pageContent: z.array(z.any()).optional(), // Legacy support
+  theme: z.any().optional(), // Theme ID or Object
+  sections: z.record(z.any()).optional(), // Theme sections props
   products: z.array(z.object({
     id: z.string().or(z.number()).optional(),
     name: z.string(),
@@ -65,11 +68,13 @@ export async function PATCH(req, { params }) {
 
     const resolvedParams = await params;
     const body = await req.json();
+    console.log('[TEMPLATE_PATCH] Received body:', JSON.stringify(body, null, 2));
     const validation = updateTemplateSchema.safeParse(body);
 
     if (!validation.success) {
       console.error('[TEMPLATE_PATCH] Validation error:', validation.error);
-      return new NextResponse(validation.error.errors[0].message, { status: 400 });
+      const errorMessage = validation.error?.errors?.[0]?.message || 'Validation Error';
+      return new NextResponse(errorMessage, { status: 400 });
     }
 
     await dbConnect();

@@ -20,7 +20,11 @@ export default function Repeater({ label, items = [], onChange, renderItem, defa
 
   const handleAddItem = () => {
     const newItem = { ...defaultItem, id: Date.now() };
-    onChange([...items, newItem]);
+    const newItems = [...items, newItem];
+    // Auto-expand the new item (last index)
+    const newIndex = newItems.length - 1;
+    setCollapsed(prev => ({ ...prev, [newIndex]: false }));
+    onChange(newItems);
   };
 
   const handleRemoveItem = (index) => {

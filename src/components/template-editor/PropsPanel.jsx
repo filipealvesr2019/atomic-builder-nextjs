@@ -182,16 +182,24 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
 
     if (viewMode !== 'desktop') {
         // Modo responsivo (tablet/mobile)
-        if (typeof currentProp === 'object' && currentProp !== null) {
+        if (typeof currentProp === 'object' && currentProp !== null && !Array.isArray(currentProp) && !Array.isArray(value)) {
             newValue = { ...currentProp, [viewMode]: value };
         } else {
             // Tenta preservar valor anterior como desktop se existia, senão usa o value
             const desktopValue = currentProp !== undefined ? currentProp : value; 
             newValue = { desktop: desktopValue, [viewMode]: value };
+            
+            // Special case: If value is active array, we might want to override behavior? 
+            // For now, let's just ensure if it's an array we treat it as non-responsive or handle it carefully.
+            // Actually, for this specific bug fix:
+            if (Array.isArray(value)) {
+                 newValue = value; // Force array to be pure array, disabling responsive arrays for now to fix corruption
+            }
         }
     } else {
          // Modo Desktop
-         if (typeof currentProp === 'object' && currentProp !== null) {
+         // If it's an array, we overwrite. If it's an object (and not array), we merge.
+         if (typeof currentProp === 'object' && currentProp !== null && !Array.isArray(currentProp) && !Array.isArray(value)) {
             newValue = { ...currentProp, desktop: value };
          } else {
             newValue = value;
@@ -203,7 +211,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
   // Helper para ler valor responsivo (visualização)
   const getValue = (key, defaultVal) => {
     const val = block.props?.[key];
-    if (typeof val === 'object' && val !== null) {
+    if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
         // Fallback hierarchy: current mode -> desktop -> default
         return val[viewMode] || val.desktop || defaultVal;
     }

@@ -373,6 +373,12 @@ export default function TemplateEditorPage() {
     const legacyPageContent = homePage ? homePage.content : blocks;
 
     try {
+      console.log('[Editor] Saving payload:', { 
+          pages: pagesToSave,
+          pageContent: legacyPageContent,
+          theme: theme 
+      });
+
       const res = await fetch(`/api/templates/${params.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
