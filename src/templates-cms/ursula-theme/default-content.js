@@ -190,9 +190,9 @@ export const ursulaDefaultContent = {
                 subtitle: 'ABOUT US',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae diam tristique, sodales enim in, scelerisque nibh.',
                 images: [
-                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&q=80',
-                    'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=500&q=80',
-                    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80'
+                    'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=500&q=80', // Chair/Corner (Vertical)
+                    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80', // Living room (Large)
+                    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80'  // Desk/Accessories
                 ]
             }
         },

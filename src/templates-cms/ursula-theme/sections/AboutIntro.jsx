@@ -10,22 +10,27 @@ export default function AboutIntro({
   return (
     <section className={styles.section}>
         <div className={styles.container}>
-            <div className={styles.textColumn}>
+            {/* Column 1: Title + Vertical Image */}
+            <div className={styles.col1}>
                 <span className={styles.subtitle}>{subtitle}</span>
                 <h2 className={styles.title}>{title}</h2>
-                <div className={styles.imageWrapper}>
-                     <img src={images[0]} alt="About 1" className={styles.image1} />
+                <div className={styles.imgWrapper1}>
+                     <img src={images[0]} alt="About 1" className={styles.image} />
                 </div>
             </div>
-            <div className={styles.descColumn}>
-                <div className={styles.imageWrapper2}>
-                    <img src={images[1]} alt="About 2" className={styles.image2} />
+
+            {/* Column 2: Large Image + Description */}
+            <div className={styles.col2}>
+                <div className={styles.imgWrapper2}>
+                    <img src={images[1]} alt="About 2" className={styles.image} />
                 </div>
                 <p className={styles.description}>{description}</p>
             </div>
-             <div className={styles.rightColumn}>
-                <div className={styles.imageWrapper3}>
-                     <img src={images[2]} alt="About 3" className={styles.image3} />
+
+            {/* Column 3: Offset Image */}
+             <div className={styles.col3}>
+                <div className={styles.imgWrapper3}>
+                     <img src={images[2]} alt="About 3" className={styles.image} />
                 </div>
             </div>
         </div>
