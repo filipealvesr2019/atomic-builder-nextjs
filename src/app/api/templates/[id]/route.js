@@ -13,6 +13,21 @@ const updateTemplateSchema = z.object({
     rawCss: z.string().optional(),
     componentCode: z.string().optional()
   })).optional(),
+  products: z.array(z.object({
+    id: z.string().or(z.number()).optional(),
+    name: z.string(),
+    price: z.number().or(z.string()), // Allow string input that can be parsed
+    currency: z.string().optional(),
+    category: z.string().optional(),
+    subcategory: z.string().optional(),
+    measurementUnit: z.string().optional(),
+    colors: z.string().optional(),
+    sizes: z.string().optional(),
+    description: z.string().optional(),
+    type: z.enum(['physical', 'digital']).optional(),
+    digitalProductFile: z.any().optional(), // Allow file obj or string
+    digitalProductCover: z.any().optional()
+  })).optional(),
 });
 
 export async function GET(req, { params }) {

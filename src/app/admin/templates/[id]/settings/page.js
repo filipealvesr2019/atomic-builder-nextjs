@@ -1,13 +1,18 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { ArrowLeft, Store, Globe, Share2, Code, Save, Settings, Package, FileDown, Upload, Palette, Ruler, Image as ImageIcon, Plus, X, Inbox } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { ArrowLeft, Store, Globe, Share2, Code, Save, Settings, Package, FileDown, Upload, Palette, Ruler, Image as ImageIcon, Plus, X, Inbox, Trash } from 'lucide-react';
 import styles from './settings.module.css';
 
-export default function TemplateSettings({ params }) {
+export default function TemplateSettings() {
+  const params = useParams();
+  const router = useRouter();
+  const templateId = params.id;
+
   const [activeTab, setActiveTab] = useState('general');
   const [loading, setLoading] = useState(false);
+  const [templateData, setTemplateData] = useState(null);
   
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +42,50 @@ export default function TemplateSettings({ params }) {
     digitalCurrency: 'USD ($)',
   });
 
+  useEffect(() => {
+    if (templateId) {
+      fetchTemplate();
+    }
+  }, [templateId]);
+
+  const fetchTemplate = async () => {
+    try {
+        const res = await fetch(`/api/templates/${templateId}`);
+        if (res.ok) {
+            const data = await res.json();
+            setTemplateData(data);
+            
+            // Populate form data if data exists
+            if (data.products) {
+                setPhysicalProducts(data.products.filter(p => p.type === 'physical'));
+                setDigitalProducts(data.products.filter(p => p.type === 'digital'));
+            }
+        }
+    } catch (error) {
+        console.error('Failed to fetch template:', error);
+    }
+  };
+
+  const saveToBackend = async (updatedProducts) => {
+      try {
+          const res = await fetch(`/api/templates/${templateId}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                  products: updatedProducts
+              })
+          });
+
+          if (!res.ok) {
+              throw new Error('Failed to save products');
+          }
+          console.log('Products saved successfully');
+      } catch (error) {
+          console.error('Error saving products:', error);
+          alert('Error saving products to database');
+      }
+  };
+
   const handleOpenModal = (type) => {
     setModalType(type);
     setCurrentProduct({}); // Reset form
@@ -56,7 +105,7 @@ export default function TemplateSettings({ params }) {
       }
   };
 
-  const handleSaveProduct = (e) => {
+  const handleSaveProduct = async (e) => {
       e.preventDefault();
       // Simple validation mock
       if (!currentProduct.name || !currentProduct.price) {
@@ -64,16 +113,42 @@ export default function TemplateSettings({ params }) {
           return;
       }
 
+      const newProduct = { ...currentProduct, id: Date.now().toString(), type: modalType };
+      let updatedList = [];
+
       if (modalType === 'physical') {
-          setPhysicalProducts([...physicalProducts, { ...currentProduct, id: Date.now() }]);
+          const newList = [...physicalProducts, newProduct];
+          setPhysicalProducts(newList);
+          updatedList = [...newList, ...digitalProducts];
       } else {
           if (!currentProduct.digitalProductFile || !currentProduct.digitalProductCover) {
              alert('Warning: Digital products require a ZIP file and a Cover image.');
              // Proceeding for demo
           }
-           setDigitalProducts([...digitalProducts, { ...currentProduct, id: Date.now() }]);
+           const newList = [...digitalProducts, newProduct];
+           setDigitalProducts(newList);
+           updatedList = [...physicalProducts, ...newList];
       }
+      
+      await saveToBackend(updatedList);
       setIsModalOpen(false);
+  };
+
+  const handleDeleteProduct = async (productId, type) => {
+      if(!confirm('Delete this product?')) return;
+
+      let updatedList = [];
+      if (type === 'physical') {
+          const newList = physicalProducts.filter(p => p.id !== productId);
+          setPhysicalProducts(newList);
+          updatedList = [...newList, ...digitalProducts];
+      } else {
+          const newList = digitalProducts.filter(p => p.id !== productId);
+          setDigitalProducts(newList);
+          updatedList = [...physicalProducts, ...newList];
+      }
+
+      await saveToBackend(updatedList);
   };
 
   const handleSaveGlobal = (e) => {
@@ -116,7 +191,7 @@ export default function TemplateSettings({ params }) {
                       <h2 className={styles.modalTitle}>
                           {modalType === 'physical' ? 'Add Physical Product' : 'Add Digital Product'}
                       </h2>
-                      <button onClick={handleCloseModal} className="text-gray-500 hover:text-gray-700">
+                      <button onClick={handleCloseModal} className={styles.closeButton}>
                           <X size={24} />
                       </button>
                   </div>
@@ -367,30 +442,37 @@ export default function TemplateSettings({ params }) {
           <>
             <div className={styles.sectionTitle}>Physical Product Management</div>
             
-            {/* Product List */}
+            {/* ADD BUTTON ABOVE LIST */}
             <div className={styles.listHeader}>
                 <h3 className={styles.listTitle}>Registered Products</h3>
+                <button className={styles.addProductBtn} onClick={() => handleOpenModal('physical')} type="button">
+                    <Plus size={18} /> Add New Product
+                </button>
             </div>
 
             {physicalProducts.length === 0 ? (
                 <div className={styles.emptyState}>
                     <Inbox className={styles.emptyIcon} size={48} />
                     <div className={styles.emptyText}>No products registered</div>
-                    <button className={styles.addProductBtn} onClick={() => handleOpenModal('physical')} type="button">
-                        <Plus size={18} /> Add New Product
-                    </button>
                 </div>
             ) : (
                 <div className={styles.productsGrid}>
                     {physicalProducts.map(p => (
-                        <div key={p.id} className={styles.variantCard}>
-                            <span className={styles.variantName}>{p.name}</span>
-                            <span className={styles.textSecondary}>{p.currency || '$'} {p.price}</span>
+                        <div key={p.id} className={styles.variantCard} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <span className={styles.variantName}>{p.name}</span>
+                                <span className={styles.textSecondary}>{p.currency || '$'} {p.price}</span>
+                            </div>
+                            <button 
+                                onClick={() => handleDeleteProduct(p.id, 'physical')}
+                                className={styles.closeButton}
+                                title="Delete Product"
+                                type="button"
+                            >
+                                <Trash size={16} color="#ef4444" />
+                            </button>
                         </div>
                     ))}
-                    <button className={styles.addProductBtn} onClick={() => handleOpenModal('physical')} type="button">
-                         <Plus size={18} /> Add Another Product
-                    </button>
                 </div>
             )}
           </>
@@ -401,33 +483,38 @@ export default function TemplateSettings({ params }) {
             <>
                 <div className={styles.sectionTitle}>Digital Product Management</div>
                 
-                {/* Product List */}
+                {/* ADD BUTTON ABOVE LIST */}
                 <div className={styles.listHeader}>
                     <h3 className={styles.listTitle}>Registered Products</h3>
+                     <button className={styles.addProductBtn} onClick={() => handleOpenModal('digital')} type="button">
+                        <Plus size={18} /> Add New Product
+                    </button>
                 </div>
 
                 {digitalProducts.length === 0 ? (
                     <div className={styles.emptyState}>
                         <Inbox className={styles.emptyIcon} size={48} />
                         <div className={styles.emptyText}>No products registered</div>
-                        <button className={styles.addProductBtn} onClick={() => handleOpenModal('digital')} type="button">
-                            <Plus size={18} /> Add New Product
-                        </button>
                     </div>
                 ) : (
                     <div className={styles.productsGrid}>
                         {digitalProducts.map(p => (
-                            <div key={p.id} className={styles.variantCard}>
+                            <div key={p.id} className={styles.variantCard} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <span className={styles.variantName}>{p.name}</span>
                                     <span className={styles.textSmall}>{p.category}</span>
+                                    <span className={styles.textSecondary}>{p.currency || '$'} {p.price}</span>
                                 </div>
-                                <span className={styles.textSecondary}>{p.currency || '$'} {p.price}</span>
+                                <button 
+                                    onClick={() => handleDeleteProduct(p.id, 'digital')}
+                                    className={styles.closeButton}
+                                    title="Delete Product"
+                                    type="button"
+                                >
+                                    <Trash size={16} color="#ef4444" />
+                                </button>
                             </div>
                         ))}
-                         <button className={styles.addProductBtn} onClick={() => handleOpenModal('digital')} type="button">
-                            <Plus size={18} /> Add Another Product
-                        </button>
                     </div>
                 )}
             </>

@@ -33,6 +33,23 @@ const TemplateSchema = new mongoose.Schema({
       componentCode: String, // Código do componente original completo
     }
   ], // Used for 'theme' type templates
+  products: [
+    {
+      id: mongoose.Schema.Types.String,
+      name: String,
+      price: Number,
+      currency: String,
+      category: String,
+      subcategory: String,
+      measurementUnit: String,
+      colors: String,
+      sizes: String,
+      description: String,
+      digitalProductFile: String, 
+      digitalProductCover: String,
+      type: { type: String, enum: ['physical', 'digital'] }
+    }
+  ],
   authorId: {
     type: String,
     required: true,
