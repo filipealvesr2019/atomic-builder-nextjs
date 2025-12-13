@@ -1,0 +1,33 @@
+.section {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.icon {
+    font-size: 4rem;
+    line-height: 1;
+    font-family: serif;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #333;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+}
+
+.author {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #e6b8ae;
+    font-style: normal;
+}

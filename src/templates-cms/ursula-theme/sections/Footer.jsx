@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { Facebook, Instagram, Twitter, Mail } from 'lucide-react';
 import styles from './Footer.module.css';
 
-export default function Footer({
-  sections = {
+// Default data
+const defaultSections = {
     contact: { 
         title: "Contact Info", 
         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -21,18 +21,25 @@ export default function Footer({
         title: "Newsletter",
         text: "Subscribe to our newsletter for latest updates."
     }
-  }
-}) {
+};
+
+export default function Footer({ sections }) {
+  // Merge defaults
+  const data = {
+      contact: { ...defaultSections.contact, ...(sections?.contact || {}) },
+      about: { ...defaultSections.about, ...(sections?.about || {}) },
+      newsletter: { ...defaultSections.newsletter, ...(sections?.newsletter || {}) }
+  };
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         {/* Contact Column */}
         <div className={styles.column}>
-            <h3 className={styles.colTitle}>{sections.contact.title}</h3>
-            <p className={styles.colText}>{sections.contact.text}</p>
+            <h3 className={styles.colTitle}>{data.contact.title}</h3>
+            <p className={styles.colText}>{data.contact.text}</p>
             <div className={styles.contactDetails}>
-                <p><Mail size={12} style={{marginRight: 5}}/> {sections.contact.email}</p>
-                <p>{sections.contact.phone}</p>
+                <p><Mail size={12} style={{marginRight: 5}}/> {data.contact.email}</p>
+                <p>{data.contact.phone}</p>
             </div>
             <div className={styles.socials}>
                 <Facebook size={16} /> <Instagram size={16} /> <Twitter size={16} />
@@ -42,17 +49,17 @@ export default function Footer({
         {/* About Column (Center) */}
         <div className={`${styles.column} ${styles.centerColumn}`}>
              <div className={styles.avatarContainer}>
-                 <img src={sections.about.image} alt="Author" className={styles.avatar} />
+                 <img src={data.about.image} alt="Author" className={styles.avatar} />
              </div>
-             <h3 className={styles.authorTitle}>{sections.about.title}</h3>
-             <p className={styles.colText}>{sections.about.text}</p>
+             <h3 className={styles.authorTitle}>{data.about.title}</h3>
+             <p className={styles.colText}>{data.about.text}</p>
              <img src="/signature.png" alt="Signature" style={{ height: 30, marginTop: 10, opacity: 0.7 }} />
         </div>
 
         {/* Newsletter Column */}
         <div className={styles.column}>
-            <h3 className={styles.colTitle}>{sections.newsletter.title}</h3>
-            <p className={styles.colText}>{sections.newsletter.text}</p>
+            <h3 className={styles.colTitle}>{data.newsletter.title}</h3>
+            <p className={styles.colText}>{data.newsletter.text}</p>
             <form className={styles.newsletterForm}>
                 <input type="email" placeholder="Your Email" className={styles.input} />
                 <button type="submit" className={styles.button}>Subscribe</button>

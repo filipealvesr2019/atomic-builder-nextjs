@@ -31,7 +31,7 @@ export const ursulaDefaultContent = {
                      ] 
                  },
                  { text: 'Single Post', href: '#' },
-                 { text: 'About Me', href: '#' },
+                 { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '#' }
              ]
           }
@@ -147,6 +147,91 @@ export const ursulaDefaultContent = {
                 }
              }
           }
+        }
+      ]
+
+    },
+    {
+      slug: 'about',
+      name: 'About Me',
+      content: [
+        {
+          type: 'header',
+          props: {
+             logoText: 'Ursula',
+             links: [
+                 { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
+                 { text: 'Categories', href: '#', subItems: [
+                     { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
+                     { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
+                     { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
+                     { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
+                 ]},
+                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
+                 { text: 'Single Post', href: '#' },
+                 { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
+                 { text: 'Contact Us', href: '#' }
+             ]
+          }
+        },
+        {
+          type: 'hero',
+          props: {
+            title: 'About Us',
+            subtitle: '',
+            buttonText: '',
+            backgroundImage: 'https://images.unsplash.com/photo-1517639493569-5666a7482836?w=1350&q=80' // Dog/Cozy image
+          }
+        },
+        {
+            type: 'about-intro',
+            props: {
+                title: 'We Are Ursula', // Keeping Theme Name Consistent
+                subtitle: 'ABOUT US',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae diam tristique, sodales enim in, scelerisque nibh.',
+                images: [
+                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&q=80',
+                    'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=500&q=80',
+                    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80'
+                ]
+            }
+        },
+        {
+            type: 'team',
+            props: {
+                title: 'Our Team',
+                subtitle: 'WE ARE URSULA THEME',
+                members: [
+                    { name: 'Amanda Lee', role: 'FOUNDER', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80' },
+                    { name: 'Adam Cheise', role: 'DESIGNER', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80' },
+                    { name: 'Mike Stuart', role: 'CEO', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80' }
+                ],
+                backgroundImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1350&q=80'
+            }
+        },
+        {
+            type: 'quote',
+            props: {
+                text: 'There is no such thing as chance in a text. Any text is the result of a repertoire, on conscious and unconscious levels.',
+                author: 'IVAN ANGELO'
+            }
+        },
+        {
+            type: 'newsletter-split',
+            props: {
+                title: 'Newsletter',
+                subtitle: 'JOIN US',
+                text: 'Subscribe to the Ursula newsletter',
+                buttonText: 'SIGN UP',
+                image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=80'
+            }
+        },
+        {
+            type: 'footer',
+            props: {
+               // Props will be merged from generic footer handling if empty, but we can pass same struct
+               sections: { /* ... */ } 
+            }
         }
       ]
     }
