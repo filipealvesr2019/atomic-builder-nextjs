@@ -132,6 +132,12 @@ export default function TemplateSettings() {
           }
       }
 
+      if (modalType === 'physical') {
+          if (!currentProduct.coverImage) {
+              errors.coverImage = 'É necessário adicionar uma imagem de capa.';
+          }
+      }
+
       if (Object.keys(errors).length > 0) {
           setValidationErrors(errors);
           return;
@@ -297,6 +303,7 @@ export default function TemplateSettings() {
                                 </div>
                             </div>
                            {modalType === 'physical' && (
+                                <>
                                 <div className={styles.colSpan3}>
                                     <div className={styles.formGroup}>
                                         <label className={styles.label}>Measurement Unit</label>
@@ -310,6 +317,28 @@ export default function TemplateSettings() {
                                         />
                                     </div>
                                 </div>
+                                <div className={styles.colSpan3}>
+                                     <div className={styles.formGroup}>
+                                        <label className={styles.label}>
+                                            Cover Image <span style={{color: '#ef4444'}}>*</span>
+                                        </label>
+                                        <div className={styles.fileInputWrapper}>
+                                            <input type="file" name="coverImage" className={styles.fileInput} onChange={handleProductChange} />
+                                            <div 
+                                                className={styles.fileInputButton}
+                                                style={validationErrors.coverImage ? { borderColor: '#ef4444', backgroundColor: '#fef2f2' } : {}}
+                                            >
+                                                <Upload size={16} /> {currentProduct.coverImage ? currentProduct.coverImage.name : 'Upload Image'}
+                                            </div>
+                                        </div>
+                                        {validationErrors.coverImage && (
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#ef4444', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                                                <AlertTriangle size={12} /> {validationErrors.coverImage}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                </>
                            )}
 
                            {/* Row 3: Colors (6), Sizes (6) */}

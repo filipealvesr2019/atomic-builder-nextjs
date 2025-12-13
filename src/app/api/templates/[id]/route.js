@@ -24,6 +24,7 @@ const updateTemplateSchema = z.object({
     colors: z.string().optional(),
     sizes: z.string().optional(),
     description: z.string().optional(),
+    coverImage: z.any().optional(), // Allow file obj or string
     type: z.enum(['physical', 'digital']).optional(),
     digitalProductFile: z.any().optional(), // Allow file obj or string
     digitalProductCover: z.any().optional()
