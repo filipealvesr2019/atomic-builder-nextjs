@@ -170,7 +170,16 @@ export default function TemplatesList() {
           >
             <div className={styles.cardHeader}>
               <h3>{template.name}</h3>
-              <span className={styles.type}>{template.type}</span>
+              <div className={styles.headerRight}>
+                <button
+                  onClick={(e) => handleDelete(e, template._id)}
+                  className={styles.deleteLink}
+                  title="Excluir"
+                >
+                  <Trash size={16} />
+                </button>
+                <span className={styles.type}>{template.type}</span>
+              </div>
             </div>
             {template.type === 'theme' && template.pages && (
               <p style={{ color: '#666', fontSize: '0.875rem', margin: '0.5rem 0' }}>
@@ -203,14 +212,6 @@ export default function TemplatesList() {
                 <Settings size={16} />
                 Config
               </Link>
-              
-              <button
-                onClick={(e) => handleDelete(e, template._id)}
-                className={`${styles.actionButton} ${styles.delete}`}
-                title="Excluir"
-              >
-                <Trash size={16} />
-              </button>
             </div>
           </div>
         ))}
