@@ -82,19 +82,39 @@ export const ursulaDefaultContent = {
              subtitle: 'Our Blog',
              posts: [
                 { 
-                   id: 1, date: '12', month: 'Sept', category: 'Decoration', title: 'The Journey Of A Thousand Miles Begins With A Single Step', 
-                   excerpt: 'Lorem ipsum dolor sit amet...', 
-                   image: 'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80'
+                   id: 1, date: '12', month: 'Sept', category: 'Lifestyle', title: 'The Journey Of A Thousand Miles Begins With A Single Step', 
+                   excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.', 
+                   image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80'
                 },
                 { 
-                   id: 2, date: '10', month: 'Sept', category: 'Design', title: 'Use Lifestyle To Make Someone Fall In Love With You', 
-                   excerpt: 'Duis aute irure dolor in reprehenderit...', 
-                   image: 'https://images.unsplash.com/photo-1595856714088-348e353592c3?w=500&q=80'
+                   id: 2, date: '10', month: 'Sept', category: 'Fashion', title: 'Top Trends For The Upcoming Winter Season', 
+                   excerpt: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 
+                   image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80'
                 },
                 { 
-                   id: 3, date: '05', month: 'Sept', category: 'Travel', title: 'How To Prove When You\'re Making A Huge Mistake', 
-                   excerpt: 'Excepteur sint occaecat cupidatat...', 
+                   id: 3, date: '05', month: 'Sept', category: 'Stories', title: 'How To Prove When You\'re Making A Huge Mistake', 
+                   excerpt: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 
                    image: 'https://images.unsplash.com/photo-1544207240-8b1025eb7aeb?w=500&q=80'
+                },
+                { 
+                   id: 4, date: '01', month: 'Sept', category: 'Featured', title: 'Why You Should Travel Alone At Least Once', 
+                   excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 
+                   image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500&q=80'
+                },
+                { 
+                   id: 5, date: '28', month: 'Aug', category: 'Lifestyle', title: 'Morning Routines That Will Change Your Life', 
+                   excerpt: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.', 
+                   image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500&q=80'
+                },
+                { 
+                   id: 6, date: '25', month: 'Aug', category: 'Fashion', title: 'Sustainable Fashion: A Guide For Beginners', 
+                   excerpt: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.', 
+                   image: 'https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=500&q=80'
+                },
+                 { 
+                   id: 7, date: '20', month: 'Aug', category: 'Stories', title: 'The Day I Met My Hero', 
+                   excerpt: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.', 
+                   image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=500&q=80'
                 }
              ]
           }
