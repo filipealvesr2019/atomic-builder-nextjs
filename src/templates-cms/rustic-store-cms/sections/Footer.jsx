@@ -7,7 +7,19 @@ export default function Footer(props) {
     logoAccent = "Store",
     description = "Transforming houses into homes with unique handmade pieces. Quality, design, and tradition in every detail.",
     companyTitle = "Company",
+    companyLinks = [
+      { text: "About Us", url: "#" },
+      { text: "Our Story", url: "#" },
+      { text: "Blog", url: "#" },
+      { text: "Careers", url: "#" }
+    ],
     supportTitle = "Support",
+    supportLinks = [
+      { text: "FAQ", url: "#" },
+      { text: "Shipping & Returns", url: "#" },
+      { text: "Privacy Policy", url: "#" },
+      { text: "Terms of Service", url: "#" }
+    ],
     contactTitle = "Contact"
   } = props;
 
@@ -36,10 +48,11 @@ export default function Footer(props) {
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{companyTitle}</h3>
             <ul className={styles.linkList}>
-              <li><a href="#" className={styles.link}>About Us</a></li>
-              <li><a href="#" className={styles.link}>Our Story</a></li>
-              <li><a href="#" className={styles.link}>Blog</a></li>
-              <li><a href="#" className={styles.link}>Careers</a></li>
+              {companyLinks.map((link, index) => (
+                <li key={index}>
+                  <a href={link.url} className={styles.link}>{link.text}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -47,10 +60,11 @@ export default function Footer(props) {
           <div className={styles.linksColumn}>
             <h3 className={styles.columnTitle}>{supportTitle}</h3>
             <ul className={styles.linkList}>
-              <li><a href="#" className={styles.link}>FAQ</a></li>
-              <li><a href="#" className={styles.link}>Shipping & Returns</a></li>
-              <li><a href="#" className={styles.link}>Privacy Policy</a></li>
-              <li><a href="#" className={styles.link}>Terms of Service</a></li>
+              {supportLinks.map((link, index) => (
+                 <li key={index}>
+                    <a href={link.url} className={styles.link}>{link.text}</a>
+                 </li>
+              ))}
             </ul>
           </div>
 
@@ -87,6 +101,24 @@ Footer.cmsConfig = {
   props: {
     logoText: { type: 'string', label: 'Logo Text' },
     logoAccent: { type: 'string', label: 'Logo Accent' },
-    description: { type: 'string', label: 'Description', multiline: true }
+    description: { type: 'string', label: 'Description', multiline: true },
+    companyTitle: { type: 'string', label: 'Company Title' },
+    companyLinks: { 
+        type: 'array', 
+        label: 'Company Links',
+        itemSchema: {
+            text: { label: 'Link Text' },
+            url: { label: 'Link URL' }
+        }
+    },
+    supportTitle: { type: 'string', label: 'Support Title' },
+    supportLinks: { 
+        type: 'array', 
+        label: 'Support Links',
+        itemSchema: {
+            text: { label: 'Link Text' },
+            url: { label: 'Link URL' }
+        }
+    }
   }
 };

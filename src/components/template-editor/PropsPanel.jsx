@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Monitor, Tablet, Smartphone, 
-  Layout, Circle, Settings,
+  Layout, Circle, Settings, Palette,
   ArrowRight, ArrowDown, ArrowLeft, ArrowUp,
   AlignStartVertical, AlignCenterVertical, AlignEndVertical,
   AlignStartHorizontal, AlignCenterHorizontal, AlignEndHorizontal,
@@ -123,7 +123,7 @@ function Section({ title, children, defaultOpen = true }) {
   );
 }
 
-export default function PropsPanel({ block, templateId, onPropsChange }) {
+export default function PropsPanel({ block, templateId, onPropsChange, pages = [] }) {
   const [config, setConfig] = useState(null);
   const [activeTab, setActiveTab] = useState('layout');
   const viewMode = useAtomValue(viewModeAtom);
@@ -132,6 +132,16 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
     if (block && templateId) {
       const template = templates[templateId];
       
+      // 1. Check for Custom Template Component Config FIRST
+      if (template && template.sections && template.sections[block.type]) {
+        const Component = template.sections[block.type];
+        if (Component.cmsConfig) {
+            setConfig(Component.cmsConfig);
+            return; // Found specific config, stop here
+        }
+      }
+
+      // 2. Fallback to Atomic/Generic Configs
       const atomicConfigs = {
         [WIDGET_TYPES.TEXT]: { name: 'Text', props: {} },
         [WIDGET_TYPES.HEADING]: { name: 'Heading', props: {} },
@@ -152,12 +162,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
         return;
       }
 
-      if (template && template.sections && template.sections[block.type]) {
-        const Component = template.sections[block.type];
-        setConfig(Component.cmsConfig || null);
-      } else {
-        setConfig(null);
-      }
+      setConfig(null);
     } else {
       setConfig(null);
     }
@@ -222,27 +227,90 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
     </button>
   );
 
-  return (
-    <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        <span className={styles.headerTitle}>
-          Editar {config?.name || block.type}
-        </span>
-        <button className={styles.headerButton}>
-          <Settings size={16} />
-        </button>
-      </div>
+  // Dynamic Renderer
+  const renderDynamicControl = (key, propConfig) => {
+      const value = getValue(key, propConfig.default || '');
+      
+      if (propConfig.type === 'string') {
+          return (
+            <StyledInput
+                key={key}
+                label={propConfig.label || key}
+                value={value}
+                onChange={(val) => handleChange(key, val)}
+                responsive={propConfig.responsive}
+                activeViewMode={viewMode}
+                multiline={propConfig.multiline} // Support textarea
+            />
+          );
+      }
+      
+      if (propConfig.type === 'array') {
+          return (
+            <Repeater
+                key={key}
+                label={propConfig.label || key}
+                items={value || []}
+                onChange={(newItems) => handleChange(key, newItems)}
+                defaultItem={propConfig.defaultItem || { text: 'New Item', url: '#' }}
+                renderItem={(item, index, onChangeItem) => (
+                    <div className={styles.formGroup}>
+                        {propConfig.itemSchema?.text && (
+                            <input 
+                                className={styles.input} 
+                                value={item.text || ''} 
+                                onChange={(e) => onChangeItem({ text: e.target.value })}
+                                placeholder={propConfig.itemSchema.text.label || "Text"}
+                                style={{ marginBottom: '8px' }}
+                            />
+                        )}
+                        {propConfig.itemSchema?.url && (
+                             <div className={styles.selectWrapper} style={{ display: 'flex', gap: '5px' }}>
+                                <select 
+                                    className={styles.select}
+                                    value={item.url && item.url.startsWith('?page=') ? item.url.replace('?page=', '') : 'custom'}
+                                    onChange={(e) => {
+                                        if (e.target.value === 'custom') onChangeItem({ url: '' });
+                                        else onChangeItem({ url: `?page=${e.target.value}` });
+                                    }}
+                                    style={{ width: '120px' }}
+                                >
+                                    <option value="custom">Custom URL</option>
+                                    <optgroup label="Pages">
+                                        {pages.map(p => (
+                                            <option key={p.slug} value={p.slug}>{p.name}</option>
+                                        ))}
+                                    </optgroup>
+                                </select>
+                                {(!item.url || !item.url.startsWith('?page=')) && (
+                                    <input 
+                                        className={styles.input}
+                                        value={item.url || ''}
+                                        onChange={(e) => onChangeItem({ url: e.target.value })}
+                                        placeholder="https://"
+                                        style={{ flex: 1 }}
+                                    />
+                                )}
+                             </div>
+                        )}
+                    </div>
+                )}
+            />
+          );
+      }
+      return null;
+  };
 
-      {/* Tabs */}
-      <div className={styles.tabContainer}>
+  return (
+    <div className={styles.propsPanel}>
+      <div className={styles.tabs}>
         <TabButton id="layout" icon={Layout} label="Layout" />
-        <TabButton id="style" icon={Circle} label="Style" />
+        <TabButton id="style" icon={Palette} label="Style" />
         <TabButton id="advanced" icon={Settings} label="Advanced" />
       </div>
 
-      {/* Content */}
       <div className={styles.content}>
+  
         {activeTab === 'layout' && isContainer && (
           <>
             {/* Container Section */}
@@ -404,8 +472,16 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
         {activeTab === 'layout' && !isContainer && (
           <Section title={config?.name || 'Content'}>
             
-            {/* ICON BOX SPECIFIC CONTENT */}
-            {block.type === WIDGET_TYPES.ICON_BOX ? (
+            {/* If cmsConfig exists, use it to generate controls */}
+            {config && config.props ? (
+                 Object.entries(config.props).map(([key, propConfig]) => (
+                     renderDynamicControl(key, propConfig)
+                 ))
+            ) : (
+                /* Fallback for standard widgets or legacy configs */
+                block.type === WIDGET_TYPES.ICON_BOX ? (
+                    // ... (keep existing hardcoded widgets)
+
                 <>
                     <StyledInput
                         label="Title"
@@ -784,7 +860,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                 placeholder="Digite o texto..."
                 responsive={false}
                 />
-            )}
+            ))}
           </Section>
         )}
 

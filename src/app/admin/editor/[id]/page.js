@@ -566,6 +566,7 @@ export default function TemplateEditorPage() {
                     <PropsPanel
                       block={selectedBlock}
                       templateId={template.templateId}
+                      pages={pages} // Pass pages list
                       onPropsChange={(newProps) => handlePropsChange(selectedBlock.id, newProps)}
                     />
                   </div>

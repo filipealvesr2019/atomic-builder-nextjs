@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import BlockRenderer from '@/components/editor/BlockRenderer';
 import { Monitor, Tablet, Smartphone } from 'lucide-react';
 import styles from './demo-preview.module.css';
 
 export default function DemoPreviewPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const [template, setTemplate] = useState(null);
   const [loading, setLoading] = useState(true);
   const [viewport, setViewport] = useState('desktop'); // 'mobile', 'tablet', 'desktop'
@@ -52,34 +53,47 @@ export default function DemoPreviewPage() {
 
   // Renderizar template CMS-compatível
   const renderContent = () => {
-    console.log('[PREVIEW] Template completo:', template);
-    console.log('[PREVIEW] templateId:', template.templateId);
-    console.log('[PREVIEW] type:', template.type);
-    
+    // 1. Determine Active Page Content
+    let activeBlocks = [];
+    const pageSlug = searchParams.get('page') || 'home';
+
+    if (template.pages && template.pages.length > 0) {
+        const activePage = template.pages.find(p => p.slug === pageSlug) || template.pages[0];
+        activeBlocks = activePage.content || [];
+    } else {
+        activeBlocks = template.pageContent || template.content || [];
+    }
+
     if (template.type === 'theme' && template.templateId) {
       // Usar templates-cms registry
       const { getTemplateLayout } = require('@/templates-cms/registry');
-      const LayoutComponent = getTemplateLayout(template.templateId, 'home');
-      
-      console.log('[PREVIEW] LayoutComponent encontrado?', !!LayoutComponent);
+      const LayoutComponent = getTemplateLayout(template.templateId, 'home'); // Assuming 'home' layout is generic enough or we need map from page.layout
       
       if (!LayoutComponent) {
         return (
           <div style={{ padding: '2rem', textAlign: 'center', border: '2px dashed #f0ad4e' }}>
             <h2>Template não encontrado</h2>
             <p>O template <code>{template.templateId}</code> não está registrado.</p>
-            <p><strong>Templates disponíveis:</strong></p>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              <li><code>minimal-business</code></li>
-              <li><code>business-theme-cms</code></li>
-              <li><code>rustic-store-cms</code></li>
-            </ul>
           </div>
         );
       }
       
-      // Renderizar com props do banco de dados ou defaults
-      const sectionProps = template.sections || {};
+      // 2. Map Blocks to Sections Props
+      // Themes expect props like { header: { ...props }, hero: { ...props } }
+      // We convert our List of Blocks (Active Page Content) to this format.
+      const sectionProps = {};
+      
+      // If we have blocks, use them to populate sections
+      if (activeBlocks && activeBlocks.length > 0) {
+          activeBlocks.forEach(block => {
+              // We assume block.type matches the section key expected by Layout
+              // e.g. type='header' -> sections.header
+              sectionProps[block.type] = block.props;
+          });
+      } else {
+         // Fallback to template.sections if no blocks (e.g. freshly installed)
+         Object.assign(sectionProps, template.sections || {});
+      }
       
       return <LayoutComponent sections={sectionProps} />;
     }
@@ -99,9 +113,9 @@ export default function DemoPreviewPage() {
       );
     }
     
-    // Fallback para templates com blocos
-    if (template.content && template.content.length > 0) {
-      return template.content.map((block) => (
+    // Fallback para templates com blocos (Generic Renderer)
+    if (activeBlocks && activeBlocks.length > 0) {
+      return activeBlocks.map((block) => (
         <BlockRenderer key={block.id} block={block} readOnly={true} />
       ));
     }
