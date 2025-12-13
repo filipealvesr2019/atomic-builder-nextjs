@@ -1,6 +1,8 @@
 
 'use client';
 
+// Page Controller for Template Editor
+
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { DndContext, closestCorners, KeyboardSensor, PointerSensor, useSensor, useSensors, DragOverlay } from '@dnd-kit/core';
@@ -24,6 +26,8 @@ export default function TemplateEditorPage() {
   const router = useRouter();
   const [template, setTemplate] = useState(null);
   const [blocks, setBlocks] = useState([]);
+  const [pages, setPages] = useState([]);
+  const [activePageSlug, setActivePageSlug] = useState('home');
   const [selectedBlock, setSelectedBlock] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -35,6 +39,9 @@ export default function TemplateEditorPage() {
   
   const [language] = useAtom(languageAtom);
   const t = translations[language].editor;
+
+  const [showAddPageModal, setShowAddPageModal] = useState(false);
+  const [newPageName, setNewPageName] = useState('');
 
   // Undo/Redo History
   const [history, setHistory] = useState([[]]);
@@ -67,37 +74,102 @@ export default function TemplateEditorPage() {
             setTheme(data.theme); 
         }
         
-        if (data.pageContent && data.pageContent.length > 0) {
-          setBlocks(data.pageContent);
-        } else if (data.defaultContent) {
-           // If no saved content, load default structure from registry
-           setBlocks(data.defaultContent);
-        } else if (data.templateId) {
-            // Legacy Logic
-            let defaultBlocks = [];
-            // ... (keep existing default blocks logic if needed, or rely on empty)
-            if (data.templateId === 'rustic-store-cms') {
-            defaultBlocks = [
-              { id: 'header-1', type: 'header', category: 'section', props: {} },
-              { id: 'hero-1', type: 'hero', category: 'section', props: {} },
-              { id: 'products-1', type: 'products', category: 'section', props: {} },
-              { id: 'about-1', type: 'about', category: 'section', props: {} },
-              { id: 'newsletter-1', type: 'newsletter', category: 'section', props: {} },
-              { id: 'contact-1', type: 'contact', category: 'section', props: {} },
-              { id: 'footer-1', type: 'footer', category: 'section', props: {} }
-            ];
-          }
-          // ... (simplified for brevity, assume existing logic remains)
-          setBlocks(defaultBlocks);
+        let initialPages = [];
+        if (data.pages && data.pages.length > 0) {
+            initialPages = data.pages;
         } else {
-          setBlocks([]);
+            // Migration / Legacy Fallback
+            let initialContent = [];
+            if (data.pageContent && data.pageContent.length > 0) {
+                initialContent = data.pageContent;
+            } else if (data.defaultContent) {
+                 initialContent = data.defaultContent;
+            } else if (data.templateId && data.templateId === 'rustic-store-cms') {
+                 initialContent = [
+                  { id: 'header-1', type: 'header', category: 'section', props: {} },
+                  { id: 'hero-1', type: 'hero', category: 'section', props: {} },
+                  { id: 'products-1', type: 'products', category: 'section', props: {} },
+                  { id: 'about-1', type: 'about', category: 'section', props: {} },
+                  { id: 'newsletter-1', type: 'newsletter', category: 'section', props: {} },
+                  { id: 'contact-1', type: 'contact', category: 'section', props: {} },
+                  { id: 'footer-1', type: 'footer', category: 'section', props: {} }
+                ];
+            }
+            initialPages = [{ name: 'Home', slug: 'home', content: initialContent }];
         }
+
+        setPages(initialPages);
+        setActivePageSlug('home');
+        
+        const homePage = initialPages.find(p => p.slug === 'home') || initialPages[0];
+        setBlocks(homePage?.content || []);
+
       }
     } catch (error) {
       console.error('Erro ao carregar template:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSwitchPage = (newSlug) => {
+    if (newSlug === activePageSlug) return;
+    
+    // 1. Save current blocks to current page in pages array
+    const updatedPages = pages.map(p => 
+        p.slug === activePageSlug ? { ...p, content: blocks } : p
+    );
+    
+    // 2. Find new page content
+    const targetPage = updatedPages.find(p => p.slug === newSlug);
+    
+    // 3. Update State
+    setPages(updatedPages);
+    setActivePageSlug(newSlug);
+    setBlocks(targetPage?.content || []);
+    setSelectedBlock(null);
+  };
+
+  const handleCreatePage = (e) => {
+    e.preventDefault();
+    if (!newPageName) return;
+
+    const slug = newPageName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    
+    if (pages.find(p => p.slug === slug)) {
+        alert('Page already exists');
+        return;
+    }
+
+    // Default content for new pages - maybe empty or basic structure
+    const newPage = { name: newPageName, slug, content: [] };
+
+    // Update current page content first
+    const updatedPages = pages.map(p => 
+        p.slug === activePageSlug ? { ...p, content: blocks } : p
+    );
+
+    setPages([...updatedPages, newPage]);
+    setActivePageSlug(slug);
+    setBlocks([]);
+    setShowAddPageModal(false);
+    setNewPageName('');
+  };
+
+  const handleDeletePage = () => {
+      if (activePageSlug === 'home') {
+          alert('Cannot delete Home page');
+          return;
+      }
+      if (!confirm(t.deleteConfirm || 'Delete this page?')) return;
+
+      const remainingPages = pages.filter(p => p.slug !== activePageSlug);
+      setPages(remainingPages);
+      
+      // Switch to home
+      const home = remainingPages.find(p => p.slug === 'home') || remainingPages[0];
+      setActivePageSlug(home.slug);
+      setBlocks(home.content || []);
   };
 
   const handleDragStart = (event) => {
@@ -290,18 +362,31 @@ export default function TemplateEditorPage() {
   const handleSave = async () => {
     // ... (existing logic)
     setSaving(true);
+    
+    // Sync current blocks to active page
+    const pagesToSave = pages.map(p => 
+        p.slug === activePageSlug ? { ...p, content: blocks } : p
+    );
+    
+    // Find Home content for backward compatibility
+    const homePage = pagesToSave.find(p => p.slug === 'home');
+    const legacyPageContent = homePage ? homePage.content : blocks;
+
     try {
       const res = await fetch(`/api/templates/${params.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          pageContent: blocks,
+          pages: pagesToSave,
+          pageContent: legacyPageContent, // Keep legacy field updated with Home
           theme: theme
         })
       });
 
       if (res.ok) {
         alert(t.saved);
+        // Update local state ensuring consistency
+        setPages(pagesToSave); 
       } else {
         alert(t.error);
       }
@@ -362,7 +447,23 @@ export default function TemplateEditorPage() {
             <Link href="/admin/templates" className={styles.backLink}>
               <ArrowLeft size={18} />
             </Link>
-            <h1>{template.name}</h1>
+            <div className="flex items-center gap-2">
+                <h1 className="text-sm font-semibold text-gray-800">{template.name}</h1>
+                <span className="text-gray-400">/</span>
+                <select 
+                    value={activePageSlug} 
+                    onChange={(e) => {
+                        if (e.target.value === 'ADD_NEW') setShowAddPageModal(true);
+                        else handleSwitchPage(e.target.value);
+                    }}
+                    className={styles.pageSelect}
+                >
+                    {pages.map(p => (
+                        <option key={p.slug} value={p.slug}>{p.name}</option>
+                    ))}
+                    <option value="ADD_NEW">+ {t.newPage || 'New Page'}</option>
+                </select>
+            </div>
           </div>
           <div className="flex gap-2">
             <button 
@@ -505,6 +606,35 @@ export default function TemplateEditorPage() {
         </DndContext>
       </div>
       <ShopCart />
+
+      {showAddPageModal && (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalContent}>
+                <h3 className="text-lg font-bold mb-4">{t.createPage || 'Create Page'}</h3>
+                <form onSubmit={handleCreatePage}>
+                    <label className="block mb-4">
+                        <span className="text-sm font-medium text-gray-700">{t.pageName || 'Page Name'}</span>
+                        <input
+                            type="text"
+                            value={newPageName}
+                            onChange={(e) => setNewPageName(e.target.value)}
+                            className={styles.input}
+                            placeholder="e.g. Blog, About Us"
+                            autoFocus
+                        />
+                    </label>
+                    <div className={styles.modalActions}>
+                        <button type="button" onClick={() => setShowAddPageModal(false)} className={styles.cancelButton}>
+                            {t.cancel || 'Cancel'}
+                        </button>
+                        <button type="submit" className={styles.createButton}>
+                            {t.create || 'Create'}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      )}
 
     </>
   );
