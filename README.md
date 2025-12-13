@@ -29,7 +29,7 @@ Unlike complex site builders that generate messy bloatware code, Atomic Builder 
 We are building the future of visual editing in Next.js. Here is the current state of the project:
 
 - [x] **Rendering Engine**: Core builder logic (`src/components/builder`).
-- [x] **Atomic Widgets**: Text, Heading, Button, Image Container.
+- [x] **Atomic Widgets**: Text, Heading, Button, Image, Icon Box, Icon List, Image Box.
 - [x] **Custom Sections**: Complex blocks (Headers, Product Grids, Sliders).
 - [x] **Template Store**: Live previews and one-click installation.
 - [x] **Plugins Marketplace**: System to enable/disable extensions.
