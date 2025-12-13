@@ -181,9 +181,8 @@ export default function TemplatesList() {
               <Link
                 href={`/admin/editor/${template._id}`}
                 className={styles.actionButton}
-                style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
               >
-                <Edit size={18} />
+                <Edit size={16} />
                 Editar
               </Link>
               
@@ -191,27 +190,26 @@ export default function TemplatesList() {
                 href={`/admin/demo-preview/${template._id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.actionButton}
-                style={{ background: '#10b981', color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                className={`${styles.actionButton} ${styles.previewButton}`}
               >
-                <Eye size={18} />
+                <Eye size={16} />
                 Ver Tema
               </Link>
 
               <Link
                 href={`/admin/templates/${template._id}/settings`}
-                className={styles.actionButton}
-                style={{ background: '#6366f1', color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                className={`${styles.actionButton} ${styles.configButton}`}
               >
-                <Settings size={18} />
+                <Settings size={16} />
                 Config
               </Link>
               
               <button
                 onClick={(e) => handleDelete(e, template._id)}
                 className={`${styles.actionButton} ${styles.delete}`}
+                title="Excluir"
               >
-                <Trash size={18} />
+                <Trash size={16} />
               </button>
             </div>
           </div>
