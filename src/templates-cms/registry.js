@@ -21,6 +21,16 @@ import RusticStoreHeader from './rustic-store-cms/sections/Header';
 import RusticStoreFooter from './rustic-store-cms/sections/Footer';
 import { rusticStoreDefaultContent } from './rustic-store-cms/default-content';
 
+import UrsulaHome from './ursula-theme/layouts/HomePage';
+import UrsulaHeader from './ursula-theme/sections/Header';
+import UrsulaHero from './ursula-theme/sections/Hero';
+import UrsulaCategoryGrid from './ursula-theme/sections/CategoryGrid';
+import UrsulaFeaturedContent from './ursula-theme/sections/FeaturedContent';
+import UrsulaClientLove from './ursula-theme/sections/ClientLove';
+import UrsulaLatestPosts from './ursula-theme/sections/LatestPosts';
+import UrsulaFooter from './ursula-theme/sections/Footer';
+import { ursulaDefaultContent } from './ursula-theme/default-content';
+
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
@@ -64,6 +74,23 @@ const templates = {
       features: MinimalBusinessFeatures,
       footer: MinimalBusinessFooter,
       header: MinimalBusinessHeader
+    }
+  },
+  'ursula-theme': {
+    name: 'Ursula Blog',
+    category: 'blog',
+    defaultContent: ursulaDefaultContent,
+    layouts: {
+      home: UrsulaHome
+    },
+    sections: {
+      header: UrsulaHeader,
+      hero: UrsulaHero,
+      categories: UrsulaCategoryGrid,
+      'featured-content': UrsulaFeaturedContent,
+      'client-love': UrsulaClientLove,
+      'latest-posts': UrsulaLatestPosts,
+      footer: UrsulaFooter
     }
   }
 };

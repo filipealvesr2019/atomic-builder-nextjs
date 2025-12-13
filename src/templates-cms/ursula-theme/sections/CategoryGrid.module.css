@@ -1,0 +1,84 @@
+.categorySection {
+    padding: 4rem 2rem;
+    background: #fff;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 3rem;
+}
+
+.subtitle {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    color: #e6b8ae; /* Pinkish accent */
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    color: #333;
+    margin: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    position: relative;
+    cursor: pointer;
+}
+
+.imageContainer {
+    width: 100%;
+    height: 300px; /* Adjust aspect ratio */
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.labelContainer {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 1rem 3rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card {
+        margin-bottom: 2rem;
+    }
+}
