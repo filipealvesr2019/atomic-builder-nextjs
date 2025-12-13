@@ -82,22 +82,38 @@ export default function DemoPreviewPage() {
       }
       
       // 2. Map Blocks to Sections Props
-      // Themes expect props like { header: { ...props }, hero: { ...props } }
-      // We convert our List of Blocks (Active Page Content) to this format.
       const sectionProps = {};
       
-      // If we have blocks, use them to populate sections
+      // A) Extract Global Defaults from Home Page (Header & Footer)
+      // This ensures that changes made to Header/Footer on Home are reflected globally
+      // unless specifically overridden by the inner page.
+      const homePage = template.pages?.find(p => p.slug === 'home');
+      const homeBlocks = homePage?.content || template.pageContent || [];
+      
+      const globalBlocks = homeBlocks.filter(b => ['header', 'footer'].includes(b.type));
+      globalBlocks.forEach(block => {
+          sectionProps[block.type] = block.props;
+      });
+
+      // B) Overlay Current Page Blocks
+      // If the current page has its own header/footer, it will override the global one.
       if (activeBlocks && activeBlocks.length > 0) {
           activeBlocks.forEach(block => {
-              // We assume block.type matches the section key expected by Layout
-              // e.g. type='header' -> sections.header
               sectionProps[block.type] = block.props;
           });
-          console.log('[DemoPreview] Section Props:', sectionProps);
-      } else {
-         // Fallback to template.sections if no blocks (e.g. freshly installed)
-         Object.assign(sectionProps, template.sections || {});
       }
+
+      // C) Final Fallback to Template Defaults
+      // If neither Home nor Current Page has defined sections, use template defaults.
+      // We use a safe merge so we don't zero out what we just found.
+      const defaults = template.sections || {};
+      for (const [key, value] of Object.entries(defaults)) {
+          if (!sectionProps[key]) {
+              sectionProps[key] = value;
+          }
+      }
+      
+      console.log('[DemoPreview] Final Section Props:', sectionProps);
       
       return <LayoutComponent sections={sectionProps} />;
     }
