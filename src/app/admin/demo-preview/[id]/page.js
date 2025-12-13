@@ -58,8 +58,40 @@ export default function DemoPreviewPage() {
     const pageSlug = searchParams.get('page') || 'home';
 
     if (template.pages && template.pages.length > 0) {
-        const activePage = template.pages.find(p => p.slug === pageSlug) || template.pages[0];
-        activeBlocks = activePage.content || [];
+        const activePage = template.pages.find(p => p.slug === pageSlug);
+        
+        if (activePage) {
+            activeBlocks = activePage.content || [];
+        } else if (pageSlug === 'home') {
+             // Fallback to first page if 'home' is requested but not explicitly named 'home'
+             activeBlocks = template.pages[0].content || [];
+        } else {
+             // Requested a specific page that doesn't exist -> Show 404
+             return (
+                 <div style={{ padding: '4rem', textAlign: 'center', color: '#666' }}>
+                     <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Page "{pageSlug}" Not Found</h2>
+                     <p>This page exists in the menu but hasn't been created in the template yet.</p>
+                     <button 
+                         onClick={() => {
+                             const url = new URL(window.location);
+                             url.searchParams.set('page', 'home');
+                             window.location.href = url.toString();
+                         }}
+                         style={{ 
+                             marginTop: '1.5rem', 
+                             padding: '0.5rem 1rem', 
+                             background: '#000', 
+                             color: '#fff', 
+                             border: 'none', 
+                             borderRadius: '4px',
+                             cursor: 'pointer'
+                         }}
+                     >
+                         Return to Home
+                     </button>
+                 </div>
+             );
+        }
     } else {
         activeBlocks = template.pageContent || template.content || [];
     }
@@ -81,12 +113,27 @@ export default function DemoPreviewPage() {
         );
       }
       
-      // 2. Map Blocks to Sections Props
+      // Helper to transform URLs to demo-preview format (PATH BASED)
+      const transformUrl = (url) => {
+        if (!url || url.startsWith('http') || url === '#') return url;
+        
+        // If it's already a full path, leave it
+        if (url.startsWith('/admin/demo-preview')) return url;
+
+        // Clean slug
+        const cleanSlug = url.replace(/^\/|\/$/g, '').replace('?page=', '');
+        
+        if (cleanSlug === 'home' || cleanSlug === '') {
+            return `/admin/demo-preview/${params.id}`;
+        }
+        
+        return `/admin/demo-preview/${params.id}/${cleanSlug}`;
+      };
+
+      // 2. Map Blocks to Section Props
       const sectionProps = {};
       
       // A) Extract Global Defaults from Home Page (Header & Footer)
-      // This ensures that changes made to Header/Footer on Home are reflected globally
-      // unless specifically overridden by the inner page.
       const homePage = template.pages?.find(p => p.slug === 'home');
       const homeBlocks = homePage?.content || template.pageContent || [];
       
@@ -96,7 +143,6 @@ export default function DemoPreviewPage() {
       });
 
       // B) Overlay Current Page Blocks
-      // If the current page has its own header/footer, it will override the global one.
       if (activeBlocks && activeBlocks.length > 0) {
           activeBlocks.forEach(block => {
               sectionProps[block.type] = block.props;
@@ -104,16 +150,72 @@ export default function DemoPreviewPage() {
       }
 
       // C) Final Fallback to Template Defaults
-      // If neither Home nor Current Page has defined sections, use template defaults.
-      // We use a safe merge so we don't zero out what we just found.
       const defaults = template.sections || {};
       for (const [key, value] of Object.entries(defaults)) {
           if (!sectionProps[key]) {
               sectionProps[key] = value;
           }
       }
+
+      // D) Intercept and Transform Links for Preview Context
+      ['header', 'footer'].forEach(sectionType => {
+        if (sectionProps[sectionType]) {
+          const props = { ...sectionProps[sectionType] };
+          let modified = false;
+
+          const smartTransform = (link) => {
+             let url = link.url || link.href; 
+             const text = link.text;
+             
+             if (url && url !== '#' && !url.startsWith('http')) {
+                 return transformUrl(url);
+             }
+             
+             if ((!url || url === '#') && text) {
+                 const slug = text.toLowerCase().replace(/\s+/g, '-');
+                 const pageExists = template.pages?.some(p => p.slug === slug);
+                 if (pageExists) {
+                     return `/admin/demo-preview/${params.id}/${slug}`;
+                 }
+             }
+             
+             return url;
+          };
+
+          // Transform 'links' array (Header)
+          if (Array.isArray(props.links)) {
+            props.links = props.links.map(link => ({
+              ...link,
+              href: smartTransform(link)
+            }));
+            modified = true;
+          }
+
+          // Transform 'companyLinks' array (Footer)
+          if (Array.isArray(props.companyLinks)) {
+            props.companyLinks = props.companyLinks.map(link => ({
+              ...link,
+              url: smartTransform(link)
+            }));
+            modified = true;
+          }
+
+          // Transform 'supportLinks' array (Footer)
+          if (Array.isArray(props.supportLinks)) {
+            props.supportLinks = props.supportLinks.map(link => ({
+              ...link,
+              url: smartTransform(link)
+            }));
+            modified = true;
+          }
+
+          if (modified) {
+            sectionProps[sectionType] = props;
+          }
+        }
+      });
       
-      console.log('[DemoPreview] Final Section Props:', sectionProps);
+      console.log('[DemoPreview] Final Section Props (Transformed):', sectionProps);
       
       return <LayoutComponent sections={sectionProps} />;
     }

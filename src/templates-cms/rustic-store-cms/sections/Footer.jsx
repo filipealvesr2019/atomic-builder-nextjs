@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 import styles from './Footer.module.css';
 
@@ -58,7 +59,9 @@ export default function Footer(props) {
             <ul className={styles.linkList}>
               {Array.isArray(companyLinks) && companyLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.url} className={styles.link}>{link.text}</a>
+                  <Link href={link.url || '#'} className={styles.link}>
+                    {link.text}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -70,7 +73,9 @@ export default function Footer(props) {
             <ul className={styles.linkList}>
               {Array.isArray(supportLinks) && supportLinks.map((link, index) => (
                  <li key={index}>
-                    <a href={link.url} className={styles.link}>{link.text}</a>
+                    <Link href={link.url || '#'} className={styles.link}>
+                        {link.text}
+                    </Link>
                  </li>
               ))}
             </ul>
@@ -127,6 +132,7 @@ Footer.cmsConfig = {
             text: { label: 'Link Text' },
             url: { label: 'Link URL' }
         }
-    }
+    },
+    contactTitle: { type: 'string', label: 'Contact Title' }
   }
 };
