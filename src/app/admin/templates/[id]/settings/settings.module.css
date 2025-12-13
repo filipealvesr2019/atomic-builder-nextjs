@@ -389,7 +389,7 @@
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
-  max-width: 1000px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
 }
@@ -465,4 +465,90 @@
 @keyframes slideUp {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+/* No-Tailwind Custom Utilities */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.colSpan12 { grid-column: span 12; }
+.colSpan6 { grid-column: span 6; }
+.colSpan3 { grid-column: span 3; }
+
+.flexRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.listTitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.productsGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.textSecondary {
+  color: #6b7280;
+}
+
+.textSmall {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.digitalHeader {
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2563eb;
+}
+
+.fileInputGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.redBackground {
+  background-color: #ef4444;
+}
+
+.closeButton {
+    color: #6b7280;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.closeButton:hover {
+    color: #374151;
+}
+
+@media (max-width: 768px) {
+  .colSpan6, .colSpan3 {
+    grid-column: span 12;
+  }
+  .fileInputGrid {
+    grid-template-columns: 1fr;
+  }
 }
