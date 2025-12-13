@@ -49,6 +49,13 @@ export default function IconList({ settings }) {
      alignItems = 'center'; // Vertical center for horizontal items
   }
 
+  // Calculate inner item alignment for vertical layout
+  let itemJustifyContent = 'flex-start';
+  if (layout === 'vertical') {
+      if (align === 'center') itemJustifyContent = 'center';
+      if (align === 'right') itemJustifyContent = 'flex-end';
+  }
+
   const listStyle = {
     display: 'flex',
     flexDirection: layout === 'horizontal' ? 'row' : 'column',
@@ -65,6 +72,7 @@ export default function IconList({ settings }) {
   const itemStyle = {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: itemJustifyContent,
     gap: iconGap, // Use configured icon gap
     fontSize: textSize,
     color: textColor,
