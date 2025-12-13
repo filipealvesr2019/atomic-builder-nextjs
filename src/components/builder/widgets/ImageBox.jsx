@@ -18,6 +18,7 @@ export default function ImageBox({ settings }) {
   // Layout
   const imagePosition = getProp('imagePosition', 'top'); // top, left, right
   const textAlign = getProp('textAlign', 'center');
+  const verticalAlign = getProp('verticalAlign', 'flex-start');
   
   // Styles
   const imageWidth = getProp('imageWidth', '100%');
@@ -33,7 +34,7 @@ export default function ImageBox({ settings }) {
   const containerStyle = {
     display: 'flex',
     flexDirection: flexDirection,
-    alignItems: flexDirection === 'column' ? (textAlign === 'left' ? 'flex-start' : textAlign === 'right' ? 'flex-end' : 'center') : 'flex-start',
+    alignItems: flexDirection === 'column' ? (textAlign === 'left' ? 'flex-start' : textAlign === 'right' ? 'flex-end' : 'center') : verticalAlign,
     textAlign: textAlign,
     gap: getProp('gap', '15px'),
     padding: getProp('padding', '0px'),

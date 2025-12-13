@@ -603,6 +603,17 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                             { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
                         ]}
                     />
+                     <IconButtonGroup
+                        label="Vertical Alignment"
+                        value={getValue('verticalAlign', 'flex-start')}
+                        onChange={(val) => handleChange('verticalAlign', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'flex-start', label: 'Top', icon: <AlignStartVertical size={16} /> },
+                            { value: 'center', label: 'Middle', icon: <AlignCenterVertical size={16} /> },
+                            { value: 'flex-end', label: 'Bottom', icon: <AlignEndVertical size={16} /> }
+                        ]}
+                    />
                 </>
             ) : (
                 /* GENERIC WIDGET CONTENT */
