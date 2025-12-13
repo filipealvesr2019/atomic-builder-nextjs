@@ -114,6 +114,19 @@ export default function TemplateSettings() {
       }
   };
 
+  const uploadFile = async (file) => {
+      if (!file || typeof file === 'string') return { url: file, public_id: null }; // Should ideally pass existing public_id if editing
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      return { url: data.url, public_id: data.public_id };
+  };
+
   const handleSaveProduct = async (e) => {
       e.preventDefault();
       
@@ -143,25 +156,96 @@ export default function TemplateSettings() {
           return;
       }
 
-      const newProduct = { ...currentProduct, id: Date.now().toString(), type: modalType };
-      let updatedList = [];
+      try {
+          // Upload files if they are new Files
+          let coverImageRes = {};
+          let digitalFileRes = {};
+          let digitalCoverRes = {};
+          
+          if (currentProduct.coverImage instanceof File) {
+             coverImageRes = await uploadFile(currentProduct.coverImage);
+          } else {
+             // Preserve existing data if not changed
+             coverImageRes = { url: currentProduct.coverImage, public_id: currentProduct.coverImagePublicId };
+          }
 
-      if (modalType === 'physical') {
-          const newList = [...physicalProducts, newProduct];
-          setPhysicalProducts(newList);
-          updatedList = [...newList, ...digitalProducts];
-      } else {
-           const newList = [...digitalProducts, newProduct];
-           setDigitalProducts(newList);
-           updatedList = [...physicalProducts, ...newList];
+          if (currentProduct.digitalProductFile instanceof File) {
+             digitalFileRes = await uploadFile(currentProduct.digitalProductFile);
+          } else {
+              digitalFileRes = { url: currentProduct.digitalProductFile, public_id: currentProduct.digitalProductFilePublicId };
+          }
+
+          if (currentProduct.digitalProductCover instanceof File) {
+             digitalCoverRes = await uploadFile(currentProduct.digitalProductCover);
+          } else {
+              digitalCoverRes = { url: currentProduct.digitalProductCover, public_id: currentProduct.digitalProductCoverPublicId };
+          }
+
+          const newProduct = { 
+              ...currentProduct, 
+              id: currentProduct.id || Date.now().toString(), 
+              type: modalType,
+              coverImage: coverImageRes.url,
+              coverImagePublicId: coverImageRes.public_id,
+              digitalProductFile: digitalFileRes.url,
+              digitalProductFilePublicId: digitalFileRes.public_id,
+              digitalProductCover: digitalCoverRes.url,
+              digitalProductCoverPublicId: digitalCoverRes.public_id,
+          };
+
+          let updatedList = [];
+          
+          // Logic for edit vs create
+          // If currentProduct has an ID and it matches an existing one, update it
+          // But here we are using a simplified flow where we might be creating new or updating. 
+          // The current code mostly treated everything as new or handled deletion separately.
+          // Let's stick to the current flow (append new) but refine it:
+          // Ideally we should check if product exists to update it, but requirements didn't specify editing, just adding/deleting.
+          // I will keep the append logic for now to avoid side effects, as users prompt was about adding/persistence/deleting.
+          
+          if (modalType === 'physical') {
+              const newList = [...physicalProducts, newProduct];
+              setPhysicalProducts(newList);
+              updatedList = [...newList, ...digitalProducts];
+          } else {
+               const newList = [...digitalProducts, newProduct];
+               setDigitalProducts(newList);
+               updatedList = [...physicalProducts, ...newList];
+          }
+          
+          await saveToBackend(updatedList);
+          setIsModalOpen(false);
+      } catch (error) {
+          console.error('Error saving product:', error);
+          alert('Failed to save product: ' + error.message);
       }
-      
-      await saveToBackend(updatedList);
-      setIsModalOpen(false);
+  };
+
+  const deleteCloudinaryFile = async (public_id) => {
+      if (!public_id) return;
+      try {
+          await fetch('/api/upload', {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ public_id })
+          });
+      } catch (error) {
+          console.error('Failed to delete file:', public_id, error);
+      }
   };
 
   const handleDeleteProduct = async (productId, type) => {
       if(!confirm('Delete this product?')) return;
+
+      // Find product to delete
+      const productToDelete = [...physicalProducts, ...digitalProducts].find(p => p.id === productId);
+      
+      if (productToDelete) {
+          // Delete associated files
+          await deleteCloudinaryFile(productToDelete.coverImagePublicId);
+          await deleteCloudinaryFile(productToDelete.digitalProductFilePublicId);
+          await deleteCloudinaryFile(productToDelete.digitalProductCoverPublicId);
+      }
 
       let updatedList = [];
       if (type === 'physical') {

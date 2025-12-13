@@ -46,8 +46,11 @@ const TemplateSchema = new mongoose.Schema({
       sizes: String,
       description: String,
       coverImage: String, // Main product image/cover
+      coverImagePublicId: String,
       digitalProductFile: String, 
+      digitalProductFilePublicId: String,
       digitalProductCover: String,
+      digitalProductCoverPublicId: String,
       type: { type: String, enum: ['physical', 'digital'] }
     }
   ],

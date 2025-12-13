@@ -25,9 +25,12 @@ const updateTemplateSchema = z.object({
     sizes: z.string().optional(),
     description: z.string().optional(),
     coverImage: z.any().optional(), // Allow file obj or string
+    coverImagePublicId: z.string().optional(),
     type: z.enum(['physical', 'digital']).optional(),
     digitalProductFile: z.any().optional(), // Allow file obj or string
-    digitalProductCover: z.any().optional()
+    digitalProductFilePublicId: z.string().optional(),
+    digitalProductCover: z.any().optional(),
+    digitalProductCoverPublicId: z.string().optional()
   })).optional(),
 });
 
