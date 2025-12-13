@@ -46,7 +46,7 @@ export default function IconList({ settings }) {
      // In horizontal, align controls main-axis (justify-content)
      if (align === 'center') justifyContent = 'center';
      if (align === 'right') justifyContent = 'flex-end';
-     alignItems = 'center'; // Vertical center for horizontal items
+     alignItems = 'center'; // Default vertical alignment
   }
 
   // Calculate inner item alignment for vertical layout
@@ -66,7 +66,8 @@ export default function IconList({ settings }) {
     listStyle: 'none',
     alignItems: alignItems,
     justifyContent: justifyContent,
-    width: '100%' // Ensure alignment works within the container
+    width: '100%', // Ensure alignment works within the container
+    height: '100%'
   };
 
   const itemStyle = {
