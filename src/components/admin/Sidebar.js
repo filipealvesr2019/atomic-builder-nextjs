@@ -5,17 +5,22 @@ import { usePathname } from 'next/navigation';
 import { LayoutDashboard, FileText, ShoppingBag, Settings, Layers, DownloadCloud, Plug } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { clsx } from 'clsx';
+import { useAtom } from 'jotai';
+import { languageAtom } from '@/atoms/languageAtom';
+import { translations } from '@/locales/translations';
 
 const menuItems = [
-  { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
-  { icon: DownloadCloud, label: 'Store', href: '/admin/store' },
-  { icon: Plug, label: 'Plugins', href: '/admin/plugins' },
-  { icon: Layers, label: 'Templates', href: '/admin/templates' },
-  { icon: Settings, label: 'Settings', href: '/admin/settings' },
+  { icon: LayoutDashboard, key: 'dashboard', href: '/admin' },
+  { icon: DownloadCloud, key: 'store', href: '/admin/store' },
+  { icon: Plug, key: 'plugins', href: '/admin/plugins' },
+  { icon: Layers, key: 'templates', href: '/admin/templates' },
+  { icon: Settings, key: 'settings', href: '/admin/settings' },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [language] = useAtom(languageAtom);
+  const t = translations[language].sidebar;
 
   return (
     <aside className={styles.sidebar}>
@@ -31,7 +36,7 @@ export default function Sidebar() {
               className={clsx(styles.link, isActive && styles.active)}
             >
               <Icon size={20} />
-              <span>{item.label}</span>
+              <span>{t[item.key]}</span>
             </Link>
           );
         })}

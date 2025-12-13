@@ -1,4 +1,4 @@
-import { UserButton } from '@clerk/nextjs';
+import AdminHeader from '@/components/admin/AdminHeader';
 import Sidebar from '@/components/admin/Sidebar';
 import styles from './admin.module.css';
 
@@ -7,9 +7,7 @@ export default function AdminLayout({ children }) {
     <div className={styles.container}>
       <Sidebar />
       <main className={styles.main}>
-        <header className={styles.header}>
-          <UserButton afterSignOutUrl="/" />
-        </header>
+        <AdminHeader />
         <div className={styles.content}>{children}</div>
       </main>
     </div>

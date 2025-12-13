@@ -5,10 +5,15 @@ import { useRouter } from 'next/navigation';
 import templates from '@/templates-cms/registry';
 import { DownloadCloud, Eye, Check } from 'lucide-react';
 import styles from './store.module.css';
+import { useAtom } from 'jotai';
+import { languageAtom } from '@/atoms/languageAtom';
+import { translations } from '@/locales/translations';
 
 export default function TemplateStore() {
   const router = useRouter();
   const [installing, setInstalling] = useState(null);
+  const [language] = useAtom(languageAtom);
+  const t = translations[language].store;
 
   const availableTemplates = Object.entries(templates).map(([key, config]) => ({
     id: key,
@@ -47,8 +52,8 @@ export default function TemplateStore() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Template Store</h1>
-        <p>Browse and install beautiful themes for your website.</p>
+        <h1>{t.title}</h1>
+        <p>{t.subtitle}</p>
       </div>
 
       <div className={styles.grid}>
@@ -57,7 +62,7 @@ export default function TemplateStore() {
             {/* Preview Image Placeholder */}
             <div className={styles.cardPreview}>
                 <div className={styles.previewPlaceholder}>
-                    <span>{template.name} Preview</span>
+                    <span>{template.name} {t.preview}</span>
                 </div>
             </div>
 
@@ -72,7 +77,7 @@ export default function TemplateStore() {
                     className={styles.previewButton}
                 >
                     <Eye size={16} />
-                    Live Demo
+                    {t.liveDemo}
                 </a>
                 
                 <button 
@@ -80,10 +85,10 @@ export default function TemplateStore() {
                   disabled={installing === template.id}
                   className={styles.installButton}
                 >
-                  {installing === template.id ? 'Installing...' : (
+                  {installing === template.id ? t.installing : (
                     <>
                         <DownloadCloud size={16} />
-                        Install Theme
+                        {t.install}
                     </>
                   )}
                 </button>

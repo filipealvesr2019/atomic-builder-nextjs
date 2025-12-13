@@ -1,0 +1,24 @@
+.switcherButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.switcherButton:hover {
+  transform: scale(1.1);
+  background-color: rgba(0,0,0,0.05);
+}
+
+.flagIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: block;
+}

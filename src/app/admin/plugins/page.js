@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { Plug, Zap, BarChart, ShoppingBag, Mail, Settings, Check, Download, CreditCard } from 'lucide-react';
 import styles from './plugins.module.css';
+import { useAtom } from 'jotai';
+import { languageAtom } from '@/atoms/languageAtom';
+import { translations } from '@/locales/translations';
 
 const MOCK_PLUGINS = [
   {
@@ -54,6 +57,8 @@ const MOCK_PLUGINS = [
 
 export default function PluginsPage() {
   const [plugins, setPlugins] = useState(MOCK_PLUGINS);
+  const [language] = useAtom(languageAtom);
+  const t = translations[language].plugins;
 
   const toggleInstall = (id) => {
     setPlugins(prev => prev.map(p => {
@@ -67,8 +72,8 @@ export default function PluginsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Plugins</h1>
-        <p>Extend the functionality of your site with powerful plugins.</p>
+        <h1>{t.title}</h1>
+        <p>{t.subtitle}</p>
       </div>
 
       <div className={styles.grid}>
@@ -95,7 +100,7 @@ export default function PluginsPage() {
                   className={`${styles.button} ${styles.installed}`}
                 >
                   <Check size={16} />
-                  Installed
+                  {t.installed}
                 </button>
               ) : (
                 <button 
@@ -103,7 +108,7 @@ export default function PluginsPage() {
                   className={`${styles.button} ${styles.install}`}
                 >
                   <Download size={16} />
-                  Install
+                  {t.install}
                 </button>
               )}
               

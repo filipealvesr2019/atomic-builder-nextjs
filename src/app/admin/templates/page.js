@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { Plus, Edit, Trash, X, Eye, Settings } from 'lucide-react';
 import styles from './templates.module.css';
 import BlockRenderer from '@/components/editor/BlockRenderer';
+import { useAtom } from 'jotai';
+import { languageAtom } from '@/atoms/languageAtom';
+import { translations } from '@/locales/translations';
 
 export default function TemplatesList() {
   const [templates, setTemplates] = useState([]);
@@ -13,6 +16,9 @@ export default function TemplatesList() {
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [importing, setImporting] = useState(false);
   const [importProgress, setImportProgress] = useState('');
+  
+  const [language] = useAtom(languageAtom);
+  const t = translations[language].templates;
 
   useEffect(() => {
     fetchTemplates();
@@ -34,7 +40,7 @@ export default function TemplatesList() {
 
   const handleDelete = async (e, id) => {
     e.stopPropagation();
-    if (!confirm('Tem certeza que deseja excluir este template?')) return;
+    if (!confirm(t.deleteConfirm)) return;
 
     try {
       const res = await fetch(`/api/templates/${id}`, {
@@ -53,32 +59,22 @@ export default function TemplatesList() {
     if (files.length === 0) return;
 
     setImporting(true);
-    setImportProgress('Validando template...');
+    setImportProgress(t.loading);
     
     try {
-      console.log('[UPLOAD] Arquivos recebidos:', files.length);
-      console.log('[UPLOAD] Primeiro arquivo:', files[0]?.name, files[0]?.webkitRelativePath);
-      
-      // Encontrar template.json (buscar por nome E caminho)
       const templateJsonFile = files.find(f => 
         f.name === 'template.json' || 
         (f.webkitRelativePath && f.webkitRelativePath.endsWith('template.json'))
       );
       
-      console.log('[UPLOAD] template.json encontrado?', !!templateJsonFile);
-      
       if (!templateJsonFile) {
-        // Mostrar lista de arquivos para debug
-        console.error('[UPLOAD] Arquivos disponíveis:', files.map(f => f.name).join(', '));
-        throw new Error('Arquivo template.json não encontrado! O template deve seguir a estrutura CMS-compatível.');
+        throw new Error('template.json not found');
       }
       
       const templateConfig = JSON.parse(await templateJsonFile.text());
-      console.log('[UPLOAD] Template config:', templateConfig.name);
       
-      setImportProgress(`Instalando "${templateConfig.name}"...`);
+      setImportProgress(`Installing "${templateConfig.name}"...`);
       
-      // Determinar o ID do template a partir do nome da pasta
       let templateId = 'custom-template';
       if (files[0].webkitRelativePath) {
         const pathParts = files[0].webkitRelativePath.split('/');
@@ -87,7 +83,6 @@ export default function TemplatesList() {
         }
       }
       
-      // Copiar arquivos para src/templates-cms/[templateId]/
       const formData = new FormData();
       formData.append('templateId', templateId);
       formData.append('templateConfig', JSON.stringify(templateConfig));
@@ -102,13 +97,11 @@ export default function TemplatesList() {
       });
       
       if (!uploadResponse.ok) {
-        const error = await uploadResponse.json();
-        throw new Error(error.error || 'Falha ao fazer upload');
+        throw new Error('Upload failed');
       }
       
-      setImportProgress('Registrando template...');
+      setImportProgress('Registering template...');
       
-      // Salvar no banco de dados
       await fetch('/api/templates', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -116,13 +109,13 @@ export default function TemplatesList() {
           name: templateConfig.name,
           type: 'theme',
           templateId: templateId,
-          sections: {}, // Props padrão
+          sections: {}, 
           content: [],
           isPublic: false
         }),
       });
 
-      setImportProgress(`Concluído! Template "${templateConfig.name}" instalado.`);
+      setImportProgress('Done!');
       
       setTimeout(() => {
         setImporting(false);
@@ -131,34 +124,26 @@ export default function TemplatesList() {
       }, 1500);
       
     } catch (err) {
-      console.error('Erro ao importar template:', err);
-      setImportProgress(`Erro: ${err.message}`);
+      console.error('Error importing:', err);
+      setImportProgress(`Error: ${err.message}`);
       setTimeout(() => {
         setImporting(false);
       }, 3000);
     }
   };
 
-
-
-  console.log('[DEBUG] Templates component rendering, isImportModalOpen:', isImportModalOpen);
-  
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <div>{t.loading}</div>;
 
   return (
     <div>
       <div className={styles.header}>
-        <h1>Templates</h1>
+        <h1>{t.title}</h1>
         <button 
-          onClick={() => {
-            console.log('[DEBUG] Import button clicked');
-            setIsImportModalOpen(true);
-          }} 
+          onClick={() => setIsImportModalOpen(true)} 
           className={styles.createButton}
-          style={{ border: '2px solid red' }} // Debug: make sure it's visible
         >
           <Plus size={20} />
-          Importar Pasta
+          {t.import}
         </button>
       </div>
 
@@ -174,7 +159,7 @@ export default function TemplatesList() {
                 <button
                   onClick={(e) => handleDelete(e, template._id)}
                   className={styles.deleteLink}
-                  title="Excluir"
+                  title={t.delete}
                 >
                   <Trash size={16} />
                 </button>
@@ -183,7 +168,7 @@ export default function TemplatesList() {
             </div>
             {template.type === 'theme' && template.pages && (
               <p style={{ color: '#666', fontSize: '0.875rem', margin: '0.5rem 0' }}>
-                {template.pages.length} página(s)
+                {template.pages.length} {t.pagesCount}
               </p>
             )}
             <div className={styles.actions}>
@@ -192,7 +177,7 @@ export default function TemplatesList() {
                 className={styles.actionButton}
               >
                 <Edit size={16} />
-                Editar
+                {t.edit}
               </Link>
               
               <Link 
@@ -202,7 +187,7 @@ export default function TemplatesList() {
                 className={`${styles.actionButton} ${styles.previewButton}`}
               >
                 <Eye size={16} />
-                Ver Tema
+                {t.viewTheme}
               </Link>
 
               <Link
@@ -210,7 +195,7 @@ export default function TemplatesList() {
                 className={`${styles.actionButton} ${styles.configButton}`}
               >
                 <Settings size={16} />
-                Config
+                {t.config}
               </Link>
             </div>
           </div>
@@ -222,7 +207,7 @@ export default function TemplatesList() {
         <div className={styles.modalOverlay} onClick={() => !importing && setIsImportModalOpen(false)}>
           <div className={styles.modalContent} style={{ height: 'auto', maxHeight: '80vh' }} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h2>Importar Tema (Pasta)</h2>
+              <h2>{t.importModalTitle}</h2>
               {!importing && (
                 <button className={styles.closeButton} onClick={() => setIsImportModalOpen(false)}>
                   <X size={24} />
@@ -236,11 +221,11 @@ export default function TemplatesList() {
                 </div>
               ) : (
                 <div style={{ padding: '2rem' }}>
-                  <h3 style={{ marginBottom: '1rem' }}>Upload de Template CMS-Compatível</h3>
-                  <p style={{ marginBottom: '1.5rem', color: '#666', lineHeight: '1.6' }}>
-                    Selecione a pasta do seu template. O template deve conter um arquivo <code>template.json</code> 
-                    e seguir a <a href="/docs/template-spec" target="_blank" style={{ color: '#2563eb' }}>estrutura CMS-compatível</a>.
-                  </p>
+                  <h3 style={{ marginBottom: '1rem' }}>{t.uploadTitle}</h3>
+                  <p 
+                    style={{ marginBottom: '1.5rem', color: '#666', lineHeight: '1.6' }}
+                    dangerouslySetInnerHTML={{ __html: t.selectFolder }}
+                  />
                   
                   <input 
                     type="file" 
@@ -259,7 +244,7 @@ export default function TemplatesList() {
                   />
                   
                   <div style={{ marginTop: '1.5rem', padding: '1rem', background: '#f0f9ff', borderRadius: '0.5rem', border: '1px solid #bae6fd' }}>
-                    <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#0369a1' }}>Estrutura esperada:</strong>
+                    <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#0369a1' }}>{t.expectedStructure}</strong>
                     <pre style={{ fontSize: '0.875rem', color: '#0c4a6e', margin: 0, lineHeight: '1.5' }}>{`meu-template/
 ├── template.json
 ├── sections/
