@@ -32,7 +32,7 @@ export const ursulaDefaultContent = {
                  },
                  { text: 'Single Post', href: '#' },
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
-                 { text: 'Contact Us', href: '#' }
+                 { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
              ]
           }
         },
@@ -70,16 +70,7 @@ export const ursulaDefaultContent = {
             image2: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80'
           }
         },
-        {
-          id: 'ursula-client-love',
-          type: 'client-love',
-          props: {
-            title: 'Client Love',
-            quote: 'Ursula is a fantastic theme. It helped me create the blog of my dreams in minutes.',
-            author: 'Sarah J.',
-            image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80'
-          }
-        },
+
         {
           id: 'ursula-latest-posts',
           type: 'latest-posts',
@@ -170,7 +161,7 @@ export const ursulaDefaultContent = {
                  { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
                  { text: 'Single Post', href: '#' },
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
-                 { text: 'Contact Us', href: '#' }
+                 { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
              ]
           }
         },
