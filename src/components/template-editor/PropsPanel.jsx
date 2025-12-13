@@ -265,32 +265,42 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             />
                         )}
                         {propConfig.itemSchema?.url && (
-                             <div className={styles.selectWrapper} style={{ display: 'flex', gap: '5px' }}>
-                                <select 
-                                    className={styles.select}
-                                    value={item.url && item.url.startsWith('?page=') ? item.url.replace('?page=', '') : 'custom'}
-                                    onChange={(e) => {
-                                        if (e.target.value === 'custom') onChangeItem({ url: '' });
-                                        else onChangeItem({ url: `?page=${e.target.value}` });
-                                    }}
-                                    style={{ width: '120px' }}
-                                >
-                                    <option value="custom">Custom URL</option>
-                                    <optgroup label="Pages">
-                                        {pages.map(p => (
-                                            <option key={p.slug} value={p.slug}>{p.name}</option>
-                                        ))}
-                                    </optgroup>
-                                </select>
-                                {(!item.url || !item.url.startsWith('?page=')) && (
-                                    <input 
-                                        className={styles.input}
-                                        value={item.url || ''}
-                                        onChange={(e) => onChangeItem({ url: e.target.value })}
-                                        placeholder="https://"
-                                        style={{ flex: 1 }}
-                                    />
-                                )}
+                             <div className={styles.formGroup}>
+                                <label className={styles.labelText} style={{ fontSize: '11px', color: '#6b7280' }}>
+                                    {propConfig.itemSchema.url.label || "Link Destination"}
+                                </label>
+                                <div className={styles.selectWrapper} style={{ display: 'flex', gap: '8px' }}>
+                                    <select 
+                                        className={styles.select}
+                                        value={item.url && item.url.startsWith('?page=') ? item.url.replace('?page=', '') : 'custom'}
+                                        onChange={(e) => {
+                                            if (e.target.value === 'custom') onChangeItem({ url: '' });
+                                            else onChangeItem({ url: `?page=${e.target.value}` });
+                                        }}
+                                        style={{ width: '35%', minWidth: '110px' }}
+                                    >
+                                        <option value="custom">Custom URL</option>
+                                        <optgroup label="Pages">
+                                            {pages.map(p => (
+                                                <option key={p.slug} value={p.slug}>{p.name}</option>
+                                            ))}
+                                        </optgroup>
+                                    </select>
+                                    {(!item.url || !item.url.startsWith('?page=')) && (
+                                        <input 
+                                            className={styles.input}
+                                            value={item.url || ''}
+                                            onChange={(e) => onChangeItem({ url: e.target.value })}
+                                            placeholder="https://example.com"
+                                            style={{ flex: 1 }}
+                                        />
+                                    )}
+                                    {item.url && item.url.startsWith('?page=') && (
+                                         <div className={styles.inputUnit} style={{ flex: 1, justifyContent: 'flex-start', background: '#eff6ff', color: '#3b82f6', border: '1px solid #bfdbfe' }}>
+                                            Internal Page
+                                         </div>
+                                    )}
+                                </div>
                              </div>
                         )}
                     </div>
@@ -302,8 +312,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
   };
 
   return (
-    <div className={styles.propsPanel}>
-      <div className={styles.tabs}>
+    <div className={styles.container}>
+      <div className={styles.tabContainer}>
         <TabButton id="layout" icon={Layout} label="Layout" />
         <TabButton id="style" icon={Palette} label="Style" />
         <TabButton id="advanced" icon={Settings} label="Advanced" />
