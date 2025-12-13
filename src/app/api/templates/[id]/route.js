@@ -56,7 +56,7 @@ export async function GET(req, { params }) {
   }
 }
 
-export async function PUT(req, { params }) {
+export async function PATCH(req, { params }) {
   try {
     const { userId } = await auth();
     if (!userId) {
@@ -68,7 +68,7 @@ export async function PUT(req, { params }) {
     const validation = updateTemplateSchema.safeParse(body);
 
     if (!validation.success) {
-      console.error('[TEMPLATE_PUT] Validation error:', validation.error);
+      console.error('[TEMPLATE_PATCH] Validation error:', validation.error);
       return new NextResponse(validation.error.errors[0].message, { status: 400 });
     }
 
@@ -86,7 +86,7 @@ export async function PUT(req, { params }) {
 
     return NextResponse.json(template);
   } catch (error) {
-    console.error('[TEMPLATE_PUT]', error);
+    console.error('[TEMPLATE_PATCH]', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
