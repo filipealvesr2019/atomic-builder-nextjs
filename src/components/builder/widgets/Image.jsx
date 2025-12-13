@@ -9,7 +9,7 @@ export default function ImageWidget({ settings }) {
   const theme = useAtomValue(themeAtom);
 
   const { 
-    src = "https://via.placeholder.com/300x200", 
+    src = "https://placehold.co/600x400", 
     alt = "Image",
     width = "100%",
     borderRadius = "0px",

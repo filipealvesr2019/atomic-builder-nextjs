@@ -10,7 +10,7 @@ const ProductCard = ({ product, onAddToCart }) => {
     name = "Produto Sem Nome",
     price = 0,
     originalPrice,
-    image = "https://via.placeholder.com/300",
+    image = "https://placehold.co/300",
     category = "Geral",
     rating = 0,
     reviews = 0,

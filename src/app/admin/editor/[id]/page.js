@@ -141,7 +141,7 @@ export default function TemplateEditorPage() {
         if (type === 'text') initialProps = { content: 'Novo texto', align: 'left', fontSize: '1rem', color: '#4b5563' };
         if (type === 'button') initialProps = { text: 'Clique Aqui', variant: 'primary', align: 'left', url: '#' };
         if (type === 'heading') initialProps = { text: 'Novo Título', tag: 'h2', align: 'left', color: '#1f2937' };
-        if (type === 'image') initialProps = { src: 'https://via.placeholder.com/300x200', width: '100%', borderRadius: '0px', align: 'center', alt: 'Image' };
+        if (type === 'image') initialProps = { src: 'https://placehold.co/600x400', width: '100%', borderRadius: '0px', align: 'center', alt: 'Image' };
       }
       
       if (category === 'container') {

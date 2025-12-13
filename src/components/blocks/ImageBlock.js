@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 export default function ImageBlock({ props, readOnly }) {
   const { src, alt } = props || {};
-  const placeholder = 'https://via.placeholder.com/300x200?text=Image+Block';
+  const placeholder = 'https://placehold.co/600x400?text=Image+Block';
 
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>

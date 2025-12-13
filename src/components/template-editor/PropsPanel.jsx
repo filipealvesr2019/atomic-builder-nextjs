@@ -734,7 +734,7 @@ export default function PropsPanel({ block, templateId, onPropsChange }) {
                 <>
                      <StyledInput
                         label="Image URL"
-                        value={getValue('src', 'https://via.placeholder.com/300x200')}
+                        value={getValue('src', 'https://placehold.co/600x400')}
                         onChange={(val) => handleChange('src', val)}
                         placeholder="https://..."
                     />
