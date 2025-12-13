@@ -62,13 +62,13 @@ export default function TemplateStore() {
             {/* Preview Image Placeholder */}
             <div className={styles.cardPreview}>
                 <div className={styles.previewPlaceholder}>
-                    <span>{template.name} {t.preview}</span>
+                    <span>{t.items[template.id]?.name || template.name} {t.preview}</span>
                 </div>
             </div>
 
             <div className={styles.cardBody}>
-              <h3>{template.name}</h3>
-              <p className={styles.description}>Perfect for {template.name.toLowerCase()} websites. Fully customizable.</p>
+              <h3>{t.items[template.id]?.name || template.name}</h3>
+              <p className={styles.description}>{t.items[template.id]?.description}</p>
               
               <div className={styles.actions}>
                 <a 

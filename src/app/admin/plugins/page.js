@@ -84,13 +84,13 @@ export default function PluginsPage() {
                 <plugin.icon size={24} />
               </div>
               <div className={styles.headerText}>
-                <h3>{plugin.name}</h3>
+                <h3>{t.items[plugin.id]?.name || plugin.name}</h3>
                 <span className={styles.version}>v{plugin.version} • {plugin.author}</span>
               </div>
             </div>
             
             <p className={styles.description}>
-              {plugin.description}
+              {t.items[plugin.id]?.description || plugin.description}
             </p>
 
             <div className={styles.actions}>

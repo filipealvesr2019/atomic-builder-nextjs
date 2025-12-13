@@ -40,13 +40,49 @@ export const translations = {
       liveDemo: 'Live Demo',
       install: 'Install Theme',
       installing: 'Installing...',
-      installed: 'Installed'
+      installed: 'Installed',
+      items: {
+         'rustic-store-cms': {
+             name: 'Rustic Store',
+             description: 'Perfect for rustic store websites. Fully customizable.'
+         },
+         'business-theme-cms': {
+             name: 'Business Theme',
+             description: 'Perfect for business websites. Fully customizable.'
+         },
+         'minimal-business': {
+             name: 'Minimal Business',
+             description: 'Perfect for minimal business websites. Fully customizable.'
+         }
+      }
     },
     plugins: {
       title: 'Plugins',
       subtitle: 'Extend the functionality of your site with powerful plugins.',
       install: 'Install',
-      installed: 'Installed'
+      installed: 'Installed',
+      items: {
+         'ecommerce-core': {
+             name: 'E-commerce Core',
+             description: 'Add products, cart, and checkout functionality to your site.'
+         },
+         'seo-booster': {
+             name: 'SEO Booster',
+             description: 'Optimize your pages for search engines with advanced meta tags and sitemaps.'
+         },
+         'analytics-pro': {
+             name: 'Analytics Pro',
+             description: 'Track visitor behavior and get detailed insights directly in your dashboard.'
+         },
+         'form-builder': {
+             name: 'Form Builder',
+             description: 'Create contact forms, surveys, and newsletters with drag-and-drop.'
+         },
+         'stripe-payments': {
+             name: 'Stripe Payments',
+             description: 'Accept credit card payments securely with Stripe Checkout integration.'
+         }
+      }
     },
     editor: {
         loading: 'Loading editor...',
@@ -106,35 +142,6 @@ export const translations = {
             gaId: 'Google Analytics ID',
             metaTitle: 'Meta Title',
             metaDescription: 'Meta Description'
-        },
-        products: {
-            titlePhysical: 'Physical Product Management',
-            titleDigital: 'Digital Product Management',
-            registered: 'Registered Products',
-            add: 'Add New Product',
-            empty: 'No products registered',
-            modalTitlePhysical: 'Add Physical Product',
-            modalTitleDigital: 'Add Digital Product',
-            name: 'Product Name',
-            category: 'Category',
-            subcategory: 'Subcategory',
-            price: 'Price',
-            unit: 'Measurement Unit',
-            colors: 'Available Colors',
-            sizes: 'Available Sizes',
-            description: 'Product Description',
-            variations: 'Color Variations & Photos',
-            digitalAssets: 'Digital Assets',
-            file: 'Product File (ZIP)',
-            cover: 'Cover Image',
-            cancel: 'Cancel',
-            save: 'Save Product',
-            delete: 'Delete this product?',
-            storeInfo: 'Store Information',
-            storeLogo: 'Store Logo',
-            changeLogo: 'Change Logo',
-            uploadLogo: 'Upload Logo',
-            displayName: 'Display Name'
         }
     }
   },
@@ -143,7 +150,7 @@ export const translations = {
       dashboard: 'Painel',
       store: 'Loja',
       plugins: 'Plugins',
-      templates: 'Modelos',
+      templates: 'Templates',
       settings: 'Configurações',
       products: 'Produtos',
       pages: 'Páginas'
@@ -158,7 +165,7 @@ export const translations = {
       salesToday: 'Vendas Hoje'
     },
     templates: {
-      title: 'Modelos',
+      title: 'Templates',
       import: 'Importar Pasta',
       importModalTitle: 'Importar Tema (Pasta)',
       uploadTitle: 'Upload de Template CMS-Compatível',
@@ -179,13 +186,49 @@ export const translations = {
       liveDemo: 'Ver Demo',
       install: 'Instalar Tema',
       installing: 'Instalando...',
-      installed: 'Instalado'
+      installed: 'Instalado',
+      items: {
+         'rustic-store-cms': {
+             name: 'Rustic Store',
+             description: 'Perfeito para lojas rústicas. Totalmente personalizável.'
+         },
+         'business-theme-cms': {
+             name: 'Tema Empresarial',
+             description: 'Perfeito para sites empresariais. Totalmente personalizável.'
+         },
+         'minimal-business': {
+             name: 'Negócio Minimalista',
+             description: 'Perfeito para sites minimalistas. Totalmente personalizável.'
+         }
+      }
     },
     plugins: {
       title: 'Plugins',
       subtitle: 'Estenda a funcionalidade do seu site com plugins poderosos.',
       install: 'Instalar',
-      installed: 'Instalado'
+      installed: 'Instalado',
+      items: {
+         'ecommerce-core': {
+             name: 'E-commerce Core',
+             description: 'Adicione produtos, carrinho e checkout ao seu site.'
+         },
+         'seo-booster': {
+             name: 'SEO Booster',
+             description: 'Otimize suas páginas para buscadores com meta tags avançadas.'
+         },
+         'analytics-pro': {
+             name: 'Analytics Pro',
+             description: 'Rastreie visitantes e obtenha insights detalhados no painel.'
+         },
+         'form-builder': {
+             name: 'Construtor de Formulários',
+             description: 'Crie formulários, pesquisas e newsletters com arrastar e soltar.'
+         },
+         'stripe-payments': {
+             name: 'Pagamentos Stripe',
+             description: 'Aceite pagamentos com cartão seguramente com Stripe.'
+         }
+      }
     },
     editor: {
         loading: 'Carregando editor...',
@@ -245,35 +288,6 @@ export const translations = {
             gaId: 'ID do Google Analytics',
             metaTitle: 'Meta Título',
             metaDescription: 'Meta Descrição'
-        },
-        products: {
-            titlePhysical: 'Gerenciamento de Produtos Físicos',
-            titleDigital: 'Gerenciamento de Produtos Digitais',
-            registered: 'Produtos Registrados',
-            add: 'Adicionar Novo Produto',
-            empty: 'Nenhum produto registrado',
-            modalTitlePhysical: 'Adicionar Produto Físico',
-            modalTitleDigital: 'Adicionar Produto Digital',
-            name: 'Nome do Produto',
-            category: 'Categoria',
-            subcategory: 'Subcategoria',
-            price: 'Preço',
-            unit: 'Unidade de Medida',
-            colors: 'Cores Disponíveis',
-            sizes: 'Tamanhos Disponíveis',
-            description: 'Descrição do Produto',
-            variations: 'Variações de Cor e Fotos',
-            digitalAssets: 'Ativos Digitais',
-            file: 'Arquivo do Produto (ZIP)',
-            cover: 'Imagem de Capa',
-            cancel: 'Cancelar',
-            save: 'Salvar Produto',
-            delete: 'Excluir este produto?',
-            storeInfo: 'Informações da Loja',
-            storeLogo: 'Logo da Loja',
-            changeLogo: 'Alterar Logo',
-            uploadLogo: 'Carregar Logo',
-            displayName: 'Nome de Exibição'
         }
     }
   }
