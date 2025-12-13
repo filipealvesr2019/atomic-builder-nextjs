@@ -182,29 +182,30 @@ export default function TemplateSettings({ params }) {
       </div>
       
       {/* Mock for Photos related to Colors */}
+      {/* Mock for Photos related to Colors */}
       <div className={styles.formGroup}>
           <label className={styles.label}>Color Variations & Photos</label>
-          <div className="p-4 border border-dashed border-gray-300 rounded-lg bg-gray-50">
+          <div className={styles.variationsContainer}>
                <div className="flex flex-col gap-3">
-                   <div className="flex items-center justify-between p-3 bg-white rounded border border-gray-200">
-                       <div className="flex items-center gap-3">
-                           <div className="w-8 h-8 rounded-full bg-red-500 border border-gray-300"></div>
-                           <span className="text-sm font-medium text-gray-700">Red Variant</span>
+                   <div className={styles.variantCard}>
+                       <div className={styles.variantInfo}>
+                           <div className={`${styles.colorPreview} bg-red-500`}></div>
+                           <span className={styles.variantName}>Red Variant</span>
                        </div>
-                       <div className="flex gap-2">
-                           <div className="w-10 h-10 bg-gray-100 rounded flex items-center justify-center border border-gray-200">
-                               <ImageIcon size={14} className="text-gray-400" />
+                       <div className={styles.variantPhotos}>
+                           <div className={styles.photoSlot}>
+                               <ImageIcon size={16} />
                            </div>
-                           <div className="w-10 h-10 bg-gray-100 rounded flex items-center justify-center border border-gray-200">
-                               <ImageIcon size={14} className="text-gray-400" />
+                           <div className={styles.photoSlot}>
+                               <ImageIcon size={16} />
                            </div>
-                           <button className="w-10 h-10 border border-dashed border-gray-300 rounded flex items-center justify-center hover:bg-gray-50 text-blue-500">
+                           <button className={styles.addPhotoBtn}>
                                <Plus size={16} />
                            </button>
                        </div>
                    </div>
                     <div className="flex items-center justify-center mt-2">
-                       <button className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1">
+                       <button className={styles.addVariantBtn}>
                            <Plus size={14} /> Add Color Variant
                        </button>
                    </div>
