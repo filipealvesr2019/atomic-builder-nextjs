@@ -12,6 +12,8 @@ import ThemePanel from '@/components/template-editor/ThemePanel';
 import { useAtom } from 'jotai';
 import { viewModeAtom } from '@/store/viewModeStore';
 import { themeAtom } from '@/store/themeStore';
+import { languageAtom } from '@/atoms/languageAtom';
+import { translations } from '@/locales/translations';
 import ShopCart from '@/components/shop/ShopCart';
 import { Save, ArrowLeft, Palette, Layers, Settings, Monitor, Tablet, Smartphone, Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
@@ -31,6 +33,9 @@ export default function TemplateEditorPage() {
   const [theme, setTheme] = useAtom(themeAtom);
   const [viewMode, setViewMode] = useAtom(viewModeAtom); // 'desktop' | 'tablet' | 'mobile'
   
+  const [language] = useAtom(languageAtom);
+  const t = translations[language].editor;
+
   // Undo/Redo History
   const [history, setHistory] = useState([[]]);
   const [historyIndex, setHistoryIndex] = useState(0);
@@ -296,13 +301,13 @@ export default function TemplateEditorPage() {
       });
 
       if (res.ok) {
-        alert('Template saved successfully!');
+        alert(t.saved);
       } else {
-        alert('Error saving template');
+        alert(t.error);
       }
     } catch (error) {
       console.error('Error saving:', error);
-      alert('Error saving template');
+      alert(t.error);
     } finally {
       setSaving(false);
     }
@@ -337,12 +342,14 @@ export default function TemplateEditorPage() {
   // --- End Undo/Redo ---
 
   if (loading) {
-    return <div className="flex items-center justify-center h-screen bg-gray-50 text-gray-500">Loading editor...</div>;
+    return <div className="flex items-center justify-center h-screen bg-gray-50 text-gray-500">{t.loading}</div>;
   }
 
   if (!template) {
-    return <div className="flex items-center justify-center h-screen bg-gray-50 text-red-500">Template not found</div>;
+    return <div className="flex items-center justify-center h-screen bg-gray-50 text-red-500">{t.notFound}</div>;
   }
+
+  const getBlockName = (type) => t.blocks[type] || type;
 
   return (
     <>
@@ -361,14 +368,14 @@ export default function TemplateEditorPage() {
             <button 
                 onClick={() => setActiveSidebarTab('add')}
                 className={`p-2 rounded hover:bg-gray-100 ${activeSidebarTab === 'add' ? 'bg-gray-100 text-blue-600' : 'text-gray-500'}`}
-                title="Add Elements"
+                title={t.add}
             >
                 <Layers size={18} />
             </button>
             <button 
                 onClick={() => setActiveSidebarTab('theme')}
                 className={`p-2 rounded hover:bg-gray-100 ${activeSidebarTab === 'theme' ? 'bg-gray-100 text-blue-600' : 'text-gray-500'}`}
-                title="Global Style"
+                title={t.theme}
             >
                 <Palette size={18} />
             </button>
@@ -379,21 +386,21 @@ export default function TemplateEditorPage() {
              <button 
                 onClick={() => setViewMode('desktop')}
                 className={`p-1.5 rounded ${viewMode === 'desktop' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
-                title="Desktop"
+                title={t.viewDesktop}
              >
                 <Monitor size={16} />
              </button>
              <button 
                 onClick={() => setViewMode('tablet')}
                 className={`p-1.5 rounded ${viewMode === 'tablet' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
-                title="Tablet"
+                title={t.viewTablet}
              >
                 <Tablet size={16} />
              </button>
              <button 
                 onClick={() => setViewMode('mobile')}
                 className={`p-1.5 rounded ${viewMode === 'mobile' ? 'bg-white shadow text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
-                title="Mobile"
+                title={t.viewMobile}
              >
                 <Smartphone size={16} />
              </button>
@@ -405,7 +412,7 @@ export default function TemplateEditorPage() {
                 onClick={handleUndo}
                 disabled={historyIndex === 0}
                 className={`p-2 rounded ${historyIndex === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
-                title="Undo (Desfazer)"
+                title={t.undo}
              >
                 <Undo2 size={16} />
              </button>
@@ -413,7 +420,7 @@ export default function TemplateEditorPage() {
                 onClick={handleRedo}
                 disabled={historyIndex === history.length - 1}
                 className={`p-2 rounded ${historyIndex === history.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'}`}
-                title="Redo (Refazer)"
+                title={t.redo}
              >
                 <Redo2 size={16} />
              </button>
@@ -426,7 +433,7 @@ export default function TemplateEditorPage() {
               className={styles.saveButton}
             >
               <Save size={14} />
-              {saving ? 'Saving...' : 'Save'}
+              {saving ? t.saving : t.save}
             </button>
           </div>
         </header>
@@ -443,11 +450,11 @@ export default function TemplateEditorPage() {
               {selectedBlock ? (
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                   <div className={styles.sidebarHeader}>
-                    <h3 className={styles.sidebarTitle}>Editar {selectedBlock.type}</h3>
+                    <h3 className={styles.sidebarTitle}>{t.edit} {getBlockName(selectedBlock.type)}</h3>
                     <button 
                       onClick={() => setSelectedBlock(null)}
                       className={styles.backButton}
-                      title="Back to library"
+                      title={t.backToLib}
                     >
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', width: '16px', height: '16px' }}>
                           {[...Array(9)].map((_, i) => <div key={i} style={{ background: 'currentColor', borderRadius: '1px' }} />)}
@@ -491,7 +498,7 @@ export default function TemplateEditorPage() {
           <DragOverlay>
             {activeDragId ? (
               <div className={styles.dragOverlayItem}>
-                {activeDragId.startsWith('lib-') ? 'Novo Elemento' : 'Movendo Bloco'}
+                {activeDragId.startsWith('lib-') ? t.newItem : t.moving}
               </div>
             ) : null}
           </DragOverlay>

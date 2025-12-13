@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { useAtom } from 'jotai';
+import { languageAtom } from '@/atoms/languageAtom';
+import { translations } from '@/locales/translations';
 import { ArrowLeft, Store, Globe, Share2, Code, Save, Settings, Package, FileDown, Upload, Palette, Ruler, Image as ImageIcon, Plus, X, Inbox, Trash, AlertTriangle } from 'lucide-react';
 import styles from './settings.module.css';
 
@@ -9,6 +12,8 @@ export default function TemplateSettings() {
   const params = useParams();
   const router = useRouter();
   const templateId = params.id;
+  const [language] = useAtom(languageAtom);
+  const t = translations[language].settings;
 
   const [activeTab, setActiveTab] = useState('general');
   const [loading, setLoading] = useState(false);
@@ -83,7 +88,7 @@ export default function TemplateSettings() {
           console.log('Products saved successfully');
       } catch (error) {
           console.error('Error saving products:', error);
-          alert('Error saving products to database');
+          alert(t.error);
       }
   };
 
@@ -235,7 +240,7 @@ export default function TemplateSettings() {
   };
 
   const handleDeleteProduct = async (productId, type) => {
-      if(!confirm('Delete this product?')) return;
+      if(!confirm(t.products.delete)) return;
 
       // Find product to delete
       const productToDelete = [...physicalProducts, ...digitalProducts].find(p => p.id === productId);
@@ -266,7 +271,7 @@ export default function TemplateSettings() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      alert('Global settings saved successfully!');
+      alert(t.success);
     }, 1000);
   };
 
@@ -280,13 +285,13 @@ export default function TemplateSettings() {
   };
 
   const tabs = [
-    { id: 'general', label: 'General', icon: Settings },
-    { id: 'store', label: 'Store', icon: Store },
-    { id: 'physical', label: 'Physical Products', icon: Package },
-    { id: 'digital', label: 'Digital Products', icon: FileDown },
-    { id: 'social', label: 'Social Media', icon: Share2 },
-    { id: 'seo', label: 'SEO & Analytics', icon: Globe },
-    { id: 'advanced', label: 'Advanced', icon: Code },
+    { id: 'general', label: t.general, icon: Settings },
+    { id: 'store', label: t.store, icon: Store },
+    { id: 'physical', label: t.physical, icon: Package },
+    { id: 'digital', label: t.digital, icon: FileDown },
+    { id: 'social', label: t.social, icon: Share2 },
+    { id: 'seo', label: t.seo, icon: Globe },
+    { id: 'advanced', label: t.advanced, icon: Code },
   ];
 
   const renderProductModal = () => {
@@ -299,7 +304,7 @@ export default function TemplateSettings() {
               <div className={styles.modalContent}>
                   <div className={styles.modalHeader}>
                       <h2 className={styles.modalTitle}>
-                          {modalType === 'physical' ? 'Add Physical Product' : 'Add Digital Product'}
+                          {modalType === 'physical' ? t.products.modalTitlePhysical : t.products.modalTitleDigital}
                       </h2>
                       <button onClick={handleCloseModal} className={styles.closeButton}>
                           <X size={24} />
@@ -311,7 +316,7 @@ export default function TemplateSettings() {
                            {/* Row 1: Name (6), Category (3), Subcategory (3) */}
                            <div className={styles.colSpan6}>
                                 <div className={styles.formGroup}>
-                                    <label className={styles.label}>Product Name *</label>
+                                    <label className={styles.label}>{t.products.name} *</label>
                                     <input 
                                         type="text" 
                                         name="name"
@@ -328,7 +333,7 @@ export default function TemplateSettings() {
                             </div>
                            <div className={styles.colSpan3}>
                               <div className={styles.formGroup}>
-                                  <label className={styles.label}>Category</label>
+                                  <label className={styles.label}>{t.products.category}</label>
                                   <input 
                                       type="text"
                                       name="category"
@@ -341,7 +346,7 @@ export default function TemplateSettings() {
                            </div>
                            <div className={styles.colSpan3}>
                               <div className={styles.formGroup}>
-                                  <label className={styles.label}>Subcategory</label>
+                                  <label className={styles.label}>{t.products.subcategory}</label>
                                   <input 
                                       type="text"
                                       name="subcategory"
@@ -356,7 +361,7 @@ export default function TemplateSettings() {
                            {/* Row 2: Price, Currency, Unit */}
                            <div className={styles.colSpan3}>
                               <div className={styles.formGroup}>
-                                  <label className={styles.label}>Price *</label>
+                                  <label className={styles.label}>{t.products.price} *</label>
                                   <input 
                                     type="number" 
                                     name="price"
@@ -373,7 +378,7 @@ export default function TemplateSettings() {
                            </div>
                            <div className={styles.colSpan3}>
                                <div className={styles.formGroup}>
-                                    <label className={styles.label}>Currency</label>
+                                    <label className={styles.label}>{t.labels.currency}</label>
                                     <select 
                                         name="currency"
                                         value={currentProduct.currency || 'USD ($)'}
@@ -390,7 +395,7 @@ export default function TemplateSettings() {
                                 <>
                                 <div className={styles.colSpan3}>
                                     <div className={styles.formGroup}>
-                                        <label className={styles.label}>Measurement Unit</label>
+                                        <label className={styles.label}>{t.products.unit}</label>
                                         <input 
                                             type="text" 
                                             name="measurementUnit"
@@ -404,7 +409,7 @@ export default function TemplateSettings() {
                                 <div className={styles.colSpan3}>
                                      <div className={styles.formGroup}>
                                         <label className={styles.label}>
-                                            Cover Image <span style={{color: '#ef4444'}}>*</span>
+                                            {t.products.cover} <span style={{color: '#ef4444'}}>*</span>
                                         </label>
                                         <div className={styles.fileInputWrapper}>
                                             <input type="file" name="coverImage" className={styles.fileInput} onChange={handleProductChange} />
@@ -412,7 +417,7 @@ export default function TemplateSettings() {
                                                 className={styles.fileInputButton}
                                                 style={validationErrors.coverImage ? { borderColor: '#ef4444', backgroundColor: '#fef2f2' } : {}}
                                             >
-                                                <Upload size={16} /> {currentProduct.coverImage ? currentProduct.coverImage.name : 'Upload Image'}
+                                                <Upload size={16} /> {currentProduct.coverImage ? currentProduct.coverImage.name : t.products.add}
                                             </div>
                                         </div>
                                         {validationErrors.coverImage && (
@@ -428,7 +433,7 @@ export default function TemplateSettings() {
                            {/* Row 3: Colors (6), Sizes (6) */}
                            <div className={styles.colSpan6}>
                               <div className={styles.formGroup}>
-                                  <label className={styles.label}>Available Colors</label>
+                                  <label className={styles.label}>{t.products.colors}</label>
                                   <div className={styles.flexRow}>
                                      <input 
                                         type="text"
@@ -444,7 +449,7 @@ export default function TemplateSettings() {
                            </div>
                            <div className={styles.colSpan6}>
                               <div className={styles.formGroup}>
-                                  <label className={styles.label}>Available Sizes</label>
+                                  <label className={styles.label}>{t.products.sizes}</label>
                                   <div className={styles.flexRow}>
                                      <input 
                                         type="text"
@@ -462,7 +467,7 @@ export default function TemplateSettings() {
                           {/* Row 4: Description (12) */}
                           <div className={styles.colSpan12}>
                               <div className={styles.formGroup}>
-                                  <label className={styles.label}>Product Description</label>
+                                  <label className={styles.label}>{t.products.description}</label>
                                   <textarea 
                                     name="description"
                                     value={currentProduct.description || ''}
@@ -477,7 +482,7 @@ export default function TemplateSettings() {
                         {/* Row 5: Variations (12) */}
                         <div className={styles.colSpan12}>
                             <div className={styles.formGroup}>
-                                <label className={styles.label}>Color Variations & Photos</label>
+                                <label className={styles.label}>{t.products.variations}</label>
                                 <div className={styles.variationsContainer}>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                         <div className={styles.variantCard}>
@@ -504,12 +509,12 @@ export default function TemplateSettings() {
                            <div className={styles.colSpan12}>
                                 <div className={styles.digitalSection}>
                                     <h4 className={styles.digitalHeader}>
-                                        <FileDown size={18} /> Digital Assets
+                                        <FileDown size={18} /> {t.products.digitalAssets}
                                     </h4>
                                     <div className={styles.fileInputGrid}>
                                         <div className={styles.formGroup}>
                                             <label className={styles.label}>
-                                                Product File (ZIP) <span style={{color: '#ef4444'}}>*</span>
+                                                {t.products.file} <span style={{color: '#ef4444'}}>*</span>
                                             </label>
                                             <div className={styles.fileInputWrapper}>
                                                 <input type="file" name="digitalProductFile" className={styles.fileInput} onChange={handleProductChange} />
@@ -528,7 +533,7 @@ export default function TemplateSettings() {
                                         </div>
                                          <div className={styles.formGroup}>
                                             <label className={styles.label}>
-                                                Cover Image <span style={{color: '#ef4444'}}>*</span>
+                                                {t.products.cover} <span style={{color: '#ef4444'}}>*</span>
                                             </label>
                                             <div className={styles.fileInputWrapper}>
                                                 <input type="file" name="digitalProductCover" className={styles.fileInput} onChange={handleProductChange} />
@@ -553,8 +558,8 @@ export default function TemplateSettings() {
                   </div>
                   
                   <div className={styles.modalFooter}>
-                      <button onClick={handleCloseModal} className={styles.cancelButton} type="button">Cancel</button>
-                      <button onClick={handleSaveProduct} className={styles.addProductBtn}>Save Product</button>
+                      <button onClick={handleCloseModal} className={styles.cancelButton} type="button">{t.products.cancel}</button>
+                      <button onClick={handleSaveProduct} className={styles.addProductBtn}>{t.products.save}</button>
                   </div>
               </div>
           </div>
@@ -566,13 +571,13 @@ export default function TemplateSettings() {
       case 'general':
         return (
           <>
-            <div className={styles.sectionTitle}>General Settings</div>
+            <div className={styles.sectionTitle}>{t.general}</div>
             <div className={styles.formGroup}>
-              <label className={styles.label}>Template Name</label>
+              <label className={styles.label}>{t.templateName}</label>
               <input type="text" name="name" value={formData.name} onChange={handleChange} className={styles.input} />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.label}>Description</label>
+              <label className={styles.label}>{t.description}</label>
               <textarea name="description" value={formData.description} onChange={handleChange} className={styles.textarea} />
             </div>
           </>
@@ -580,20 +585,20 @@ export default function TemplateSettings() {
       case 'store':
         return (
           <>
-            <div className={styles.sectionTitle}>Store Information</div>
+            <div className={styles.sectionTitle}>{t.products.storeInfo}</div>
              <div className={styles.formGroup}>
-              <label className={styles.label}>Store Logo</label>
+              <label className={styles.label}>{t.products.storeLogo}</label>
               <div className={styles.flexRow} style={{ gap: '1rem' }}>
                   <div className={styles.fileInputWrapper}>
                     <input type="file" name="storeLogo" accept="image/*" onChange={handleChange} className={styles.fileInput} />
                     <div className={styles.fileInputButton}>
-                        <Upload size={16} /> {formData.storeLogo ? 'Change Logo' : 'Upload Logo'}
+                        <Upload size={16} /> {formData.storeLogo ? t.products.changeLogo : t.products.uploadLogo}
                     </div>
                   </div>
               </div>
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.label}>Display Name</label>
+              <label className={styles.label}>{t.products.displayName}</label>
               <input type="text" name="storeName" value={formData.storeName} onChange={handleChange} className={styles.input} />
             </div>
           </>
@@ -601,20 +606,20 @@ export default function TemplateSettings() {
        case 'physical':
         return (
           <>
-            <div className={styles.sectionTitle}>Physical Product Management</div>
+            <div className={styles.sectionTitle}>{t.products.titlePhysical}</div>
             
             {/* ADD BUTTON ABOVE LIST */}
             <div className={styles.listHeader}>
-                <h3 className={styles.listTitle}>Registered Products</h3>
+                <h3 className={styles.listTitle}>{t.products.registered}</h3>
                 <button className={styles.addProductBtn} onClick={() => handleOpenModal('physical')} type="button">
-                    <Plus size={18} /> Add New Product
+                    <Plus size={18} /> {t.products.add}
                 </button>
             </div>
 
             {physicalProducts.length === 0 ? (
                 <div className={styles.emptyState}>
                     <Inbox className={styles.emptyIcon} size={48} />
-                    <div className={styles.emptyText}>No products registered</div>
+                    <div className={styles.emptyText}>{t.products.empty}</div>
                 </div>
             ) : (
                 <div className={styles.productsGrid}>
@@ -642,20 +647,20 @@ export default function TemplateSettings() {
        case 'digital':
         return (
             <>
-                <div className={styles.sectionTitle}>Digital Product Management</div>
+                <div className={styles.sectionTitle}>{t.products.titleDigital}</div>
                 
                 {/* ADD BUTTON ABOVE LIST */}
                 <div className={styles.listHeader}>
-                    <h3 className={styles.listTitle}>Registered Products</h3>
+                    <h3 className={styles.listTitle}>{t.products.registered}</h3>
                      <button className={styles.addProductBtn} onClick={() => handleOpenModal('digital')} type="button">
-                        <Plus size={18} /> Add New Product
+                        <Plus size={18} /> {t.products.add}
                     </button>
                 </div>
 
                 {digitalProducts.length === 0 ? (
                     <div className={styles.emptyState}>
                         <Inbox className={styles.emptyIcon} size={48} />
-                        <div className={styles.emptyText}>No products registered</div>
+                        <div className={styles.emptyText}>{t.products.empty}</div>
                     </div>
                 ) : (
                     <div className={styles.productsGrid}>
@@ -689,7 +694,7 @@ export default function TemplateSettings() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Theme Settings</h1>
+        <h1 className={styles.title}>{t.title}</h1>
       </div>
 
       <div className={styles.contentWrapper}>
@@ -714,7 +719,7 @@ export default function TemplateSettings() {
             {activeTab !== 'physical' && activeTab !== 'digital' && (
                  <div className={styles.saveBar}>
                     <button type="submit" className={styles.saveButton} disabled={loading}>
-                        <Save size={18} /> {loading ? 'Saving...' : 'Save Changes'}
+                        <Save size={18} /> {loading ? t.saving : t.save}
                     </button>
                  </div>
             )}

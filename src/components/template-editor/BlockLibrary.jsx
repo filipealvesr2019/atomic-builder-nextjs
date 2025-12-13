@@ -7,6 +7,9 @@ import { Type, Image as ImageIcon, Square, Box, Layout, ShoppingBag } from 'luci
 import styles from './BlockLibrary.module.css';
 import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
 import templates from '@/templates-cms/registry';
+import { useAtom } from 'jotai';
+import { languageAtom } from '@/atoms/languageAtom';
+import { translations } from '@/locales/translations';
 
 function DraggableLibraryItem({ id, title, icon: Icon, category }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -40,6 +43,8 @@ function DraggableLibraryItem({ id, title, icon: Icon, category }) {
 
 export default function BlockLibrary({ templateId }) {
   const [activeTab, setActiveTab] = useState('atomic'); // 'atomic' | 'sections'
+  const [language] = useAtom(languageAtom);
+  const t = translations[language].editor;
 
   // Get current template config
   const currentTemplate = templateId ? templates[templateId] : null;
@@ -59,7 +64,7 @@ export default function BlockLibrary({ templateId }) {
 
   return (
     <div className={styles.libraryContainer}>
-      <h3 className={styles.libraryTitle}>Elements</h3>
+      <h3 className={styles.libraryTitle}>{t.elements}</h3>
       
       {/* Tabs */}
       <div className={styles.tabContainer}>
@@ -67,14 +72,14 @@ export default function BlockLibrary({ templateId }) {
           className={`${styles.tabButton} ${activeTab === 'atomic' ? styles.tabButtonActive : ''}`}
           onClick={() => setActiveTab('atomic')}
         >
-          Basic
+          {t.basic}
         </button>
         {templateSections.length > 0 && (
           <button
             className={`${styles.tabButton} ${activeTab === 'sections' ? styles.tabButtonActive : ''}`}
             onClick={() => setActiveTab('sections')}
           >
-            Sections
+            {t.sections}
           </button>
         )}
       </div>
@@ -85,7 +90,7 @@ export default function BlockLibrary({ templateId }) {
             <DraggableLibraryItem 
               key={block.id} 
               id={block.id} 
-              title={block.name} 
+              title={t.blocks[block.id] || block.name} 
               icon={block.icon} 
               category={block.category} 
             />
