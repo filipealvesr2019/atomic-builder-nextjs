@@ -21,7 +21,7 @@ export async function POST(request) {
 
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
-        { folder: 'cms-next' },
+        { folder: 'cms-next', resource_type: 'auto' },
         (error, result) => {
           if (error) reject(error);
           else resolve(result);
@@ -43,12 +43,12 @@ export async function POST(request) {
 
 export async function DELETE(request) {
     try {
-        const { public_id } = await request.json();
+        const { public_id, resource_type = 'image' } = await request.json();
         if (!public_id) {
             return NextResponse.json({ error: 'Missing public_id' }, { status: 400 });
         }
 
-        const result = await cloudinary.uploader.destroy(public_id);
+        const result = await cloudinary.uploader.destroy(public_id, { resource_type });
         
         return NextResponse.json({ result });
     } catch (error) {

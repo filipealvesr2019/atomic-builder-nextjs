@@ -221,13 +221,13 @@ export default function TemplateSettings() {
       }
   };
 
-  const deleteCloudinaryFile = async (public_id) => {
+  const deleteCloudinaryFile = async (public_id, resource_type = 'image') => {
       if (!public_id) return;
       try {
           await fetch('/api/upload', {
               method: 'DELETE',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ public_id })
+              body: JSON.stringify({ public_id, resource_type })
           });
       } catch (error) {
           console.error('Failed to delete file:', public_id, error);
@@ -242,9 +242,9 @@ export default function TemplateSettings() {
       
       if (productToDelete) {
           // Delete associated files
-          await deleteCloudinaryFile(productToDelete.coverImagePublicId);
-          await deleteCloudinaryFile(productToDelete.digitalProductFilePublicId);
-          await deleteCloudinaryFile(productToDelete.digitalProductCoverPublicId);
+          await deleteCloudinaryFile(productToDelete.coverImagePublicId, 'image');
+          await deleteCloudinaryFile(productToDelete.digitalProductFilePublicId, 'raw'); // ZIPs are usually 'raw'
+          await deleteCloudinaryFile(productToDelete.digitalProductCoverPublicId, 'image');
       }
 
       let updatedList = [];
