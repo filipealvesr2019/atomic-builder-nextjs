@@ -198,7 +198,7 @@ export const translations = {
       categories: {
           all: 'Todos',
           ecommerce: 'E-commerce',
-          business: 'Negócios',
+          // business: 'Negócios', // Removed
           blog: 'Blog',
           landing: 'Landing Page',
           portfolio: 'Portfólio'
