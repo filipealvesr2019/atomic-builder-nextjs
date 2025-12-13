@@ -44,7 +44,7 @@ export const translations = {
       categories: {
           all: 'All',
           ecommerce: 'E-commerce',
-          business: 'Business',
+          // business: 'Business', // Removed
           blog: 'Blog',
           landing: 'Landing Page',
           portfolio: 'Portfolio'
