@@ -17,6 +17,7 @@ import Quote from '@/templates-cms/ursula-theme/sections/Quote';
 import NewsletterSplit from '@/templates-cms/ursula-theme/sections/NewsletterSplit';
 import ContactSection from '@/templates-cms/ursula-theme/sections/ContactSection';
 import InstagramRow from '@/templates-cms/ursula-theme/sections/InstagramRow';
+import SinglePost from '@/templates-cms/ursula-theme/sections/SinglePost';
 // Add others if needed
 import LatestPosts from '@/templates-cms/ursula-theme/sections/LatestPosts';
 
@@ -30,6 +31,7 @@ const SECTION_MAP = {
     'newsletter-split': NewsletterSplit,
     'contact-section': ContactSection,
     'instagram-row': InstagramRow,
+    'single-post': SinglePost,
     'latest-posts': LatestPosts
 };
 

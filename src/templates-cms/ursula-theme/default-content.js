@@ -30,7 +30,7 @@ export const ursulaDefaultContent = {
                          { text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog' }
                      ] 
                  },
-                 { text: 'Single Post', href: '#' },
+
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
              ]
@@ -159,7 +159,7 @@ export const ursulaDefaultContent = {
                      { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
                  ]},
                  { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
-                 { text: 'Single Post', href: '#' },
+
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
              ]
@@ -244,7 +244,7 @@ export const ursulaDefaultContent = {
                      { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
                  ]},
                  { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
-                 { text: 'Single Post', href: '#' },
+
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
              ]
@@ -270,6 +270,73 @@ export const ursulaDefaultContent = {
                     email: 'hello@yourgmail.com',
                     phone: '+84 979445717'
                 }
+            }
+        },
+        {
+            type: 'instagram-row',
+            props: {
+                images: [
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc0a8?w=300&q=80',
+                    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80',
+                    'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=300&q=80',
+                    'https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=300&q=80',
+                    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=300&q=80',
+                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&q=80'
+                ]
+            }
+        },
+        {
+            type: 'footer',
+            props: {
+               sections: {} 
+            }
+        }
+      ]
+
+    },
+    {
+      slug: 'single-post',
+      name: 'Single Post',
+      content: [
+        {
+          type: 'header',
+          props: {
+             logoText: 'Ursula',
+             links: [
+                 { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
+                 { text: 'Categories', href: '#', subItems: [
+                     { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
+                     { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
+                     { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
+                     { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
+                 ]},
+                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
+                 { text: 'Single Post', href: '/admin/demo-preview/ursula-demo/single-post' },
+                 { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
+                 { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
+             ]
+          }
+        },
+        {
+            type: 'single-post',
+            props: {
+                category: 'FASHION',
+                date: '12 DEC 2024',
+                title: 'The journey of a thousand miles begins with a single step',
+                author: 'POST AUTHOR',
+                comments: '2 COMMENTS',
+                mainImage: 'https://images.unsplash.com/photo-1497215842964-222b430dc0a8?w=1200&q=80',
+                content: [
+                    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+                ],
+                gallery: [
+                     'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=500&q=80',
+                     'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80',
+                     'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80'
+                ],
+                quote: "There is no such thing as chance in a text. Any text is the result of a repertoire, on conscious and unconscious levels.",
+                tags: ['LIFE', 'STYLE', 'ART', 'TECH']
             }
         },
         {
