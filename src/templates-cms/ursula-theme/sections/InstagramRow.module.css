@@ -1,0 +1,56 @@
+.section {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+}
+
+.imgWrapper {
+    position: relative;
+    aspect-ratio: 1; /* Square */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.overlay {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0; 
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.imgWrapper:hover .overlay {
+    opacity: 1;
+}
+
+.imgWrapper:hover .image {
+    transform: scale(1.1);
+}
+
+@media (max-width: 900px) {
+    .section {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

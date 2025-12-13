@@ -234,6 +234,73 @@ export const ursulaDefaultContent = {
             }
         }
       ]
+
+    },
+    {
+      slug: 'contact',
+      name: 'Contact Us',
+      content: [
+        {
+          type: 'header',
+          props: {
+             logoText: 'Ursula',
+             links: [
+                 { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
+                 { text: 'Categories', href: '#', subItems: [
+                     { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
+                     { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
+                     { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
+                     { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
+                 ]},
+                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
+                 { text: 'Single Post', href: '#' },
+                 { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
+                 { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
+             ]
+          }
+        },
+        {
+          type: 'hero',
+          props: {
+            title: 'Contact Us',
+            subtitle: '',
+            buttonText: '',
+            backgroundImage: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1350&q=80' // Coffee/Desk top down
+          }
+        },
+        {
+            type: 'contact-section',
+            props: {
+                subtitle: 'SEND US',
+                title: 'Contact Info',
+                description: 'Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo.',
+                details: {
+                    address: 'Quang Trung, Thai Nguyen',
+                    email: 'hello@yourgmail.com',
+                    phone: '+84 979445717'
+                }
+            }
+        },
+        {
+            type: 'instagram-row',
+            props: {
+                images: [
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc0a8?w=300&q=80',
+                    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80',
+                    'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=300&q=80',
+                    'https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=300&q=80',
+                    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=300&q=80',
+                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=300&q=80'
+                ]
+            }
+        },
+        {
+            type: 'footer',
+            props: {
+               sections: {} 
+            }
+        }
+      ]
     }
   ]
 };
