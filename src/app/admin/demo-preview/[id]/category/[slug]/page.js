@@ -1,0 +1,127 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { getTemplateLayout, getTemplate } from '@/templates-cms/registry';
+import styles from '../../demo-preview.module.css'; // Reuse preview styles
+
+export default function CategoryPage() {
+  const params = useParams(); // { id, slug } "slug" here is the category name
+  const [template, setTemplate] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (params.id) {
+      fetchTemplate();
+    }
+  }, [params.id]);
+
+  const fetchTemplate = async () => {
+    try {
+      const res = await fetch(`/api/templates/${params.id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setTemplate(data);
+      }
+    } catch (error) {
+      console.error('Error fetching template:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return (
+      <div className={styles.loading}>
+        <div className={styles.spinner}></div>
+      </div>
+  );
+  if (!template) return <div className={styles.error}>Template not found</div>;
+
+  // 1. Get Theme Configuration
+  if (template.type === 'theme' && template.templateId) {
+      const templateConfig = getTemplate(template.templateId);
+      if (!templateConfig) return <div>Theme Registry Error</div>;
+
+      const HeaderComponent = templateConfig.sections?.header;
+      const FooterComponent = templateConfig.sections?.footer;
+      const LatestPostsComponent = templateConfig.sections?.['latest-posts']; // Re-use this for the list
+
+      // 2. Prepare Section Props (Header/Footer)
+      const sectionProps = {};
+      
+      // Defaults from Home (Global)
+      const homePage = template.pages?.find(p => p.slug === 'home');
+      const homeBlocks = homePage?.content || template.pageContent || []; 
+      
+      const globalBlocks = homeBlocks.filter(b => ['header', 'footer'].includes(b.type)); 
+      
+      // We try to find "header" and "footer" props from existing content to keep consistency
+      globalBlocks.forEach(block => {
+          if (['header', 'footer'].includes(block.type)) {
+              sectionProps[block.type] = block.props;
+          }
+      });
+      
+      // Fallback to registry defaults if missing
+      const defaults = templateConfig.defaultContent?.pages?.[0]?.content || [];
+      const defaultHeader = defaults.find(b => b.type === 'header')?.props;
+      const defaultFooter = defaults.find(b => b.type === 'footer')?.props;
+
+      if (!sectionProps.header) sectionProps.header = defaultHeader;
+      if (!sectionProps.footer) sectionProps.footer = defaultFooter;
+
+      // 3. Filter Posts by Category
+      const categorySlug = params.slug; 
+      
+      // Where are the posts? 
+      // In a real CMS, they are in a database.
+      // In this demo, they might be in the 'latest-posts' section props of the Home page or we simulated them.
+      let allPosts = [];
+      const postsBlock = homeBlocks.find(b => b.type === 'latest-posts');
+      
+      if (postsBlock && postsBlock.props && Array.isArray(postsBlock.props.posts)) {
+          allPosts = postsBlock.props.posts;
+      } else {
+          // Fallback to mock data from defaultContent if not in saved template
+           const defaultPostsBlock = defaults.find(b => b.type === 'latest-posts');
+           if (defaultPostsBlock) {
+               allPosts = defaultPostsBlock.props.posts || [];
+           }
+      }
+
+      // Perform Filter (Case insensitive)
+      const filteredPosts = allPosts.filter(post => 
+          post.category?.toLowerCase() === categorySlug.toLowerCase()
+      );
+
+      return (
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            {/* Header */}
+            {HeaderComponent && <HeaderComponent {...(sectionProps.header || {})} />}
+            
+            {/* Main Content: Category Title + Post Grid */}
+            <main style={{ flex: 1, background: '#f9f9f9' }}>
+                 {/* Re-use LatestPosts component but override title/posts */}
+                 {LatestPostsComponent ? (
+                     <LatestPostsComponent 
+                        subtitle={`Category Archive`}
+                        title={categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1)}
+                        posts={filteredPosts}
+                     />
+                 ) : (
+                     <div style={{padding: '4rem'}}>No Component for Posts</div>
+                 )}
+                 
+                 {filteredPosts.length === 0 && (
+                     <p style={{textAlign:'center', paddingBottom: '4rem', color: '#999'}}>No posts found in this category.</p>
+                 )}
+            </main>
+
+            {/* Footer */}
+            {FooterComponent && <FooterComponent {...(sectionProps.footer || {})} />}
+        </div>
+      );
+  }
+
+  return <div>Only Themes Supported for Categories</div>;
+}

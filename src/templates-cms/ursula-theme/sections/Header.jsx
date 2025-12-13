@@ -7,52 +7,92 @@ import styles from './Header.module.css';
 
 export default function Header({ 
   logoText = "Ursula", 
-  logoSub = "Theme",
+  logoSub = "",
   logoImage = "",
   links = []
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Split links for desktop layout (first 3 left, rest right)
+  const midPoint = Math.ceil(links.length / 2);
+  const leftLinks = links.slice(0, midPoint);
+  const rightLinks = links.slice(midPoint);
+
   return (
     <header className={styles.header}>
-      <div className={styles.topBar}>
-         <div className={styles.socials}>
-             <a href="#" className={styles.socialLink}><Facebook size={14} className={styles.socialIcon} /></a>
-             <a href="#" className={styles.socialLink}><Instagram size={14} className={styles.socialIcon} /></a>
-             <a href="#" className={styles.socialLink}><Twitter size={14} className={styles.socialIcon} /></a>
-         </div>
-         <div className={styles.search}>
-             <Search size={14} />
-         </div>
+      {/* Mobile Header */}
+      <div className={styles.mobileHeader}>
+          <button className={styles.mobileToggle} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+             {isMenuOpen ? <X size={24}/> : <Menu size={24}/>}
+          </button>
+          <div className={styles.mobileLogo}>{logoText}</div>
+          <div className={styles.mobileSearch}><Search size={20} /></div>
       </div>
-      
-      <div className={styles.mainHeader}>
-        <div className={styles.logoContainer}>
-            {logoImage ? (
-                <img src={logoImage} alt={logoText} className={styles.logoImage} />
-            ) : (
-                <div className={styles.textLogo}>
-                    <h1 className={styles.logoTitle}>{logoText}</h1>
-                    <span className={styles.logoSub}>{logoSub}</span>
-                </div>
-            )}
-        </div>
-        
-        <button className={styles.mobileToggle} onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X /> : <Menu />}
-        </button>
 
-        <nav className={`${styles.nav} ${isMenuOpen ? styles.mobileOpen : ''}`}>
-           <ul className={styles.navList}>
-               {links.map((link, idx) => (
-                   <li key={idx}>
-                       <Link href={link.href} className={styles.navLink}>
-                           {link.text}
-                       </Link>
-                   </li>
-               ))}
-           </ul>
-        </nav>
+      {/* Desktop Header Container */}
+      <div className={`${styles.container} ${isMenuOpen ? styles.showMenu : ''}`}>
+        
+        {/* Left: Socials */}
+        <div className={styles.socials}>
+             <a href="#" className={styles.socialLink}><Facebook size={16} /></a>
+             <a href="#" className={styles.socialLink}><Twitter size={16} /></a>
+             <a href="#" className={styles.socialLink}><Instagram size={16} /></a>
+        </div>
+
+        {/* Center: Nav - Logo - Nav */}
+        <div className={styles.centerNav}>
+            <nav className={styles.navGroup}>
+                {leftLinks.map((link, idx) => (
+                    <div key={idx} className={styles.navItemWrapper}>
+                        <Link href={link.href} className={styles.navLink}>
+                            {link.text} {link.subItems && <span style={{fontSize: 10, marginLeft: 2}}>▼</span>}
+                        </Link>
+                        {link.subItems && (
+                            <div className={styles.dropdown}>
+                                {link.subItems.map((sub, sIdx) => (
+                                    <Link key={sIdx} href={sub.href} className={styles.dropdownLink}>
+                                        {sub.text}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </nav>
+
+            <div className={styles.logoWrapper}>
+                {logoImage ? (
+                    <img src={logoImage} alt={logoText} className={styles.logoImage} />
+                ) : (
+                    <h1 className={styles.logoTitle}>{logoText}</h1>
+                )}
+            </div>
+
+            <nav className={styles.navGroup}>
+                {rightLinks.map((link, idx) => (
+                    <div key={idx} className={styles.navItemWrapper}>
+                        <Link href={link.href} className={styles.navLink}>
+                             {link.text} {link.subItems && <span style={{fontSize: 10, marginLeft: 2}}>▼</span>}
+                        </Link>
+                         {link.subItems && (
+                            <div className={styles.dropdown}>
+                                {link.subItems.map((sub, sIdx) => (
+                                    <Link key={sIdx} href={sub.href} className={styles.dropdownLink}>
+                                        {sub.text}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </nav>
+        </div>
+
+        {/* Right: Search */}
+        <div className={styles.search}>
+             <Search size={18} />
+        </div>
+
       </div>
     </header>
   );

@@ -13,9 +13,20 @@ export const ursulaDefaultContent = {
              logoSub: 'Theme',
              links: [
                  { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
-                 { text: 'Lifestyle', href: '#' },
-                 { text: 'About', href: '#' },
-                 { text: 'Contact', href: '#' }
+                 { 
+                     text: 'Categories', 
+                     href: '#',
+                     subItems: [
+                         { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
+                         { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
+                         { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
+                         { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
+                     ]
+                 },
+                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '#'}] },
+                 { text: 'Single Post', href: '#' },
+                 { text: 'About Me', href: '#' },
+                 { text: 'Contact Us', href: '#' }
              ]
           }
         },

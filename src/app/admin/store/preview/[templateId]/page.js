@@ -21,6 +21,22 @@ export default function BlueprintPreview() {
   // Function to simulate installation (just redirects to store for now, or could handle install logic)
   // In a real flow, we might want to install directly from here.
   
+  // Prepare sections from default content
+  const defaultContent = templateConfig.defaultContent || { pages: [] };
+  const homePage = defaultContent.pages?.find(p => p.slug === 'home') || defaultContent.pages?.[0];
+  const sections = {};
+  
+  if (homePage?.content) {
+      homePage.content.forEach(block => {
+          // Use block.id as key if it matches section names, or block.type as fallback
+          // For Ursula, IDs are like 'ursula-header' but keys expected are 'header'
+          // We used type in default-content for Ursula: type: 'header', type: 'hero' etc.
+          // HomePage expects keys: header, hero, categories, featured-content, client-love, latest-posts, footer
+          
+          sections[block.type] = block.props;
+      });
+  }
+
   return (
     <div className="relative min-h-screen bg-white">
         {/* Sticky Header for Actions */}
@@ -46,8 +62,8 @@ export default function BlueprintPreview() {
         <div className="template-preview-frame">
             {HomeLayout ? (
                 <HomeLayout 
-                    content={templateConfig.defaultContent || []} 
-                    theme={{}} // Pass default theme if available
+                    sections={sections}
+                    theme={{}} 
                 />
             ) : (
                 <div className="p-10 text-center text-red-500">

@@ -1,130 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@300;400;500&display=swap');
+
 .header {
     width: 100%;
-    font-family: 'Playfair Display', serif; /* Assuming Serif font from screenshot */
     background: #fff;
-    border-bottom: 1px solid #eee;
-}
-
-.topBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 2rem;
-    background: #fdfdfd;
     border-bottom: 1px solid #f0f0f0;
-    font-size: 0.8rem;
-    color: #666;
+    font-family: 'Inter', sans-serif;
 }
 
+.mobileHeader {
+    display: none;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+
+/* Left Socials */
 .socials {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
+    flex: 1;
 }
 
-.socialIcon {
-    cursor: pointer;
+.socialLink {
+    color: #333;
     transition: color 0.2s;
 }
 
-.socialIcon:hover {
-    color: #d4a373; /* Accent color */
+.socialLink:hover {
+    color: #d4a373;
 }
 
-.mainHeader {
+/* Center Navigation & Logo */
+.centerNav {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 2rem 1rem;
-    position: relative;
-}
-
-.logoContainer {
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.logoTitle {
-    font-size: 3rem;
-    font-weight: 400;
-    margin: 0;
-    letter-spacing: -1px;
-    font-style: italic;
-    color: #333;
-}
-
-.logoSub {
-    display: block;
-    font-family: 'Inter', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.7rem;
-    color: #999;
-    margin-top: 5px;
-}
-
-.nav {
-    width: 100%;
-    border-top: 1px solid #f5f5f5;
-    border-bottom: 1px solid #f5f5f5;
-    padding: 1rem 0;
-}
-
-.navList {
-    display: flex;
     justify-content: center;
-    gap: 3rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    gap: 2rem;
+    flex: 2;
+}
+
+.navGroup {
+    display: flex;
+    gap: 2rem;
+}
+
+.navItemWrapper {
+    position: relative;
+    padding: 1rem 0; /* Increase hit area for hover */
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-top: 2px solid #e6b8ae; /* Pink accent top border */
+    z-index: 50;
+    flex-direction: column;
+    padding: 0.5rem 0;
+}
+
+.navItemWrapper:hover .dropdown {
+    display: flex;
+}
+
+.dropdownLink {
+    text-decoration: none;
+    color: #444;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #f9f9f9;
+    transition: all 0.2s;
+}
+
+.dropdownLink:hover {
+    background: #fdfdfd;
+    color: #d4a373;
+    padding-left: 1.8rem; /* Slight slide effect */
 }
 
 .navLink {
     text-decoration: none;
     color: #444;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 0.9rem;
+    font-weight: 400;
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
 }
 
 .navLink:hover {
-    color: #d4a373;
+    color: #000;
 }
 
-.mobileToggle {
-    display: none;
-    position: absolute;
-    right: 1rem;
-    top: 2rem;
-    background: none;
-    border: none;
+.logoWrapper {
+    padding: 0 1rem;
+}
+
+.logoTitle {
+    font-family: 'Allura', cursive; /* Script font similar to reference */
+    font-size: 4rem; /* Large size */
+    margin: 0;
+    line-height: 0.8;
+    color: #000;
+    font-weight: 400;
+}
+
+.logoImage {
+    height: 50px;
+    object-fit: contain;
+}
+
+/* Right Search */
+.search {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    color: #333;
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: white;
-        z-index: 100;
-        border-bottom: 1px solid #eee;
+@media (max-width: 1024px) {
+    .container {
+        display: none; /* Hide desktop menu */
     }
 
-    .nav.mobileOpen {
-        display: block;
-    }
-
-    .navList {
+    .container.showMenu {
+        display: flex;
         flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        z-index: 100;
+        height: auto;
+        padding: 2rem;
         align-items: center;
+        gap: 2rem;
     }
 
-    .mobileToggle {
-        display: block;
+    .mobileHeader {
+        display: flex;
+    }
+
+    .mobileLogo {
+        font-family: 'Allura', cursive;
+        font-size: 2.5rem;
+    }
+
+    .centerNav {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .navGroup {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .socials {
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    
+    .logoWrapper {
+        display: none; /* Hide logo inside menu since it's on top bar */
+    }
+    
+    .search {
+        display: none;
     }
 }
