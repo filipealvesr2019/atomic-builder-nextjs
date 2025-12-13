@@ -41,6 +41,14 @@ export const translations = {
       install: 'Install Theme',
       installing: 'Installing...',
       installed: 'Installed',
+      categories: {
+          all: 'All',
+          ecommerce: 'E-commerce',
+          business: 'Business',
+          blog: 'Blog',
+          landing: 'Landing Page',
+          portfolio: 'Portfolio'
+      },
       items: {
          'rustic-store-cms': {
              name: 'Rustic Store',
@@ -187,6 +195,14 @@ export const translations = {
       install: 'Instalar Tema',
       installing: 'Instalando...',
       installed: 'Instalado',
+      categories: {
+          all: 'Todos',
+          ecommerce: 'E-commerce',
+          business: 'Negócios',
+          blog: 'Blog',
+          landing: 'Landing Page',
+          portfolio: 'Portfólio'
+      },
       items: {
          'rustic-store-cms': {
              name: 'Rustic Store',

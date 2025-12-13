@@ -122,3 +122,38 @@
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tabButton {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #4b5563;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tabButton:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.tabButtonActive {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.tabButtonActive:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}

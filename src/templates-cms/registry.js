@@ -24,6 +24,7 @@ import { rusticStoreDefaultContent } from './rustic-store-cms/default-content';
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
+    category: 'ecommerce',
     defaultContent: rusticStoreDefaultContent,
     layouts: {
       home: RusticStoreHome
@@ -41,6 +42,7 @@ const templates = {
   },
   'business-theme-cms': {
     name: 'Business Theme',
+    category: 'business',
     layouts: {
       home: BusinessThemeHome
     },
@@ -53,6 +55,7 @@ const templates = {
   },
   'minimal-business': {
     name: 'Minimal Business',
+    category: 'landing',
     layouts: {
       home: MinimalBusinessHome
     },

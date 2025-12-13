@@ -12,13 +12,20 @@ import { translations } from '@/locales/translations';
 export default function TemplateStore() {
   const router = useRouter();
   const [installing, setInstalling] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all');
   const [language] = useAtom(languageAtom);
   const t = translations[language].store;
+
+  const CATEGORIES = ['all', 'ecommerce', 'business', 'landing', 'blog', 'portfolio'];
 
   const availableTemplates = Object.entries(templates).map(([key, config]) => ({
     id: key,
     ...config
   }));
+
+  const filteredTemplates = activeCategory === 'all' 
+    ? availableTemplates 
+    : availableTemplates.filter(t => t.category === activeCategory);
 
   const handleInstall = async (templateId) => {
     setInstalling(templateId);
@@ -56,8 +63,20 @@ export default function TemplateStore() {
         <p>{t.subtitle}</p>
       </div>
 
+      <div className={styles.tabs}>
+        {CATEGORIES.map(cat => (
+            <button
+                key={cat}
+                className={`${styles.tabButton} ${activeCategory === cat ? styles.tabButtonActive : ''}`}
+                onClick={() => setActiveCategory(cat)}
+            >
+                {t.categories?.[cat] || cat}
+            </button>
+        ))}
+      </div>
+
       <div className={styles.grid}>
-        {availableTemplates.map((template) => (
+        {filteredTemplates.map((template) => (
           <div key={template.id} className={styles.card}>
             {/* Preview Image Placeholder */}
             <div className={styles.cardPreview}>
