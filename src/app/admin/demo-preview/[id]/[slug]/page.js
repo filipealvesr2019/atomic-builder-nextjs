@@ -92,50 +92,30 @@ export default function DemoPage() {
     }
 
     if (template.type === 'theme' && template.templateId) {
-      const { getTemplateLayout } = require('@/templates-cms/registry');
-      const LayoutComponent = getTemplateLayout(template.templateId, 'home'); 
-      
-      if (!LayoutComponent) {
-        return <div>Template Not Registered</div>;
-      }
+      const { getTemplateLayout, getTemplate } = require('@/templates-cms/registry');
       
       // Transform URLs to PATH format: /admin/demo-preview/[id]/[slug]
       const transformUrl = (url) => {
         if (!url || url.startsWith('http') || url === '#') return url;
-        
-        // If it's already a full path, leave it (unless we want to force it)
         if (url.startsWith('/admin/demo-preview')) return url;
-
-        // Basic slug extraction
         const cleanSlug = url.replace(/^\/|\/$/g, '').replace('?page=', '');
-        
-        // Handle "Home" link (empty slug or '/') -> go to root ID
-        if (cleanSlug === 'home' || cleanSlug === '') {
-            return `/admin/demo-preview/${params.id}`;
-        }
-
+        if (cleanSlug === 'home' || cleanSlug === '') return `/admin/demo-preview/${params.id}`;
         return `/admin/demo-preview/${params.id}/${cleanSlug}`;
       };
 
       const smartTransform = (link) => {
          let url = link.url || link.href;
          const text = link.text;
-         
-         if (url && url !== '#' && !url.startsWith('http')) {
-             return transformUrl(url);
-         }
-         
+         if (url && url !== '#' && !url.startsWith('http')) return transformUrl(url);
          if ((!url || url === '#') && text) {
              const slug = text.toLowerCase().replace(/\s+/g, '-');
              const pageExists = template.pages?.some(p => p.slug === slug);
-             if (pageExists) {
-                 return `/admin/demo-preview/${params.id}/${slug}`;
-             }
+             if (pageExists) return `/admin/demo-preview/${params.id}/${slug}`;
          }
-         
          return url;
       };
 
+      // PREPARE PROPS
       const sectionProps = {};
       
       // Defaults from Home
@@ -144,9 +124,16 @@ export default function DemoPage() {
       const globalBlocks = homeBlocks.filter(b => ['header', 'footer'].includes(b.type));
       globalBlocks.forEach(block => { sectionProps[block.type] = block.props; });
 
-      // Overlay Current Page
+      // Overlay Current Page (Only if it's Home or if we want to override header/footer on subpages)
+      // For subpages, we usually generally want strictly the global header/footer unless overridden.
+      // But activeBlocks might contain valid content blocks too.
       if (activeBlocks && activeBlocks.length > 0) {
-          activeBlocks.forEach(block => { sectionProps[block.type] = block.props; });
+          activeBlocks.forEach(block => { 
+              // Only override header/footer if explicitly present in activeBlocks
+              if (['header', 'footer'].includes(block.type)) {
+                  sectionProps[block.type] = block.props; 
+              }
+          });
       }
 
       // Template Defaults
@@ -155,30 +142,63 @@ export default function DemoPage() {
           if (!sectionProps[key]) sectionProps[key] = value;
       }
 
-      // Apply Transformations
+      // Apply Link Transformations
       ['header', 'footer'].forEach(sectionType => {
         if (sectionProps[sectionType]) {
           const props = { ...sectionProps[sectionType] };
           let modified = false;
-
-          if (Array.isArray(props.links)) {
-            props.links = props.links.map(link => ({...link, href: smartTransform(link)}));
-            modified = true;
-          }
-          if (Array.isArray(props.companyLinks)) {
-            props.companyLinks = props.companyLinks.map(link => ({...link, url: smartTransform(link)}));
-            modified = true;
-          }
-          if (Array.isArray(props.supportLinks)) {
-            props.supportLinks = props.supportLinks.map(link => ({...link, url: smartTransform(link)}));
-            modified = true;
-          }
-
+          if (Array.isArray(props.links)) { props.links = props.links.map(link => ({...link, href: smartTransform(link)})); modified = true; }
+          if (Array.isArray(props.companyLinks)) { props.companyLinks = props.companyLinks.map(link => ({...link, url: smartTransform(link)})); modified = true; }
+          if (Array.isArray(props.supportLinks)) { props.supportLinks = props.supportLinks.map(link => ({...link, url: smartTransform(link)})); modified = true; }
           if (modified) sectionProps[sectionType] = props;
         }
       });
-      
-      return <LayoutComponent sections={sectionProps} />;
+
+      // RENDER STRATEGY
+      // 1. HOME PAGE: Use rigid Layout
+      if (pageSlug === 'home') {
+          const LayoutComponent = getTemplateLayout(template.templateId, 'home');
+          if (!LayoutComponent) return <div>Template Layout Not Found</div>;
+          
+          // Should we merge content blocks into sections for Home? 
+          // The previous logic did: `activeBlocks.forEach(block => { sectionProps[block.type] = block.props; });`
+          // Let's ensure we do that for Home only or if the layout supports it.
+          // Re-apply activeBlocks for Home specific sections (hero, features...)
+          if (activeBlocks && activeBlocks.length > 0) {
+             activeBlocks.forEach(block => { sectionProps[block.type] = block.props; });
+          }
+          
+          return <LayoutComponent sections={sectionProps} />;
+      }
+
+      // 2. INNER PAGES: Dynamic Composition (Header + generic content + Footer)
+      const templateConfig = getTemplate(template.templateId);
+      const HeaderComponent = templateConfig?.sections?.header;
+      const FooterComponent = templateConfig?.sections?.footer;
+
+      return (
+          <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+              {HeaderComponent && <HeaderComponent {...(sectionProps.header || {})} />}
+              
+              <main style={{ flex: 1 }}>
+                  {activeBlocks && activeBlocks.length > 0 ? (
+                      // Filter out header/footer from activeBlocks to avoid duplication if they exist there
+                      activeBlocks
+                        .filter(b => !['header', 'footer'].includes(b.type))
+                        .map((block) => (
+                           <BlockRenderer key={block.id} block={block} readOnly={true} />
+                        ))
+                  ) : (
+                      <div style={{ padding: '4rem', textAlign: 'center', color: '#888' }}>
+                          <h3>Empty Page</h3>
+                          <p>Add content to this page in the editor.</p>
+                      </div>
+                  )}
+              </main>
+
+              {FooterComponent && <FooterComponent {...(sectionProps.footer || {})} />}
+          </div>
+      );
     }
     
     // Generic renderer fallback
