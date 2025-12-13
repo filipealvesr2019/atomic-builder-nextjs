@@ -23,7 +23,13 @@ export const ursulaDefaultContent = {
                          { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
                      ]
                  },
-                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '#'}] },
+                 { 
+                     text: 'Our Blog', 
+                     href: '#', 
+                     subItems: [
+                         { text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog' }
+                     ] 
+                 },
                  { text: 'Single Post', href: '#' },
                  { text: 'About Me', href: '#' },
                  { text: 'Contact Us', href: '#' }

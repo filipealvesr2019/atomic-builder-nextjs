@@ -15,7 +15,7 @@ export default function Hero({
       <div className={styles.content}>
         <span className={styles.subtitle}>{subtitle}</span>
         <h2 className={styles.title}>{title}</h2>
-        <a href={buttonLink} className={styles.button}>{buttonText}</a>
+        {buttonText && <a href={buttonLink} className={styles.button}>{buttonText}</a>}
       </div>
     </section>
   );

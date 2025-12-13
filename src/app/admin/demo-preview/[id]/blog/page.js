@@ -3,16 +3,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getTemplateLayout, getTemplate } from '@/templates-cms/registry';
-import styles from '../../demo-preview.module.css'; // Reuse preview styles
+import styles from '../demo-preview.module.css'; 
 
-export default function CategoryPage() {
-  const params = useParams(); // { id, slug } "slug" here is the category name
+export default function BlogPage() {
+  const params = useParams(); // { id }
   const [template, setTemplate] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (params.id === 'ursula-demo') {
-        // Special case for static demo preview
         const ursulaConfig = getTemplate('ursula-theme');
         if (ursulaConfig && ursulaConfig.defaultContent) {
            setTemplate({
@@ -36,9 +35,6 @@ export default function CategoryPage() {
       if (res.ok) {
         const data = await res.json();
         setTemplate(data);
-      } else {
-        // Fallback for demo IDs that might not be in DB but are valid themes
-        // This makes "ursula-demo" work even if logic above missed or if used elsewhere
       }
     } catch (error) {
       console.error('Error fetching template:', error);
@@ -54,7 +50,6 @@ export default function CategoryPage() {
   );
   if (!template) return <div className={styles.error}>Template not found</div>;
 
-  // 1. Get Theme Configuration
   if (template.type === 'theme' && template.templateId) {
       const templateConfig = getTemplate(template.templateId);
       if (!templateConfig) return <div>Theme Registry Error</div>;
@@ -64,23 +59,18 @@ export default function CategoryPage() {
       const LatestPostsComponent = templateConfig.sections?.['latest-posts']; 
       const HeroComponent = templateConfig.sections?.hero;
 
-      // 2. Prepare Section Props (Header/Footer)
+      // Prepare Section Props
       const sectionProps = {};
-      
-      // Defaults from Home (Global)
       const homePage = template.pages?.find(p => p.slug === 'home');
       const homeBlocks = homePage?.content || template.pageContent || []; 
-      
       const globalBlocks = homeBlocks.filter(b => ['header', 'footer'].includes(b.type)); 
       
-      // We try to find "header" and "footer" props from existing content to keep consistency
       globalBlocks.forEach(block => {
           if (['header', 'footer'].includes(block.type)) {
               sectionProps[block.type] = block.props;
           }
       });
       
-      // Fallback to registry defaults if missing
       const defaults = templateConfig.defaultContent?.pages?.[0]?.content || [];
       const defaultHeader = defaults.find(b => b.type === 'header')?.props;
       const defaultFooter = defaults.find(b => b.type === 'footer')?.props;
@@ -88,60 +78,44 @@ export default function CategoryPage() {
       if (!sectionProps.header) sectionProps.header = defaultHeader;
       if (!sectionProps.footer) sectionProps.footer = defaultFooter;
 
-      // 3. Filter Posts by Category
-      const categorySlug = params.slug; 
-      
-      // Where are the posts? 
-      // In a real CMS, they are in a database.
-      // In this demo, they might be in the 'latest-posts' section props of the Home page or we simulated them.
+      // Get All Posts (No Filtering)
       let allPosts = [];
       const postsBlock = homeBlocks.find(b => b.type === 'latest-posts');
       
       if (postsBlock && postsBlock.props && Array.isArray(postsBlock.props.posts)) {
           allPosts = postsBlock.props.posts;
       } else {
-          // Fallback to mock data from defaultContent if not in saved template
            const defaultPostsBlock = defaults.find(b => b.type === 'latest-posts');
            if (defaultPostsBlock) {
                allPosts = defaultPostsBlock.props.posts || [];
            }
       }
 
-      // Perform Filter (Case insensitive)
-      const filteredPosts = allPosts.filter(post => 
-          post.category?.toLowerCase() === categorySlug.toLowerCase()
-      );
-
       return (
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             {/* Header */}
             {HeaderComponent && <HeaderComponent {...(sectionProps.header || {})} />}
             
-            {/* Category Hero */}
+            {/* Blog Hero */}
             {HeroComponent && (
                 <HeroComponent 
-                    title={categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1)}
-                    subtitle="Category Archive"
-                    buttonText="" // Hide button
-                    backgroundImage="https://images.unsplash.com/photo-1459156212016-c812468e2115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    title="Our Blog"
+                    subtitle=""
+                    buttonText="" 
+                    backgroundImage="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
                 />
             )}
             
-            {/* Main Content: Post Grid */}
+            {/* Main Content: All Posts */}
             <main style={{ flex: 1, background: '#fff' }}>
-                 {/* Re-use LatestPosts component but override title/posts */}
                  {LatestPostsComponent ? (
                      <LatestPostsComponent 
                         subtitle=""
                         title="Latest Articles"
-                        posts={filteredPosts}
+                        posts={allPosts}
                      />
                  ) : (
                      <div style={{padding: '4rem'}}>No Component for Posts</div>
-                 )}
-                 
-                 {filteredPosts.length === 0 && (
-                     <p style={{textAlign:'center', paddingBottom: '4rem', color: '#999'}}>No posts found in this category.</p>
                  )}
             </main>
 
@@ -151,5 +125,5 @@ export default function CategoryPage() {
       );
   }
 
-  return <div>Only Themes Supported for Categories</div>;
+  return <div>Only Themes Supported</div>;
 }
