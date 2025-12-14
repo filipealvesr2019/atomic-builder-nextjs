@@ -27,6 +27,14 @@ export default function IconBox({ settings }) {
   // We prioritize 'size' (new standard) over 'iconSize' (legacy)
   const iconSize = getProp('size') || getProp('iconSize', '40px'); 
   const iconColor = getProp('primaryColor') || getProp('iconColor', '#3b82f6');
+  const iconLib = getProp('iconLib', 'lucide');
+
+  // Adapter Logic:
+  // The UI sets 'iconLib' to 'custom' when Custom Icon is selected.
+  // The IconWidget expects 'iconType' to be 'custom'.
+  // If we don't do this, IconWidget defaults to 'library' mode and looks for an icon named "Star" or undefined.
+  const isCustomIcon = iconLib === 'custom';
+  const iconType = isCustomIcon ? 'custom' : 'library';
 
   // Prepare settings for the IconWidget
   // We merge legacy props to ensure IconWidget receives what it expects ('size', 'primaryColor')
@@ -34,6 +42,8 @@ export default function IconBox({ settings }) {
       ...settings,
       size: iconSize,
       primaryColor: iconColor,
+      iconType: iconType, // Pass the derived type explicitly
+
       // Ensure specific positioning doesn't conflict, though IconWidget handles its own alignment internally if needed.
       // Here we just want the IconWidget to render the icon itself.
       align: 'center', // Force center within the container we provide
