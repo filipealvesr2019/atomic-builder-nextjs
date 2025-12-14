@@ -57,6 +57,7 @@ export default function BlockLibrary({ templateId }) {
     { id: WIDGET_TYPES.IMAGE, name: 'Image', icon: ImageIcon, category: NODE_TYPES.WIDGET },
     { id: NODE_TYPES.CONTAINER, name: 'Container', icon: Box, category: NODE_TYPES.CONTAINER },
     { id: WIDGET_TYPES.PRODUCT_LIST, name: 'Product List', icon: ShoppingBag, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.ICON, name: 'Icon', icon: LucideIcons.Smile, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.ICON_BOX, name: 'Icon Box', icon: LucideIcons.Star, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.ICON_LIST, name: 'Icon List', icon: LucideIcons.List, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.IMAGE_BOX, name: 'Image Box', icon: LucideIcons.Image, category: NODE_TYPES.WIDGET },

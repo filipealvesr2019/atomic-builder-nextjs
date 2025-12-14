@@ -622,25 +622,46 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                     {activeTab === 'layout' && (
                         <Section title="Content">
                             <StyledSelect
-                                label="Icon Library / Name"
-                                value={getValue('icon', 'FaStar')}
-                                onChange={(val) => handleChange('icon', val)}
+                                label="Icon Source"
+                                value={getValue('iconType', 'library')}
+                                onChange={(val) => handleChange('iconType', val)}
                                 responsive={false}
                                 options={[
-                                    { label: 'Star (FontAwesome)', value: 'FaStar' },
-                                    { label: 'Heart (FontAwesome)', value: 'FaHeart' },
-                                    { label: 'User (FontAwesome)', value: 'FaUser' },
-                                    { label: 'Check (FontAwesome)', value: 'FaCheck' },
-                                    { label: 'Facebook (FontAwesome)', value: 'FaFacebook' },
-                                    { label: 'Twitter (FontAwesome)', value: 'FaTwitter' },
-                                    { label: 'Instagram (FontAwesome)', value: 'FaInstagram' },
-                                    { label: 'Linkedin (FontAwesome)', value: 'FaLinkedin' },
-                                    { label: 'Lucide Star', value: 'Star' },
-                                    { label: 'Lucide Heart', value: 'Heart' },
-                                    { label: 'Lucide User', value: 'User' },
-                                    { label: 'Lucide Check', value: 'Check' },
+                                    { label: 'Icon Library', value: 'library' },
+                                    { label: 'Custom Image', value: 'custom' }
                                 ]}
                             />
+
+                            {getValue('iconType', 'library') === 'library' ? (
+                                <StyledSelect
+                                    label="Icon Library / Name"
+                                    value={getValue('icon', 'FaStar')}
+                                    onChange={(val) => handleChange('icon', val)}
+                                    responsive={false}
+                                    options={[
+                                        { label: 'Star (FontAwesome)', value: 'FaStar' },
+                                        { label: 'Heart (FontAwesome)', value: 'FaHeart' },
+                                        { label: 'User (FontAwesome)', value: 'FaUser' },
+                                        { label: 'Check (FontAwesome)', value: 'FaCheck' },
+                                        { label: 'Facebook (FontAwesome)', value: 'FaFacebook' },
+                                        { label: 'Twitter (FontAwesome)', value: 'FaTwitter' },
+                                        { label: 'Instagram (FontAwesome)', value: 'FaInstagram' },
+                                        { label: 'Linkedin (FontAwesome)', value: 'FaLinkedin' },
+                                        { label: 'Lucide Star', value: 'Star' },
+                                        { label: 'Lucide Heart', value: 'Heart' },
+                                        { label: 'Lucide User', value: 'User' },
+                                        { label: 'Lucide Check', value: 'Check' },
+                                    ]}
+                                />
+                            ) : (
+                                 <StyledInput
+                                    label="Custom Image URL"
+                                    value={getValue('customIconSrc', '')}
+                                    onChange={(val) => handleChange('customIconSrc', val)}
+                                    placeholder="https://... (SVG, PNG, JPG)"
+                                    responsive={false}
+                                />
+                            )}
                              <StyledInput
                                 label="Link"
                                 value={getValue('link', '')}

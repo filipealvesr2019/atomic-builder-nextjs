@@ -1,0 +1,59 @@
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* Views */
+.viewDefault {
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+.viewStacked {
+  /* Background color will be set inline via variables or props */
+}
+
+.viewFramed {
+  background: transparent;
+  /* Border color/width set inline */
+  border-style: solid;
+}
+
+/* Animations */
+.hoverGrow:hover {
+  transform: scale(1.1);
+}
+
+.hoverShrink:hover {
+  transform: scale(0.9);
+}
+
+.hoverRotate:hover {
+  transform: rotate(20deg);
+}
+
+.hoverBuzz:hover {
+  animation: buzz 0.4s ease-in-out;
+}
+
+@keyframes buzz {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-3px) rotate(-3deg); }
+  40% { transform: translateX(3px) rotate(3deg); }
+  60% { transform: translateX(-3px) rotate(-3deg); }
+  80% { transform: translateX(3px) rotate(3deg); }
+  100% { transform: translateX(0); }
+}
+
+.iconImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}

@@ -3,6 +3,7 @@ import * as LucideIcons from 'lucide-react';
 import * as FaIcons from 'react-icons/fa6'; // Font Awesome 6
 import { useAtomValue } from 'jotai';
 import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
+import styles from './Icon.module.css';
 
 export default function IconWidget({ settings }) {
   const viewMode = useAtomValue(viewModeAtom);
@@ -14,7 +15,9 @@ export default function IconWidget({ settings }) {
   };
 
   // Content
-  const iconName = getProp('icon', 'FaStar'); // Default to FontAwesome Star
+  const iconType = getProp('iconType', 'library'); // 'library' or 'custom'
+  const iconName = getProp('icon', 'FaStar');
+  const customIconSrc = getProp('customIconSrc', '');
   const link = getProp('link', '');
   const view = getProp('view', 'default'); // default, stacked, framed
 
@@ -23,24 +26,41 @@ export default function IconWidget({ settings }) {
   
   // Style
   const primaryColor = getProp('primaryColor', '#3b82f6');
-  const secondaryColor = getProp('secondaryColor', '#ffffff'); // Background for stacked/framed
+  const secondaryColor = getProp('secondaryColor', '#ffffff');
   const iconSize = getProp('size', '50');
   const rotate = getProp('rotate', '0');
   const padding = getProp('padding', '15px');
-  const borderRadius = getProp('borderRadius', view === 'framed' ? '50%' : '0'); // Default circle for framed
+  const borderRadius = getProp('borderRadius', view === 'framed' ? '50%' : '0');
+  const width = getProp('width', ''); // Optional width override
   
-  // Hover & Animation
-  // Note: Hover state handling in React for inline styles is tricky without CSS modules or styled-components.
-  // We'll use a simple CSS class approach for the animation, assuming globals.css has them or we inject styles.
+  // Animation
   const hoverAnimation = getProp('hoverAnimation', ''); // grow, shrink, rotate, buzz
 
-  // Resolve Icon
-  // Support Lucide (default imports) and FontAwesome (prefixed with Fa)
-  let IconComponent = LucideIcons.Star;
-  if (iconName.startsWith('Fa')) {
-      IconComponent = FaIcons[iconName] || FaIcons.FaStar;
+  // Resolve Content
+  let renderedContent = null;
+
+  if (iconType === 'custom' && customIconSrc) {
+      renderedContent = (
+          <img 
+            src={customIconSrc} 
+            alt="Icon" 
+            className={styles.iconImage} 
+            style={{ 
+                width: width || `${iconSize}px`, 
+                height: width ? 'auto' : `${iconSize}px`,
+                objectFit: 'contain'
+            }}
+          />
+      );
   } else {
-      IconComponent = LucideIcons[iconName] || LucideIcons.Star;
+      // Library Mode
+      let IconComponent = LucideIcons.Star;
+      if (iconName.startsWith('Fa')) {
+          IconComponent = FaIcons[iconName] || FaIcons.FaStar;
+      } else {
+          IconComponent = LucideIcons[iconName] || LucideIcons.Star;
+      }
+      renderedContent = <IconComponent size={iconSize} />;
   }
 
   // Styles
@@ -48,7 +68,7 @@ export default function IconWidget({ settings }) {
     display: 'flex',
     justifyContent: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
     width: '100%',
-    padding: '10px' // Container padding
+    padding: '10px'
   };
 
   const linkStyle = {
@@ -57,11 +77,10 @@ export default function IconWidget({ settings }) {
     transition: 'transform 0.3s ease'
   };
 
-  const iconContainerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: `${iconSize}px`, // Icon size controls font-size for react-icons/lucide size
+  // Use values from props for dynamic inline styles (colors, specific sizes)
+  // But use CSS module for structural base and animations
+  const containerStyle = {
+    fontSize: `${iconSize}px`, // Controls icon size for SVGs
     color: primaryColor,
     backgroundColor: view !== 'default' ? secondaryColor : 'transparent',
     padding: view !== 'default' ? padding : '0',
@@ -70,17 +89,18 @@ export default function IconWidget({ settings }) {
     width: view !== 'default' ? `calc(${iconSize}px + ${parseInt(padding)*2}px)` : 'auto',
     height: view !== 'default' ? `calc(${iconSize}px + ${parseInt(padding)*2}px)` : 'auto',
     transform: `rotate(${rotate}deg)`,
-    transition: 'all 0.3s ease',
-    cursor: link ? 'pointer' : 'default'
   };
 
-  // Animation Classes (Standard Elementor-like names)
-  const animationClass = hoverAnimation ? `hover-${hoverAnimation}` : '';
+  // Resolve Classes
+  const viewClass = styles[`view${view.charAt(0).toUpperCase() + view.slice(1)}`];
+  const animationClass = hoverAnimation ? styles[`hover${hoverAnimation.charAt(0).toUpperCase() + hoverAnimation.slice(1)}`] : '';
 
   const Content = (
-    <div className={`icon-widget-content ${animationClass}`} style={iconContainerStyle}>
-        {/* React Icons / Lucide typically take size or style.fontSize */}
-        <IconComponent size={iconSize} /> 
+    <div 
+        className={`${styles.iconWrapper} ${viewClass} ${animationClass}`} 
+        style={containerStyle}
+    >
+        {renderedContent}
     </div>
   );
 
@@ -93,22 +113,6 @@ export default function IconWidget({ settings }) {
       ) : (
          Content
       )}
-      
-      {/* Injecting simple hover styles for this widget instance if needed, 
-          or relying on global CSS for .hover-grow etc. 
-          For this demo, we can assume standard hover classes exist or add them to global css later.
-       */}
-       <style jsx global>{`
-          .hover-grow:hover { transform: scale(1.1) !important; }
-          .hover-shrink:hover { transform: scale(0.9) !important; }
-          .hover-rotate:hover { transform: rotate(15deg) !important; }
-          .hover-buzz:hover { animation: valo-buzz 0.5s infinite; }
-          
-          @keyframes valo-buzz {
-            50% { transform: translateX(3px) rotate(2deg); }
-            100% { transform: translateX(-3px) rotate(-2deg); }
-          }
-       `}</style>
     </div>
   );
 }
