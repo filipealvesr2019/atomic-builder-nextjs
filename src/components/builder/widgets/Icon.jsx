@@ -2,6 +2,15 @@ import React from 'react';
 import * as LucideIcons from 'lucide-react';
 import * as FaIcons from 'react-icons/fa6'; // Font Awesome 6
 import * as MdIcons from 'react-icons/md'; // Material Design
+import * as CiIcons from 'react-icons/ci'; // Circum Icons
+import * as BsIcons from 'react-icons/bs'; // Bootstrap Icons
+import * as IoIcons from 'react-icons/io5'; // Ionicons 5
+import * as BiIcons from 'react-icons/bi'; // BoxIcons
+import * as AiIcons from 'react-icons/ai'; // Ant Design Icons
+import * as RiIcons from 'react-icons/ri'; // Remix Icons
+import * as TiIcons from 'react-icons/ti'; // Typicons
+import * as GiIcons from 'react-icons/gi'; // Game Icons
+import * as FiIcons from 'react-icons/fi'; // Feather Icons
 import { useAtomValue } from 'jotai';
 import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
 import styles from './Icon.module.css';
@@ -64,6 +73,24 @@ export default function IconWidget({ settings }) {
       } else if (iconLib === 'md') {
           // Material Design
           IconComponent = MdIcons[iconName] || MdIcons.MdStar;
+      } else if (iconLib === 'ci') {
+          IconComponent = CiIcons[iconName] || CiIcons.CiStar;
+      } else if (iconLib === 'bs') {
+          IconComponent = BsIcons[iconName] || BsIcons.BsStar;
+      } else if (iconLib === 'io') {
+          IconComponent = IoIcons[iconName] || IoIcons.IoStar;
+      } else if (iconLib === 'bi') {
+          IconComponent = BiIcons[iconName] || BiIcons.BiStar;
+      } else if (iconLib === 'ai') {
+          IconComponent = AiIcons[iconName] || AiIcons.AiOutlineStar;
+      } else if (iconLib === 'ri') {
+          IconComponent = RiIcons[iconName] || RiIcons.RiStarFill;
+      } else if (iconLib === 'ti') {
+          IconComponent = TiIcons[iconName] || TiIcons.TiStarFullOutline;
+      } else if (iconLib === 'gi') {
+          IconComponent = GiIcons[iconName] || GiIcons.GiStarMedal;
+      } else if (iconLib === 'fi') {
+          IconComponent = FiIcons[iconName] || FiIcons.FiStar;
       } else {
           // Lucide
           IconComponent = LucideIcons[iconName] || LucideIcons.Star;

@@ -31,7 +31,16 @@ function IconImportModal({ onImport, currentLibrary }) {
     const libraryInfo = {
         'fa': { name: 'FontAwesome', url: 'https://react-icons.github.io/react-icons/icons/fa' },
         'md': { name: 'Material Design', url: 'https://react-icons.github.io/react-icons/icons/md' },
-        'lucide': { name: 'Lucide', url: 'https://lucide.dev/icons' }
+        'lucide': { name: 'Lucide', url: 'https://lucide.dev/icons' },
+        'ci': { name: 'Circum Icons', url: 'https://react-icons.github.io/react-icons/icons/ci' },
+        'bs': { name: 'Bootstrap Icons', url: 'https://react-icons.github.io/react-icons/icons/bs' },
+        'io': { name: 'Ionicons 5', url: 'https://react-icons.github.io/react-icons/icons/io5' },
+        'bi': { name: 'BoxIcons', url: 'https://react-icons.github.io/react-icons/icons/bi' },
+        'ai': { name: 'Ant Design', url: 'https://react-icons.github.io/react-icons/icons/ai' },
+        'ri': { name: 'Remix Icons', url: 'https://react-icons.github.io/react-icons/icons/ri' },
+        'ti': { name: 'Typicons', url: 'https://react-icons.github.io/react-icons/icons/ti' },
+        'gi': { name: 'Game Icons', url: 'https://react-icons.github.io/react-icons/icons/gi' },
+        'fi': { name: 'Feather Icons', url: 'https://react-icons.github.io/react-icons/icons/fi' }
     };
 
     const handleImport = () => {
@@ -53,6 +62,15 @@ function IconImportModal({ onImport, currentLibrary }) {
         // Detect library based on prefix
         if (extractedName.startsWith('Fa')) detectedLib = 'fa';
         else if (extractedName.startsWith('Md')) detectedLib = 'md';
+        else if (extractedName.startsWith('Ci')) detectedLib = 'ci';
+        else if (extractedName.startsWith('Bs')) detectedLib = 'bs';
+        else if (extractedName.startsWith('Io')) detectedLib = 'io';
+        else if (extractedName.startsWith('Bi')) detectedLib = 'bi';
+        else if (extractedName.startsWith('Ai')) detectedLib = 'ai';
+        else if (extractedName.startsWith('Ri')) detectedLib = 'ri';
+        else if (extractedName.startsWith('Ti')) detectedLib = 'ti';
+        else if (extractedName.startsWith('Gi')) detectedLib = 'gi';
+        else if (extractedName.startsWith('Fi')) detectedLib = 'fi';
         else if (!extractedName.startsWith('Fa') && !extractedName.startsWith('Md')) detectedLib = 'lucide';
 
         if (extractedName) {
