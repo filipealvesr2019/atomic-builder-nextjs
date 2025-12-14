@@ -87,48 +87,56 @@ export default function DividerWidget({ settings }) {
     return null;
   };
 
+  const justifyMap = {
+    'left': 'flex-start',
+    'center': 'center',
+    'right': 'flex-end',
+  };
+
   return (
     <div 
       className={styles.container}
       style={{
-        width: width,
+        width: '100%', 
         margin: margin,
         padding: padding,
-        justifyContent: 'center', // Flex control
+        justifyContent: justifyMap[align] || 'center',
       }}
     >
-      {/* 
-         Logic:
-         Left: Content - Line
-         Right: Line - Content
-         Center: Line - Content - Line
-         
-         If element == 'line', just one Line.
-      */}
-      
-      {element === 'line' && <Line />}
+      <div style={{ width: width, display: 'flex', alignItems: 'center' }}>
+        {/* 
+           Logic:
+           Left: Content - Line
+           Right: Line - Content
+           Center: Line - Content - Line
+           
+           If element == 'line', just one Line.
+        */}
+        
+        {element === 'line' && <Line />}
 
-      {element !== 'line' && align === 'center' && (
-        <>
-          <Line />
-          <Content />
-          <Line />
-        </>
-      )}
+        {element !== 'line' && align === 'center' && (
+          <>
+            <Line />
+            <Content />
+            <Line />
+          </>
+        )}
 
-      {element !== 'line' && align === 'left' && (
-        <>
-          <Content />
-          <Line />
-        </>
-      )}
+        {element !== 'line' && align === 'left' && (
+          <>
+            <Content />
+            <Line />
+          </>
+        )}
 
-      {element !== 'line' && align === 'right' && (
-        <>
-          <Line />
-          <Content />
-        </>
-      )}
+        {element !== 'line' && align === 'right' && (
+          <>
+            <Line />
+            <Content />
+          </>
+        )}
+      </div>
     </div>
   );
 }
