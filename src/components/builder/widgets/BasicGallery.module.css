@@ -1,3 +1,4 @@
+
 .galleryContainer {
     width: 100%;
 }
@@ -5,70 +6,48 @@
 .galleryGrid {
     display: grid;
     width: 100%;
-    /* columns and gap are set inline */
+}
+
+.galleryItemWrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .galleryItem {
     position: relative;
-    overflow: hidden; /* Essential for zoom effects */
-    cursor: default;
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .galleryImage {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.3s ease-in-out;
+    display: block;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-/* Hover Animations */
+/* Animations */
 .anim_zoom:hover .galleryImage {
     transform: scale(1.1);
 }
 
-.anim_grow {
-    transition: transform 0.3s ease-in-out;
-}
 .anim_grow:hover {
-    transform: scale(1.1); /* Scales the container */
+    transform: scale(1.05);
     z-index: 2;
 }
 
-.anim_shrink {
-    transition: transform 0.3s ease-in-out;
-}
 .anim_shrink:hover {
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
-.anim_fade .galleryImage {
-    opacity: 1;
-}
 .anim_fade:hover .galleryImage {
     opacity: 0.7;
 }
 
-/* Caption */
-.caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.galleryItem:hover .caption {
-    opacity: 1;
+/* Caption Styles */
+.captionBelow {
+    line-height: 1.5;
 }
 
 /* Lightbox */
@@ -76,31 +55,43 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    cursor: zoom-out;
-}
-
-.lightboxImage {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    cursor: default;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    flex-direction: column;
 }
 
 .closeButton {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 30px;
     background: transparent;
     border: none;
     color: white;
     cursor: pointer;
-    z-index: 10000;
+    z-index: 10001;
+    transition: transform 0.2s;
+}
+
+.closeButton:hover {
+    transform: scale(1.1);
+}
+
+.lightboxImage {
+    max-width: 90%;
+    max-height: 80vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    border-radius: 4px;
+}
+
+.lightboxCaption {
+    margin-top: 15px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    max-width: 80%;
 }

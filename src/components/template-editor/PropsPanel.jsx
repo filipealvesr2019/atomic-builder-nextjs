@@ -2368,6 +2368,16 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                     />
                                 </div>
                                 <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Title</label>
+                                    <input 
+                                        type="text" 
+                                        value={item.title || ''} 
+                                        onChange={(e) => onChangeItem({ title: e.target.value })}
+                                        className={styles.input}
+                                        placeholder="Image Title"
+                                    />
+                                </div>
+                                <div style={{ marginBottom: '10px' }}>
                                     <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Caption</label>
                                     <input 
                                         type="text" 
@@ -2429,8 +2439,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             responsive={false}
                             options={[
                                 { label: 'None', value: 'none' },
-                                { label: 'Title', value: 'title' },
-                                { label: 'Caption', value: 'caption' }
+                                { label: 'Attachment Title', value: 'title' },
+                                { label: 'Attachment Caption', value: 'caption' }
                             ]}
                         />
                     </Section>
@@ -2961,6 +2971,60 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             { label: 'Fade', value: 'fade' }
                         ]}
                     />
+
+                    {getValue('showCaption') !== 'none' && (
+                        <>
+                            <div style={{ marginTop: '20px', borderTop: '1px solid #eee', paddingTop: '10px' }}></div>
+                            <span className={styles.inputLabel} style={{fontWeight:'bold', display:'block', marginBottom:'10px'}}>Caption</span>
+                            
+                            <StyledInput
+                                label="Text Color"
+                                value={getValue('captionColor', '')}
+                                onChange={(val) => handleChange('captionColor', val)}
+                                placeholder="Inherit"
+                                responsive={false}
+                            />
+                             <IconButtonGroup
+                                label="Alignment"
+                                value={getValue('captionAlign', 'center')}
+                                onChange={(val) => handleChange('captionAlign', val)}
+                                activeViewMode={viewMode}
+                                options={[
+                                    { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                                    { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                                ]}
+                            />
+                             <StyledInput
+                                label="Spacing"
+                                value={getValue('captionSpacing', '10px')}
+                                onChange={(val) => handleChange('captionSpacing', val)}
+                                placeholder="10px"
+                                responsive={false}
+                            />
+                            
+                            <span className={styles.inputLabel} style={{display:'block', marginTop:'10px', fontSize:'13px'}}>Typography</span>
+                            <StyledInput
+                                label="Font Size"
+                                value={getValue('captionFontSize', '14px')}
+                                onChange={(val) => handleChange('captionFontSize', val)}
+                                placeholder="14px"
+                                responsive={false}
+                            />
+                             <StyledSelect
+                                label="Font Weight"
+                                value={getValue('captionFontWeight', '400')}
+                                onChange={(val) => handleChange('captionFontWeight', val)}
+                                responsive={false}
+                                options={[
+                                    { label: 'Normal (400)', value: '400' },
+                                    { label: 'Medium (500)', value: '500' },
+                                    { label: 'Semi Bold (600)', value: '600' },
+                                    { label: 'Bold (700)', value: '700' }
+                                ]}
+                            />
+                        </>
+                    )}
                 </Section>
             )}
 

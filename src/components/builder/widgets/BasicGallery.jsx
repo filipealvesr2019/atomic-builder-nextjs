@@ -7,12 +7,12 @@ export default function BasicGallery({ settings }) {
         images = [],
         columns = { desktop: 4, tablet: 3, mobile: 1 },
         spacing = '10px',
-        isLink = 'media', // none, media, custom
-        aspectRatio = '1/1', // 1/1, 4/3, 16/9, or 'auto'
+        isLink = 'media', 
+        aspectRatio = '1/1',
         showCaption = 'none', // none, title, caption
         
         // Styles
-        hoverAnimation = 'none', // zoom, grow, shrink, fade
+        hoverAnimation = 'none',
         
         // Image Styles
         borderType = 'none',
@@ -20,6 +20,13 @@ export default function BasicGallery({ settings }) {
         borderColor = '#000',
         borderRadius = '0px',
         boxShadow = 'none',
+
+        // Caption Styles
+        captionColor = '',
+        captionAlign = 'center',
+        captionSpacing = '10px',
+        captionFontSize = '14px',
+        captionFontWeight = '400',
         
     } = settings || {};
 
@@ -67,7 +74,6 @@ export default function BasicGallery({ settings }) {
         } else if (isLink === 'custom' && img.link) {
             window.location.href = img.link;
         }
-        // 'none' does nothing
     };
 
     // --- Helpers ---
@@ -94,27 +100,45 @@ export default function BasicGallery({ settings }) {
                     const captionText = getCaption(img);
                     
                     return (
-                        <div 
-                            key={index}
-                            className={`${styles.galleryItem} ${hoverAnimation !== 'none' ? styles[`anim_${hoverAnimation}`] : ''}`}
-                            style={{
-                                aspectRatio: aspectRatio === 'auto' ? 'auto' : aspectRatio,
-                                borderRadius: borderRadius,
-                                boxShadow: boxShadow !== 'none' ? '0px 0px 10px rgba(0,0,0,0.2)' : 'none', // Simplify shadow for now or use real prop if passed as string
-                                border: borderType !== 'none' ? `${borderWidth} ${borderType} ${borderColor}` : 'none'
-                             }}
-                            onClick={() => handleImageClick(index, img)}
-                        >
-                            <img 
-                                src={src} 
-                                alt={getAlt(img)} 
-                                className={styles.galleryImage}
+                        <div key={index} className={styles.galleryItemWrapper}>
+                            <div 
+                                className={`${styles.galleryItem} ${hoverAnimation !== 'none' ? styles[`anim_${hoverAnimation}`] : ''}`}
                                 style={{
-                                    borderRadius: borderRadius // Apply to image as well if container has it
-                                }}
-                            />
+                                    aspectRatio: aspectRatio === 'auto' ? 'auto' : aspectRatio,
+                                    borderRadius: borderRadius,
+                                    boxShadow: boxShadow !== 'none' ? '0px 0px 10px rgba(0,0,0,0.2)' : 'none',
+                                    border: borderType !== 'none' ? `${borderWidth} ${borderType} ${borderColor}` : 'none',
+                                    cursor: isLink !== 'none' ? 'pointer' : 'default',
+                                    overflow: 'hidden', // Essential for zoom/grow effects to be contained
+                                    position: 'relative',
+                                    width: '100%',
+                                    height: '100%', // Inherit if aspectRatio controls mapping
+                                 }}
+                                onClick={() => handleImageClick(index, img)}
+                            >
+                                <img 
+                                    src={src} 
+                                    alt={getAlt(img)} 
+                                    className={styles.galleryImage}
+                                    style={{
+                                        borderRadius: borderRadius
+                                    }}
+                                />
+                            </div>
+                            
                             {showCaption !== 'none' && captionText && (
-                                <div className={styles.caption}>{captionText}</div>
+                                <div 
+                                    className={styles.captionBelow}
+                                    style={{
+                                        color: captionColor || 'inherit',
+                                        textAlign: captionAlign,
+                                        marginTop: captionSpacing,
+                                        fontSize: captionFontSize,
+                                        fontWeight: captionFontWeight,
+                                    }}
+                                >
+                                    {captionText}
+                                </div>
                             )}
                         </div>
                     );
@@ -133,6 +157,11 @@ export default function BasicGallery({ settings }) {
                         className={styles.lightboxImage}
                         onClick={(e) => e.stopPropagation()}
                     />
+                     {/* Lightbox Caption? Usually nice but not strictly requested as configurable style here, 
+                         but standard behavior usually shows title/caption in lightbox too. */}
+                     <div className={styles.lightboxCaption}>
+                        {getCaption(displayImages[lightboxIndex])}
+                     </div>
                 </div>
             )}
         </div>
