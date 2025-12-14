@@ -21,6 +21,7 @@ export const WIDGET_TYPES = {
   DIVIDER: 'divider',
   SPACER: 'spacer',
   IMAGE_GALLERY: 'image_gallery',
+  BASIC_GALLERY: 'basic_gallery',
   IMAGE_CAROUSEL: 'image_carousel'
 };
 

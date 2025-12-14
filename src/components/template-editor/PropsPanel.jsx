@@ -2304,6 +2304,137 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         placeholder="Optional caption"
                     />
                 </>
+            ) : block.type === WIDGET_TYPES.BASIC_GALLERY ? (
+                <>
+                    <Repeater
+                        label="Images"
+                        items={getValue('images', [])}
+                        onChange={(newItems) => handleChange('images', newItems)}
+                        defaultItem={{ src: 'https://placehold.co/600x400', alt: 'Gallery Image' }}
+                        renderItem={(item, index, onChangeItem) => (
+                           <div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Image Source</label>
+                                    <div style={{ display: 'flex', gap: '5px' }}>
+                                        <input 
+                                            type="text" 
+                                            value={item.src} 
+                                            onChange={(e) => onChangeItem({ src: e.target.value })}
+                                            className={styles.input}
+                                            style={{ flex: 1 }}
+                                            placeholder="https://..."
+                                        />
+                                        <button
+                                            onClick={() => document.getElementById(`basic-gallery-upload-${index}`).click()}
+                                            disabled={isUploading}
+                                            style={{
+                                                background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '4px',
+                                                color: '#3b82f6', padding: '0 8px', cursor: 'pointer'
+                                            }}
+                                            title="Upload"
+                                        >
+                                            <LucideIcons.Upload size={14} />
+                                        </button>
+                                        <input
+                                            id={`basic-gallery-upload-${index}`}
+                                            type="file"
+                                            accept="image/*"
+                                            style={{ display: 'none' }}
+                                            onChange={async (e) => {
+                                                const file = e.target.files?.[0];
+                                                if(!file) return;
+                                                setIsUploading(true);
+                                                try {
+                                                    const data = await uploadFile(file);
+                                                    onChangeItem({ src: data.url });
+                                                } catch(err) {
+                                                    alert('Upload failed');
+                                                } finally {
+                                                    setIsUploading(false);
+                                                    e.target.value = '';
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Alt Text</label>
+                                    <input 
+                                        type="text" 
+                                        value={item.alt || ''} 
+                                        onChange={(e) => onChangeItem({ alt: e.target.value })}
+                                        className={styles.input}
+                                        placeholder="Image description"
+                                    />
+                                </div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Caption</label>
+                                    <input 
+                                        type="text" 
+                                        value={item.caption || ''} 
+                                        onChange={(e) => onChangeItem({ caption: e.target.value })}
+                                        className={styles.input}
+                                        placeholder="Caption text"
+                                    />
+                                </div>
+                           </div> 
+                        )}
+                    />
+
+                    <Section title="Settings">
+                        <StyledInput
+                            label="Columns"
+                            value={getValue('columns', '4')}
+                            onChange={(val) => handleChange('columns', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="4"
+                        />
+                        <StyledInput
+                            label="Spacing"
+                            value={getValue('spacing', '10px')}
+                            onChange={(val) => handleChange('spacing', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="10px"
+                        />
+                        <StyledSelect
+                            label="Link"
+                            value={getValue('isLink', 'media')}
+                            onChange={(val) => handleChange('isLink', val)}
+                            responsive={false}
+                            options={[
+                                { label: 'None', value: 'none' },
+                                { label: 'Media File (Lightbox)', value: 'media' },
+                                { label: 'Custom URL', value: 'custom' }
+                            ]}
+                        />
+                        <StyledSelect
+                            label="Aspect Ratio"
+                            value={getValue('aspectRatio', '1/1')}
+                            onChange={(val) => handleChange('aspectRatio', val)}
+                            responsive={false}
+                            options={[
+                                { label: 'Square (1:1)', value: '1/1' },
+                                { label: 'Standard (4:3)', value: '4/3' },
+                                { label: 'Portrait (3:4)', value: '3/4' },
+                                { label: 'Wide (16:9)', value: '16/9' },
+                                { label: 'Auto', value: 'auto' }
+                            ]}
+                        />
+                        <StyledSelect
+                            label="Caption"
+                            value={getValue('showCaption', 'none')}
+                            onChange={(val) => handleChange('showCaption', val)}
+                            responsive={false}
+                            options={[
+                                { label: 'None', value: 'none' },
+                                { label: 'Title', value: 'title' },
+                                { label: 'Caption', value: 'caption' }
+                            ]}
+                        />
+                    </Section>
+                </>
             ) : block.type === WIDGET_TYPES.IMAGE_GALLERY ? (
                 <>
                     <Repeater
@@ -2761,6 +2892,74 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         placeholder="15px"
                         responsive={true}
                         activeViewMode={viewMode}
+                    />
+                </Section>
+            )}
+
+            {block.type === WIDGET_TYPES.BASIC_GALLERY && (
+                <Section title="Image Styles">
+                     <StyledSelect
+                        label="Border Type"
+                        value={getValue('borderType', 'none')}
+                        onChange={(val) => handleChange('borderType', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'None', value: 'none' },
+                            { label: 'Solid', value: 'solid' },
+                            { label: 'Double', value: 'double' },
+                            { label: 'Dotted', value: 'dotted' },
+                            { label: 'Dashed', value: 'dashed' },
+                            { label: 'Groove', value: 'groove' }
+                        ]}
+                    />
+                    {getValue('borderType') !== 'none' && (
+                        <>
+                            <StyledInput
+                                label="Border Width"
+                                value={getValue('borderWidth', '1px')}
+                                onChange={(val) => handleChange('borderWidth', val)}
+                                responsive={false}
+                            />
+                            <StyledInput
+                                label="Border Color"
+                                value={getValue('borderColor', '#000')}
+                                onChange={(val) => handleChange('borderColor', val)}
+                                responsive={false}
+                            />
+                        </>
+                    )}
+                     <StyledInput
+                        label="Border Radius"
+                        value={getValue('borderRadius', '0px')}
+                        onChange={(val) => handleChange('borderRadius', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                     <StyledSelect
+                        label="Box Shadow"
+                        value={getValue('boxShadow', 'none')}
+                        onChange={(val) => handleChange('boxShadow', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'None', value: 'none' },
+                            { label: 'Yes', value: 'yes' }
+                        ]}
+                    />
+                    
+                    <div style={{ marginTop: '15px' }}></div>
+                    <span className={styles.inputLabel} style={{fontWeight:'bold'}}>Hover</span>
+                    <StyledSelect
+                        label="Hover Animation"
+                        value={getValue('hoverAnimation', 'none')}
+                        onChange={(val) => handleChange('hoverAnimation', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'None', value: 'none' },
+                            { label: 'Zoom In', value: 'zoom' },
+                            { label: 'Grow', value: 'grow' },
+                            { label: 'Shrink', value: 'shrink' },
+                            { label: 'Fade', value: 'fade' }
+                        ]}
                     />
                 </Section>
             )}

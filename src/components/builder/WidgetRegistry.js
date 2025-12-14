@@ -14,6 +14,7 @@ import SpacerWidget from './widgets/Spacer';
 import IconWidget from './widgets/Icon';
 import ImageGallery from './widgets/ImageGallery';
 import ImageCarousel from './widgets/ImageCarousel';
+import BasicGallery from './widgets/BasicGallery';
 
 /**
  * Widget Registry
@@ -30,6 +31,7 @@ export const EVENT_WIDGETS = {
   [WIDGET_TYPES.IMAGE_BOX]: ImageBox,
   [WIDGET_TYPES.SPACER]: SpacerWidget,
   [WIDGET_TYPES.ICON]: IconWidget,
+  [WIDGET_TYPES.BASIC_GALLERY]: BasicGallery,
   [WIDGET_TYPES.IMAGE_GALLERY]: ImageGallery,
   [WIDGET_TYPES.IMAGE_CAROUSEL]: ImageCarousel,
   // Add new widgets here

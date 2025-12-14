@@ -63,6 +63,7 @@ export default function BlockLibrary({ templateId }) {
     { id: WIDGET_TYPES.IMAGE_BOX, name: 'Image Box', icon: LucideIcons.Image, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.DIVIDER, name: 'Divider', icon: Minus, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.SPACER, name: 'Spacer', icon: Square, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.BASIC_GALLERY, name: 'Basic Gallery', icon: LucideIcons.LayoutGrid, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.IMAGE_GALLERY, name: 'Image Gallery', icon: LucideIcons.GalleryHorizontal, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.IMAGE_CAROUSEL, name: 'Image Carousel', icon: LucideIcons.Images, category: NODE_TYPES.WIDGET },
   ];
