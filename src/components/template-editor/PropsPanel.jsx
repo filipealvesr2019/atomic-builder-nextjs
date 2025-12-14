@@ -912,14 +912,14 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         ]}
                     />
 
-                   <StyledSelect
-                      label="Inline List"
-                      value={getValue('layout', 'vertical')} // Using 'layout' key for compat
+                   <IconButtonGroup
+                      label="Layout"
+                      value={getValue('layout', 'vertical')}
                       onChange={(val) => handleChange('layout', val)}
-                      responsive={false}
+                      activeViewMode={viewMode}
                       options={[
-                          { value: 'vertical', label: 'Off' },
-                          { value: 'horizontal', label: 'On' }
+                          { value: 'vertical', label: 'Vertical', icon: <ArrowDown size={16} /> },
+                          { value: 'horizontal', label: 'Horizontal', icon: <ArrowRight size={16} /> }
                       ]}
                   />
 
