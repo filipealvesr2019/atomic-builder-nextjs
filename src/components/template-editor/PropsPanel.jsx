@@ -153,25 +153,7 @@ function IconImportModal({ onImport, currentLibrary }) {
                          Reference: <a href={libraryInfo[currentLibrary]?.url} target="_blank" rel="noopener noreferrer" style={{textDecoration:'underline'}}>Browse Icons</a>
                     </div>
 
-                    <input 
-                        type="text"
-                        style={{
-                            width: '100%',
-                            height: '38px',
-                            margin: '5px 0 5px',
-                            padding: '0 10px',
-                            border: '1px solid #d1d5db',
-                            borderRadius: '4px',
-                            fontFamily: 'monospace',
-                            fontSize: '13px',
-                            outlineColor: '#2563eb'
-                        }}
-                        placeholder="Icon Name (e.g. FaRocket)"
-                        value={iconName} 
-                        onChange={(e) => setIconName(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleImport()}
-                    />
-                    <div style={{ textAlign: 'center', fontSize: '10px', color: '#999', margin: '2px 0' }}>OR</div>
+                  
                     <textarea 
                         style={{
                             width: '100%',
