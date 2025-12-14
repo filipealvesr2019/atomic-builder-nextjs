@@ -153,6 +153,10 @@ function IconImportModal({ onImport, currentLibrary }) {
                          Reference: <a href={libraryInfo[currentLibrary]?.url} target="_blank" rel="noopener noreferrer" style={{textDecoration:'underline'}}>Browse Icons</a>
                     </div>
 
+                    <div style={{ fontSize: '11px', background: '#eff6ff', color: '#1e40af', padding: '8px', borderRadius: '4px', marginBottom: '10px', lineHeight: '1.4' }}>
+                        <strong>Como usar:</strong> No site, selecione a aba <strong>React</strong> e copie o código do import.
+                    </div>
+
                   
                     <textarea 
                         style={{
