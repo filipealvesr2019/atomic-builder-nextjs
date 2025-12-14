@@ -513,7 +513,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                     onChange={(val) => handleChange('content', val)}
                                     modules={{
                                         toolbar: [
-                                            [{ 'font': [] }],
+                                            [{ 'font': [] }, { 'size': [] }],
                                             ['bold', 'italic', 'underline', 'strike'],
                                             [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                                             [{ 'align': [] }],
