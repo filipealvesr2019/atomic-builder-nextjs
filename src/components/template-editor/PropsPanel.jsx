@@ -57,23 +57,27 @@ function IconImportModal({ onImport, currentLibrary }) {
         }
         
         // Detect library based on prefix
+        // Detect library based on prefix
         if (extractedName.startsWith('Fa')) detectedLib = 'fa';
         else if (extractedName.startsWith('Md')) detectedLib = 'md';
-        else if (extractedName.startsWith('Ci')) detectedLib = 'ci';
-        else if (extractedName.startsWith('Bs')) detectedLib = 'bs';
-        else if (extractedName.startsWith('Io')) detectedLib = 'io';
-        else if (extractedName.startsWith('Bi')) detectedLib = 'bi';
-        else if (extractedName.startsWith('Ai')) detectedLib = 'ai';
-        else if (extractedName.startsWith('Ri')) detectedLib = 'ri';
-        else if (extractedName.startsWith('Ti')) detectedLib = 'ti';
-        else if (extractedName.startsWith('Gi')) detectedLib = 'gi';
-        else if (extractedName.startsWith('Fi')) detectedLib = 'fi';
-        else detectedLib = 'lucide';
+        else if (extractedName.startsWith('Ci')) detectedLib = 'md'; // Map to md (React Icons generic)
+        else if (extractedName.startsWith('Bs')) detectedLib = 'md';
+        else if (extractedName.startsWith('Io')) detectedLib = 'md';
+        else if (extractedName.startsWith('Bi')) detectedLib = 'md';
+        else if (extractedName.startsWith('Ai')) detectedLib = 'md';
+        else if (extractedName.startsWith('Ri')) detectedLib = 'md';
+        else if (extractedName.startsWith('Ti')) detectedLib = 'md';
+        else if (extractedName.startsWith('Gi')) detectedLib = 'md';
+        else if (extractedName.startsWith('Fi')) detectedLib = 'md';
+        else if (extractedName.startsWith('Gi')) detectedLib = 'md';
+        else if (extractedName.startsWith('Fi')) detectedLib = 'md';
+        else detectedLib = null; // Do NOT default to Lucide. Respect current library.
 
         if (extractedName) {
+            console.log('[IconImportModal] Detected:', { extractedName, detectedLib });
             onImport(extractedName, detectedLib);
             
-            setIconName(''); 
+            setIconName('');  
             setImportCode('');
             setError('');
         } else {
@@ -805,6 +809,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             />
 
                             {getValue('iconType', 'library') === 'library' ? (
+                                console.log('[PropsPanel] Rendering Icon Select. Lib:', getValue('iconLib'), 'Icon:', getValue('icon')),
                                 <>
                                     <StyledSelect
                                         label="Library"
@@ -866,8 +871,11 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                                 { label: 'Add', value: 'MdAdd' },
                                                 { label: 'Delete', value: 'MdDelete' },
                                                 { label: 'Edit', value: 'MdEdit' },
-                                                // Dynamic option for imported icon - MD only
-                                                ...(getValue('icon') && getValue('icon').startsWith('Md') && ![
+                                                // Dynamic option for imported icon - MD & other React Icons
+                                                ...(getValue('icon') && (
+                                                    // Allow ANY value if it's not in the default list
+                                                    true
+                                                ) && ![
                                                     'MdStar', 'MdFavorite', 'MdPerson', 'MdCheck', 
                                                     'MdMenu', 'MdClose', 'MdHome', 'MdSettings', 
                                                     'MdSearch', 'MdAdd', 'MdDelete', 'MdEdit'
@@ -896,8 +904,11 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                     <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
                                         <IconImportModal 
                                             onImport={(importedName, library) => {
-                                                if (library) handleChange('iconLib', library);
-                                                handleChange('icon', importedName);
+                                                const updates = {};
+                                                if (library) updates.iconLib = library;
+                                                updates.icon = importedName;
+                                                console.log('[PropsPanel] onImport triggering update:', updates);
+                                                onPropsChange(updates);
                                             }}
                                             currentLibrary={getValue('iconLib', 'fa')}
                                         />
