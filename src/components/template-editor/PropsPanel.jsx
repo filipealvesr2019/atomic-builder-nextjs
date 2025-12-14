@@ -819,7 +819,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                 responsive={false}
                                 options={[
                                     { label: 'Icon Library', value: 'library' },
-                                    { label: 'Custom Image', value: 'custom' }
+                                    { label: 'Custom icon', value: 'custom' }
                                 ]}
                             />
 
