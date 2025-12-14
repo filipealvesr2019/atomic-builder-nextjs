@@ -504,6 +504,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                             ['bold', 'italic', 'underline', 'strike'],
                                             [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                                             [{ 'align': [] }],
+                                            [{ 'color': [] }, { 'background': [] }],
                                             ['link', 'clean']
                                         ]
                                     }}
