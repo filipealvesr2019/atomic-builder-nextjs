@@ -89,7 +89,18 @@ function IconImportModal({ onImport, currentLibrary }) {
             </button>
 
             {isOpen && (
-                <div className="icon-import-popover">
+                <div style={{
+                    position: 'absolute',
+                    top: 'calc(100% + 5px)',
+                    left: 0,
+                    width: '100%',
+                    background: 'white',
+                    padding: '15px',
+                    borderRadius: '6px',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                    border: '1px solid #e5e7eb',
+                    zIndex: 100
+                }}>
                     <h4 style={{ margin: '0 0 10px', fontSize: '14px', fontWeight: 'bold' }}>Import {libraryInfo[currentLibrary]?.name}</h4>
                     
                     <div style={{ marginBottom: '10px', fontSize: '11px', color: '#3b82f6' }}>
@@ -97,7 +108,17 @@ function IconImportModal({ onImport, currentLibrary }) {
                     </div>
 
                     <textarea 
-                        className="icon-import-textarea"
+                        style={{
+                            width: '100%',
+                            height: '60px',
+                            margin: '5px 0 10px',
+                            padding: '8px',
+                            border: '1px solid #ddd',
+                            borderRadius: '4px',
+                            fontFamily: 'monospace',
+                            fontSize: '11px',
+                            resize: 'vertical'
+                        }}
                         placeholder={`Paste import line or icon name...\ne.g. ${currentLibrary === 'fa' ? 'FaRocket' : 'MdAlarm'}`}
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
