@@ -803,62 +803,29 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                         ]}
                                     />
                                     
-                                    {getValue('iconLib', 'fa') === 'fa' ? (
-                                        <StyledSelect
-                                            label="Icon"
-                                            value={getValue('icon', 'FaStar')}
-                                            onChange={(val) => handleChange('icon', val)}
-                                            responsive={false}
-                                            options={[
-                                                { label: 'Star', value: 'FaStar' },
-                                                { label: 'Heart', value: 'FaHeart' },
-                                                { label: 'User', value: 'FaUser' },
-                                                { label: 'Check', value: 'FaCheck' },
-                                                { label: 'Facebook', value: 'FaFacebook' },
-                                                { label: 'Twitter', value: 'FaTwitter' },
-                                                { label: 'Instagram', value: 'FaInstagram' },
-                                                { label: 'Linkedin', value: 'FaLinkedin' },
-                                                { label: 'Github', value: 'FaGithub' },
-                                                { label: 'Youtube', value: 'FaYoutube' },
-                                                { label: 'Google', value: 'FaGoogle' },
-                                                { label: 'Whatsapp', value: 'FaWhatsapp' },
-                                            ]}
-                                        />
-                                    ) : getValue('iconLib') === 'md' ? (
-                                        <StyledSelect
-                                            label="Icon"
-                                            value={getValue('icon', 'MdStar')}
-                                            onChange={(val) => handleChange('icon', val)}
-                                            responsive={false}
-                                            options={[
-                                                { label: 'Star', value: 'MdStar' },
-                                                { label: 'Favorite', value: 'MdFavorite' },
-                                                { label: 'Person', value: 'MdPerson' },
-                                                { label: 'Check', value: 'MdCheck' },
-                                                { label: 'Menu', value: 'MdMenu' },
-                                                { label: 'Close', value: 'MdClose' },
-                                                { label: 'Home', value: 'MdHome' },
-                                                { label: 'Settings', value: 'MdSettings' },
-                                                { label: 'Search', value: 'MdSearch' },
-                                                { label: 'Add', value: 'MdAdd' },
-                                                { label: 'Delete', value: 'MdDelete' },
-                                                { label: 'Edit', value: 'MdEdit' },
-                                            ]}
-                                        />
-                                    ) : (
-                                        <StyledSelect
-                                            label="Icon"
-                                            value={getValue('icon', 'Star')}
-                                            onChange={(val) => handleChange('icon', val)}
-                                            responsive={false}
-                                            options={[
-                                                { label: 'Star', value: 'Star' },
-                                                { label: 'Heart', value: 'Heart' },
-                                                { label: 'User', value: 'User' },
-                                                { label: 'Check', value: 'Check' },
-                                            ]}
-                                        />
-                                    )}
+                                    {(() => {
+                                        const currentLib = getValue('iconLib', 'fa');
+                                        const currentIcon = getValue('icon', 'FaStar');
+                                        
+                                        // Get base options or empty array
+                                        let iconOptions = [...(DEFAULT_LIBRARY_ICONS[currentLib] || DEFAULT_LIBRARY_ICONS['lucide'])];
+                                        
+                                        // If current icon is set and not in the list, add it to the top
+                                        if (currentIcon && !iconOptions.find(o => o.value === currentIcon)) {
+                                            iconOptions.unshift({ label: `${currentIcon} (Imported)`, value: currentIcon });
+                                        }
+
+                                        return (
+                                            <StyledSelect
+                                                label="Icon"
+                                                value={currentIcon}
+                                                onChange={(val) => handleChange('icon', val)}
+                                                responsive={false}
+                                                options={iconOptions}
+                                            />
+                                        );
+                                    })()}
+
                                     {/* Manual Icon Import / Search */}
                                     <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
                                         <IconImportModal 
@@ -869,59 +836,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                             currentLibrary={getValue('iconLib', 'fa')}
                                         />
                                     </div>
-                                    <style jsx global>{`
-                                        .icon-import-modal-overlay {
-                                            position: fixed;
-                                            top: 0;
-                                            left: 0;
-                                            width: 100vw;
-                                            height: 100vh;
-                                            background: rgba(0,0,0,0.5);
-                                            z-index: 9999;
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                        }
-                                        .icon-import-modal {
-                                            background: white;
-                                            padding: 20px;
-                                            border-radius: 8px;
-                                            width: 400px;
-                                            max-width: 90%;
-                                            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                                        }
-                                        .icon-import-textarea {
-                                            width: 100%;
-                                            height: 80px;
-                                            margin: 10px 0;
-                                            padding: 8px;
-                                            border: 1px solid #ccc;
-                                            border-radius: 4px;
-                                            font-family: monospace;
-                                            font-size: 12px;
-                                        }
-                                        .icon-import-btn {
-                                            background: #3b82f6;
-                                            color: white;
-                                            border: none;
-                                            padding: 8px 16px;
-                                            border-radius: 4px;
-                                            cursor: pointer;
-                                            font-weight: 500;
-                                        }
-                                        .icon-import-btn:hover {
-                                            background: #2563eb;
-                                        }
-                                        .icon-cancel-btn {
-                                            background: transparent;
-                                            color: #666;
-                                            border: 1px solid #ccc;
-                                            padding: 8px 16px;
-                                            border-radius: 4px;
-                                            cursor: pointer;
-                                            margin-right: 10px;
-                                        }
-                                    `}</style>
+                                </>
+                            ) : (
                                 </>
                             ) : (
                                  <StyledInput
