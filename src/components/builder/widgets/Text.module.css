@@ -1,0 +1,48 @@
+.textWidgetContent p {
+    margin-bottom: 1em;
+}
+
+.textWidgetContent ul, .textWidgetContent ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    list-style-position: outside;
+}
+
+.textWidgetContent ul {
+    list-style-type: disc;
+}
+
+.textWidgetContent ol {
+    list-style-type: decimal;
+}
+
+
+.textWidgetContent strong, .textWidgetContent b {
+    font-weight: bold !important;
+}
+
+.textWidgetContent em, .textWidgetContent i {
+    font-style: italic !important;
+}
+
+.textWidgetContent s, .textWidgetContent strike {
+    text-decoration: line-through !important;
+}
+
+.textWidgetContent u {
+    text-decoration: underline !important;
+}
+
+.textWidgetContent a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.textWidgetContent p {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 1em !important;
+    min-height: 1.5em; /* Ensure empty lines have height */
+    line-height: inherit !important; /* Inherit from container */
+}
+
