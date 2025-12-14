@@ -101,11 +101,13 @@ function IconImportModal({ onImport, currentLibrary }) {
             console.log('[IconImportModal] Detected:', { extractedName, detectedLib });
             onImport(extractedName, detectedLib);
             
-            setIconName('');  
+            // Reset fields
+            setIconName(''); 
             setImportCode('');
             setError('');
         } else {
-            setError('Could not recognize an icon name.');
+            // Only show error if BOTH fields failed
+            setError('Could not recognize an icon name from input or code.');
         }
     };
 
@@ -933,6 +935,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                                 updates.icon = importedName;
                                                 console.log('[PropsPanel] onImport triggering update:', updates);
                                                 onPropsChange(updates);
+                                                setIsOpen(false); // Auto-close modal on success
                                             }}
                                             currentLibrary={getValue('iconLib', 'fa')}
                                         />
