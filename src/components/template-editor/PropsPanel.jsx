@@ -787,7 +787,6 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                 </>
             ) : block.type === WIDGET_TYPES.DIVIDER ? (
                 <>
-                    <Section title="Content">
                          <StyledSelect
                             label="Style"
                             value={getValue('style', 'solid')}
@@ -851,7 +850,6 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                 { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
                             ]}
                         />
-                    </Section>
 
                     <Section title="Style">
                         <StyledInput
