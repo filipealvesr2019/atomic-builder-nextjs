@@ -2387,6 +2387,18 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                         placeholder="Caption text"
                                     />
                                 </div>
+                                {getValue('isLink') === 'custom' && (
+                                    <div style={{ marginBottom: '10px' }}>
+                                        <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Link URL</label>
+                                        <input 
+                                            type="text" 
+                                            value={item.link || ''} 
+                                            onChange={(e) => onChangeItem({ link: e.target.value })}
+                                            className={styles.input}
+                                            placeholder="https://..."
+                                        />
+                                    </div>
+                                )}
                            </div> 
                         )}
                     />
