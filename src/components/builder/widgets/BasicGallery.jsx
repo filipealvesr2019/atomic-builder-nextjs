@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import styles from './BasicGallery.module.css';
 import { X } from 'lucide-react';
