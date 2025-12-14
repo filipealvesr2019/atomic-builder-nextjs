@@ -75,8 +75,9 @@ function IconImportModal({ onImport, currentLibrary }) {
 
         if (extractedName) {
             onImport(extractedName, detectedLib);
-            setIsOpen(false);
-            setInputValue('');
+            // setIsOpen(false); // Kept open as per user request
+            // setInputValue(''); // Optional: keep value or clear? User said "paste an icon", maybe they want to paste another. Clearing is safer for "new paste".
+            setInputValue(''); 
             setError('');
         } else {
             setError('Could not recognize an icon name.');
@@ -796,8 +797,9 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                         responsive={false}
                                         options={[
                                             { label: 'FontAwesome', value: 'fa' },
-                                            { label: 'Material (React Icons)', value: 'md' },
-                                            { label: 'Lucide Icons', value: 'lucide' }
+                                            { label: 'React Icons', value: 'md' },
+                                            { label: 'Lucide Icons', value: 'lucide' },
+                                     
                                         ]}
                                     />
                                     
