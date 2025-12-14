@@ -73,7 +73,13 @@ export default function IconWidget({ settings }) {
 
       if (iconLib === 'fa') {
           // FontAwesome (react-icons/fa6)
-          IconComponent = FaIcons[iconName] || FaIcons.FaStar;
+          IconComponent = FaIcons[iconName] || 
+            // Smart Fallback for raw names (e.g. 'apple' -> 'FaApple')
+            (() => {
+                const faName = `Fa${toPascalCase(iconName)}`;
+                return FaIcons[faName];
+            })() ||
+            FaIcons.FaStar;
       } else if (iconLib === 'md') {
           // Material Design & Generic React Icons Fallback
           // Comprehensive lookup: Scan all imported libraries for the icon name
@@ -92,7 +98,12 @@ export default function IconWidget({ settings }) {
             FaIcons[iconName] || 
             LucideIcons[iconName] ||
             // FontAwesome Fallback: Try Fa + PascalCase (e.g. 'apple' -> 'FaApple', 'arrow-right' -> 'FaArrowRight')
-            FaIcons[`Fa${toPascalCase(iconName)}`] ||
+            (() => {
+                const faName = `Fa${toPascalCase(iconName)}`;
+                const resolved = FaIcons[faName];
+                console.log('[IconWidget] Resolving:', { iconLib, iconName, faName, found: !!resolved });
+                return resolved;
+            })() ||
             MdIcons.MdStar;
       } else if (iconLib === 'ci') {
           IconComponent = CiIcons[iconName] || CiIcons.CiStar;

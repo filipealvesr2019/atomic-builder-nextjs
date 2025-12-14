@@ -53,7 +53,7 @@ function IconImportModal({ onImport, currentLibrary }) {
                 const faMatch = importCode.match(/\['([^']+)'\]/);
                 if (faMatch && faMatch[1]) {
                      extractedName = faMatch[1]; // Extracts 'apple'
-                     detectedLib = 'md'; // Force to Universal/React Icons
+                     detectedLib = 'fa'; // Explicitly set to FontAwesome
                 }
             }
 
@@ -72,10 +72,10 @@ function IconImportModal({ onImport, currentLibrary }) {
         }
         
         // Detect library based on prefix
-        // Detect library based on prefix
-        if (extractedName.startsWith('Fa')) detectedLib = 'fa';
-        else if (extractedName.startsWith('Md')) detectedLib = 'md';
-        else if (extractedName.startsWith('Ci')) detectedLib = 'md'; // Map to md (React Icons generic)
+        if (!detectedLib) { // Only run prefix detection if not already detected by import
+            if (extractedName.startsWith('Fa')) detectedLib = 'fa';
+            else if (extractedName.startsWith('Md')) detectedLib = 'md';
+            else if (extractedName.startsWith('Ci')) detectedLib = 'md'; // Map to md (React Icons generic)
         else if (extractedName.startsWith('Bs')) detectedLib = 'md';
         else if (extractedName.startsWith('Io')) detectedLib = 'md';
         else if (extractedName.startsWith('Bi')) detectedLib = 'md';
@@ -86,6 +86,8 @@ function IconImportModal({ onImport, currentLibrary }) {
         else if (extractedName.startsWith('Fi')) detectedLib = 'md';
         else if (extractedName.startsWith('Gi')) detectedLib = 'md';
         else if (extractedName.startsWith('Fi')) detectedLib = 'md';
+        
+        }
         
         // Semantic Import Check: If the string explicitly says "from 'react-icons/...'", trust that it is React Icons (md)
         if (importCode && /from\s+['"]react-icons\/(\w+)['"]/i.test(importCode)) {
