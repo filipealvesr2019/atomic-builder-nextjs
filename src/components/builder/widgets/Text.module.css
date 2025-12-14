@@ -34,15 +34,63 @@
 }
 
 .textWidgetContent a {
-    color: inherit;
-    text-decoration: underline;
+    color: #3b82f6 !important; /* Blue color */
+    text-decoration: underline !important;
 }
 
-.textWidgetContent p {
+
+.textWidgetContent {
+    white-space: pre-wrap; /* Respect newlines if tags are missing */
+    word-wrap: break-word;
+}
+
+.textWidgetContent p, .textWidgetContent > div {
     display: block !important;
     width: 100% !important;
     margin-bottom: 1em !important;
-    min-height: 1.5em; /* Ensure empty lines have height */
-    line-height: inherit !important; /* Inherit from container */
+    min-height: 1.5em; 
+    line-height: inherit !important;
 }
+
+.textWidgetContent br {
+    display: block !important;
+    content: "" !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* Quill Alignment Classes */
+.textWidgetContent :global(.ql-align-center) {
+    text-align: center;
+}
+
+.textWidgetContent :global(.ql-align-right) {
+    text-align: right;
+}
+
+.textWidgetContent :global(.ql-align-justify) {
+    text-align: justify;
+}
+
+/* Quill Indentation Classes */
+.textWidgetContent :global(.ql-indent-1) {
+    padding-left: 3em;
+}
+
+.textWidgetContent :global(.ql-indent-2) {
+    padding-left: 6em;
+}
+
+.textWidgetContent :global(.ql-indent-3) {
+    padding-left: 9em;
+}
+
+.textWidgetContent :global(.ql-indent-4) {
+    padding-left: 12em;
+}
+
+.textWidgetContent :global(.ql-indent-5) {
+    padding-left: 15em;
+}
+
+
 

@@ -29,6 +29,8 @@ export default function TextWidget({ settings }) {
     zIndex: getProp('zIndex')
   };
 
+  console.log('TextWidget Content:', content);
+
   return (
     <div style={style} className={styles.textWidgetContent}>
       {typeof content === 'string' ? parse(content) : content}
