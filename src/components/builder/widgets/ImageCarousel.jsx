@@ -27,7 +27,7 @@ export default function ImageCarousel({ settings }) {
     } = settings || {};
 
     // --- State and Refs ---
-    const [currentIndex, setCurrentIndex] = useState(0); // This is the *logical* index (0 to images.length - 1)
+    const [currentIndex, setCurrentIndex] = useState(0); 
     const [isTransitioning, setIsTransitioning] = useState(false);
     const trackRef = useRef(null);
     const intervalRef = useRef(null);
@@ -39,13 +39,16 @@ export default function ImageCarousel({ settings }) {
         const handleResize = () => {
             const width = window.innerWidth;
             let count = 1;
-            if (typeof slidesPerView === 'object') {
-                 if (width >= 1024) count = slidesPerView.desktop || 1;
-                 else if (width >= 768) count = slidesPerView.tablet || 1;
-                 else count = slidesPerView.mobile || 1;
+
+            // Robust parsing
+            if (typeof slidesPerView === 'object' && slidesPerView !== null) {
+                 if (width >= 1024) count = parseInt(slidesPerView.desktop) || 1;
+                 else if (width >= 768) count = parseInt(slidesPerView.tablet) || 1;
+                 else count = parseInt(slidesPerView.mobile) || 1;
             } else {
                 count = parseInt(slidesPerView) || 1;
             }
+            if (count < 1) count = 1;
             setVisibleSlides(count);
         };
         
@@ -56,16 +59,21 @@ export default function ImageCarousel({ settings }) {
 
 
     // --- Data Preparation (Infinite Loop) ---
+    // 1. Handle potential responsive wrapper for images
+    let rawImages = images;
+    if (!Array.isArray(images) && typeof images === 'object' && images !== null) {
+        rawImages = images.desktop || images.mobile || [];
+    }
+    if (!Array.isArray(rawImages)) rawImages = [];
+
     // Filter valid images only
-     const validImages = Array.isArray(images) 
-        ? images.filter(img => img && (typeof img === 'string' ? img : img.src)) 
-        : [];
+     const validImages = rawImages.filter(img => img && (typeof img === 'string' ? img : img.src));
 
     // If no images, show placeholder
     const displayList = validImages.length > 0 ? validImages : [
-        'https://placehold.co/800x400?text=Slide+1',
-        'https://placehold.co/800x400?text=Slide+2',
-        'https://placehold.co/800x400?text=Slide+3'
+        { src: 'https://placehold.co/800x400?text=Slide+1', alt: 'Slide 1' },
+        { src: 'https://placehold.co/800x400?text=Slide+2', alt: 'Slide 2' },
+        { src: 'https://placehold.co/800x400?text=Slide+3', alt: 'Slide 3' }
     ];
 
     const totalSlides = displayList.length;
@@ -211,37 +219,21 @@ export default function ImageCarousel({ settings }) {
 
 
     // --- Calculation for Translate ---
-    // If loop is true, effective index is `currentIndex + 1` (because of initial clone)
-    // Slide width is `100% / visibleSlides`.
-    const slideWidthPct = 100 / visibleSlides;
-    let translatePct = 0;
+    // Correct calculation for Translate
+    // translateX(%) is relative to the TRACK width, not the container.
+    // Each slide occupies (100 / extendedSlides.length)% of the track.
     
-    if (loop) {
-        // [Clone Last] (-1) [0] [1] ...
-        // Index -1 maps to translate 0% (if we want left-aligned)? No.
-        // Let's say Viewport starts at 0.
-        // If we want to show [Clone Last], we translate 0? No, usually typical setup is:
-        // [Clone Last] [Orig 0] ...
-        // We initially translate by `-100% / visibleSlides` to show [Orig 0].
-        // Then `currentIndex * slideWidth` more.
-        
-        translatePct = -( (currentIndex + 1) * slideWidthPct ); 
-    } else {
-        translatePct = -(currentIndex * slideWidthPct);
-    }
+    // Effective index (considering clone at start if loop is true)
+    const effectiveIndex = loop ? currentIndex + 1 : currentIndex;
     
-    // Add Gap logic? 
-    // Gap makes % calc harder. `calc(-X% - Ypx)`
-    // Simplest is to use `padding` inside slides for gap, or `calc`.
+    // Slide percentage width relative to the track
+    const slidePerTrackPct = 100 / extendedSlides.length;
+    
+    const translatePct = -(effectiveIndex * slidePerTrackPct);
     
     const trackStyle = {
         transform: `translateX(${translatePct}%)`,
         transition: disableAnimation ? 'none' : 'transform 0.5s ease-in-out',
-        width: `${extendedSlides.length * slideWidthPct}%`, // Total track width needs to accommodate all slides? 
-        // No. If `width: 100%` on track, and we have N slides, each slide is 1/N width?
-        // Better: Track width = (TotalSlides * 100 / Visible) %? 
-        // Example: 3 visible. 1 slide = 33.33% of VIEWPORT.
-        // Track has M total slides. Track width should be (M * 100 / 3) % of Container.
         width: `${(extendedSlides.length / visibleSlides) * 100}%`
     };
 
