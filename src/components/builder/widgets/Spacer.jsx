@@ -19,14 +19,17 @@ export default function SpacerWidget({ settings }) {
   const backgroundColor = getProp('backgroundColor', 'transparent');
 
   const width = getProp('width', '100%');
+  const hasBackground = backgroundColor && backgroundColor !== 'transparent';
 
   return (
     <div 
       style={{
         padding: padding, 
-        backgroundColor: backgroundColor,
+        backgroundColor: hasBackground ? backgroundColor : 'rgba(0, 0, 0, 0.02)',
         width: width,
-        minWidth: '1px', // Ensure it doesn't collapse completely if empty
+        minWidth: '1px', 
+        border: '1px dashed rgba(0, 0, 0, 0.1)',
+        borderRadius: '4px'
       }}
     />
   );
