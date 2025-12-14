@@ -5,19 +5,135 @@ import {
   ArrowRight, ArrowDown, ArrowLeft, ArrowUp,
   AlignStartVertical, AlignCenterVertical, AlignEndVertical,
   AlignStartHorizontal, AlignCenterHorizontal, AlignEndHorizontal,
-  Columns, Rows, ChevronDown, ChevronRight
+  Columns, Rows, ChevronDown, ChevronRight,
+  Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, Type, Check, X, Search,
+  Baseline, PaintBucket
 } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
 import templates from '@/templates-cms/registry';
 import styles from './PropsPanel.module.css';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useAtom, useSetAtom } from 'jotai';
 import { viewModeAtom } from '@/store/viewModeStore';
 import Repeater from './Repeater';
 import dynamic from 'next/dynamic';
 import 'react-quill-new/dist/quill.snow.css';
 
 import { renderToStaticMarkup } from 'react-dom/server';
-import { Baseline, PaintBucket } from 'lucide-react';
+
+
+// --- Icon Import Modal Component ---
+function IconImportModal({ onImport, currentLibrary }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [error, setError] = useState('');
+
+    const libraryInfo = {
+        'fa': { name: 'FontAwesome', url: 'https://react-icons.github.io/react-icons/icons/fa' },
+        'md': { name: 'Material Design', url: 'https://react-icons.github.io/react-icons/icons/md' },
+        'lucide': { name: 'Lucide', url: 'https://lucide.dev/icons' }
+    };
+
+    const handleImport = () => {
+        let extractedName = inputValue.trim();
+        let detectedLib = null;
+
+        // Try to match import style: import { FaBeer } from "react-icons/fa";
+        const importMatch = inputValue.match(/import\s+\{\s*(\w+)\s*\}\s+from/);
+        if (importMatch && importMatch[1]) {
+            extractedName = importMatch[1];
+        }
+
+        // Try to match JSX style: <FaBeer />
+        const jsxMatch = inputValue.match(/<(\w+)\s*\/>/);
+        if (jsxMatch && jsxMatch[1]) {
+            extractedName = jsxMatch[1];
+        }
+        
+        // Detect library based on prefix
+        if (extractedName.startsWith('Fa')) detectedLib = 'fa';
+        else if (extractedName.startsWith('Md')) detectedLib = 'md';
+        else if (!extractedName.startsWith('Fa') && !extractedName.startsWith('Md')) detectedLib = 'lucide';
+
+        if (extractedName) {
+            onImport(extractedName, detectedLib);
+            setIsOpen(false);
+            setInputValue('');
+            setError('');
+        } else {
+            setError('Could not recognize an icon name.');
+        }
+    };
+
+    return (
+        <div style={{ position: 'relative' }}>
+            <button 
+                onClick={() => setIsOpen(!isOpen)}
+                style={{
+                    width: '100%',
+                    padding: '8px',
+                    background: '#f3f4f6',
+                    border: '1px dashed #ccc',
+                    borderRadius: '4px',
+                    color: '#666',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    fontSize: '13px'
+                }}
+            >
+                <Search size={14} />
+                {isOpen ? 'Close Import' : `Import Icon from ${libraryInfo[currentLibrary]?.name || 'Library'}`}
+            </button>
+
+            {isOpen && (
+                <div className="icon-import-popover">
+                    <h4 style={{ margin: '0 0 10px', fontSize: '14px', fontWeight: 'bold' }}>Import {libraryInfo[currentLibrary]?.name}</h4>
+                    
+                    <div style={{ marginBottom: '10px', fontSize: '11px', color: '#3b82f6' }}>
+                         Reference: <a href={libraryInfo[currentLibrary]?.url} target="_blank" rel="noopener noreferrer" style={{textDecoration:'underline'}}>Browse Icons</a>
+                    </div>
+
+                    <textarea 
+                        className="icon-import-textarea"
+                        placeholder={`Paste import line or icon name...\ne.g. ${currentLibrary === 'fa' ? 'FaRocket' : 'MdAlarm'}`}
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                    />
+                    
+                    {error && <p style={{color: 'red', fontSize: '11px', marginBottom: '8px'}}>{error}</p>}
+
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+                        <button 
+                            onClick={handleImport}
+                            style={{
+                                background: '#2563eb',
+                                color: 'white',
+                                border: 'none',
+                                padding: '6px 12px',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                fontSize: '12px',
+                                fontWeight: 500
+                            }}
+                            onMouseEnter={(e) => e.target.style.background = '#1d4ed8'}
+                            onMouseLeave={(e) => e.target.style.background = '#2563eb'}
+                        >
+                            Load Icon
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+const WIDGET_ICONS = {
+    // This object seems to be incomplete in the provided instruction.
+    // Assuming it's meant to be an empty object or defined elsewhere.
+};
 
 const ReactQuill = dynamic(async () => {
     const { default: RQ, Quill } = await import('react-quill-new');
@@ -702,6 +818,69 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                             ]}
                                         />
                                     )}
+                                    {/* Manual Icon Import / Search */}
+                                    <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
+                                        <IconImportModal 
+                                            onImport={(importedName, library) => {
+                                                if (library) handleChange('iconLib', library);
+                                                handleChange('icon', importedName);
+                                            }}
+                                            currentLibrary={getValue('iconLib', 'fa')}
+                                        />
+                                    </div>
+                                    <style jsx global>{`
+                                        .icon-import-modal-overlay {
+                                            position: fixed;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100vw;
+                                            height: 100vh;
+                                            background: rgba(0,0,0,0.5);
+                                            z-index: 9999;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                        }
+                                        .icon-import-modal {
+                                            background: white;
+                                            padding: 20px;
+                                            border-radius: 8px;
+                                            width: 400px;
+                                            max-width: 90%;
+                                            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                                        }
+                                        .icon-import-textarea {
+                                            width: 100%;
+                                            height: 80px;
+                                            margin: 10px 0;
+                                            padding: 8px;
+                                            border: 1px solid #ccc;
+                                            border-radius: 4px;
+                                            font-family: monospace;
+                                            font-size: 12px;
+                                        }
+                                        .icon-import-btn {
+                                            background: #3b82f6;
+                                            color: white;
+                                            border: none;
+                                            padding: 8px 16px;
+                                            border-radius: 4px;
+                                            cursor: pointer;
+                                            font-weight: 500;
+                                        }
+                                        .icon-import-btn:hover {
+                                            background: #2563eb;
+                                        }
+                                        .icon-cancel-btn {
+                                            background: transparent;
+                                            color: #666;
+                                            border: 1px solid #ccc;
+                                            padding: 8px 16px;
+                                            border-radius: 4px;
+                                            cursor: pointer;
+                                            margin-right: 10px;
+                                        }
+                                    `}</style>
                                 </>
                             ) : (
                                  <StyledInput
