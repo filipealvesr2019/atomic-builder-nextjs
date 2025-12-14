@@ -71,11 +71,10 @@ function IconImportModal({ onImport, currentLibrary }) {
             extractedName = iconName.trim();
         }
         
-        // Detect library based on prefix
         if (!detectedLib) { // Only run prefix detection if not already detected by import
             if (extractedName.startsWith('Fa')) detectedLib = 'fa';
             else if (extractedName.startsWith('Md')) detectedLib = 'md';
-            else if (extractedName.startsWith('Ci')) detectedLib = 'md'; // Map to md (React Icons generic)
+        else if (extractedName.startsWith('Ci')) detectedLib = 'md'; // Map to md (React Icons generic)
         else if (extractedName.startsWith('Bs')) detectedLib = 'md';
         else if (extractedName.startsWith('Io')) detectedLib = 'md';
         else if (extractedName.startsWith('Bi')) detectedLib = 'md';
@@ -106,8 +105,8 @@ function IconImportModal({ onImport, currentLibrary }) {
             // Reset fields
             setIconName(''); 
             setImportCode('');
+            setImportCode('');
             setError('');
-            
             setIsOpen(false); // Close modal internally
         } else {
             // Only show error if BOTH fields failed
@@ -860,7 +859,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                                 { label: 'Google', value: 'FaGoogle' },
                                                 { label: 'Whatsapp', value: 'FaWhatsapp' },
                                                 // Dynamic option for imported icon - FA only
-                                                ...(getValue('icon') && getValue('icon').startsWith('Fa') && ![
+                                                ...(getValue('icon') && ![
                                                     'FaStar', 'FaHeart', 'FaUser', 'FaCheck', 
                                                     'FaFacebook', 'FaTwitter', 'FaInstagram', 
                                                     'FaLinkedin', 'FaGithub', 'FaYoutube', 
@@ -889,8 +888,9 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                                 { label: 'Edit', value: 'MdEdit' },
                                                 // Dynamic option for imported icon - MD & other React Icons
                                                 ...(getValue('icon') && (
-                                                    // Allow ANY value if it's not in the default list
-                                                    true
+                                                    // STRICT SEPARATION: Only allow icons with valid React Icon prefixes.
+                                                    // This prevents Lucide icons (like 'Armchair') from showing up here.
+                                                    ['Fa','Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => getValue('icon').startsWith(p))
                                                 ) && ![
                                                     'MdStar', 'MdFavorite', 'MdPerson', 'MdCheck', 
                                                     'MdMenu', 'MdClose', 'MdHome', 'MdSettings', 

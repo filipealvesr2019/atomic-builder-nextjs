@@ -96,12 +96,12 @@ export default function IconWidget({ settings }) {
             GiIcons[iconName] || 
             FiIcons[iconName] || 
             FaIcons[iconName] || 
-            LucideIcons[iconName] ||
+            // FontAwesome Fallback: Try Fa + PascalCase (e.g. 'apple' -> 'FaApple', 'arrow-right' -> 'FaArrowRight')
             // FontAwesome Fallback: Try Fa + PascalCase (e.g. 'apple' -> 'FaApple', 'arrow-right' -> 'FaArrowRight')
             (() => {
                 const faName = `Fa${toPascalCase(iconName)}`;
                 const resolved = FaIcons[faName];
-                console.log('[IconWidget] Resolving:', { iconLib, iconName, faName, found: !!resolved });
+                // console.log('[IconWidget] Resolving:', { iconLib, iconName, faName, found: !!resolved });
                 return resolved;
             })() ||
             MdIcons.MdStar;
