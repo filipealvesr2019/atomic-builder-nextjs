@@ -40,9 +40,8 @@ function IconImportModal({ onImport, currentLibrary }) {
         let extractedName = '';
         let detectedLib = null;
 
-        if (iconName.trim()) {
-            extractedName = iconName.trim();
-        } else if (importCode.trim()) {
+        // Priority 1: Extract from Import Code (if present)
+        if (importCode.trim()) {
             // Try to match import style: import { FaBeer } from "react-icons/fa";
             const importMatch = importCode.match(/import\s+\{\s*(\w+)\s*\}\s+from/);
             if (importMatch && importMatch[1]) {
@@ -50,10 +49,17 @@ function IconImportModal({ onImport, currentLibrary }) {
             }
 
             // Try to match JSX style: <FaBeer />
-            const jsxMatch = importCode.match(/<(\w+)\s*\/>/);
-            if (jsxMatch && jsxMatch[1]) {
-                extractedName = jsxMatch[1];
+            if (!extractedName) {
+                const jsxMatch = importCode.match(/<(\w+)\s*\/>/);
+                if (jsxMatch && jsxMatch[1]) {
+                    extractedName = jsxMatch[1];
+                }
             }
+        }
+
+        // Priority 2: Use manually entered name if no name extracted from code
+        if (!extractedName && iconName.trim()) {
+            extractedName = iconName.trim();
         }
         
         // Detect library based on prefix
@@ -71,7 +77,16 @@ function IconImportModal({ onImport, currentLibrary }) {
         else if (extractedName.startsWith('Fi')) detectedLib = 'md';
         else if (extractedName.startsWith('Gi')) detectedLib = 'md';
         else if (extractedName.startsWith('Fi')) detectedLib = 'md';
-        else detectedLib = null; // Do NOT default to Lucide. Respect current library.
+        
+        // Semantic Import Check: If the string explicitly says "from 'react-icons/...'", trust that it is React Icons (md)
+        if (importCode && /from\s+['"]react-icons\/(\w+)['"]/i.test(importCode)) {
+             const match = importCode.match(/from\s+['"]react-icons\/(\w+)['"]/i);
+             if (match && ['ci', 'bs', 'io5', 'io', 'bi', 'ai', 'ri', 'ti', 'gi', 'fi', 'md'].includes(match[1])) {
+                 detectedLib = 'md';
+             }
+        }
+
+        if (!detectedLib) detectedLib = null; // Default to null (keep current) if still not detected
 
         if (extractedName) {
             console.log('[IconImportModal] Detected:', { extractedName, detectedLib });

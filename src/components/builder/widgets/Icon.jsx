@@ -72,17 +72,20 @@ export default function IconWidget({ settings }) {
           IconComponent = FaIcons[iconName] || FaIcons.FaStar;
       } else if (iconLib === 'md') {
           // Material Design & Generic React Icons Fallback
-          // Allow other known React Icon libraries to be rendered under 'md' if name matches prefix
-          if (iconName.startsWith('Ci')) IconComponent = CiIcons[iconName] || CiIcons.CiAirportSign1;
-          else if (iconName.startsWith('Bs')) IconComponent = BsIcons[iconName] || BsIcons.BsStar;
-          else if (iconName.startsWith('Io')) IconComponent = IoIcons[iconName] || IoIcons.IoStar;
-          else if (iconName.startsWith('Bi')) IconComponent = BiIcons[iconName] || BiIcons.BiStar;
-          else if (iconName.startsWith('Ai')) IconComponent = AiIcons[iconName] || AiIcons.AiOutlineStar;
-          else if (iconName.startsWith('Ri')) IconComponent = RiIcons[iconName] || RiIcons.RiStarFill;
-          else if (iconName.startsWith('Ti')) IconComponent = TiIcons[iconName] || TiIcons.TiStarFullOutline;
-          else if (iconName.startsWith('Gi')) IconComponent = GiIcons[iconName] || GiIcons.GiStarMedal;
-          else if (iconName.startsWith('Fi')) IconComponent = FiIcons[iconName] || FiIcons.FiStar;
-          else IconComponent = MdIcons[iconName] || MdIcons.MdStar;
+          // Comprehensive lookup: Scan all imported libraries for the icon name
+          // This ensures that "By Import" works regardless of prefix, as long as the name exists in one of the libs.
+          IconComponent = 
+            MdIcons[iconName] || 
+            CiIcons[iconName] || 
+            BsIcons[iconName] || 
+            IoIcons[iconName] || 
+            BiIcons[iconName] || 
+            AiIcons[iconName] || 
+            RiIcons[iconName] || 
+            TiIcons[iconName] || 
+            GiIcons[iconName] || 
+            FiIcons[iconName] || 
+            MdIcons.MdStar;
       } else if (iconLib === 'ci') {
           IconComponent = CiIcons[iconName] || CiIcons.CiStar;
       } else if (iconLib === 'bs') {
