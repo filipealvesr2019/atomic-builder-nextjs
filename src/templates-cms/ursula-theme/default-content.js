@@ -325,7 +325,7 @@ export const ursulaDefaultContent = {
                 title: 'The journey of a thousand miles begins with a single step',
                 author: 'POST AUTHOR',
                 comments: '2 COMMENTS',
-                mainImage: 'https://images.unsplash.com/photo-1497215842964-222b430dc0a8?w=1200&q=80',
+                mainImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&q=80',
                 content: [
                     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
