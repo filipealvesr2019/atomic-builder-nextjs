@@ -16,7 +16,19 @@ import Repeater from './Repeater';
 import dynamic from 'next/dynamic';
 import 'react-quill-new/dist/quill.snow.css';
 
-const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
+import { renderToStaticMarkup } from 'react-dom/server';
+import { Baseline, PaintBucket } from 'lucide-react';
+
+const ReactQuill = dynamic(async () => {
+    const { default: RQ, Quill } = await import('react-quill-new');
+    
+    // Customize Icons using Lucide
+    const icons = Quill.import('ui/icons');
+    icons['color'] = renderToStaticMarkup(<Baseline size={18} strokeWidth={2} />);
+    icons['background'] = renderToStaticMarkup(<PaintBucket size={18} strokeWidth={2} />);
+    
+    return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
+}, { ssr: false });
 
 // Icon Button Group Component (for Direction, Justify, Align)
 function IconButtonGroup({ label, value, onChange, options, activeViewMode }) {
