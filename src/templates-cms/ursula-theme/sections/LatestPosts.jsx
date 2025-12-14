@@ -1,6 +1,7 @@
 'use client';
 
 import styles from './LatestPosts.module.css';
+import Link from 'next/link';
 
 export default function LatestPosts({ 
   subtitle = "Our Blog",
@@ -45,19 +46,21 @@ export default function LatestPosts({
       <div className={styles.grid}>
           {posts.map((post, idx) => (
              <article key={idx} className={styles.post}>
-                 <div className={styles.imageContainer}>
-                     <div className={styles.dateBadge}>
-                         <span className={styles.dateDay}>{post.date}</span>
-                         <span className={styles.dateMonth}>{post.month}</span>
+                 <Link href="/admin/demo-preview/ursula-demo/single-post" className={styles.linkWrapper}>
+                     <div className={styles.imageContainer}>
+                         <div className={styles.dateBadge}>
+                             <span className={styles.dateDay}>{post.date}</span>
+                             <span className={styles.dateMonth}>{post.month}</span>
+                         </div>
+                         <img src={post.image} alt={post.title} className={styles.image} />
                      </div>
-                     <img src={post.image} alt={post.title} className={styles.image} />
-                 </div>
-                 <div className={styles.content}>
-                     <span className={styles.category}>{post.category}</span>
-                     <h3 className={styles.postTitle}>{post.title}</h3>
-                     <p className={styles.excerpt}>{post.excerpt}</p>
-                     <button className={styles.readMore}>Read More</button>
-                 </div>
+                     <div className={styles.content}>
+                         <span className={styles.category}>{post.category}</span>
+                         <h3 className={styles.postTitle}>{post.title}</h3>
+                         <p className={styles.excerpt}>{post.excerpt}</p>
+                         <button className={styles.readMore}>Read More</button>
+                     </div>
+                 </Link>
              </article>
           ))}
       </div>
