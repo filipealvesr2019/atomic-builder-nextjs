@@ -25,12 +25,14 @@ export default function ImageGallery({ settings }) {
         ? images.filter(img => img && (typeof img === 'string' ? img : img.src)) 
         : [];
         
-    // Default placeholders if empty
+    // Default placeholders if empty (Varying sizes for Masonry/Justified demo)
     const displayImagesList = validImages.length > 0 ? validImages : [
-        { src: 'https://placehold.co/600x400?text=Image+1', alt: 'Placeholder 1' },
-        { src: 'https://placehold.co/600x400?text=Image+2', alt: 'Placeholder 2' },
-        { src: 'https://placehold.co/600x400?text=Image+3', alt: 'Placeholder 3' },
-        { src: 'https://placehold.co/600x400?text=Image+4', alt: 'Placeholder 4' }
+        { src: 'https://placehold.co/600x400?text=Landscape', alt: 'Landscape' },
+        { src: 'https://placehold.co/400x600?text=Portrait', alt: 'Portrait' },
+        { src: 'https://placehold.co/500x500?text=Square', alt: 'Square' },
+        { src: 'https://placehold.co/600x300?text=Wide', alt: 'Wide' },
+        { src: 'https://placehold.co/400x500?text=Tall', alt: 'Tall' },
+        { src: 'https://placehold.co/600x400?text=Landscape+2', alt: 'Landscape 2' }
     ];
         
     // Shuffle logic
