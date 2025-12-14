@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.line {
+  flex-grow: 1;
+  border-top-style: solid; /* Default */
+  border-top-width: 1px;   /* Default */
+  opacity: 1;
+}
+
+/* Content wrapper (Icon or Text) */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Gap managed via margin in JSX or here */
+}
+
+/* Modifier classes could be used if strictly CSS, 
+   but since user wants dynamic control (px, %), 
+   many styles will be inline. We use this for structure. */

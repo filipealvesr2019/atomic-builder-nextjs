@@ -785,6 +785,167 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         placeholder="Inherit"
                     />
                 </>
+            ) : block.type === WIDGET_TYPES.DIVIDER ? (
+                <>
+                    <Section title="Content">
+                         <StyledSelect
+                            label="Style"
+                            value={getValue('style', 'solid')}
+                            onChange={(val) => handleChange('style', val)}
+                            responsive={false}
+                            options={[
+                                { label: 'Solid', value: 'solid' },
+                                { label: 'Double', value: 'double' },
+                                { label: 'Dotted', value: 'dotted' },
+                                { label: 'Dashed', value: 'dashed' },
+                                { label: 'Groove', value: 'groove' }
+                            ]}
+                        />
+                         <StyledSelect
+                            label="Element"
+                            value={getValue('element', 'line')}
+                            onChange={(val) => handleChange('element', val)}
+                            responsive={false}
+                            options={[
+                                { label: 'Line', value: 'line' },
+                                { label: 'Line + Icon', value: 'line_icon' },
+                                { label: 'Line + Text', value: 'line_text' }
+                            ]}
+                        />
+                         
+                        {getValue('element') === 'line_text' && (
+                             <StyledInput
+                                label="Text"
+                                value={getValue('text', 'Divider')}
+                                onChange={(val) => handleChange('text', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                            />
+                        )}
+
+                        {getValue('element') === 'line_icon' && (
+                            <StyledSelect
+                                label="Icon"
+                                value={getValue('icon', 'Star')}
+                                onChange={(val) => handleChange('icon', val)}
+                                responsive={false}
+                                options={[
+                                   { label: 'Star', value: 'Star' },
+                                   { label: 'Heart', value: 'Heart' },
+                                   { label: 'Check', value: 'Check' },
+                                   { label: 'User', value: 'User' },
+                                   { label: 'Home', value: 'Home' },
+                                   { label: 'Settings', value: 'Settings' }
+                                ]}
+                            />
+                        )}
+                        
+                        <IconButtonGroup
+                            label="Alignment"
+                            value={getValue('align', 'center')}
+                            onChange={(val) => handleChange('align', val)}
+                            activeViewMode={viewMode}
+                            options={[
+                                { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                                { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                                { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                            ]}
+                        />
+                    </Section>
+
+                    <Section title="Style">
+                        <StyledInput
+                            label="Color"
+                            value={getValue('color', '#e5e7eb')}
+                            onChange={(val) => handleChange('color', val)}
+                            responsive={false}
+                        />
+                        <StyledInput
+                            label="Width"
+                            value={getValue('width', '100%')}
+                            onChange={(val) => handleChange('width', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                        />
+                        <StyledInput
+                            label="Height / Weight"
+                            value={getValue('height', '1px')}
+                            onChange={(val) => handleChange('height', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                        />
+                         <StyledInput
+                            label="Gap"
+                            value={getValue('gap', '15px')}
+                            onChange={(val) => handleChange('gap', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                        />
+                         <StyledInput
+                            label="Border Radius"
+                            value={getValue('borderRadius', '0px')}
+                            onChange={(val) => handleChange('borderRadius', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                        />
+                    </Section>
+
+                     {getValue('element') !== 'line' && (
+                        <Section title="Text / Icon Style">
+                             {getValue('element') === 'line_text' && (
+                                <>
+                                     <StyledInput
+                                        label="Text Color"
+                                        value={getValue('textColor', '')}
+                                        onChange={(val) => handleChange('textColor', val)}
+                                        responsive={false}
+                                    />
+                                    <StyledInput
+                                        label="Font Size"
+                                        value={getValue('textSize', '14px')}
+                                        onChange={(val) => handleChange('textSize', val)}
+                                        responsive={true}
+                                        activeViewMode={viewMode}
+                                    />
+                                </>
+                             )}
+                             {getValue('element') === 'line_icon' && (
+                                <>
+                                     <StyledInput
+                                        label="Icon Color"
+                                        value={getValue('iconColor', '')}
+                                        onChange={(val) => handleChange('iconColor', val)}
+                                        responsive={false}
+                                    />
+                                    <StyledInput
+                                        label="Icon Size"
+                                        value={getValue('iconSize', '14px')}
+                                        onChange={(val) => handleChange('iconSize', val)}
+                                        responsive={true}
+                                        activeViewMode={viewMode}
+                                    />
+                                </>
+                             )}
+                        </Section>
+                    )}
+
+                    <Section title="Spacing">
+                        <StyledInput
+                            label="Margin"
+                            value={getValue('margin', '20px 0')}
+                            onChange={(val) => handleChange('margin', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                        />
+                        <StyledInput
+                            label="Padding"
+                            value={getValue('padding', '0')}
+                            onChange={(val) => handleChange('padding', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                        />
+                    </Section>
+                </>
             ) : block.type === WIDGET_TYPES.BUTTON ? (
                 <>
                     <StyledInput

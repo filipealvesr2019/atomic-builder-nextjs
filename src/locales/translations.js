@@ -129,7 +129,8 @@ export const translations = {
             productList: 'Product List',
             iconBox: 'Icon Box',
             iconList: 'Icon List',
-            imageBox: 'Image Box'
+            imageBox: 'Image Box',
+            divider: 'Divider'
         }
     },
     settings: {
@@ -289,7 +290,8 @@ export const translations = {
             productList: 'Lista de Produtos',
             iconBox: 'Caixa de Ícone',
             iconList: 'Lista de Ícones',
-            imageBox: 'Caixa de Imagem'
+            imageBox: 'Caixa de Imagem',
+            divider: 'Divisor'
         }
     },
     settings: {
