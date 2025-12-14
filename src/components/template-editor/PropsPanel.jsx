@@ -334,6 +334,35 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
   const [config, setConfig] = useState(null);
   const [activeTab, setActiveTab] = useState('layout');
   const viewMode = useAtomValue(viewModeAtom);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+        const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) throw new Error('Upload failed');
+
+        const data = await response.json();
+        handleChange('src', data.url);
+    } catch (error) {
+        console.error('Upload Error:', error);
+        alert('Failed to upload image. Please try again.');
+    } finally {
+        setIsUploading(false);
+        // Clear input value to allow re-upload of same file if needed
+        e.target.value = '';
+    }
+  };
 
   useEffect(() => {
     if (block && templateId) {
@@ -2123,12 +2152,57 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                 </>
             ) : block.type === WIDGET_TYPES.IMAGE ? (
                 <>
-                     <StyledInput
+                    <StyledInput
                         label="Image URL"
                         value={getValue('src', 'https://placehold.co/600x400')}
                         onChange={(val) => handleChange('src', val)}
                         placeholder="https://..."
                     />
+                     <div style={{ marginTop: '10px', marginBottom: '15px' }}>
+                        <label className={styles.inputLabel} style={{ display: 'block', marginBottom: '8px', fontSize: '13px', color: '#6b7280' }}>
+                            Or Upload Image
+                        </label>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                             <button
+                                onClick={() => document.getElementById('image-upload-input').click()}
+                                disabled={isUploading}
+                                style={{
+                                    background: isUploading ? '#e5e7eb' : '#eff6ff',
+                                    color: isUploading ? '#9ca3af' : '#3b82f6',
+                                    border: '1px dashed #bfdbfe',
+                                    padding: '8px 12px',
+                                    borderRadius: '6px',
+                                    cursor: isUploading ? 'not-allowed' : 'pointer',
+                                    fontSize: '13px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    width: '100%',
+                                    justifyContent: 'center',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                {isUploading ? (
+                                    <>
+                                        <div className="spinner" style={{ width: '14px', height: '14px', border: '2px solid #9ca3af', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                                        Uploading...
+                                    </>
+                                ) : (
+                                    <>
+                                        <LucideIcons.Upload size={14} />
+                                        Upload from Computer
+                                    </>
+                                )}
+                            </button>
+                            <input
+                                id="image-upload-input"
+                                type="file"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={handleImageUpload}
+                            />
+                        </div>
+                    </div>
                     <StyledInput
                         label="Alt Text"
                         value={getValue('alt', 'Image')}
