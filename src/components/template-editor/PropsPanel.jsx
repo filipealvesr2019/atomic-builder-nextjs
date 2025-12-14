@@ -25,38 +25,35 @@ import { renderToStaticMarkup } from 'react-dom/server';
 // --- Icon Import Modal Component ---
 function IconImportModal({ onImport, currentLibrary }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+    const [iconName, setIconName] = useState('');
+    const [importCode, setImportCode] = useState('');
     const [error, setError] = useState('');
 
     const libraryInfo = {
         'fa': { name: 'FontAwesome', url: 'https://react-icons.github.io/react-icons/icons/fa' },
         'md': { name: 'Material Design', url: 'https://react-icons.github.io/react-icons/icons/md' },
         'lucide': { name: 'Lucide', url: 'https://lucide.dev/icons' },
-        'ci': { name: 'Circum Icons', url: 'https://react-icons.github.io/react-icons/icons/ci' },
-        'bs': { name: 'Bootstrap Icons', url: 'https://react-icons.github.io/react-icons/icons/bs' },
-        'io': { name: 'Ionicons 5', url: 'https://react-icons.github.io/react-icons/icons/io5' },
-        'bi': { name: 'BoxIcons', url: 'https://react-icons.github.io/react-icons/icons/bi' },
-        'ai': { name: 'Ant Design', url: 'https://react-icons.github.io/react-icons/icons/ai' },
-        'ri': { name: 'Remix Icons', url: 'https://react-icons.github.io/react-icons/icons/ri' },
-        'ti': { name: 'Typicons', url: 'https://react-icons.github.io/react-icons/icons/ti' },
-        'gi': { name: 'Game Icons', url: 'https://react-icons.github.io/react-icons/icons/gi' },
-        'fi': { name: 'Feather Icons', url: 'https://react-icons.github.io/react-icons/icons/fi' }
+      
     };
 
     const handleImport = () => {
-        let extractedName = inputValue.trim();
+        let extractedName = '';
         let detectedLib = null;
 
-        // Try to match import style: import { FaBeer } from "react-icons/fa";
-        const importMatch = inputValue.match(/import\s+\{\s*(\w+)\s*\}\s+from/);
-        if (importMatch && importMatch[1]) {
-            extractedName = importMatch[1];
-        }
+        if (iconName.trim()) {
+            extractedName = iconName.trim();
+        } else if (importCode.trim()) {
+            // Try to match import style: import { FaBeer } from "react-icons/fa";
+            const importMatch = importCode.match(/import\s+\{\s*(\w+)\s*\}\s+from/);
+            if (importMatch && importMatch[1]) {
+                extractedName = importMatch[1];
+            }
 
-        // Try to match JSX style: <FaBeer />
-        const jsxMatch = inputValue.match(/<(\w+)\s*\/>/);
-        if (jsxMatch && jsxMatch[1]) {
-            extractedName = jsxMatch[1];
+            // Try to match JSX style: <FaBeer />
+            const jsxMatch = importCode.match(/<(\w+)\s*\/>/);
+            if (jsxMatch && jsxMatch[1]) {
+                extractedName = jsxMatch[1];
+            }
         }
         
         // Detect library based on prefix
@@ -71,13 +68,13 @@ function IconImportModal({ onImport, currentLibrary }) {
         else if (extractedName.startsWith('Ti')) detectedLib = 'ti';
         else if (extractedName.startsWith('Gi')) detectedLib = 'gi';
         else if (extractedName.startsWith('Fi')) detectedLib = 'fi';
-        else if (!extractedName.startsWith('Fa') && !extractedName.startsWith('Md')) detectedLib = 'lucide';
+        else detectedLib = 'lucide';
 
         if (extractedName) {
             onImport(extractedName, detectedLib);
-            // setIsOpen(false); // Kept open as per user request
-            // setInputValue(''); // Optional: keep value or clear? User said "paste an icon", maybe they want to paste another. Clearing is safer for "new paste".
-            setInputValue(''); 
+            
+            setIconName(''); 
+            setImportCode('');
             setError('');
         } else {
             setError('Could not recognize an icon name.');
@@ -126,6 +123,25 @@ function IconImportModal({ onImport, currentLibrary }) {
                          Reference: <a href={libraryInfo[currentLibrary]?.url} target="_blank" rel="noopener noreferrer" style={{textDecoration:'underline'}}>Browse Icons</a>
                     </div>
 
+                    <input 
+                        type="text"
+                        style={{
+                            width: '100%',
+                            height: '38px',
+                            margin: '5px 0 5px',
+                            padding: '0 10px',
+                            border: '1px solid #d1d5db',
+                            borderRadius: '4px',
+                            fontFamily: 'monospace',
+                            fontSize: '13px',
+                            outlineColor: '#2563eb'
+                        }}
+                        placeholder="Icon Name (e.g. FaRocket)"
+                        value={iconName} 
+                        onChange={(e) => setIconName(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleImport()}
+                    />
+                    <div style={{ textAlign: 'center', fontSize: '10px', color: '#999', margin: '2px 0' }}>OR</div>
                     <textarea 
                         style={{
                             width: '100%',
@@ -138,9 +154,9 @@ function IconImportModal({ onImport, currentLibrary }) {
                             fontSize: '11px',
                             resize: 'vertical'
                         }}
-                        placeholder={`Paste import line or icon name...\ne.g. ${currentLibrary === 'fa' ? 'FaRocket' : 'MdAlarm'}`}
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder={`Paste import line...\ne.g. import { ... } from ...`}
+                        value={importCode}
+                        onChange={(e) => setImportCode(e.target.value)}
                     />
                     
                     {error && <p style={{color: 'red', fontSize: '11px', marginBottom: '8px'}}>{error}</p>}
@@ -803,29 +819,79 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                         ]}
                                     />
                                     
-                                    {(() => {
-                                        const currentLib = getValue('iconLib', 'fa');
-                                        const currentIcon = getValue('icon', 'FaStar');
-                                        
-                                        // Get base options or empty array
-                                        let iconOptions = [...(DEFAULT_LIBRARY_ICONS[currentLib] || DEFAULT_LIBRARY_ICONS['lucide'])];
-                                        
-                                        // If current icon is set and not in the list, add it to the top
-                                        if (currentIcon && !iconOptions.find(o => o.value === currentIcon)) {
-                                            iconOptions.unshift({ label: `${currentIcon} (Imported)`, value: currentIcon });
-                                        }
-
-                                        return (
-                                            <StyledSelect
-                                                label="Icon"
-                                                value={currentIcon}
-                                                onChange={(val) => handleChange('icon', val)}
-                                                responsive={false}
-                                                options={iconOptions}
-                                            />
-                                        );
-                                    })()}
-
+                                    {getValue('iconLib', 'fa') === 'fa' ? (
+                                        <StyledSelect
+                                            label="Icon"
+                                            value={getValue('icon', 'FaStar')}
+                                            onChange={(val) => handleChange('icon', val)}
+                                            responsive={false}
+                                            options={[
+                                                { label: 'Star', value: 'FaStar' },
+                                                { label: 'Heart', value: 'FaHeart' },
+                                                { label: 'User', value: 'FaUser' },
+                                                { label: 'Check', value: 'FaCheck' },
+                                                { label: 'Facebook', value: 'FaFacebook' },
+                                                { label: 'Twitter', value: 'FaTwitter' },
+                                                { label: 'Instagram', value: 'FaInstagram' },
+                                                { label: 'Linkedin', value: 'FaLinkedin' },
+                                                { label: 'Github', value: 'FaGithub' },
+                                                { label: 'Youtube', value: 'FaYoutube' },
+                                                { label: 'Google', value: 'FaGoogle' },
+                                                { label: 'Whatsapp', value: 'FaWhatsapp' },
+                                                // Dynamic option for imported icon - FA only
+                                                ...(getValue('icon') && getValue('icon').startsWith('Fa') && ![
+                                                    'FaStar', 'FaHeart', 'FaUser', 'FaCheck', 
+                                                    'FaFacebook', 'FaTwitter', 'FaInstagram', 
+                                                    'FaLinkedin', 'FaGithub', 'FaYoutube', 
+                                                    'FaGoogle', 'FaWhatsapp'
+                                                ].includes(getValue('icon')) ? [{ label: getValue('icon'), value: getValue('icon') }] : [])
+                                            ]}
+                                        />
+                                    ) : getValue('iconLib') === 'md' ? (
+                                        <StyledSelect
+                                            label="Icon"
+                                            value={getValue('icon', 'MdStar')}
+                                            onChange={(val) => handleChange('icon', val)}
+                                            responsive={false}
+                                            options={[
+                                                { label: 'Star', value: 'MdStar' },
+                                                { label: 'Favorite', value: 'MdFavorite' },
+                                                { label: 'Person', value: 'MdPerson' },
+                                                { label: 'Check', value: 'MdCheck' },
+                                                { label: 'Menu', value: 'MdMenu' },
+                                                { label: 'Close', value: 'MdClose' },
+                                                { label: 'Home', value: 'MdHome' },
+                                                { label: 'Settings', value: 'MdSettings' },
+                                                { label: 'Search', value: 'MdSearch' },
+                                                { label: 'Add', value: 'MdAdd' },
+                                                { label: 'Delete', value: 'MdDelete' },
+                                                { label: 'Edit', value: 'MdEdit' },
+                                                // Dynamic option for imported icon - MD only
+                                                ...(getValue('icon') && getValue('icon').startsWith('Md') && ![
+                                                    'MdStar', 'MdFavorite', 'MdPerson', 'MdCheck', 
+                                                    'MdMenu', 'MdClose', 'MdHome', 'MdSettings', 
+                                                    'MdSearch', 'MdAdd', 'MdDelete', 'MdEdit'
+                                                ].includes(getValue('icon')) ? [{ label: getValue('icon'), value: getValue('icon') }] : [])
+                                            ]}
+                                        />
+                                    ) : (
+                                        <StyledSelect
+                                            label="Icon"
+                                            value={getValue('icon', 'Star')}
+                                            onChange={(val) => handleChange('icon', val)}
+                                            responsive={false}
+                                            options={[
+                                                { label: 'Star', value: 'Star' },
+                                                { label: 'Heart', value: 'Heart' },
+                                                { label: 'User', value: 'User' },
+                                                { label: 'Check', value: 'Check' },
+                                                // Dynamic option for imported icon - Others (Generic/Lucide)
+                                                ...(getValue('icon') && !getValue('icon').startsWith('Fa') && !getValue('icon').startsWith('Md') && ![
+                                                    'Star', 'Heart', 'User', 'Check'
+                                                ].includes(getValue('icon')) ? [{ label: getValue('icon'), value: getValue('icon') }] : [])
+                                            ]}
+                                        />
+                                    )}
                                     {/* Manual Icon Import / Search */}
                                     <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
                                         <IconImportModal 
@@ -836,8 +902,59 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                             currentLibrary={getValue('iconLib', 'fa')}
                                         />
                                     </div>
-                                </>
-                            ) : (
+                                    <style jsx global>{`
+                                        .icon-import-modal-overlay {
+                                            position: fixed;
+                                            top: 0;
+                                            left: 0;
+                                            width: 100vw;
+                                            height: 100vh;
+                                            background: rgba(0,0,0,0.5);
+                                            z-index: 9999;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                        }
+                                        .icon-import-modal {
+                                            background: white;
+                                            padding: 20px;
+                                            border-radius: 8px;
+                                            width: 400px;
+                                            max-width: 90%;
+                                            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                                        }
+                                        .icon-import-textarea {
+                                            width: 100%;
+                                            height: 80px;
+                                            margin: 10px 0;
+                                            padding: 8px;
+                                            border: 1px solid #ccc;
+                                            border-radius: 4px;
+                                            font-family: monospace;
+                                            font-size: 12px;
+                                        }
+                                        .icon-import-btn {
+                                            background: #3b82f6;
+                                            color: white;
+                                            border: none;
+                                            padding: 8px 16px;
+                                            border-radius: 4px;
+                                            cursor: pointer;
+                                            font-weight: 500;
+                                        }
+                                        .icon-import-btn:hover {
+                                            background: #2563eb;
+                                        }
+                                        .icon-cancel-btn {
+                                            background: transparent;
+                                            color: #666;
+                                            border: 1px solid #ccc;
+                                            padding: 8px 16px;
+                                            border-radius: 4px;
+                                            cursor: pointer;
+                                            margin-right: 10px;
+                                        }
+                                    `}</style>
                                 </>
                             ) : (
                                  <StyledInput
