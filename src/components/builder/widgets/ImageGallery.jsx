@@ -25,14 +25,20 @@ export default function ImageGallery({ settings }) {
         ? images.filter(img => img && (typeof img === 'string' ? img : img.src)) 
         : [];
         
-    // Default placeholders if empty (Varying sizes for Masonry/Justified demo)
+    // Default placeholders if empty (12 items for proper Masonry effect)
     const displayImagesList = validImages.length > 0 ? validImages : [
-        { src: 'https://placehold.co/600x400?text=Landscape', alt: 'Landscape' },
-        { src: 'https://placehold.co/400x600?text=Portrait', alt: 'Portrait' },
-        { src: 'https://placehold.co/500x500?text=Square', alt: 'Square' },
-        { src: 'https://placehold.co/600x300?text=Wide', alt: 'Wide' },
-        { src: 'https://placehold.co/400x500?text=Tall', alt: 'Tall' },
-        { src: 'https://placehold.co/600x400?text=Landscape+2', alt: 'Landscape 2' }
+        { src: 'https://placehold.co/400x300/ff7b7b/ffffff?text=1+Landscape', alt: 'Landscape' },
+        { src: 'https://placehold.co/300x500/7bff7b/ffffff?text=2+Portrait', alt: 'Portrait' },
+        { src: 'https://placehold.co/400x400/7b7bff/ffffff?text=3+Square', alt: 'Square' },
+        { src: 'https://placehold.co/300x600/ffb347/ffffff?text=4+Tall', alt: 'Tall' },
+        { src: 'https://placehold.co/500x300/c23b22/ffffff?text=5+Wide', alt: 'Wide' },
+        { src: 'https://placehold.co/400x500/fdfd96/000000?text=6+Portrait', alt: 'Portrait 2' },
+        { src: 'https://placehold.co/300x300/aec6cf/ffffff?text=7+Square', alt: 'Square 2' },
+        { src: 'https://placehold.co/400x300/836953/ffffff?text=8+Landscape', alt: 'Landscape 2' },
+        { src: 'https://placehold.co/300x400/779ecb/ffffff?text=9+Med+Port', alt: 'Medium Portrait' },
+        { src: 'https://placehold.co/600x300/ff6961/ffffff?text=10+Wide', alt: 'Wide 2' },
+        { src: 'https://placehold.co/400x400/cb99c9/ffffff?text=11+Square', alt: 'Square 3' },
+        { src: 'https://placehold.co/300x500/03c03c/ffffff?text=12+Tall', alt: 'Tall 2' }
     ];
         
     // Shuffle logic

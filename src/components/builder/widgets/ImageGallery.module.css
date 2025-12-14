@@ -55,13 +55,21 @@
 .justified .galleryItem {
     flex-grow: 1;
     /* Height set via inline styles */
+    max-width: 100%; /* Prevent overflow */
+}
+
+/* Prevent last item from growing too huge if it's alone */
+.justified::after {
+    content: '';
+    flex-grow: 1000000000; /* Super high grow to take available space */
+    min-width: 20%; /* Minimal width to ensure it pushes */
 }
 
 .justified .galleryImage {
     height: 100%;
-    width: auto;
-    min-width: 100%;
+    width: 100%; /* Changed from auto to 100% to fill container */
     object-fit: cover;
+    min-width: unset; /* Remove min-width constraint */
 }
 
 /* --- LIGHTBOX --- */
