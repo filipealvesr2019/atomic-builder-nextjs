@@ -1442,34 +1442,169 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                     onChange={(newItems) => handleChange('items', newItems)}
                     defaultItem={{ text: 'New Item', icon: 'Check', link: '' }}
                     renderItem={(item, index, onChangeItem) => (
-                      <div className={styles.formGroup}>
-                         <input 
-                            className={styles.input} 
-                            value={item.text} 
-                            onChange={(e) => onChangeItem({ text: e.target.value })}
-                            placeholder="Text"
-                         />
-                         <div style={{ display: 'flex', gap: '8px' }}>
-                            <select 
-                                className={styles.select}
-                                value={item.icon || 'Check'}
-                                onChange={(e) => onChangeItem({ icon: e.target.value })}
-                            >
-                                <option value="Check">Check</option>
-                                <option value="Star">Star</option>
-                                <option value="ArrowRight">Arrow Right</option>
-                                <option value="Dot">Dot</option>
-                                <option value="Phone">Phone</option>
-                                <option value="Mail">Mail</option>
-                                <option value="MapPin">MapPin</option>
-                            </select>
-                            <input 
+                      <div className={styles.formGroup} style={{ border: '1px solid #e5e7eb', padding: '10px', borderRadius: '6px', background: '#f9fafb' }}>
+                         {/* Text Input */}
+                         <div style={{ marginBottom: '10px' }}>
+                             <label style={{ display: 'block', fontSize: '12px', marginBottom: '4px', color: '#374151' }}>Text</label>
+                             <input 
+                                className={styles.input} 
+                                value={item.text} 
+                                onChange={(e) => onChangeItem({ text: e.target.value })}
+                                placeholder="Text"
+                                style={{ width: '100%', marginBottom: '8px' }}
+                             />
+                         </div>
+
+                         {/* Link Input */}
+                         <div style={{ marginBottom: '10px' }}>
+                             <label style={{ display: 'block', fontSize: '12px', marginBottom: '4px', color: '#374151' }}>Link</label>
+                             <input 
                                 className={styles.input} 
                                 value={item.link || ''} 
                                 onChange={(e) => onChangeItem({ link: e.target.value })}
-                                placeholder="Link (optional)"
+                                placeholder="#"
+                                style={{ width: '100%', marginBottom: '8px' }}
                              />
                          </div>
+
+                         {/* Divider */}
+                         <div style={{ height: '1px', background: '#e5e7eb', margin: '10px 0' }}></div>
+
+                         {/* ICON CONTROLS FOR LIST ITEM */}
+                         
+                         {/* 1. Source Selector */}
+                         <StyledSelect
+                             label="Icon Source"
+                             value={['fa', 'md', 'lucide'].includes(item.iconLib) ? 'library' : (item.iconLib === 'custom' ? 'custom' : 'library')}
+                             onChange={(val) => {
+                                 if (val === 'custom') {
+                                     onChangeItem({ iconLib: 'custom', iconType: 'custom' });
+                                 } else {
+                                     onChangeItem({ iconLib: 'fa', iconType: 'library' }); // Default to FA when switching back
+                                 }
+                             }}
+                             responsive={false}
+                             options={[
+                                 { label: 'Icon Library', value: 'library' },
+                                 { label: 'Custom icon', value: 'custom' }
+                             ]}
+                         />
+
+                         {/* 2. Library Logic */}
+                         {(!item.iconLib || ['fa', 'md', 'lucide'].includes(item.iconLib)) && (
+                             <StyledSelect
+                                 label="Library"
+                                 value={item.iconLib || 'lucide'}
+                                 onChange={(val) => onChangeItem({ iconLib: val })}
+                                 responsive={false}
+                                 options={[
+                                     { label: 'Lucide (Default)', value: 'lucide' },
+                                     { label: 'FontAwesome', value: 'fa' },
+                                     { label: 'Material Design', value: 'md' }
+                                 ]}
+                             />
+                         )}
+
+                         {/* 3. Icon Selector / Upload */}
+                         {item.iconLib === 'custom' ? (
+                            <div style={{ marginTop: '10px' }}>
+                                <div style={{ marginBottom: '8px', fontSize: '13px', color: '#374151', fontWeight: 500 }}>Custom Icon File</div>
+                                {item.customIconSrc ? (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#fff', padding: '10px', border: '1px solid #eee', borderRadius: '6px' }}>
+                                        <img src={item.customIconSrc} alt="Icon" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+                                        <div style={{ flex: 1, fontSize: '12px', color: '#4b5563' }}>Icon Loaded</div>
+                                        <button 
+                                            onClick={() => onChangeItem({ customIconSrc: '' })}
+                                            style={{ padding: '4px 8px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '4px', fontSize: '11px', cursor: 'pointer' }}
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px dashed #d1d5db', borderRadius: '6px', padding: '15px', cursor: 'pointer', background: '#fff' }}>
+                                        <div style={{ marginBottom: '5px', color: '#6b7280', fontSize: '12px' }}>Click to Upload</div>
+                                        <input 
+                                            type="file" 
+                                            accept=".jpg,.jpeg,.png,.svg,.webp" 
+                                            style={{ display: 'none' }} 
+                                            onChange={(e) => {
+                                                const file = e.target.files?.[0];
+                                                if (file) {
+                                                    const reader = new FileReader();
+                                                    reader.onloadend = () => {
+                                                        onChangeItem({ customIconSrc: reader.result });
+                                                    };
+                                                    reader.readAsDataURL(file);
+                                                }
+                                            }}
+                                        />
+                                    </label>
+                                )}
+                            </div>
+                         ) : (
+                             <>
+                                {/* Import Modal for Item */}
+                                <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #eee' }}>
+                                    <IconImportModal 
+                                        onImport={(importedLib, importedIcon) => {
+                                             onChangeItem({ iconLib: importedLib, icon: importedIcon });
+                                        }}
+                                        currentLibrary={item.iconLib || 'lucide'}
+                                    />
+                                </div>
+                                
+                                {/* Strict Icon Dropdowns based on item.iconLib */}
+                                {item.iconLib === 'fa' ? (
+                                    <StyledSelect
+                                        label="Icon"
+                                        value={item.icon || 'FaStar'}
+                                        onChange={(val) => onChangeItem({ icon: val })}
+                                        responsive={false}
+                                        options={[
+                                            { label: 'Star', value: 'FaStar' },
+                                            { label: 'Check', value: 'FaCheck' },
+                                            { label: 'User', value: 'FaUser' },
+                                            // Dynamic option for imported icon - FA only
+                                            ...(item.icon && !['Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => item.icon.startsWith(p)) && 
+                                               !['FaStar', 'FaCheck', 'FaUser'].includes(item.icon) 
+                                               ? [{ label: item.icon, value: item.icon }] : [])
+                                        ]}
+                                    />
+                                ) : item.iconLib === 'md' ? (
+                                    <StyledSelect
+                                        label="Icon"
+                                        value={item.icon || 'MdStar'}
+                                        onChange={(val) => onChangeItem({ icon: val })}
+                                        responsive={false}
+                                        options={[
+                                            { label: 'Star', value: 'MdStar' },
+                                            { label: 'Check', value: 'MdCheck' },
+                                            { label: 'Person', value: 'MdPerson' },
+                                            // Dynamic option for imported icon - MD only
+                                            ...(item.icon && ['Fa','Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => item.icon.startsWith(p)) && 
+                                               !['MdStar', 'MdCheck', 'MdPerson'].includes(item.icon) 
+                                               ? [{ label: item.icon, value: item.icon }] : [])
+                                        ]}
+                                    />
+                                ) : (
+                                    <StyledSelect
+                                        label="Icon"
+                                        value={item.icon || 'Check'}
+                                        onChange={(val) => onChangeItem({ icon: val })}
+                                        responsive={false}
+                                        options={[
+                                            { label: 'Check', value: 'Check' },
+                                            { label: 'Star', value: 'Star' },
+                                            { label: 'ArrowRight', value: 'ArrowRight' },
+                                            // Dynamic option for imported icon - Lucide/Generic
+                                            ...(item.icon && !['Fa','Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => item.icon.startsWith(p)) && 
+                                               !['Check', 'Star', 'ArrowRight'].includes(item.icon) 
+                                               ? [{ label: item.icon, value: item.icon }] : [])
+                                        ]}
+                                    />
+                                )}
+                             </>
+                         )}
                       </div>
                     )}
                   />

@@ -1,4 +1,5 @@
 import React from 'react';
+import IconWidget from './Icon'; // Import IconWidget
 import * as LucideIcons from 'lucide-react';
 import { useAtomValue } from 'jotai';
 import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
@@ -86,9 +87,22 @@ export default function IconList({ settings }) {
   return (
     <ul style={listStyle} className="icon-list-widget">
       {items.map((item, index) => {
-        const IconComponent = LucideIcons[item.icon] || LucideIcons.Check;
-        // Handle numeric icon size
-        const sizeNum = parseInt(iconSize) || 16;
+        // Construct settings for the IconWidget based on item properties + global style settings
+        const itemIconSettings = {
+            icon: item.icon,
+            iconLib: item.iconLib || 'lucide', // Default to lucide if not set
+            customIconSrc: item.customIconSrc,
+            // Inherit global style settings from the main widget settings
+            size: iconSize, // Pass as 'size' (standard)
+            primaryColor: iconColor,
+            align: 'center', // Icon itself is centered in its span
+            padding: '0',
+            view: 'default',
+            // Derive iconType from iconLib (Adapter Logic similar to IconBox)
+            iconType: item.iconLib === 'custom' ? 'custom' : 'library'
+        };
+
+        // Handle numeric icon size logic if needed by IconWidget (it handles strings mostly, but we pass what we have)
         
         // Remove divider for the last item if active
         const isLast = index === items.length - 1;
@@ -103,14 +117,14 @@ export default function IconList({ settings }) {
              {item.link ? (
                 <a href={item.link} style={currentItemStyle}>
                    <span style={{ color: iconColor, display: 'flex', alignItems: 'center' }}>
-                      <IconComponent size={sizeNum} />
+                      <IconWidget settings={itemIconSettings} />
                    </span>
                    <span>{item.text}</span>
                 </a>
              ) : (
                 <div style={currentItemStyle}>
                    <span style={{ color: iconColor, display: 'flex', alignItems: 'center' }}>
-                      <IconComponent size={sizeNum} />
+                      <IconWidget settings={itemIconSettings} />
                    </span>
                    <span>{item.text}</span>
                 </div>
