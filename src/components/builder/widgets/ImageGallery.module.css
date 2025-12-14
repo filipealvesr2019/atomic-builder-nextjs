@@ -1,0 +1,152 @@
+.galleryContainer {
+    width: 100%;
+}
+
+/* --- GRID LAYOUT --- */
+.grid {
+    display: grid;
+    /* Columns and Gap are set via inline styles from props */
+}
+
+.galleryItem {
+    position: relative;
+    overflow: hidden;
+}
+
+.galleryImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Aspect Ratio Utilities for Grid */
+.ratio_square .galleryItem { aspect-ratio: 1 / 1; }
+.ratio_4_3 .galleryItem { aspect-ratio: 4 / 3; }
+.ratio_16_9 .galleryItem { aspect-ratio: 16 / 9; }
+.ratio_3_4 .galleryItem { aspect-ratio: 3 / 4; }
+.ratio_auto .galleryItem { aspect-ratio: auto; }
+
+/* --- MASONRY LAYOUT (CSS Columns) --- */
+.masonry {
+    display: block;
+    /* Column count and gap are set via inline styles */
+}
+
+.masonry .galleryItem {
+    break-inside: avoid;
+    margin-bottom: var(--gallery-gap, 15px); /* Fallback or set via js */
+}
+
+.masonry .galleryImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- JUSTIFIED LAYOUT (Flex) --- */
+.justified {
+    display: flex;
+    flex-wrap: wrap;
+    /* Gap set via inline styles */
+}
+
+.justified .galleryItem {
+    flex-grow: 1;
+    /* Height set via inline styles */
+}
+
+.justified .galleryImage {
+    height: 100%;
+    width: auto;
+    min-width: 100%;
+    object-fit: cover;
+}
+
+/* --- LIGHTBOX --- */
+.lightboxOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.lightboxImage {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    cursor: default;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.closeButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- HOVER EFFECTS --- */
+.hover_zoom .galleryImage:hover {
+    transform: scale(1.05);
+}
+
+.hover_grayscale .galleryImage {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+.hover_grayscale .galleryImage:hover {
+    filter: grayscale(0%);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.galleryItem:hover .overlay {
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+}
+
+.caption {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.galleryItem:hover .caption {
+    transform: translateY(0);
+}

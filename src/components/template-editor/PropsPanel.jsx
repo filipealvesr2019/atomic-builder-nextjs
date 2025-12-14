@@ -336,33 +336,29 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
   const viewMode = useAtomValue(viewModeAtom);
   const [isUploading, setIsUploading] = useState(false);
 
+  // Reusable upload helper
+  const uploadFile = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await fetch('/api/upload', { method: 'POST', body: formData });
+    if (!response.ok) throw new Error('Upload failed');
+    return response.json();
+  };
+
   // Helper factory or just direct call. 
-  // Since we can't easily curry in the jsx without creating new function every render (which is fine here),
-  // we will just define it to take (e, propName)
   const handleImageUpload = async (e, propName = 'src') => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setIsUploading(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
     try {
-        const response = await fetch('/api/upload', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) throw new Error('Upload failed');
-
-        const data = await response.json();
+        const data = await uploadFile(file);
         handleChange(propName, data.url);
     } catch (error) {
         console.error('Upload Error:', error);
         alert('Failed to upload image. Please try again.');
     } finally {
         setIsUploading(false);
-        // Clear input value to allow re-upload of same file if needed
         e.target.value = '';
     }
   };
@@ -2288,6 +2284,155 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         placeholder="Optional caption"
                     />
                 </>
+            ) : block.type === WIDGET_TYPES.IMAGE_GALLERY ? (
+                <>
+                    <Repeater
+                        label="Images"
+                        items={getValue('images', [])}
+                        onChange={(newItems) => handleChange('images', newItems)}
+                        defaultItem={{ src: 'https://placehold.co/600x400', alt: 'Gallery Image' }}
+                        renderItem={(item, index, onChangeItem) => (
+                           <div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Image Source</label>
+                                    <div style={{ display: 'flex', gap: '5px' }}>
+                                        <input 
+                                            type="text" 
+                                            value={item.src} 
+                                            onChange={(e) => onChangeItem({ src: e.target.value })}
+                                            className={styles.input}
+                                            style={{ flex: 1 }}
+                                            placeholder="https://..."
+                                        />
+                                        <button
+                                            onClick={() => document.getElementById(`gallery-upload-${index}`).click()}
+                                            disabled={isUploading}
+                                            style={{
+                                                background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '4px',
+                                                color: '#3b82f6', padding: '0 8px', cursor: 'pointer'
+                                            }}
+                                            title="Upload"
+                                        >
+                                            <LucideIcons.Upload size={14} />
+                                        </button>
+                                        <input
+                                            id={`gallery-upload-${index}`}
+                                            type="file"
+                                            accept="image/*"
+                                            style={{ display: 'none' }}
+                                            onChange={async (e) => {
+                                                const file = e.target.files?.[0];
+                                                if(!file) return;
+                                                setIsUploading(true);
+                                                try {
+                                                    const data = await uploadFile(file);
+                                                    onChangeItem({ src: data.url });
+                                                } catch(err) {
+                                                    alert('Upload failed');
+                                                } finally {
+                                                    setIsUploading(false);
+                                                    e.target.value = '';
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Alt Text</label>
+                                    <input 
+                                        type="text" 
+                                        value={item.alt || ''} 
+                                        onChange={(e) => onChangeItem({ alt: e.target.value })}
+                                        className={styles.input}
+                                        placeholder="Image description"
+                                    />
+                                </div>
+                           </div> 
+                        )}
+                    />
+
+                    <Section title="Layout Settings">
+                        <StyledSelect
+                            label="Layout Mode"
+                            value={getValue('layout', 'grid')}
+                            onChange={(val) => handleChange('layout', val)}
+                            responsive={false}
+                            options={[
+                                { label: 'Grid', value: 'grid' },
+                                { label: 'Masonry', value: 'masonry' },
+                                { label: 'Justified', value: 'justified' }
+                            ]}
+                        />
+                        <StyledInput
+                            label="Columns"
+                            value={getValue('columns', '4')}
+                            onChange={(val) => handleChange('columns', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="4"
+                        />
+                        <StyledInput
+                            label="Gap"
+                            value={getValue('gap', '15px')}
+                            onChange={(val) => handleChange('gap', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="15px"
+                        />
+                        
+                        {getValue('layout', 'grid') === 'grid' && (
+                             <StyledSelect
+                                label="Aspect Ratio"
+                                value={getValue('aspectRatio', '1/1')}
+                                onChange={(val) => handleChange('aspectRatio', val)}
+                                responsive={false}
+                                options={[
+                                    { label: 'Square (1:1)', value: '1/1' },
+                                    { label: 'Standard (4:3)', value: '4/3' },
+                                    { label: 'Portrait (3:4)', value: '3/4' },
+                                    { label: 'Wide (16:9)', value: '16/9' },
+                                    { label: 'Auto', value: 'auto' }
+                                ]}
+                            />
+                        )}
+
+                        {getValue('layout') === 'justified' && (
+                            <StyledInput
+                                label="Row Height"
+                                value={getValue('rowHeight', '200px')}
+                                onChange={(val) => handleChange('rowHeight', val)}
+                                placeholder="200px"
+                                responsive={true}
+                                activeViewMode={viewMode}
+                            />
+                        )}
+
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                            <span className={styles.labelText}>Random Order</span>
+                             <input 
+                                type="checkbox"
+                                checked={getValue('shuffle', false)}
+                                onChange={(e) => handleChange('shuffle', e.target.checked)}
+                            />
+                        </div>
+                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                            <span className={styles.labelText}>Lazy Load</span>
+                             <input 
+                                type="checkbox"
+                                checked={getValue('lazyLoad', true)}
+                                onChange={(e) => handleChange('lazyLoad', e.target.checked)}
+                            />
+                        </div>
+                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                            <span className={styles.labelText}>Enable Lightbox</span>
+                             <input 
+                                type="checkbox"
+                                checked={getValue('enableLightbox', true)}
+                                onChange={(e) => handleChange('enableLightbox', e.target.checked)}
+                            />
+                        </div>
+                    </Section>
+                </>
             ) : (
                 /* GENERIC WIDGET CONTENT */
                 <StyledInput
@@ -2432,6 +2577,32 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                     />
                 </Section>
             )}
+
+            {block.type === WIDGET_TYPES.IMAGE_GALLERY && (
+                <Section title="Gallery Styles">
+                     <StyledInput
+                        label="Border Radius"
+                        value={getValue('borderRadius', '0px')}
+                        onChange={(val) => handleChange('borderRadius', val)}
+                        placeholder="0px"
+                        responsive={true}
+                         activeViewMode={viewMode}
+                    />
+                     <StyledSelect
+                        label="Shadow"
+                        value={getValue('shadow', 'none')}
+                        onChange={(val) => handleChange('shadow', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'None', value: 'none' },
+                            { label: 'Small', value: 'small' },
+                            { label: 'Medium', value: 'medium' },
+                            { label: 'Large', value: 'large' }
+                        ]}
+                    />
+                </Section>
+            )}
+
           </>
         )}
 
