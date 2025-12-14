@@ -20,7 +20,8 @@ export const WIDGET_TYPES = {
   IMAGE_BOX: 'image_box',
   DIVIDER: 'divider',
   SPACER: 'spacer',
-  IMAGE_GALLERY: 'image_gallery'
+  IMAGE_GALLERY: 'image_gallery',
+  IMAGE_CAROUSEL: 'image_carousel'
 };
 
 export const LAYOUT_TYPES = {

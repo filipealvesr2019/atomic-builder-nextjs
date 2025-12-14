@@ -385,6 +385,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
         [WIDGET_TYPES.ICON_BOX]: { name: 'Icon Box', props: {} },
         [WIDGET_TYPES.ICON_LIST]: { name: 'Icon List', props: {} },
         [WIDGET_TYPES.IMAGE_BOX]: { name: 'Image Box', props: {} },
+        [WIDGET_TYPES.IMAGE_GALLERY]: { name: 'Image Gallery', props: {} }, // Keep current
+        [WIDGET_TYPES.IMAGE_CAROUSEL]: { name: 'Image Carousel', props: {} },
         [NODE_TYPES.CONTAINER]: { name: 'Container', props: {} },
         [NODE_TYPES.SECTION]: { name: 'Section', props: {} }
       };
@@ -401,6 +403,24 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
       setConfig(null);
     }
   }, [block, templateId]);
+
+  // --- Initialization Logic for Image Carousel ---
+  useEffect(() => {
+    if (block?.type === WIDGET_TYPES.IMAGE_CAROUSEL) {
+         const currentImages = block.props?.images;
+         // If images is strictly empty (null, undefined, or empty array), populate with defaults
+         if (!currentImages || (Array.isArray(currentImages) && currentImages.length === 0)) {
+             onPropsChange({
+                images: [
+                    { src: 'https://placehold.co/800x400?text=Slide+1', alt: 'Slide 1' },
+                    { src: 'https://placehold.co/800x400?text=Slide+2', alt: 'Slide 2' },
+                    { src: 'https://placehold.co/800x400?text=Slide+3', alt: 'Slide 3' }
+                ]
+             });
+         }
+    }
+  }, [block?.type, block?.id]); // Run when block type or ID changes
+
 
   if (!block) {
     return (
@@ -2433,6 +2453,173 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         </div>
                     </Section>
                 </>
+            ) : block.type === WIDGET_TYPES.IMAGE_CAROUSEL ? (
+                <>
+                    <Repeater
+                        label="Slides"
+                        items={getValue('images', [
+                            { src: 'https://placehold.co/800x400?text=Slide+1', alt: 'Slide 1' },
+                            { src: 'https://placehold.co/800x400?text=Slide+2', alt: 'Slide 2' },
+                            { src: 'https://placehold.co/800x400?text=Slide+3', alt: 'Slide 3' }
+                        ])}
+                        onChange={(newItems) => handleChange('images', newItems)}
+                        defaultItem={{ src: 'https://placehold.co/800x400', alt: 'New Slide' }}
+                        renderItem={(item, index, onChangeItem) => (
+                           <div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Image Source</label>
+                                    <div style={{ display: 'flex', gap: '5px' }}>
+                                        <input 
+                                            type="text" 
+                                            value={item.src || ''} 
+                                            onChange={(e) => onChangeItem({ src: e.target.value })}
+                                            className={styles.input}
+                                            style={{ flex: 1 }}
+                                            placeholder="https://..."
+                                        />
+                                        <button
+                                            onClick={() => document.getElementById(`carousel-upload-${index}`).click()}
+                                            disabled={isUploading}
+                                            style={{
+                                                background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '4px',
+                                                color: '#3b82f6', padding: '0 8px', cursor: 'pointer'
+                                            }}
+                                            title="Upload"
+                                        >
+                                            <LucideIcons.Upload size={14} />
+                                        </button>
+                                        <input
+                                            id={`carousel-upload-${index}`}
+                                            type="file"
+                                            accept="image/*"
+                                            style={{ display: 'none' }}
+                                            onChange={async (e) => {
+                                                const file = e.target.files?.[0];
+                                                if(!file) return;
+                                                setIsUploading(true);
+                                                try {
+                                                    const data = await uploadFile(file);
+                                                    onChangeItem({ src: data.url });
+                                                } catch(err) {
+                                                    alert('Upload failed');
+                                                } finally {
+                                                    setIsUploading(false);
+                                                    e.target.value = '';
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Alt Text</label>
+                                    <input 
+                                        type="text" 
+                                        value={item.alt || ''} 
+                                        onChange={(e) => onChangeItem({ alt: e.target.value })}
+                                        className={styles.input}
+                                        placeholder="Image description"
+                                    />
+                                </div>
+                                <div style={{ marginBottom: '10px' }}>
+                                    <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>Caption (Optional)</label>
+                                    <input 
+                                        type="text" 
+                                        value={item.caption || ''} 
+                                        onChange={(e) => onChangeItem({ caption: e.target.value })}
+                                        className={styles.input}
+                                        placeholder="Overlay text..."
+                                    />
+                                </div>
+                           </div> 
+                        )}
+                    />
+
+                    <Section title="Carousel Settings">
+                        <StyledSelect
+                            label="Autoplay"
+                            value={getValue('autoplay', true) ? 'yes' : 'no'}
+                            onChange={(val) => handleChange('autoplay', val === 'yes')}
+                            responsive={false}
+                            options={[
+                                { label: 'On', value: 'yes' },
+                                { label: 'Off', value: 'no' }
+                            ]}
+                        />
+                        {getValue('autoplay', true) && (
+                            <StyledInput
+                                label="Speed (ms)"
+                                value={getValue('autoplaySpeed', '3000')}
+                                onChange={(val) => handleChange('autoplaySpeed', val)}
+                                placeholder="3000"
+                                responsive={false}
+                            />
+                        )}
+                         <StyledSelect
+                            label="Infinite Loop"
+                            value={getValue('loop', true) ? 'yes' : 'no'}
+                            onChange={(val) => handleChange('loop', val === 'yes')}
+                            responsive={false}
+                            options={[
+                                { label: 'Yes', value: 'yes' },
+                                { label: 'No', value: 'no' }
+                            ]}
+                        />
+                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                            <span className={styles.labelText}>Show Arrows</span>
+                             <input 
+                                type="checkbox"
+                                checked={getValue('showArrows', true)}
+                                onChange={(e) => handleChange('showArrows', e.target.checked)}
+                            />
+                        </div>
+                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                            <span className={styles.labelText}>Show Dots</span>
+                             <input 
+                                type="checkbox"
+                                checked={getValue('showDots', true)}
+                                onChange={(e) => handleChange('showDots', e.target.checked)}
+                            />
+                        </div>
+                    </Section>
+
+                    <Section title="Layout">
+                        <StyledInput
+                            label="Height"
+                            value={getValue('height', '400px')}
+                            onChange={(val) => handleChange('height', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="400px"
+                        />
+                        <StyledInput
+                            label="Slides Per View"
+                            value={getValue('slidesPerView', '1')}
+                            onChange={(val) => handleChange('slidesPerView', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="1"
+                        />
+                         <StyledInput
+                            label="Gap"
+                            value={getValue('gap', '0px')}
+                            onChange={(val) => handleChange('gap', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="0px"
+                        />
+                         <StyledSelect
+                            label="Object Fit"
+                            value={getValue('objectFit', 'cover')}
+                            onChange={(val) => handleChange('objectFit', val)}
+                            responsive={false}
+                            options={[
+                                { label: 'Cover', value: 'cover' },
+                                { label: 'Contain', value: 'contain' },
+                                { label: 'Fill', value: 'fill' }
+                            ]}
+                        />
+                    </Section>
+                </>
             ) : (
                 /* GENERIC WIDGET CONTENT */
                 <StyledInput
@@ -2599,6 +2786,60 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             { label: 'Medium', value: 'medium' },
                             { label: 'Large', value: 'large' }
                         ]}
+                    />
+                </Section>
+            )}
+
+            {block.type === WIDGET_TYPES.IMAGE_CAROUSEL && (
+                <Section title="Carousel Styles">
+                     <StyledInput
+                        label="Border Radius"
+                        value={getValue('borderRadius', '0px')}
+                        onChange={(val) => handleChange('borderRadius', val)}
+                        placeholder="0px"
+                        responsive={true}
+                         activeViewMode={viewMode}
+                    />
+                     <StyledSelect
+                        label="Shadow"
+                        value={getValue('shadow', 'none')}
+                        onChange={(val) => handleChange('shadow', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'None', value: 'none' },
+                            { label: 'Small', value: 'small' },
+                            { label: 'Medium', value: 'medium' },
+                            { label: 'Large', value: 'large' }
+                        ]}
+                    />
+                    <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
+                    <span className={styles.labelText} style={{display:'block', marginBottom:'10px'}}>Arrows</span>
+                    <StyledInput
+                        label="Arrow Color"
+                        value={getValue('arrowColor', '#fff')}
+                        onChange={(val) => handleChange('arrowColor', val)}
+                        responsive={false}
+                    />
+                     <StyledInput
+                        label="Arrow Background"
+                        value={getValue('arrowBg', 'rgba(0,0,0,0.5)')}
+                        onChange={(val) => handleChange('arrowBg', val)}
+                        responsive={false}
+                    />
+                    
+                    <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
+                    <span className={styles.labelText} style={{display:'block', marginBottom:'10px'}}>Pagination (Dots)</span>
+                     <StyledInput
+                        label="Dot Color (Inactive)"
+                        value={getValue('dotColor', 'rgba(255,255,255,0.5)')}
+                        onChange={(val) => handleChange('dotColor', val)}
+                        responsive={false}
+                    />
+                     <StyledInput
+                        label="Dot Color (Active)"
+                        value={getValue('dotActiveColor', '#fff')}
+                        onChange={(val) => handleChange('dotActiveColor', val)}
+                        responsive={false}
                     />
                 </Section>
             )}

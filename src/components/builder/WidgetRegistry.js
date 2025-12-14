@@ -13,6 +13,7 @@ import DividerWidget from './widgets/Divider';
 import SpacerWidget from './widgets/Spacer';
 import IconWidget from './widgets/Icon';
 import ImageGallery from './widgets/ImageGallery';
+import ImageCarousel from './widgets/ImageCarousel';
 
 /**
  * Widget Registry
@@ -30,6 +31,7 @@ export const EVENT_WIDGETS = {
   [WIDGET_TYPES.SPACER]: SpacerWidget,
   [WIDGET_TYPES.ICON]: IconWidget,
   [WIDGET_TYPES.IMAGE_GALLERY]: ImageGallery,
+  [WIDGET_TYPES.IMAGE_CAROUSEL]: ImageCarousel,
   // Add new widgets here
 };
 
