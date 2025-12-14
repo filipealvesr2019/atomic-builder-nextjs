@@ -18,13 +18,15 @@ export default function SpacerWidget({ settings }) {
   // For now, let's keep it simple as just space.
   const backgroundColor = getProp('backgroundColor', 'transparent');
 
+  const width = getProp('width', '100%');
+
   return (
     <div 
       style={{
-        paddingTop: padding, 
+        padding: padding, 
         backgroundColor: backgroundColor,
-        width: '100%',
-        clear: 'both' // Ensure it breaks floats if necessary
+        width: width,
+        minWidth: '1px', // Ensure it doesn't collapse completely if empty
       }}
     />
   );

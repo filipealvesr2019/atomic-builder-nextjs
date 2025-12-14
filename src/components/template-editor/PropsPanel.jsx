@@ -947,8 +947,15 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
             ) : block.type === WIDGET_TYPES.SPACER ? (
                 <>
                     <Section title="Settings">
+                        <StyledInput
+                            label="Width"
+                            value={getValue('width', '100%')}
+                            onChange={(val) => handleChange('width', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                        />
                          <StyledInput
-                            label="Padding (Height)"
+                            label="Padding"
                             value={getValue('padding', '50px')}
                             onChange={(val) => handleChange('padding', val)}
                             responsive={true}
