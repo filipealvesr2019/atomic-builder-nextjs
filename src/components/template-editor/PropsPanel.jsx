@@ -13,6 +13,10 @@ import styles from './PropsPanel.module.css';
 import { useAtomValue } from 'jotai';
 import { viewModeAtom } from '@/store/viewModeStore';
 import Repeater from './Repeater';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 // Icon Button Group Component (for Direction, Justify, Align)
 function IconButtonGroup({ label, value, onChange, options, activeViewMode }) {
@@ -752,38 +756,52 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                 </>
             ) : block.type === WIDGET_TYPES.TEXT ? (
                 <>
-                     <StyledInput
-                        label="Content"
-                        value={getValue('content', 'Lorem ipsum...')}
-                        onChange={(val) => handleChange('content', val)}
-                        responsive={true}
-                        activeViewMode={viewMode}
-                    />
-                     <IconButtonGroup
-                        label="Alignment"
-                        value={getValue('align', 'left')}
-                        onChange={(val) => handleChange('align', val)}
-                        activeViewMode={viewMode}
-                        options={[
-                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
-                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
-                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
-                            { value: 'justify', label: 'Justify', icon: <Columns size={16} /> }
-                        ]}
-                    />
-                     <StyledInput
-                        label="Font Size"
-                        value={getValue('fontSize', '')}
-                        onChange={(val) => handleChange('fontSize', val)}
-                        placeholder="Default"
-                         activeViewMode={viewMode}
-                    />
-                    <StyledInput
-                        label="Color"
-                        value={getValue('color', '')}
-                        onChange={(val) => handleChange('color', val)}
-                        placeholder="Inherit"
-                    />
+                    <Section title="Content">
+                        <div className={styles.richEditorWrapper}>
+                            <ReactQuill 
+                                theme="snow"
+                                value={getValue('content', '')}
+                                onChange={(val) => handleChange('content', val)}
+                                modules={{
+                                    toolbar: [
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                        [{ 'align': [] }],
+                                        ['link', 'clean']
+                                    ]
+                                }}
+                            />
+                        </div>
+                    </Section>
+                    <Section title="Style">
+                         <IconButtonGroup
+                            label="Alignment"
+                            value={getValue('align', 'left')}
+                            onChange={(val) => handleChange('align', val)}
+                            activeViewMode={viewMode}
+                            options={[
+                                { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                                { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                                { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
+                                { value: 'justify', label: 'Justify', icon: <AlignEndVertical size={16} /> } 
+                            ]}
+                        />
+                         <StyledInput
+                            label="Color"
+                            value={getValue('color', '')}
+                            onChange={(val) => handleChange('color', val)}
+                            responsive={false}
+                            placeholder="Inherit"
+                        />
+                         <StyledInput
+                            label="Font Size"
+                            value={getValue('fontSize', '')}
+                            onChange={(val) => handleChange('fontSize', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="16px"
+                        />
+                    </Section>
                 </>
             ) : block.type === WIDGET_TYPES.DIVIDER ? (
                 <>

@@ -1,5 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { themeAtom } from '@/store/themeStore';
+import parse from 'html-react-parser';
 
 /**
  * Basic Text Widget
@@ -23,5 +24,5 @@ export default function TextWidget({ settings }) {
     lineHeight: 1.6
   };
 
-  return <p style={style}>{content}</p>;
+  return <div style={style}>{typeof content === 'string' ? parse(content) : content}</div>;
 }
