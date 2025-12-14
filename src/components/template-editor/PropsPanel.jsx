@@ -336,7 +336,10 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
   const viewMode = useAtomValue(viewModeAtom);
   const [isUploading, setIsUploading] = useState(false);
 
-  const handleImageUpload = async (e) => {
+  // Helper factory or just direct call. 
+  // Since we can't easily curry in the jsx without creating new function every render (which is fine here),
+  // we will just define it to take (e, propName)
+  const handleImageUpload = async (e, propName = 'src') => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -353,7 +356,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
         if (!response.ok) throw new Error('Upload failed');
 
         const data = await response.json();
-        handleChange('src', data.url);
+        handleChange(propName, data.url);
     } catch (error) {
         console.error('Upload Error:', error);
         alert('Failed to upload image. Please try again.');
@@ -1709,6 +1712,51 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         placeholder="https://..."
                         responsive={false}
                     />
+                    <div style={{ marginTop: '10px', marginBottom: '15px' }}>
+                        <label className={styles.inputLabel} style={{ display: 'block', marginBottom: '8px', fontSize: '13px', color: '#6b7280' }}>
+                            Or Upload Image
+                        </label>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                             <button
+                                onClick={() => document.getElementById('image-box-upload-input').click()}
+                                disabled={isUploading}
+                                style={{
+                                    background: isUploading ? '#e5e7eb' : '#eff6ff',
+                                    color: isUploading ? '#9ca3af' : '#3b82f6',
+                                    border: '1px dashed #bfdbfe',
+                                    padding: '8px 12px',
+                                    borderRadius: '6px',
+                                    cursor: isUploading ? 'not-allowed' : 'pointer',
+                                    fontSize: '13px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    width: '100%',
+                                    justifyContent: 'center',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                {isUploading ? (
+                                    <>
+                                        <div className="spinner" style={{ width: '14px', height: '14px', border: '2px solid #9ca3af', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                                        Uploading...
+                                    </>
+                                ) : (
+                                    <>
+                                        <LucideIcons.Upload size={14} />
+                                        Upload from Computer
+                                    </>
+                                )}
+                            </button>
+                            <input
+                                id="image-box-upload-input"
+                                type="file"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={(e) => handleImageUpload(e, 'imageSrc')}
+                            />
+                        </div>
+                    </div>
                     <StyledInput
                         label="Title"
                         value={getValue('title', 'Título do Serviço')}
@@ -2199,7 +2247,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                 type="file"
                                 accept="image/*"
                                 style={{ display: 'none' }}
-                                onChange={handleImageUpload}
+                                onChange={(e) => handleImageUpload(e, 'src')}
                             />
                         </div>
                     </div>
