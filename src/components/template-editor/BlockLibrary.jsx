@@ -52,7 +52,7 @@ export default function BlockLibrary({ templateId }) {
 
   const atomicBlocks = [
     { id: WIDGET_TYPES.HEADING, name: 'Heading', icon: Type, category: NODE_TYPES.WIDGET },
-    { id: WIDGET_TYPES.TEXT, name: 'Text', icon: Type, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.TEXT, name: 'Text Editor', icon: Type, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.BUTTON, name: 'Button', icon: Square, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.IMAGE, name: 'Image', icon: ImageIcon, category: NODE_TYPES.WIDGET },
     { id: NODE_TYPES.CONTAINER, name: 'Container', icon: Box, category: NODE_TYPES.CONTAINER },

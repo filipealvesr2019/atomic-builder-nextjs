@@ -122,7 +122,7 @@ export const translations = {
         deletePage: 'Delete Page',
         blocks: {
             heading: 'Heading',
-            text: 'Text',
+            text: 'Text Editor',
             button: 'Button',
             image: 'Image',
             container: 'Container',
@@ -284,7 +284,7 @@ export const translations = {
         deletePage: 'Excluir Página',
         blocks: {
             heading: 'Título',
-            text: 'Texto',
+            text: 'Editor de Texto',
             button: 'Botão',
             image: 'Imagem',
             container: 'Container',

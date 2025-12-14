@@ -14,9 +14,9 @@ import { useAtomValue } from 'jotai';
 import { viewModeAtom } from '@/store/viewModeStore';
 import Repeater from './Repeater';
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 // Icon Button Group Component (for Direction, Justify, Align)
 function IconButtonGroup({ label, value, onChange, options, activeViewMode }) {
@@ -147,7 +147,6 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
 
       // 2. Fallback to Atomic/Generic Configs
       const atomicConfigs = {
-        [WIDGET_TYPES.TEXT]: { name: 'Text', props: {} },
         [WIDGET_TYPES.HEADING]: { name: 'Heading', props: {} },
         [WIDGET_TYPES.BUTTON]: { name: 'Button', props: {} },
         [WIDGET_TYPES.IMAGE]: { name: 'Image', props: {} },
@@ -491,7 +490,120 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
           </>
         )}
 
-        {activeTab === 'layout' && !isContainer && (
+        {block.type === WIDGET_TYPES.TEXT && (
+            <>
+                 {activeTab === 'layout' && (
+                        <Section title="Content">
+                            <div className={styles.richEditorWrapper}>
+                                <ReactQuill 
+                                    theme="snow"
+                                    value={getValue('content', '')}
+                                    onChange={(val) => handleChange('content', val)}
+                                    modules={{
+                                        toolbar: [
+                                            ['bold', 'italic', 'underline', 'strike'],
+                                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                            [{ 'align': [] }],
+                                            ['link', 'clean']
+                                        ]
+                                    }}
+                                />
+                            </div>
+                        </Section>
+                    )}
+
+                    {activeTab === 'style' && (
+                        <Section title="Typography">
+                             <StyledInput
+                                label="Text Color"
+                                value={getValue('color', '')}
+                                onChange={(val) => handleChange('color', val)}
+                                responsive={false}
+                                placeholder="Inherit"
+                            />
+                            <IconButtonGroup
+                                label="Alignment"
+                                value={getValue('align', 'left')}
+                                onChange={(val) => handleChange('align', val)}
+                                activeViewMode={viewMode}
+                                options={[
+                                    { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                                    { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
+                                    { value: 'justify', label: 'Justify', icon: <AlignEndVertical size={16} /> } 
+                                ]}
+                            />
+                             <StyledInput
+                                label="Font Size"
+                                value={getValue('fontSize', '')}
+                                onChange={(val) => handleChange('fontSize', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="16px"
+                            />
+                             <StyledSelect
+                                label="Font Weight"
+                                value={getValue('fontWeight', '')}
+                                onChange={(val) => handleChange('fontWeight', val)}
+                                responsive={false}
+                                options={[
+                                    { label: 'Default', value: '' },
+                                    { label: 'Normal (400)', value: '400' },
+                                    { label: 'Bold (700)', value: '700' },
+                                    { label: 'Light (300)', value: '300' },
+                                    { label: 'Extra Bold (800)', value: '800' }
+                                ]}
+                            />
+                             <StyledInput
+                                label="Line Height"
+                                value={getValue('lineHeight', '')}
+                                onChange={(val) => handleChange('lineHeight', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="1.5"
+                            />
+                             <StyledInput
+                                label="Letter Spacing"
+                                value={getValue('letterSpacing', '')}
+                                onChange={(val) => handleChange('letterSpacing', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="0px"
+                            />
+                        </Section>
+                    )}
+                    
+                    {activeTab === 'advanced' && (
+                         <Section title="Spacing">
+                            <StyledInput
+                                label="Margin"
+                                value={getValue('margin', '')}
+                                onChange={(val) => handleChange('margin', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="0px"
+                            />
+                            <StyledInput
+                                label="Padding"
+                                value={getValue('padding', '')}
+                                onChange={(val) => handleChange('padding', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="0px"
+                            />
+                             <StyledInput
+                                label="Z-Index"
+                                value={getValue('zIndex', '')}
+                                onChange={(val) => handleChange('zIndex', val)}
+                                responsive={false}
+                                placeholder="auto"
+                            />
+                         </Section>
+                    )}
+            </>
+        )}
+
+        {activeTab === 'layout' && !isContainer && block.type !== WIDGET_TYPES.TEXT && (
           <Section title={config?.name || 'Content'}>
             
             {/* If cmsConfig exists, use it to generate controls */}
@@ -756,52 +868,114 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                 </>
             ) : block.type === WIDGET_TYPES.TEXT ? (
                 <>
-                    <Section title="Content">
-                        <div className={styles.richEditorWrapper}>
-                            <ReactQuill 
-                                theme="snow"
-                                value={getValue('content', '')}
-                                onChange={(val) => handleChange('content', val)}
-                                modules={{
-                                    toolbar: [
-                                        ['bold', 'italic', 'underline', 'strike'],
-                                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                        [{ 'align': [] }],
-                                        ['link', 'clean']
-                                    ]
-                                }}
+                    {activeTab === 'layout' && (
+                        <Section title="Content">
+                            <div className={styles.richEditorWrapper}>
+                                <ReactQuill 
+                                    theme="snow"
+                                    value={getValue('content', '')}
+                                    onChange={(val) => handleChange('content', val)}
+                                    modules={{
+                                        toolbar: [
+                                            ['bold', 'italic', 'underline', 'strike'],
+                                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                            [{ 'align': [] }],
+                                            ['link', 'clean']
+                                        ]
+                                    }}
+                                />
+                            </div>
+                        </Section>
+                    )}
+
+                    {activeTab === 'style' && (
+                        <Section title="Typography">
+                             <StyledInput
+                                label="Text Color"
+                                value={getValue('color', '')}
+                                onChange={(val) => handleChange('color', val)}
+                                responsive={false}
+                                placeholder="Inherit"
                             />
-                        </div>
-                    </Section>
-                    <Section title="Style">
-                         <IconButtonGroup
-                            label="Alignment"
-                            value={getValue('align', 'left')}
-                            onChange={(val) => handleChange('align', val)}
-                            activeViewMode={viewMode}
-                            options={[
-                                { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
-                                { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
-                                { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
-                                { value: 'justify', label: 'Justify', icon: <AlignEndVertical size={16} /> } 
-                            ]}
-                        />
-                         <StyledInput
-                            label="Color"
-                            value={getValue('color', '')}
-                            onChange={(val) => handleChange('color', val)}
-                            responsive={false}
-                            placeholder="Inherit"
-                        />
-                         <StyledInput
-                            label="Font Size"
-                            value={getValue('fontSize', '')}
-                            onChange={(val) => handleChange('fontSize', val)}
-                            responsive={true}
-                            activeViewMode={viewMode}
-                            placeholder="16px"
-                        />
-                    </Section>
+                            <IconButtonGroup
+                                label="Alignment"
+                                value={getValue('align', 'left')}
+                                onChange={(val) => handleChange('align', val)}
+                                activeViewMode={viewMode}
+                                options={[
+                                    { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                                    { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
+                                    { value: 'justify', label: 'Justify', icon: <AlignEndVertical size={16} /> } 
+                                ]}
+                            />
+                             <StyledInput
+                                label="Font Size"
+                                value={getValue('fontSize', '')}
+                                onChange={(val) => handleChange('fontSize', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="16px"
+                            />
+                             <StyledSelect
+                                label="Font Weight"
+                                value={getValue('fontWeight', '')}
+                                onChange={(val) => handleChange('fontWeight', val)}
+                                responsive={false}
+                                options={[
+                                    { label: 'Default', value: '' },
+                                    { label: 'Normal (400)', value: '400' },
+                                    { label: 'Bold (700)', value: '700' },
+                                    { label: 'Light (300)', value: '300' },
+                                    { label: 'Extra Bold (800)', value: '800' }
+                                ]}
+                            />
+                             <StyledInput
+                                label="Line Height"
+                                value={getValue('lineHeight', '')}
+                                onChange={(val) => handleChange('lineHeight', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="1.5"
+                            />
+                             <StyledInput
+                                label="Letter Spacing"
+                                value={getValue('letterSpacing', '')}
+                                onChange={(val) => handleChange('letterSpacing', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="0px"
+                            />
+                        </Section>
+                    )}
+                    
+                    {activeTab === 'advanced' && (
+                         <Section title="Spacing">
+                            <StyledInput
+                                label="Margin"
+                                value={getValue('margin', '')}
+                                onChange={(val) => handleChange('margin', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="0px"
+                            />
+                            <StyledInput
+                                label="Padding"
+                                value={getValue('padding', '')}
+                                onChange={(val) => handleChange('padding', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                                placeholder="0px"
+                            />
+                             <StyledInput
+                                label="Z-Index"
+                                value={getValue('zIndex', '')}
+                                onChange={(val) => handleChange('zIndex', val)}
+                                responsive={false}
+                                placeholder="auto"
+                            />
+                         </Section>
+                    )}
                 </>
             ) : block.type === WIDGET_TYPES.DIVIDER ? (
                 <>

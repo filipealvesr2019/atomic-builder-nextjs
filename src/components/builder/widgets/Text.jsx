@@ -18,10 +18,15 @@ export default function TextWidget({ settings }) {
 
   const style = {
     textAlign: align,
-    color: color || theme.colors.secondary, // Default to secondary text color
+    color: color || theme.colors.secondary,
     fontSize: fontSize || theme.typography.baseSize,
     fontFamily: theme.typography.fontFamily,
-    lineHeight: 1.6
+    fontWeight: settings.fontWeight || 'normal',
+    lineHeight: settings.lineHeight || 1.6,
+    letterSpacing: settings.letterSpacing || 'normal',
+    margin: settings.margin,
+    padding: settings.padding,
+    zIndex: settings.zIndex
   };
 
   return <div style={style}>{typeof content === 'string' ? parse(content) : content}</div>;
