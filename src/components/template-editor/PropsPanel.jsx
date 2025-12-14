@@ -633,26 +633,76 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             />
 
                             {getValue('iconType', 'library') === 'library' ? (
-                                <StyledSelect
-                                    label="Icon Library / Name"
-                                    value={getValue('icon', 'FaStar')}
-                                    onChange={(val) => handleChange('icon', val)}
-                                    responsive={false}
-                                    options={[
-                                        { label: 'Star (FontAwesome)', value: 'FaStar' },
-                                        { label: 'Heart (FontAwesome)', value: 'FaHeart' },
-                                        { label: 'User (FontAwesome)', value: 'FaUser' },
-                                        { label: 'Check (FontAwesome)', value: 'FaCheck' },
-                                        { label: 'Facebook (FontAwesome)', value: 'FaFacebook' },
-                                        { label: 'Twitter (FontAwesome)', value: 'FaTwitter' },
-                                        { label: 'Instagram (FontAwesome)', value: 'FaInstagram' },
-                                        { label: 'Linkedin (FontAwesome)', value: 'FaLinkedin' },
-                                        { label: 'Lucide Star', value: 'Star' },
-                                        { label: 'Lucide Heart', value: 'Heart' },
-                                        { label: 'Lucide User', value: 'User' },
-                                        { label: 'Lucide Check', value: 'Check' },
-                                    ]}
-                                />
+                                <>
+                                    <StyledSelect
+                                        label="Library"
+                                        value={getValue('iconLib', 'fa')} // 'fa', 'md', 'lucide'
+                                        onChange={(val) => handleChange('iconLib', val)}
+                                        responsive={false}
+                                        options={[
+                                            { label: 'FontAwesome', value: 'fa' },
+                                            { label: 'Material (React Icons)', value: 'md' },
+                                            { label: 'Lucide Icons', value: 'lucide' }
+                                        ]}
+                                    />
+                                    
+                                    {getValue('iconLib', 'fa') === 'fa' ? (
+                                        <StyledSelect
+                                            label="Icon"
+                                            value={getValue('icon', 'FaStar')}
+                                            onChange={(val) => handleChange('icon', val)}
+                                            responsive={false}
+                                            options={[
+                                                { label: 'Star', value: 'FaStar' },
+                                                { label: 'Heart', value: 'FaHeart' },
+                                                { label: 'User', value: 'FaUser' },
+                                                { label: 'Check', value: 'FaCheck' },
+                                                { label: 'Facebook', value: 'FaFacebook' },
+                                                { label: 'Twitter', value: 'FaTwitter' },
+                                                { label: 'Instagram', value: 'FaInstagram' },
+                                                { label: 'Linkedin', value: 'FaLinkedin' },
+                                                { label: 'Github', value: 'FaGithub' },
+                                                { label: 'Youtube', value: 'FaYoutube' },
+                                                { label: 'Google', value: 'FaGoogle' },
+                                                { label: 'Whatsapp', value: 'FaWhatsapp' },
+                                            ]}
+                                        />
+                                    ) : getValue('iconLib') === 'md' ? (
+                                        <StyledSelect
+                                            label="Icon"
+                                            value={getValue('icon', 'MdStar')}
+                                            onChange={(val) => handleChange('icon', val)}
+                                            responsive={false}
+                                            options={[
+                                                { label: 'Star', value: 'MdStar' },
+                                                { label: 'Favorite', value: 'MdFavorite' },
+                                                { label: 'Person', value: 'MdPerson' },
+                                                { label: 'Check', value: 'MdCheck' },
+                                                { label: 'Menu', value: 'MdMenu' },
+                                                { label: 'Close', value: 'MdClose' },
+                                                { label: 'Home', value: 'MdHome' },
+                                                { label: 'Settings', value: 'MdSettings' },
+                                                { label: 'Search', value: 'MdSearch' },
+                                                { label: 'Add', value: 'MdAdd' },
+                                                { label: 'Delete', value: 'MdDelete' },
+                                                { label: 'Edit', value: 'MdEdit' },
+                                            ]}
+                                        />
+                                    ) : (
+                                        <StyledSelect
+                                            label="Icon"
+                                            value={getValue('icon', 'Star')}
+                                            onChange={(val) => handleChange('icon', val)}
+                                            responsive={false}
+                                            options={[
+                                                { label: 'Star', value: 'Star' },
+                                                { label: 'Heart', value: 'Heart' },
+                                                { label: 'User', value: 'User' },
+                                                { label: 'Check', value: 'Check' },
+                                            ]}
+                                        />
+                                    )}
+                                </>
                             ) : (
                                  <StyledInput
                                     label="Custom Image URL"

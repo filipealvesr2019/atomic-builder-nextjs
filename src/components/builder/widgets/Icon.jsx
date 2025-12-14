@@ -1,6 +1,7 @@
 import React from 'react';
 import * as LucideIcons from 'lucide-react';
 import * as FaIcons from 'react-icons/fa6'; // Font Awesome 6
+import * as MdIcons from 'react-icons/md'; // Material Design
 import { useAtomValue } from 'jotai';
 import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
 import styles from './Icon.module.css';
@@ -54,10 +55,17 @@ export default function IconWidget({ settings }) {
       );
   } else {
       // Library Mode
+      const iconLib = getProp('iconLib', 'fa'); // 'fa', 'md', 'lucide'
       let IconComponent = LucideIcons.Star;
-      if (iconName.startsWith('Fa')) {
+
+      if (iconLib === 'fa') {
+          // FontAwesome (react-icons/fa6)
           IconComponent = FaIcons[iconName] || FaIcons.FaStar;
+      } else if (iconLib === 'md') {
+          // Material Design
+          IconComponent = MdIcons[iconName] || MdIcons.MdStar;
       } else {
+          // Lucide
           IconComponent = LucideIcons[iconName] || LucideIcons.Star;
       }
       renderedContent = <IconComponent size={iconSize} />;
