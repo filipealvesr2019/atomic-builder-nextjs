@@ -616,12 +616,140 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                     )}
             </>
         )}
+        {block.type === WIDGET_TYPES.ICON && (
+                 /* ICON WIDGET ROOT CONTROLS */
+                 <>
+                    {activeTab === 'layout' && (
+                        <Section title="Content">
+                            <StyledSelect
+                                label="Icon Library / Name"
+                                value={getValue('icon', 'FaStar')}
+                                onChange={(val) => handleChange('icon', val)}
+                                responsive={false}
+                                options={[
+                                    { label: 'Star (FontAwesome)', value: 'FaStar' },
+                                    { label: 'Heart (FontAwesome)', value: 'FaHeart' },
+                                    { label: 'User (FontAwesome)', value: 'FaUser' },
+                                    { label: 'Check (FontAwesome)', value: 'FaCheck' },
+                                    { label: 'Facebook (FontAwesome)', value: 'FaFacebook' },
+                                    { label: 'Twitter (FontAwesome)', value: 'FaTwitter' },
+                                    { label: 'Instagram (FontAwesome)', value: 'FaInstagram' },
+                                    { label: 'Linkedin (FontAwesome)', value: 'FaLinkedin' },
+                                    { label: 'Lucide Star', value: 'Star' },
+                                    { label: 'Lucide Heart', value: 'Heart' },
+                                    { label: 'Lucide User', value: 'User' },
+                                    { label: 'Lucide Check', value: 'Check' },
+                                ]}
+                            />
+                             <StyledInput
+                                label="Link"
+                                value={getValue('link', '')}
+                                onChange={(val) => handleChange('link', val)}
+                                placeholder="https://..."
+                                responsive={false}
+                            />
+                             <StyledSelect
+                                label="View"
+                                value={getValue('view', 'default')}
+                                onChange={(val) => handleChange('view', val)}
+                                responsive={false}
+                                options={[
+                                    { label: 'Default', value: 'default' },
+                                    { label: 'Stacked', value: 'stacked' },
+                                    { label: 'Framed', value: 'framed' }
+                                ]}
+                             />
+                             <IconButtonGroup
+                                label="Alignment"
+                                value={getValue('align', 'center')}
+                                onChange={(val) => handleChange('align', val)}
+                                activeViewMode={viewMode}
+                                options={[
+                                    { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                                    { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                                    { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                                ]}
+                            />
+                        </Section>
+                    )}
 
-        {activeTab === 'layout' && !isContainer && block.type !== WIDGET_TYPES.TEXT && (
+                    {activeTab === 'style' && (
+                        <Section title="Icon Style">
+                             <StyledInput
+                                label="Size (px)"
+                                value={getValue('size', '50')}
+                                onChange={(val) => handleChange('size', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                            />
+                             <StyledInput
+                                label="Primary Color"
+                                value={getValue('primaryColor', '#3b82f6')}
+                                onChange={(val) => handleChange('primaryColor', val)}
+                                responsive={false}
+                                placeholder="#3b82f6"
+                            />
+                            {getValue('view') !== 'default' && (
+                                <>
+                                 <StyledInput
+                                    label="Secondary Color (Background)"
+                                    value={getValue('secondaryColor', '#ffffff')}
+                                    onChange={(val) => handleChange('secondaryColor', val)}
+                                    responsive={false}
+                                    placeholder="#ffffff"
+                                />
+                                 <StyledInput
+                                    label="Padding"
+                                    value={getValue('padding', '15px')}
+                                    onChange={(val) => handleChange('padding', val)}
+                                    responsive={true}
+                                    activeViewMode={viewMode}
+                                />
+                                <StyledInput
+                                    label="Border Radius"
+                                    value={getValue('borderRadius', '50%')}
+                                    onChange={(val) => handleChange('borderRadius', val)}
+                                    responsive={true}
+                                    activeViewMode={viewMode}
+                                />
+                                </>
+                            )}
+                             <StyledInput
+                                label="Rotate (deg)"
+                                value={getValue('rotate', '0')}
+                                onChange={(val) => handleChange('rotate', val)}
+                                responsive={true}
+                                activeViewMode={viewMode}
+                            />
+                        </Section>
+                    )}
+
+                    {activeTab === 'advanced' && (
+                        <Section title="Hover Animation">
+                            <StyledSelect
+                                label="Hover Animation"
+                                value={getValue('hoverAnimation', '')}
+                                onChange={(val) => handleChange('hoverAnimation', val)}
+                                responsive={false}
+                                options={[
+                                    { label: 'None', value: '' },
+                                    { label: 'Grow', value: 'grow' },
+                                    { label: 'Shrink', value: 'shrink' },
+                                    { label: 'Rotate', value: 'rotate' },
+                                    { label: 'Buzz', value: 'buzz' }
+                                ]}
+                            />
+                        </Section>
+                    )}
+                 </>
+        )}
+
+
+        {activeTab === 'layout' && !isContainer && block.type !== WIDGET_TYPES.TEXT && block.type !== WIDGET_TYPES.ICON && (
           <Section title={config?.name || 'Content'}>
             
-            {/* If cmsConfig exists, use it to generate controls */}
-            {config && config.props ? (
+            {/* If cmsConfig exists and has props, use it to generate controls */ }
+            {config && config.props && Object.keys(config.props).length > 0 ? (
                  Object.entries(config.props).map(([key, propConfig]) => (
                      renderDynamicControl(key, propConfig)
                  ))
@@ -686,6 +814,34 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
                         ]}
                     />
+                     <IconButtonGroup
+                        label="Vertical Alignment"
+                        value={getValue('verticalAlign', 'flex-start')}
+                        onChange={(val) => handleChange('verticalAlign', val)}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'flex-start', label: 'Top', icon: <AlignStartVertical size={16} /> },
+                            { value: 'center', label: 'Middle', icon: <AlignCenterVertical size={16} /> },
+                            { value: 'flex-end', label: 'Bottom', icon: <AlignEndVertical size={16} /> }
+                        ]}
+                    />
+                    <StyledSelect
+                        label="Title HTML Tag"
+                        value={getValue('titleTag', 'h3')}
+                        onChange={(val) => handleChange('titleTag', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'Div', value: 'div' },
+                            { label: 'Span', value: 'span' },
+                            { label: 'P', value: 'p' }
+                        ]}
+                    />
                 </>
             ) : block.type === WIDGET_TYPES.ICON_LIST ? (
                 /* ICON LIST SPECIFIC CONTENT */
@@ -732,18 +888,19 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                     )}
                   />
 
-                  <IconButtonGroup
-                      label="Layout"
-                      value={getValue('layout', 'vertical')}
-                      onChange={(val) => handleChange('layout', val)}
-                      activeViewMode={viewMode}
+                  <StyledSelect
+                      label="View"
+                      value={getValue('view', 'default')}
+                      onChange={(val) => handleChange('view', val)}
+                      responsive={false}
                       options={[
-                          { value: 'vertical', label: 'Vertical', icon: <ArrowDown size={16} /> },
-                          { value: 'horizontal', label: 'Horizontal', icon: <ArrowRight size={16} /> }
+                          { label: 'Default', value: 'default' },
+                          { label: 'Stacked', value: 'stacked' },
+                          { label: 'Framed', value: 'framed' }
                       ]}
-                  />
+                   />
 
-                  <IconButtonGroup
+                   <IconButtonGroup
                         label="Alignment"
                         value={getValue('align', 'left')}
                         onChange={(val) => handleChange('align', val)}
@@ -754,6 +911,17 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
                         ]}
                     />
+
+                   <StyledSelect
+                      label="Inline List"
+                      value={getValue('layout', 'vertical')} // Using 'layout' key for compat
+                      onChange={(val) => handleChange('layout', val)}
+                      responsive={false}
+                      options={[
+                          { value: 'vertical', label: 'Off' },
+                          { value: 'horizontal', label: 'On' }
+                      ]}
+                  />
 
                    <StyledSelect
                         label="Divider"
@@ -836,6 +1004,23 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             { value: 'flex-start', label: 'Top', icon: <AlignStartVertical size={16} /> },
                             { value: 'center', label: 'Middle', icon: <AlignCenterVertical size={16} /> },
                             { value: 'flex-end', label: 'Bottom', icon: <AlignEndVertical size={16} /> }
+                        ]}
+                    />
+                    <StyledSelect
+                        label="Title HTML Tag"
+                        value={getValue('titleTag', 'h3')}
+                        onChange={(val) => handleChange('titleTag', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'Div', value: 'div' },
+                            { label: 'Span', value: 'span' },
+                            { label: 'P', value: 'p' }
                         ]}
                     />
                 </>

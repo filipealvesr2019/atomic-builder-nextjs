@@ -16,6 +16,7 @@ export const WIDGET_TYPES = {
   PRODUCT_LIST: 'product_list',
   ICON_BOX: 'icon_box',
   ICON_LIST: 'icon_list',
+  ICON: 'icon',
   IMAGE_BOX: 'image_box',
   DIVIDER: 'divider',
   SPACER: 'spacer'
