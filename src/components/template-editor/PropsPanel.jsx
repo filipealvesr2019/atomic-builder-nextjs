@@ -48,6 +48,15 @@ function IconImportModal({ onImport, currentLibrary }) {
                 extractedName = importMatch[1];
             }
 
+            // Try to match FontAwesome native style: ['apple']
+            if (!extractedName) {
+                const faMatch = importCode.match(/\['([^']+)'\]/);
+                if (faMatch && faMatch[1]) {
+                     extractedName = faMatch[1]; // Extracts 'apple'
+                     detectedLib = 'md'; // Force to Universal/React Icons
+                }
+            }
+
             // Try to match JSX style: <FaBeer />
             if (!extractedName) {
                 const jsxMatch = importCode.match(/<(\w+)\s*\/>/);

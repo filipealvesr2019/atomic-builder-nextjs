@@ -24,6 +24,10 @@ export default function IconWidget({ settings }) {
     return val !== undefined && val !== null && val !== '' ? val : defaultValue;
   };
 
+  const toPascalCase = (str) => {
+    return str.replace(/(^\w|-\w)/g, (clear) => clear.replace('-', '').toUpperCase());
+  };
+
   // Content
   const iconType = getProp('iconType', 'library'); // 'library' or 'custom'
   const iconName = getProp('icon', 'FaStar');
@@ -85,6 +89,10 @@ export default function IconWidget({ settings }) {
             TiIcons[iconName] || 
             GiIcons[iconName] || 
             FiIcons[iconName] || 
+            FaIcons[iconName] || 
+            LucideIcons[iconName] ||
+            // FontAwesome Fallback: Try Fa + PascalCase (e.g. 'apple' -> 'FaApple', 'arrow-right' -> 'FaArrowRight')
+            FaIcons[`Fa${toPascalCase(iconName)}`] ||
             MdIcons.MdStar;
       } else if (iconLib === 'ci') {
           IconComponent = CiIcons[iconName] || CiIcons.CiStar;
