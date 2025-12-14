@@ -859,7 +859,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                                 { label: 'Google', value: 'FaGoogle' },
                                                 { label: 'Whatsapp', value: 'FaWhatsapp' },
                                                 // Dynamic option for imported icon - FA only
-                                                ...(getValue('icon') && ![
+                                                // Exclude other React Icon prefixes to prevent mixing (e.g. CiAirportSign1 showing here)
+                                                ...(getValue('icon') && !['Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => getValue('icon').startsWith(p)) && ![
                                                     'FaStar', 'FaHeart', 'FaUser', 'FaCheck', 
                                                     'FaFacebook', 'FaTwitter', 'FaInstagram', 
                                                     'FaLinkedin', 'FaGithub', 'FaYoutube', 
@@ -910,7 +911,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                                 { label: 'User', value: 'User' },
                                                 { label: 'Check', value: 'Check' },
                                                 // Dynamic option for imported icon - Others (Generic/Lucide)
-                                                ...(getValue('icon') && !getValue('icon').startsWith('Fa') && !getValue('icon').startsWith('Md') && ![
+                                                // STRICT EXCLUSION: Must NOT be any React Icon prefix
+                                                ...(getValue('icon') && !['Fa','Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => getValue('icon').startsWith(p)) && ![
                                                     'Star', 'Heart', 'User', 'Check'
                                                 ].includes(getValue('icon')) ? [{ label: getValue('icon'), value: getValue('icon') }] : [])
                                             ]}
