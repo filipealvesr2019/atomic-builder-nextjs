@@ -61,6 +61,7 @@ export default function BlockLibrary({ templateId }) {
     { id: WIDGET_TYPES.ICON_LIST, name: 'Icon List', icon: LucideIcons.List, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.IMAGE_BOX, name: 'Image Box', icon: LucideIcons.Image, category: NODE_TYPES.WIDGET },
     { id: WIDGET_TYPES.DIVIDER, name: 'Divider', icon: Minus, category: NODE_TYPES.WIDGET },
+    { id: WIDGET_TYPES.SPACER, name: 'Spacer', icon: Square, category: NODE_TYPES.WIDGET },
   ];
 
   return (

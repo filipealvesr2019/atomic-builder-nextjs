@@ -130,7 +130,8 @@ export const translations = {
             iconBox: 'Icon Box',
             iconList: 'Icon List',
             imageBox: 'Image Box',
-            divider: 'Divider'
+            divider: 'Divider',
+            spacer: 'Spacer'
         }
     },
     settings: {
@@ -291,7 +292,8 @@ export const translations = {
             iconBox: 'Caixa de Ícone',
             iconList: 'Lista de Ícones',
             imageBox: 'Caixa de Imagem',
-            divider: 'Divisor'
+            divider: 'Divisor',
+            spacer: 'Espaçador'
         }
     },
     settings: {

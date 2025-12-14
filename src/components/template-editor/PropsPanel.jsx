@@ -944,6 +944,25 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         />
                     </Section>
                 </>
+            ) : block.type === WIDGET_TYPES.SPACER ? (
+                <>
+                    <Section title="Settings">
+                         <StyledInput
+                            label="Padding (Height)"
+                            value={getValue('padding', '50px')}
+                            onChange={(val) => handleChange('padding', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            placeholder="50px"
+                        />
+                        <StyledInput
+                            label="Background Color (Debug)"
+                            value={getValue('backgroundColor', 'transparent')}
+                            onChange={(val) => handleChange('backgroundColor', val)}
+                            responsive={false}
+                        />
+                    </Section>
+                </>
             ) : block.type === WIDGET_TYPES.BUTTON ? (
                 <>
                     <StyledInput

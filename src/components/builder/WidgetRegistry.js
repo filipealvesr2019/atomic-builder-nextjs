@@ -10,6 +10,7 @@ import IconBox from './widgets/IconBox';
 import IconList from './widgets/IconList';
 import ImageBox from './widgets/ImageBox';
 import DividerWidget from './widgets/Divider';
+import SpacerWidget from './widgets/Spacer';
 
 /**
  * Widget Registry
@@ -25,6 +26,7 @@ export const EVENT_WIDGETS = {
   [WIDGET_TYPES.ICON_LIST]: IconList,
   [WIDGET_TYPES.IMAGE_BOX]: ImageBox,
   [WIDGET_TYPES.DIVIDER]: DividerWidget,
+  [WIDGET_TYPES.SPACER]: SpacerWidget,
   // Add new widgets here
 };
 

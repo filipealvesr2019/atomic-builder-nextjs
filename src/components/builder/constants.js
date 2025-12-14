@@ -17,7 +17,8 @@ export const WIDGET_TYPES = {
   ICON_BOX: 'icon_box',
   ICON_LIST: 'icon_list',
   IMAGE_BOX: 'image_box',
-  DIVIDER: 'divider'
+  DIVIDER: 'divider',
+  SPACER: 'spacer'
 };
 
 export const LAYOUT_TYPES = {
