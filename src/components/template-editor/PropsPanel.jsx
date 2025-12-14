@@ -107,6 +107,8 @@ function IconImportModal({ onImport, currentLibrary }) {
             setIconName(''); 
             setImportCode('');
             setError('');
+            
+            setIsOpen(false); // Close modal internally
         } else {
             // Only show error if BOTH fields failed
             setError('Could not recognize an icon name from input or code.');
@@ -923,7 +925,6 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                                 updates.icon = importedName;
                                                 console.log('[PropsPanel] onImport triggering update:', updates);
                                                 onPropsChange(updates);
-                                                setIsOpen(false); // Auto-close modal on success
                                             }}
                                             currentLibrary={getValue('iconLib', 'fa')}
                                         />
