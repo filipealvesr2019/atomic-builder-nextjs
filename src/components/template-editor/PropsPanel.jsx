@@ -986,13 +986,78 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                     `}</style>
                                 </>
                             ) : (
-                                 <StyledInput
-                                    label="Custom Image URL"
-                                    value={getValue('customIconSrc', '')}
-                                    onChange={(val) => handleChange('customIconSrc', val)}
-                                    placeholder="https://... (SVG, PNG, JPG)"
-                                    responsive={false}
-                                />
+                                <div style={{ marginTop: '10px' }}>
+                                    <div style={{ marginBottom: '8px', fontSize: '13px', color: '#374151', fontWeight: 500 }}>Custom Icon File</div>
+                                    
+                                    {getValue('customIconSrc') ? (
+                                        <div style={{ 
+                                            border: '1px solid #e5e7eb', 
+                                            borderRadius: '6px', 
+                                            padding: '10px',
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            gap: '10px',
+                                            background: '#f9fafb'
+                                        }}>
+                                            <img 
+                                                src={getValue('customIconSrc')} 
+                                                alt="Custom Icon" 
+                                                style={{ width: '30px', height: '30px', objectFit: 'contain' }} 
+                                            />
+                                            <div style={{ flex: 1, fontSize: '12px', color: '#666', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                Icon Loaded
+                                            </div>
+                                            <button 
+                                                onClick={() => handleChange('customIconSrc', '')}
+                                                style={{
+                                                    background: '#ef4444',
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '4px',
+                                                    padding: '4px 8px',
+                                                    cursor: 'pointer',
+                                                    fontSize: '11px'
+                                                }}
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <label style={{ 
+                                            display: 'flex', 
+                                            flexDirection: 'column', 
+                                            alignItems: 'center', 
+                                            justifyContent: 'center', 
+                                            border: '1px dashed #d1d5db', 
+                                            borderRadius: '6px', 
+                                            padding: '20px', 
+                                            cursor: 'pointer',
+                                            background: '#fff',
+                                            transition: 'border-color 0.2s'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                                        onMouseLeave={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                                        >
+                                            <div style={{ marginBottom: '5px', color: '#6b7280' }}>Click to Upload</div>
+                                            <div style={{ fontSize: '11px', color: '#9ca3af' }}>JPG, PNG, SVG</div>
+                                            <input 
+                                                type="file" 
+                                                accept=".jpg,.jpeg,.png,.svg,.webp" 
+                                                style={{ display: 'none' }} 
+                                                onChange={(e) => {
+                                                    const file = e.target.files?.[0];
+                                                    if (file) {
+                                                        const reader = new FileReader();
+                                                        reader.onloadend = () => {
+                                                            handleChange('customIconSrc', reader.result);
+                                                        };
+                                                        reader.readAsDataURL(file);
+                                                    }
+                                                }}
+                                            />
+                                        </label>
+                                    )}
+                                </div>
                             )}
                              <StyledInput
                                 label="Link"
