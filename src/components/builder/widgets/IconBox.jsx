@@ -1,5 +1,5 @@
 import React from 'react';
-import * as LucideIcons from 'lucide-react';
+import IconWidget from './Icon'; // Import the robust IconWidget
 import { useAtomValue } from 'jotai';
 import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
 
@@ -9,11 +9,9 @@ export default function IconBox({ settings }) {
   const getProp = (key, defaultValue) => {
     const raw = settings?.[key];
     const val = resolveResponsiveProp(raw, viewMode);
-    // Treat empty string as invalid for text content to ensure defaults show up
     return val !== undefined && val !== null && val !== '' ? val : defaultValue;
   };
 
-  const iconName = getProp('icon', 'Star');
   const title = getProp('title', 'Título do Serviço');
   const description = getProp('description', 'Descrição curta sobre o benefício ou serviço oferecido.');
   
@@ -22,14 +20,26 @@ export default function IconBox({ settings }) {
   const textAlign = getProp('textAlign', 'center');
   
   // Styles
-  const iconColor = getProp('iconColor', '#3b82f6');
-  const iconSize = getProp('iconSize', '40px'); // logic size (font-size equivalent)
   const titleColor = getProp('titleColor', '#1f2937');
   const descColor = getProp('descColor', '#6b7280');
   
-  // Icon Component
-  // Fallback to Star if not found
-  const IconComponent = LucideIcons[iconName] || LucideIcons.Star;
+  // Resolve icon properties for the wrapper
+  // We prioritize 'size' (new standard) over 'iconSize' (legacy)
+  const iconSize = getProp('size') || getProp('iconSize', '40px'); 
+  const iconColor = getProp('primaryColor') || getProp('iconColor', '#3b82f6');
+
+  // Prepare settings for the IconWidget
+  // We merge legacy props to ensure IconWidget receives what it expects ('size', 'primaryColor')
+  const iconSettings = {
+      ...settings,
+      size: iconSize,
+      primaryColor: iconColor,
+      // Ensure specific positioning doesn't conflict, though IconWidget handles its own alignment internally if needed.
+      // Here we just want the IconWidget to render the icon itself.
+      align: 'center', // Force center within the container we provide
+      padding: '0', // Reset padding for the icon box context
+      view: 'default', // Force default view unless we want to expose 'framed'/'stacked' in Icon Box later
+  };
 
   // Layout Logic
   let flexDirection = 'column';
@@ -53,15 +63,13 @@ export default function IconBox({ settings }) {
     justifyContent: 'center',
     color: iconColor,
     minWidth: iconSize, // Ensure generic spacing
+    // We don't set height here to allow autofit
   };
-  
-  // Numeric size conversion if needed, assuming px string for now
-  const sizeNum = parseInt(iconSize) || 24;
 
   return (
     <div style={containerStyle} className="icon-box-widget">
       <div style={iconContainerStyle}>
-         <IconComponent size={sizeNum} />
+         <IconWidget settings={iconSettings} />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <h3 style={{ margin: 0, color: titleColor, fontSize: '1.25rem' }}>{title}</h3>

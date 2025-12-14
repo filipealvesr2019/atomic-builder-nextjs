@@ -1191,25 +1191,193 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         responsive={true}
                         activeViewMode={viewMode}
                     />
+
                     <StyledSelect
-                        label="Icon"
-                        value={getValue('icon', 'Star')}
-                        onChange={(val) => handleChange('icon', val)}
+                        label="Icon Source"
+                        value={getValue('iconLib', 'lucide')}
+                        onChange={(val) => {
+                            handleChange('iconLib', val);
+                             // Reset icon when library changes to prevent mixing
+                            if (val === 'custom') handleChange('customIconSrc', '');
+                            else if (val === 'fa') handleChange('icon', 'FaStar');
+                            else if (val === 'md') handleChange('icon', 'MdStar');
+                            else handleChange('icon', 'Star');
+                        }}
                         responsive={false}
                         options={[
-                           { label: 'Star', value: 'Star' },
-                           { label: 'User', value: 'User' },
-                           { label: 'Check', value: 'Check' },
-                           { label: 'Truck', value: 'Truck' },
-                           { label: 'Shield', value: 'Shield' },
-                           { label: 'Settings', value: 'Settings' },
-                           { label: 'Heart', value: 'Heart' },
-                           { label: 'Home', value: 'Home' },
-                           { label: 'ShoppingBag', value: 'ShoppingBag' },
-                           { label: 'Phone', value: 'Phone' },
-                           { label: 'Mail', value: 'Mail' }
+                            { label: 'Lucide Icons', value: 'lucide' },
+                            { label: 'FontAwesome', value: 'fa' },
+                            { label: 'React Icons', value: 'md' },
+                            { label: 'Custom icon', value: 'custom' }
                         ]}
                     />
+
+                    {getValue('iconLib') === 'custom' ? (
+                                <div style={{ marginTop: '10px' }}>
+                                    <div style={{ marginBottom: '8px', fontSize: '13px', color: '#374151', fontWeight: 500 }}>Custom Icon File</div>
+                                    
+                                    {getValue('customIconSrc') ? (
+                                        <div style={{ 
+                                            border: '1px solid #e5e7eb', 
+                                            borderRadius: '6px', 
+                                            padding: '10px',
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            gap: '10px',
+                                            background: '#f9fafb'
+                                        }}>
+                                            <img 
+                                                src={getValue('customIconSrc')} 
+                                                alt="Custom Icon" 
+                                                style={{ width: '30px', height: '30px', objectFit: 'contain' }} 
+                                            />
+                                            <div style={{ flex: 1, fontSize: '12px', color: '#666', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                Icon Loaded
+                                            </div>
+                                            <button 
+                                                onClick={() => handleChange('customIconSrc', '')}
+                                                style={{
+                                                    background: '#ef4444',
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '4px',
+                                                    padding: '4px 8px',
+                                                    cursor: 'pointer',
+                                                    fontSize: '11px'
+                                                }}
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <label style={{ 
+                                            display: 'flex', 
+                                            flexDirection: 'column', 
+                                            alignItems: 'center', 
+                                            justifyContent: 'center', 
+                                            border: '1px dashed #d1d5db', 
+                                            borderRadius: '6px', 
+                                            padding: '20px', 
+                                            cursor: 'pointer',
+                                            background: '#fff',
+                                            transition: 'border-color 0.2s'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                                        onMouseLeave={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                                        >
+                                            <div style={{ marginBottom: '5px', color: '#6b7280' }}>Click to Upload</div>
+                                            <div style={{ fontSize: '11px', color: '#9ca3af' }}>JPG, PNG, SVG</div>
+                                            <input 
+                                                type="file" 
+                                                accept=".jpg,.jpeg,.png,.svg,.webp" 
+                                                style={{ display: 'none' }} 
+                                                onChange={(e) => {
+                                                    const file = e.target.files?.[0];
+                                                    if (file) {
+                                                        const reader = new FileReader();
+                                                        reader.onloadend = () => {
+                                                            handleChange('customIconSrc', reader.result);
+                                                        };
+                                                        reader.readAsDataURL(file);
+                                                    }
+                                                }}
+                                            />
+                                        </label>
+                                    )}
+                                </div>
+                    ) : (
+                        <>
+                             {/* Import Modal Trigger */}
+                             <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
+                                <IconImportModal 
+                                    onImport={(importedLib, importedIcon) => {
+                                         // Atomic update
+                                         onPropsChange({
+                                             iconLib: importedLib,
+                                             icon: importedIcon
+                                         });
+                                    }}
+                                    currentLibrary={getValue('iconLib', 'lucide')}
+                                />
+                            </div>
+
+                            {/* Dynamic Icon Dropdown based on Library */}
+                            {getValue('iconLib') === 'fa' ? (
+                                <StyledSelect
+                                    label="Icon"
+                                    value={getValue('icon', 'FaStar')}
+                                    onChange={(val) => handleChange('icon', val)}
+                                    responsive={false}
+                                    options={[
+                                        { label: 'Star', value: 'FaStar' },
+                                        { label: 'Heart', value: 'FaHeart' },
+                                        { label: 'User', value: 'FaUser' },
+                                        { label: 'Check', value: 'FaCheck' },
+                                        { label: 'Facebook', value: 'FaFacebook' },
+                                        { label: 'Twitter', value: 'FaTwitter' },
+                                        { label: 'Instagram', value: 'FaInstagram' },
+                                        { label: 'Linkedin', value: 'FaLinkedin' },
+                                        { label: 'Github', value: 'FaGithub' },
+                                        // Dynamic option for imported icon - FA only
+                                        // Exclude other React Icon prefixes to prevent mixing
+                                        ...(getValue('icon') && !['Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => getValue('icon').startsWith(p)) && ![
+                                            'FaStar', 'FaHeart', 'FaUser', 'FaCheck', 
+                                            'FaFacebook', 'FaTwitter', 'FaInstagram', 
+                                            'FaLinkedin', 'FaGithub'
+                                        ].includes(getValue('icon')) ? [{ label: getValue('icon'), value: getValue('icon') }] : [])
+                                    ]}
+                                />
+                            ) : getValue('iconLib') === 'md' ? (
+                                <StyledSelect
+                                    label="Icon"
+                                    value={getValue('icon', 'MdStar')}
+                                    onChange={(val) => handleChange('icon', val)}
+                                    responsive={false}
+                                    options={[
+                                        { label: 'Star', value: 'MdStar' },
+                                        { label: 'Favorite', value: 'MdFavorite' },
+                                        { label: 'Person', value: 'MdPerson' },
+                                        { label: 'Check', value: 'MdCheck' },
+                                        { label: 'Menu', value: 'MdMenu' },
+                                        { label: 'Close', value: 'MdClose' },
+                                        // Dynamic option for imported icon - MD & other React Icons
+                                        ...(getValue('icon') && (
+                                            // STRICT SEPARATION: Only allow icons with valid React Icon prefixes.
+                                            ['Fa','Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => getValue('icon').startsWith(p))
+                                        ) && ![
+                                            'MdStar', 'MdFavorite', 'MdPerson', 'MdCheck', 
+                                            'MdMenu', 'MdClose'
+                                        ].includes(getValue('icon')) ? [{ label: getValue('icon'), value: getValue('icon') }] : [])
+                                    ]}
+                                />
+                            ) : (
+                                <StyledSelect
+                                    label="Icon"
+                                    value={getValue('icon', 'Star')}
+                                    onChange={(val) => handleChange('icon', val)}
+                                    responsive={false}
+                                    options={[
+                                        { label: 'Star', value: 'Star' },
+                                        { label: 'Heart', value: 'Heart' },
+                                        { label: 'User', value: 'User' },
+                                        { label: 'Check', value: 'Check' },
+                                        { label: 'Truck', value: 'Truck' },
+                                        { label: 'Shield', value: 'Shield' },
+                                        { label: 'Settings', value: 'Settings' },
+                                        { label: 'Home', value: 'Home' },
+                                        { label: 'ShoppingBag', value: 'ShoppingBag' },
+                                        { label: 'Phone', value: 'Phone' },
+                                        { label: 'Mail', value: 'Mail' },
+                                        // Dynamic option for imported icon - Others (Generic/Lucide)
+                                        // STRICT EXCLUSION: Must NOT be any React Icon prefix
+                                        ...(getValue('icon') && !['Fa','Md','Ci','Bs','Io','Bi','Ai','Ri','Ti','Gi','Fi'].some(p => getValue('icon').startsWith(p)) && ![
+                                            'Star', 'Heart', 'User', 'Check', 'Truck', 'Shield', 'Settings', 'Home', 'ShoppingBag', 'Phone', 'Mail'
+                                        ].includes(getValue('icon')) ? [{ label: getValue('icon'), value: getValue('icon') }] : [])
+                                    ]}
+                                />
+                            )}
+                        </>
+                    )}
                      <IconButtonGroup
                         label="Icon Position"
                         value={getValue('iconPosition', 'top')}
