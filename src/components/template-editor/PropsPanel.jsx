@@ -3514,6 +3514,33 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                 placeholder="e.g. custom-style-1 custom-style-2"
               />
             </Section>
+
+            <Section title="Custom CSS">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <span style={{ fontSize: '12px', color: '#666' }}>
+                        Use <code>selector</code> to target this element.
+                    </span>
+                    <textarea
+                        value={getValue('customCss', '')}
+                        onChange={(e) => handleChange('customCss', e.target.value)}
+                        placeholder={'selector {\n  border: 1px solid red;\n}\n\nselector h1 {\n  color: blue;\n}'}
+                        style={{
+                            width: '100%',
+                            minHeight: '150px',
+                            fontFamily: 'monospace',
+                            fontSize: '12px',
+                            padding: '8px',
+                            border: '1px solid #e0e0e0',
+                            borderRadius: '4px',
+                            resize: 'vertical',
+                            whiteSpace: 'pre',
+                            overflowX: 'auto',
+                            backgroundColor: '#f9f9f9',
+                            color: '#333'
+                        }}
+                    />
+                </div>
+            </Section>
           </>
         )}
       </div>

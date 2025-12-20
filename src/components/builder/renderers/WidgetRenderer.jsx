@@ -64,13 +64,19 @@ export default function WidgetRenderer({ widget, parentDirection = 'column' }) {
     boxSizing: 'border-box'
   };
 
+  // 4. Custom CSS
+  const customCss = resolvedSettings.customCss || '';
+  const uniqueClass = `widget-${id}`;
+  const parsedCss = customCss ? customCss.replace(/selector/g, `.${uniqueClass}`) : '';
+
   return (
     <div 
       id={resolvedSettings.cssId}
       data-widget-id={id} 
-      className={`widget-wrapper ${resolvedSettings.cssClasses || ''}`}
+      className={`widget-wrapper ${uniqueClass} ${resolvedSettings.cssClasses || ''}`}
       style={wrapperStyle}
     >
+      {parsedCss && <style>{parsedCss}</style>}
       <WidgetComponent settings={resolvedSettings} />
     </div>
   );

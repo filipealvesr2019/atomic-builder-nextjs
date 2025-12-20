@@ -162,11 +162,18 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     onUpdateBlock: onUpdateBlock // Pass update function
   };
 
+  // Custom CSS Injection
+  // We replace 'selector' with a unique ID targeting the wrapper
+  // Note: We use data-block-id for robustness
+  const customCss = block.props?.customCss || '';
+  const uniqueClass = `block-${block.id}`;
+  const parsedCss = customCss ? customCss.replace(/selector/g, `.${uniqueClass}`) : '';
+
   return (
     <div
       ref={setNodeRef}
       style={outerStyle}
-      className={`${styles.blockWrapper} ${
+      className={`${styles.blockWrapper} ${uniqueClass} ${
         isSelected ? styles.blockWrapperSelected : ''
       } ${isOver ? styles.blockWrapperOver : ''}`}
       onClick={(e) => {
@@ -174,6 +181,9 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
         onClick(block);
       }}
     >
+      {/* Inject Custom CSS */}
+      {parsedCss && <style>{parsedCss}</style>}
+      
       {/* Inner Visual Wrapper */}
       <div style={innerStyle} className="visual-wrapper">
           {/* Action Overlay */}
