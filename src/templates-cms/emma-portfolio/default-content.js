@@ -130,7 +130,7 @@ export const emmaDefaultContent = {
               {
                 title: 'Spring podcast',
                 excerpt: 'Listen to our new episode about spring trends.',
-                image: 'https://images.unsplash.com/photo-1478737270239-2f02b77ac618?w=500&q=80',
+                image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80',
                 link: '#'
               },
               {
