@@ -34,7 +34,7 @@
 
 .button {
     display: inline-block;
-    color: #e6b8ae;
+    color: #c78576;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.75rem;
@@ -44,7 +44,7 @@
 }
 
 .button:hover {
-    border-bottom-color: #e6b8ae;
+    border-bottom-color: #c78576;
 }
 
 .imageColumn {
