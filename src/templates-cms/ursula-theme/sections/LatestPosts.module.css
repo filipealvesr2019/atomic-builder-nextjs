@@ -12,7 +12,7 @@
 .subtitle {
     display: block;
     font-family: 'Inter', sans-serif;
-    color: #7a4035;
+    color: #A00603;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -101,7 +101,7 @@
     font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
-    color: #7a4035; /* Rose gold - improved contrast */
+    color: #A00603; /* Rose gold - improved contrast */
     letter-spacing: 2px;
     margin-bottom: 1rem;
 }
