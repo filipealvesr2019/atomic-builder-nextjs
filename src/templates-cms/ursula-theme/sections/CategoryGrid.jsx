@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styles from './CategoryGrid.module.css';
 
 export default function CategoryGrid({ 
@@ -20,14 +21,14 @@ export default function CategoryGrid({
       
       <div className={styles.grid}>
           {categories.map((cat, idx) => (
-             <div key={idx} className={styles.card}>
+             <Link key={idx} href={cat.link || '#'} className={styles.card}>
                  <div className={styles.imageContainer}>
                      <img src={cat.image} alt={cat.name} className={styles.image} />
                  </div>
                  <div className={styles.labelContainer}>
                      <span className={styles.label}>{cat.name}</span>
                  </div>
-             </div>
+             </Link>
           ))}
       </div>
     </section>
