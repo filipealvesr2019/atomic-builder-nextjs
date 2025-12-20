@@ -147,7 +147,7 @@ export default function ContainerRenderer({ container, children }) {
       }}
     >
       {children ? children : widgets.map(widget => (
-        <WidgetRenderer key={widget.id} widget={widget} />
+        <WidgetRenderer key={widget.id} widget={widget} parentDirection={direction} />
       ))}
       
       {/* Append Zone - Always available at the end */}

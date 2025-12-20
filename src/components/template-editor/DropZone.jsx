@@ -14,7 +14,7 @@ import { useAtomValue } from 'jotai';
 import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
 import styles from './DropZone.module.css';
 
-function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpdateBlock, children }) {
+function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpdateBlock, parentDirection = 'column', children }) {
   const viewMode = useAtomValue(viewModeAtom);
 
   const {
@@ -40,11 +40,18 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     'stretch': 'stretch'
   };
 
+  // Determine alignment based on parent direction
+  // If parent is Row, align-self controls VERTICAL axis, so we disable it to let alignItems work.
+  const isColumn = parentDirection.includes('column');
+  const finalAlignSelf = isColumn 
+    ? (alignMap[align] || alignSelf || 'auto')
+    : 'auto';
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     width: width || 'auto',
-    alignSelf: alignMap[align] || alignSelf || 'auto',
+    alignSelf: finalAlignSelf,
     maxWidth: '100%'
   };
 
@@ -130,7 +137,8 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
 // Recursive Block Renderer
 import ResizeHandle from './ResizeHandle';
 
-const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDeleteBlock, onUpdateBlock }) => {
+const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDeleteBlock, onUpdateBlock, parentDirection = 'column' }) => {
+    const viewMode = useAtomValue(viewModeAtom);
     const parentRef = React.useRef(null);
 
     // Resize Handler
@@ -168,11 +176,12 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
             <SortableBlock
                 block={block}
                 templateId={templateId}
-                isSelected={selectedBlock?.id === block.id}
-                onClick={onBlockClick}
-                onDelete={onDeleteBlock}
-                onUpdateBlock={onUpdateBlock}
-            >
+            isSelected={selectedBlock?.id === block.id}
+            onClick={onBlockClick}
+            onDelete={onDeleteBlock}
+            onUpdateBlock={onUpdateBlock}
+            parentDirection={parentDirection}
+        >
                 {/* 
                    CRITICAL FIX: 
                    Removed the ghost wrapper 'div' that was here.
@@ -200,6 +209,7 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
                                 onBlockClick={onBlockClick}
                                 onDeleteBlock={onDeleteBlock}
                                 onUpdateBlock={onUpdateBlock}
+                                parentDirection={resolveResponsiveProp(block.props?.direction, viewMode) || 'column'}
                             />
                             {isRow && index < block.children.length - 1 && (
                                 <ResizeHandle 
@@ -224,6 +234,7 @@ const BlockRenderer = ({ block, templateId, selectedBlock, onBlockClick, onDelet
             onClick={onBlockClick}
             onDelete={onDeleteBlock}
             onUpdateBlock={onUpdateBlock}
+            parentDirection={parentDirection}
         />
     );
 };

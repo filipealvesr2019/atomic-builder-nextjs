@@ -7,7 +7,7 @@ import { getWidgetComponent } from '../WidgetRegistry';
  * WIDGET RENDERER - ZERO BASED REWRITE
  * Wrapper simples que aplica largura/altura e deixa o conteúdo fluir.
  */
-export default function WidgetRenderer({ widget }) {
+export default function WidgetRenderer({ widget, parentDirection = 'column' }) {
   const viewMode = useAtomValue(viewModeAtom);
 
   if (!widget) return null;
@@ -28,10 +28,9 @@ export default function WidgetRenderer({ widget }) {
   }, {}) : {};
 
   // 2. Estilo do Wrapper
-  // IMPORTANTE: width padrão é 'auto' para permitir que o Flexbox do pai controle (align-items).
-  // Se o usuário definir width explícito, usamos ele.
-  
-  // Mapear alinhamento horizontal (align) para alignSelf
+  // Mapear alinhamento horizontal (align) para alignSelf APENAS se o pai for Column.
+  // Se o pai for Row, align-self controlaria o alinhamento Vertical, o que conflita com o 
+  // alinhamento vertical global (align-items) do contêiner.
   const alignMap = {
     'left': 'flex-start',
     'center': 'center',
@@ -39,10 +38,16 @@ export default function WidgetRenderer({ widget }) {
     'stretch': 'stretch'
   };
 
+  // Se direction for row, deixamos alignSelf como auto para que o alignItems do pai controle a vertical.
+  const isColumn = parentDirection.includes('column');
+  const alignSelf = isColumn 
+    ? (alignMap[resolvedSettings.align] || resolvedSettings.alignSelf || 'auto')
+    : 'auto';
+
   const wrapperStyle = {
     width: resolvedSettings.width || 'auto', 
     height: resolvedSettings.height || 'auto',
-    alignSelf: alignMap[resolvedSettings.align] || resolvedSettings.alignSelf || 'auto',
+    alignSelf: alignSelf,
     flexGrow: resolvedSettings.flexGrow || 0,
     boxSizing: 'border-box'
   };
