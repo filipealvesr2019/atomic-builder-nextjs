@@ -53,7 +53,7 @@ export default function Footer({ sections }) {
              </div>
              <h3 className={styles.authorTitle}>{data.about.title}</h3>
              <p className={styles.colText}>{data.about.text}</p>
-             <img src="/signature.png" alt="Signature" style={{ height: 30, marginTop: 10, opacity: 0.7 }} />
+             <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: '1.2rem', opacity: 0.8, marginTop: 10, display: 'block' }}>Ursula</span>
         </div>
 
         {/* Newsletter Column */}
