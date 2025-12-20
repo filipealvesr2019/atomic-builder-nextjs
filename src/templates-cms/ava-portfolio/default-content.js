@@ -1,91 +1,144 @@
 
 export const avaDefaultContent = {
-    header: {
-      logoText: "Ava",
-      links: [
-        { label: "ABOUT", href: "#about" },
-        { label: "WORKSHOPS", href: "#workshops" },
-        { label: "SERVICES", href: "#services" },
-        { label: "CONTACT", href: "#contact" },
-        { label: "THE BLOG", href: "#blog" }
-      ],
-      socialLinks: [
-        { icon: "instagram", href: "#" },
-        { icon: "pinterest", href: "#" },
-        { icon: "vimeo", href: "#" }
+  templateId: 'ava-portfolio',
+  pages: [
+    {
+      slug: 'home',
+      name: 'Home',
+      content: [
+        {
+          id: 'ava-header',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "#about" },
+                { label: "WORKSHOPS", href: "#workshops" },
+                { label: "SERVICES", href: "#services" },
+                { label: "CONTACT", href: "#contact" },
+                { label: "THE BLOG", href: "#blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+          id: 'ava-hero',
+          type: 'hero',
+          props: {
+             backgroundImage: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop"
+          }
+        },
+        {
+          id: 'ava-intro',
+          type: 'introduction',
+          props: {
+             heading: "Forever Cherish The Most Important Moments in Your Life",
+             subheading: "INTRODUCING THE BRANDING",
+             buttonText: "Learn More"
+          }
+        },
+        {
+            id: 'ava-collage',
+            type: 'collage',
+            props: {
+                images: [
+                     "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1976&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
+                ],
+                title: "Every Part of Your Love Story",
+                description: "Capturing life's most precious moments with elegance and grace. We believe in the power of storytelling through imagery.",
+                buttonText: "Sound interesting?"
+            }
+        },
+        {
+            id: 'ava-services',
+            type: 'services',
+            props: {
+                services: [
+                    {
+                        number: "01",
+                        title: "Wedding Photography",
+                        description: "Capturing the magic of your special day with a timeless and artistic approach."
+                    },
+                    {
+                        number: "02",
+                        title: "Portrait Sessions",
+                        description: "Creating beautiful and authentic portraits that reveal your true personality."
+                    },
+                    {
+                        number: "03",
+                        title: "Lifestyle Shoots",
+                        description: "Documenting real-life moments in a natural and candid style."
+                    }
+                ]
+            }
+        },
+        {
+            id: 'ava-about-intro',
+            type: 'about-intro',
+            props: {
+                title: "It's Nice to Meet You, I'm",
+                name: "Ave Rose!",
+                description: "Capturing life's perfect moments with grace and style. I turn your memories into timeless art that you will cherish forever.",
+                buttonText: "Read My Story",
+                imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
+            }
+        },
+        {
+            id: 'ava-testimonials',
+            type: 'testimonials',
+            props: {
+                heading: "Showing the Love",
+                quote: "Capturing the perfect photo is an art. Ava and her team are true artists.",
+                author: "Sarah Johnson",
+                role: "Happy Client",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=264&auto=format&fit=crop"
+            }
+        },
+        {
+            id: 'ava-blog-grid',
+            type: 'blog-grid',
+            props: {
+                title: "From the Journal",
+                posts: [
+                    {
+                        title: "Big Day Title One",
+                        category: "Wedding",
+                        image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
+                    },
+                    {
+                        title: "Big Day Title Two",
+                        category: "Elopement",
+                        image: "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1976&auto=format&fit=crop"
+                    },
+                    {
+                        title: "Big Day Title Three",
+                        category: "Engagement",
+                        image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
+                    }
+                ]
+            }
+        },
+        {
+            id: 'ava-footer',
+            type: 'footer',
+            props: {
+                instagramImages: [
+                     "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1000&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1000&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1000&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1000&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1000&auto=format&fit=crop"
+                ],
+                copyright: "© 2024 Ava Portfolio. All rights reserved."
+            }
+        }
       ]
-    },
-    hero: {
-      title: "Forever Cherish The Most Important Moments in Your Life",
-      subtitle: "INTRODUCING THE BRANDING",
-      backgroundImage: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop" // Couple in nature
-    },
-    introduction: {
-      heading: "Forever Cherish The Most Important Moments in Your Life",
-      subheading: "INTRODUCING THE BRANDING",
-      description: "Capturing life's most precious moments with elegance and grace. We believe in the power of storytelling through imagery.",
-      buttonText: "Learn More"
-    },
-    services: {
-        items: [
-            {
-                number: "01",
-                title: "Wedding Photography",
-                description: "Capturing the magic of your special day with a timeless and artistic approach."
-            },
-            {
-                number: "02",
-                title: "Portrait Sessions",
-                description: "Creating beautiful and authentic portraits that reveal your true personality."
-            },
-            {
-                number: "03",
-                title: "Lifestyle Shoots",
-                description: "Documenting real-life moments in a natural and candid style."
-            }
-        ]
-    },
-    about: {
-        title: "It's Nice to Meet You, I'm... Ava!",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        buttonText: "Read My Story",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop" // Woman portrait
-    },
-    testimonials: {
-        quote: "Capturing the perfect photo is an art. Ava and her team are true artists.",
-        author: "Sarah Johnson",
-        role: "Happy Client"
-    },
-    blog: {
-        posts: [
-            {
-                id: 1,
-                title: "Big Day Title One",
-                category: "Wedding",
-                image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
-            },
-            {
-                id: 2,
-                title: "Big Day Title Two",
-                category: "Elopement",
-                image: "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1976&auto=format&fit=crop"
-            },
-            {
-                id: 3,
-                title: "Big Day Title Three",
-                category: "Engagement",
-                image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
-            }
-        ]
-    },
-    footer: {
-        instagramImages: [
-             "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1000&auto=format&fit=crop",
-             "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1000&auto=format&fit=crop",
-             "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1000&auto=format&fit=crop",
-             "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1000&auto=format&fit=crop",
-             "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1000&auto=format&fit=crop"
-        ],
-        copyright: "© 2024 Ava Portfolio. All rights reserved."
     }
-  };
+  ]
+};
