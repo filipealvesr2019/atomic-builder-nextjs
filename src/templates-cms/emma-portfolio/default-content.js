@@ -247,9 +247,9 @@ export const emmaDefaultContent = {
                         image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=80" // Palm/Greenery (Verified from Podcast)
                     },
                     {
-                        title: "Another service",
-                        subtitle: "Another catchy subtitle",
-                        description: "Describe your other services here. Maybe social media management, content creation, or website design.",
+                        title: "Content Creation",
+                        subtitle: "Stand out on social media",
+                        description: "We create stunning visuals and engaging captions for your social media platforms. Save time and grow your audience with our consistent content strategy.",
                         buttonText: "READ MORE",
                         image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=600&q=80" // Desktop/Creative (Verified)
                     }
