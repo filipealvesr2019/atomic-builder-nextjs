@@ -280,6 +280,40 @@
 }
 
 /* ============================================
+   COLOR PICKER INPUT
+   ============================================ */
+.colorPickerContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.colorBall {
+  position: absolute;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.colorBall:hover {
+  transform: scale(1.15);
+}
+
+.colorInputHidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ============================================
    ICON BUTTON GROUP
    ============================================ */
 .iconButtonGroup {

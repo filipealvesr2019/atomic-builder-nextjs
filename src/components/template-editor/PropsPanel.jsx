@@ -308,6 +308,55 @@ function StyledInput({ label, value, onChange, placeholder, unit = '', responsiv
   );
 }
 
+// Styled Color Input Component
+function StyledColorInput({ label, value, onChange, placeholder, responsive = true, activeViewMode = 'desktop' }) {
+  const isResponsive = responsive && activeViewMode !== 'desktop';
+  const colorPickerRef = React.useRef(null);
+  
+  // Logic for white color border is handled by CSS (rgba border always present)
+  // but if we want it more prominent for white:
+  const isWhite = value?.toLowerCase() === '#ffffff' || value?.toLowerCase() === 'white' || value === '#fff';
+
+  return (
+    <div className={styles.formGroup}>
+      <div className={styles.formLabel}>
+        <span className={styles.labelText}>{label}</span>
+        {responsive && (
+          <button className={`${styles.responsiveButton} ${isResponsive ? styles.responsiveActive : ''}`}>
+             {activeViewMode === 'mobile' ? <Smartphone size={14} /> : activeViewMode === 'tablet' ? <Tablet size={14} /> : <Monitor size={14} />}
+          </button>
+        )}
+      </div>
+      <div className={styles.colorPickerContainer}>
+          <input
+            type="text"
+            value={value || ''}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            className={styles.input}
+            style={{ paddingRight: '40px' }}
+          />
+          <div 
+            className={styles.colorBall}
+            style={{ 
+              backgroundColor: value || 'transparent',
+              border: isWhite ? '1px solid #ddd' : '1px solid rgba(0,0,0,0.1)'
+            }}
+            onClick={() => colorPickerRef.current?.click()}
+            title="Open Color Picker"
+          />
+          <input 
+            type="color"
+            ref={colorPickerRef}
+            value={value && value.startsWith('#') && (value.length === 7 || value.length === 4) ? value : '#000000'}
+            onChange={(e) => onChange(e.target.value)}
+            className={styles.colorInputHidden}
+          />
+      </div>
+    </div>
+  );
+}
+
 // Collapsible Section Component
 function Section({ title, children, defaultOpen = true }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -795,7 +844,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
 
                     {activeTab === 'style' && (
                         <Section title="Typography">
-                             <StyledInput
+                             <StyledColorInput
                                 label="Text Color"
                                 value={getValue('color', '')}
                                 onChange={(val) => handleChange('color', val)}
@@ -1176,7 +1225,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                 responsive={true}
                                 activeViewMode={viewMode}
                             />
-                             <StyledInput
+                             <StyledColorInput
                                 label="Primary Color"
                                 value={getValue('primaryColor', '#3b82f6')}
                                 onChange={(val) => handleChange('primaryColor', val)}
@@ -1185,7 +1234,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             />
                             {getValue('view') !== 'default' && (
                                 <>
-                                 <StyledInput
+                                 <StyledColorInput
                                     label="Secondary Color (Background)"
                                     value={getValue('secondaryColor', '#ffffff')}
                                     onChange={(val) => handleChange('secondaryColor', val)}
@@ -1900,12 +1949,6 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             { value: 'justify', label: 'Justify', icon: <Columns size={16} /> }
                         ]}
                     />
-                    <StyledInput
-                        label="Color"
-                        value={getValue('color', '')}
-                        onChange={(val) => handleChange('color', val)}
-                        placeholder="Inherit"
-                    />
                 </>
             ) : block.type === WIDGET_TYPES.TEXT ? (
                 <>
@@ -1931,7 +1974,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
 
                     {activeTab === 'style' && (
                         <Section title="Typography">
-                             <StyledInput
+                             <StyledColorInput
                                 label="Text Color"
                                 value={getValue('color', '')}
                                 onChange={(val) => handleChange('color', val)}
@@ -2020,77 +2063,73 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                 </>
             ) : block.type === WIDGET_TYPES.DIVIDER ? (
                 <>
-                         <StyledSelect
-                            label="Style"
-                            value={getValue('style', 'solid')}
-                            onChange={(val) => handleChange('style', val)}
-                            responsive={false}
-                            options={[
-                                { label: 'Solid', value: 'solid' },
-                                { label: 'Double', value: 'double' },
-                                { label: 'Dotted', value: 'dotted' },
-                                { label: 'Dashed', value: 'dashed' },
-                                { label: 'Groove', value: 'groove' }
-                            ]}
-                        />
-                         <StyledSelect
-                            label="Element"
-                            value={getValue('element', 'line')}
-                            onChange={(val) => handleChange('element', val)}
-                            responsive={false}
-                            options={[
-                                { label: 'Line', value: 'line' },
-                                { label: 'Line + Icon', value: 'line_icon' },
-                                { label: 'Line + Text', value: 'line_text' }
-                            ]}
-                        />
-                         
-                        {getValue('element') === 'line_text' && (
-                             <StyledInput
-                                label="Text"
-                                value={getValue('text', 'Divider')}
-                                onChange={(val) => handleChange('text', val)}
-                                responsive={true}
-                                activeViewMode={viewMode}
-                            />
-                        )}
-
-                        {getValue('element') === 'line_icon' && (
-                            <StyledSelect
-                                label="Icon"
-                                value={getValue('icon', 'Star')}
-                                onChange={(val) => handleChange('icon', val)}
-                                responsive={false}
-                                options={[
-                                   { label: 'Star', value: 'Star' },
-                                   { label: 'Heart', value: 'Heart' },
-                                   { label: 'Check', value: 'Check' },
-                                   { label: 'User', value: 'User' },
-                                   { label: 'Home', value: 'Home' },
-                                   { label: 'Settings', value: 'Settings' }
-                                ]}
-                            />
-                        )}
-                        
-                        <IconButtonGroup
-                            label="Alignment"
-                            value={getValue('align', 'center')}
-                            onChange={(val) => handleChange('align', val)}
-                            activeViewMode={viewMode}
-                            options={[
-                                { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
-                                { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
-                                { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
-                            ]}
-                        />
-
-                    <Section title="Style">
+                    <StyledSelect
+                        label="Style"
+                        value={getValue('style', 'solid')}
+                        onChange={(val) => handleChange('style', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'Solid', value: 'solid' },
+                            { label: 'Double', value: 'double' },
+                            { label: 'Dotted', value: 'dotted' },
+                            { label: 'Dashed', value: 'dashed' },
+                            { label: 'Groove', value: 'groove' }
+                        ]}
+                    />
+                    <StyledSelect
+                        label="Element"
+                        value={getValue('element', 'line')}
+                        onChange={(val) => handleChange('element', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'Line', value: 'line' },
+                            { label: 'Line + Icon', value: 'line_icon' },
+                            { label: 'Line + Text', value: 'line_text' }
+                        ]}
+                    />
+                    
+                    {getValue('element') === 'line_text' && (
                         <StyledInput
-                            label="Color"
-                            value={getValue('color', '#e5e7eb')}
-                            onChange={(val) => handleChange('color', val)}
-                            responsive={false}
+                            label="Text"
+                            value={getValue('text', 'Divider')}
+                            onChange={(val) => handleChange('text', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
                         />
+                    )}
+
+                    {getValue('element') === 'line_icon' && (
+                        <StyledSelect
+                            label="Icon"
+                            value={getValue('icon', 'Star')}
+                            onChange={(val) => handleChange('icon', val)}
+                            responsive={false}
+                            options={[
+                            { label: 'Star', value: 'Star' },
+                            { label: 'Heart', value: 'Heart' },
+                            { label: 'Check', value: 'Check' },
+                            { label: 'User', value: 'User' },
+                            { label: 'Home', value: 'Home' },
+                            { label: 'Settings', value: 'Settings' }
+                            ]}
+                        />
+                    )}
+                    
+                    <IconButtonGroup
+                        label="Alignment"
+                        value={getValue('align', 'center')}
+                        onChange={(val) => {
+                            handleChange('align', val);
+                        }}
+                        activeViewMode={viewMode}
+                        options={[
+                            { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                            { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                            { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> }
+                        ]}
+                    />
+
+                    <Section title="Settings">
                         <StyledInput
                             label="Width"
                             value={getValue('width', '100%')}
@@ -2105,14 +2144,14 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             responsive={true}
                             activeViewMode={viewMode}
                         />
-                         <StyledInput
+                            <StyledInput
                             label="Gap"
                             value={getValue('gap', '15px')}
                             onChange={(val) => handleChange('gap', val)}
                             responsive={true}
                             activeViewMode={viewMode}
                         />
-                         <StyledInput
+                            <StyledInput
                             label="Border Radius"
                             value={getValue('borderRadius', '0px')}
                             onChange={(val) => handleChange('borderRadius', val)}
@@ -2121,16 +2160,9 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         />
                     </Section>
 
-                     {getValue('element') !== 'line' && (
-                        <Section title="Text / Icon Style">
+                    {getValue('element') !== 'line' && (
+                        <Section title="Extra Settings">
                              {getValue('element') === 'line_text' && (
-                                <>
-                                     <StyledInput
-                                        label="Text Color"
-                                        value={getValue('textColor', '')}
-                                        onChange={(val) => handleChange('textColor', val)}
-                                        responsive={false}
-                                    />
                                     <StyledInput
                                         label="Font Size"
                                         value={getValue('textSize', '14px')}
@@ -2138,16 +2170,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                         responsive={true}
                                         activeViewMode={viewMode}
                                     />
-                                </>
                              )}
                              {getValue('element') === 'line_icon' && (
-                                <>
-                                     <StyledInput
-                                        label="Icon Color"
-                                        value={getValue('iconColor', '')}
-                                        onChange={(val) => handleChange('iconColor', val)}
-                                        responsive={false}
-                                    />
                                     <StyledInput
                                         label="Icon Size"
                                         value={getValue('iconSize', '14px')}
@@ -2155,7 +2179,6 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                         responsive={true}
                                         activeViewMode={viewMode}
                                     />
-                                </>
                              )}
                         </Section>
                     )}
@@ -2187,19 +2210,13 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             responsive={true}
                             activeViewMode={viewMode}
                         />
-                         <StyledInput
+                        <StyledInput
                             label="Padding"
                             value={getValue('padding', '50px')}
                             onChange={(val) => handleChange('padding', val)}
                             responsive={true}
                             activeViewMode={viewMode}
                             placeholder="50px"
-                        />
-                        <StyledInput
-                            label="Background Color (Debug)"
-                            value={getValue('backgroundColor', 'transparent')}
-                            onChange={(val) => handleChange('backgroundColor', val)}
-                            responsive={false}
                         />
                     </Section>
                 </>
@@ -2305,13 +2322,6 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         value={getValue('width', '100%')}
                         onChange={(val) => handleChange('width', val)}
                         placeholder="100% or 300px"
-                         activeViewMode={viewMode}
-                    />
-                     <StyledInput
-                        label="Border Radius"
-                        value={getValue('borderRadius', '0px')}
-                        onChange={(val) => handleChange('borderRadius', val)}
-                        placeholder="0px"
                          activeViewMode={viewMode}
                     />
                      <IconButtonGroup
@@ -2830,7 +2840,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
         {activeTab === 'style' && (
           <>
             <Section title="Background">
-                <StyledInput
+                <StyledColorInput
                 label="Background Color"
                 value={getValue('backgroundColor', 'transparent')}
                 onChange={(val) => handleChange('backgroundColor', val)}
@@ -2839,9 +2849,78 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                 />
             </Section>
 
+             {block.type === WIDGET_TYPES.HEADING && (
+                <Section title="Heading Style">
+                    <StyledColorInput
+                        label="Text Color"
+                        value={getValue('color', '')}
+                        onChange={(val) => handleChange('color', val)}
+                        placeholder="Inherit"
+                        responsive={false}
+                    />
+                </Section>
+            )}
+
+            {block.type === WIDGET_TYPES.DIVIDER && (
+                <>
+                    <Section title="Divider Style">
+                        <StyledColorInput
+                            label="Color"
+                            value={getValue('color', '#e5e7eb')}
+                            onChange={(val) => handleChange('color', val)}
+                            responsive={false}
+                        />
+                    </Section>
+                    {getValue('element') !== 'line' && (
+                        <Section title="Text / Icon Style">
+                            {getValue('element') === 'line_text' && (
+                                <StyledColorInput
+                                    label="Text Color"
+                                    value={getValue('textColor', '')}
+                                    onChange={(val) => handleChange('textColor', val)}
+                                    responsive={false}
+                                />
+                            )}
+                            {getValue('element') === 'line_icon' && (
+                                <StyledColorInput
+                                    label="Icon Color"
+                                    value={getValue('iconColor', '')}
+                                    onChange={(val) => handleChange('iconColor', val)}
+                                    responsive={false}
+                                />
+                            )}
+                        </Section>
+                    )}
+                </>
+            )}
+
+            {block.type === WIDGET_TYPES.SPACER && (
+                <Section title="Spacer Style">
+                    <StyledColorInput
+                        label="Background Color"
+                        value={getValue('backgroundColor', 'transparent')}
+                        onChange={(val) => handleChange('backgroundColor', val)}
+                        responsive={false}
+                    />
+                </Section>
+            )}
+
+             {block.type === WIDGET_TYPES.IMAGE && (
+                <Section title="Image Styles">
+                    <StyledInput
+                        label="Border Radius"
+                        value={getValue('borderRadius', '0px')}
+                        onChange={(val) => handleChange('borderRadius', val)}
+                        placeholder="0px"
+                        responsive={true}
+                        activeViewMode={viewMode}
+                    />
+                </Section>
+            )}
+
             {block.type === WIDGET_TYPES.ICON_BOX && (
                 <Section title="Icon Box Styles">
-                    <StyledInput
+                    <StyledColorInput
                         label="Icon Color"
                         value={getValue('iconColor', '#3b82f6')}
                         onChange={(val) => handleChange('iconColor', val)}
@@ -2856,14 +2935,14 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         responsive={true}
                         activeViewMode={viewMode}
                     />
-                     <StyledInput
+                     <StyledColorInput
                         label="Title Color"
                         value={getValue('titleColor', '#1f2937')}
                         onChange={(val) => handleChange('titleColor', val)}
                         placeholder="#1f2937"
                         responsive={false}
                     />
-                     <StyledInput
+                     <StyledColorInput
                         label="Description Color"
                         value={getValue('descColor', '#6b7280')}
                         onChange={(val) => handleChange('descColor', val)}
@@ -2875,7 +2954,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
 
             {block.type === WIDGET_TYPES.ICON_LIST && (
                 <Section title="Icon List Styles">
-                    <StyledInput
+                    <StyledColorInput
                         label="Icon Color"
                         value={getValue('iconColor', '#3b82f6')}
                         onChange={(val) => handleChange('iconColor', val)}
@@ -2898,7 +2977,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         responsive={true}
                          activeViewMode={viewMode}
                     />
-                     <StyledInput
+                     <StyledColorInput
                         label="Text Color"
                         value={getValue('textColor', '#374151')}
                         onChange={(val) => handleChange('textColor', val)}
@@ -2934,14 +3013,14 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         responsive={true}
                          activeViewMode={viewMode}
                     />
-                     <StyledInput
+                     <StyledColorInput
                         label="Title Color"
                         value={getValue('titleColor', '#1f2937')}
                         onChange={(val) => handleChange('titleColor', val)}
                         placeholder="#1f2937"
                         responsive={false}
                     />
-                     <StyledInput
+                     <StyledColorInput
                         label="Description Color"
                         value={getValue('descColor', '#6b7280')}
                         onChange={(val) => handleChange('descColor', val)}
@@ -2983,7 +3062,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                 onChange={(val) => handleChange('borderWidth', val)}
                                 responsive={false}
                             />
-                            <StyledInput
+                            <StyledColorInput
                                 label="Border Color"
                                 value={getValue('borderColor', '#000')}
                                 onChange={(val) => handleChange('borderColor', val)}
@@ -3030,7 +3109,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             <div style={{ marginTop: '20px', borderTop: '1px solid #eee', paddingTop: '10px' }}></div>
                             <span className={styles.inputLabel} style={{fontWeight:'bold', display:'block', marginBottom:'10px'}}>Caption</span>
                             
-                            <StyledInput
+                            <StyledColorInput
                                 label="Text Color"
                                 value={getValue('captionColor', '')}
                                 onChange={(val) => handleChange('captionColor', val)}
@@ -3130,13 +3209,13 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                     />
                     <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
                     <span className={styles.labelText} style={{display:'block', marginBottom:'10px'}}>Arrows</span>
-                    <StyledInput
+                    <StyledColorInput
                         label="Arrow Color"
                         value={getValue('arrowColor', '#fff')}
                         onChange={(val) => handleChange('arrowColor', val)}
                         responsive={false}
                     />
-                     <StyledInput
+                     <StyledColorInput
                         label="Arrow Background"
                         value={getValue('arrowBg', 'rgba(0,0,0,0.5)')}
                         onChange={(val) => handleChange('arrowBg', val)}
@@ -3145,13 +3224,13 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                     
                     <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
                     <span className={styles.labelText} style={{display:'block', marginBottom:'10px'}}>Pagination (Dots)</span>
-                     <StyledInput
+                     <StyledColorInput
                         label="Dot Color (Inactive)"
                         value={getValue('dotColor', 'rgba(255,255,255,0.5)')}
                         onChange={(val) => handleChange('dotColor', val)}
                         responsive={false}
                     />
-                     <StyledInput
+                     <StyledColorInput
                         label="Dot Color (Active)"
                         value={getValue('dotActiveColor', '#fff')}
                         onChange={(val) => handleChange('dotActiveColor', val)}
