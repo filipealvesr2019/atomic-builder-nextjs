@@ -9,12 +9,12 @@ export const emmaDefaultContent = {
           id: 'emma-header',
           type: 'header',
           props: {
-            links: [
-              { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
-              { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
-              { text: 'ABOUT', href: '#' },
-              { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
-            ],
+                links: [
+                    { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
+                    { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
+                    { text: 'ABOUT', href: '/admin/store/preview/emma-portfolio/about' },
+                    { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
+                ],
             socialLinks: [
               { platform: 'instagram', url: '#' },
               { platform: 'pinterest', url: '#' },
@@ -367,6 +367,106 @@ export const emmaDefaultContent = {
         },
         {
             id: 'emma-contact-footer',
+            type: 'footer',
+            props: {
+                logoText: 'EMMA',
+                copyright: '© 2024 Emma Theme. All rights reserved.',
+                socialLinks: [
+                    { platform: 'instagram', url: '#' },
+                    { platform: 'tiktok', url: '#' },
+                    { platform: 'facebook', url: '#' }
+                ]
+            }
+        }
+      ]
+    },
+    {
+      slug: 'about',
+      layout: 'about',
+      content: [
+         {
+            id: 'emma-header-about',
+            type: 'header',
+            props: {
+                links: [
+                    { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
+                    { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
+                    { text: 'ABOUT', href: '/admin/store/preview/emma-portfolio/about' },
+                    { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
+                ],
+                socialLinks: [
+                    { platform: 'instagram', url: '#' },
+                    { platform: 'pinterest', url: '#' },
+                    { platform: 'youtube', url: '#' }
+                ]
+            }
+        },
+        {
+            id: 'emma-about-intro',
+            type: 'about-intro',
+            props: {
+                name: 'Emma Best',
+                subtitle: 'Have we met?',
+                bio: '<p>I am a passionate certified business coach who helps creative entrepreneurs build profitable and sustainable businesses they love.</p><p>With over 10 years of experience in marketing and brand strategy, I provide clarity, strategy, and actionable steps to help you scale.</p>',
+                profileImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80',
+                heroImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80'
+            }
+        },
+        {
+            id: 'emma-about-story',
+            type: 'about-story',
+            props: {
+                title: 'Owner & Brand strategist',
+                subtitle: 'My story',
+                text: '<p>It all started when I realized that many talented creatives were struggling to turn their passion into a specialized business. They had the talent but lacked the strategy.</p><p>So I decided to combine my love for design with my strategic mind to create a coaching method that works.</p>',
+                buttonText: 'READ MY STORY',
+                image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80'
+            }
+        },
+        {
+            id: 'emma-about-things',
+            type: 'about-things',
+            props: {
+                title: '3 things about me',
+                subtitle: 'A few fun facts about who I am.',
+                things: [
+                    { title: "My superpower", text: "I can organize chaos into structured plans.", icon: "sparkles" },
+                    { title: "Coffee Addict", text: "I cannot start my day without a fresh brew.", icon: "coffee" },
+                    { title: "Stationery Lover", text: "I have an obsession with notebooks and pens.", icon: "pen" }
+                ]
+            }
+        },
+        {
+            id: 'emma-about-behind',
+            type: 'about-behind',
+            props: {
+                title: 'Behind the scene',
+                subtitle: 'Get to know me',
+                text: '<p>I love working from cozy cafes, surrounded by inspiring books and good music. When I am not coaching, you can find me hiking in nature or exploring new art galleries.</p><p>I believe that balance is key to success, and I encourage my clients to build a business that supports their lifestyle.</p>',
+                image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=80'
+            }
+        },
+        {
+             id: 'emma-about-quote',
+             type: 'about-quote',
+             props: {
+                 text: '« Everything is magic if you know where to look »'
+             }
+        },
+        {
+            id: 'emma-about-passion',
+            type: 'about-passion',
+            props: {
+                title: 'My passion',
+                subtitle: 'Bringing your vision to life!',
+                items: ["Authentic storytelling", "Strategic growth", "Community building", "Creative excellence", "Results driven"],
+                buttonText: "CONTACT ME",
+                mainImage: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80",
+                subImage: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&q=80"
+            }
+        },
+        {
+            id: 'emma-about-footer',
             type: 'footer',
             props: {
                 logoText: 'EMMA',

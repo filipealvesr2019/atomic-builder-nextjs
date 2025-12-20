@@ -1,0 +1,76 @@
+.section {
+    display: flex;
+    min-height: 80vh; /* Occupy good amount of screen */
+    background-color: #fffbf7;
+}
+
+.contentSide {
+    flex: 1;
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.imageSide {
+    flex: 1;
+    position: relative;
+    max-height: 90vh; /* Limit height if needed */
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.floaterImage {
+    width: 200px; /* The small inset image in the corner if any, or just main image */
+    /* Reference shows one large image on right, but there's a smaller image on the left in the content side? No, looks like just content on left. 
+       Wait, reference: Left side has a square image + text. Right side has a large vertical image. 
+       Let's adjust layout. Reference: Left col has a photo, Title "Zoe Sweet", Subtitle "Have we met?", Text. Right col is FULL height image. */
+    width: 300px;
+    height: 350px;
+    object-fit: cover;
+    margin-bottom: 40px;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.05); /* subtle shadow/offset */
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #666;
+    max-width: 500px;
+}
+
+.text p {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .section {
+        flex-direction: column;
+    }
+    .imageSide {
+        height: 400px;
+    }
+    .contentSide {
+        padding: 40px 20px;
+    }
+}
