@@ -881,7 +881,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                                     { label: 'Normal (400)', value: '400' },
                                     { label: 'Bold (700)', value: '700' },
                                     { label: 'Light (300)', value: '300' },
-                                    { label: 'Extra Bold (800)', value: '800' }
+                                    { label: 'Extra Bold (800)', value: '800' },
+                                    { label: 'Black (900)', value: '900' }
                                 ]}
                             />
                              <StyledInput
@@ -2897,7 +2898,8 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             { label: 'Medium (500)', value: '500' },
                             { label: 'Semi Bold (600)', value: '600' },
                             { label: 'Bold (700)', value: '700' },
-                            { label: 'Extra Bold (800)', value: '800' }
+                            { label: 'Extra Bold (800)', value: '800' },
+                            { label: 'Black (900)', value: '900' }
                         ]}
                     />
 
