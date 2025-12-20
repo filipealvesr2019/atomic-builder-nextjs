@@ -2858,6 +2858,66 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         placeholder="Inherit"
                         responsive={false}
                     />
+                    <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
+                    <span className={styles.labelText} style={{display:'block', marginBottom:'10px'}}>Typography</span>
+                    
+                    <StyledSelect
+                        label="Font Family"
+                        value={getValue('fontFamily', '')}
+                        onChange={(val) => handleChange('fontFamily', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'Default', value: '' },
+                            { label: 'Inter', value: 'Inter, sans-serif' },
+                            { label: 'Roboto', value: 'Roboto, sans-serif' },
+                            { label: 'Outfit', value: 'Outfit, sans-serif' },
+                            { label: 'Playfair Display', value: '"Playfair Display", serif' },
+                            { label: 'System', value: 'system-ui, sans-serif' }
+                        ]}
+                    />
+
+                    <StyledInput
+                        label="Font Size"
+                        value={getValue('fontSize', '')}
+                        onChange={(val) => handleChange('fontSize', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                        placeholder="e.g. 24px"
+                    />
+
+                    <StyledSelect
+                        label="Font Weight"
+                        value={getValue('fontWeight', '')}
+                        onChange={(val) => handleChange('fontWeight', val)}
+                        responsive={false}
+                        options={[
+                            { label: 'Default', value: '' },
+                            { label: 'Light (300)', value: '300' },
+                            { label: 'Normal (400)', value: '400' },
+                            { label: 'Medium (500)', value: '500' },
+                            { label: 'Semi Bold (600)', value: '600' },
+                            { label: 'Bold (700)', value: '700' },
+                            { label: 'Extra Bold (800)', value: '800' }
+                        ]}
+                    />
+
+                    <StyledInput
+                        label="Line Height"
+                        value={getValue('lineHeight', '')}
+                        onChange={(val) => handleChange('lineHeight', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                        placeholder="e.g. 1.2"
+                    />
+
+                    <StyledInput
+                        label="Letter Spacing"
+                        value={getValue('letterSpacing', '')}
+                        onChange={(val) => handleChange('letterSpacing', val)}
+                        responsive={true}
+                        activeViewMode={viewMode}
+                        placeholder="e.g. 1px"
+                    />
                 </Section>
             )}
 

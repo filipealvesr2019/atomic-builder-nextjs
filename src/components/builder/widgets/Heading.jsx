@@ -12,7 +12,12 @@ export default function HeadingWidget({ settings }) {
     text = "Heading Text", 
     tag = "h2", 
     align,
-    color
+    color,
+    fontFamily,
+    fontSize,
+    fontWeight,
+    lineHeight,
+    letterSpacing
   } = settings;
 
   const Tag = tag;
@@ -20,10 +25,11 @@ export default function HeadingWidget({ settings }) {
   const style = {
     textAlign: align || 'left',
     color: color || theme.colors.text,
-    fontFamily: theme.typography.headings.fontFamily,
-    fontWeight: theme.typography.headings.fontWeight,
-    fontSize: theme.typography.headings[tag]?.fontSize || '1.5rem',
-    lineHeight: theme.typography.headings[tag]?.lineHeight || '1.2',
+    fontFamily: fontFamily || theme.typography.headings.fontFamily,
+    fontWeight: fontWeight || theme.typography.headings.fontWeight,
+    fontSize: fontSize || theme.typography.headings[tag]?.fontSize || '1.5rem',
+    lineHeight: lineHeight || theme.typography.headings[tag]?.lineHeight || '1.2',
+    letterSpacing: letterSpacing || 'normal',
     margin: 0,
     width: 'fit-content'
   };
