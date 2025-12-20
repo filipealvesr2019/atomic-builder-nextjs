@@ -16,7 +16,7 @@
 .metaTop {
     font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
-    color: #e6b8ae;
+    color: #c78576;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 1rem;
@@ -82,13 +82,13 @@
 .quoteBlock {
     margin: 3rem 0;
     padding: 2rem;
-    border-left: 3px solid #e6b8ae;
+    border-left: 3px solid #c78576;
     background: #fafafa;
 }
 
 .quoteIcon {
     font-size: 2rem;
-    color: #e6b8ae;
+    color: #c78576;
     display: block;
     margin-bottom: 0.5rem;
 }
@@ -182,11 +182,11 @@
 }
 
 .input:focus, .textarea:focus {
-    border-color: #e6b8ae;
+    border-color: #c78576;
 }
 
 .button {
-    background: #e6b8ae;
+    background: #c78576;
     color: #fff;
     border: none;
     padding: 1rem 2rem;
