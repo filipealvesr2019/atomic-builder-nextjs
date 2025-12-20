@@ -27,10 +27,15 @@ export default function WidgetRenderer({ widget, parentDirection = 'column' }) {
     return acc;
   }, {}) : {};
 
-  // 2. Estilo do Wrapper
+  // 2. Visibilidade Responsiva
+  const isHidden = (viewMode === 'desktop' && resolvedSettings.hideOnDesktop) ||
+                   (viewMode === 'tablet' && resolvedSettings.hideOnTablet) ||
+                   (viewMode === 'mobile' && resolvedSettings.hideOnMobile);
+
+  if (isHidden) return null;
+
+  // 3. Estilo do Wrapper
   // Mapear alinhamento horizontal (align) para alignSelf APENAS se o pai for Column.
-  // Se o pai for Row, align-self controlaria o alinhamento Vertical, o que conflita com o 
-  // alinhamento vertical global (align-items) do contêiner.
   const alignMap = {
     'left': 'flex-start',
     'center': 'center',
@@ -38,7 +43,6 @@ export default function WidgetRenderer({ widget, parentDirection = 'column' }) {
     'stretch': 'stretch'
   };
 
-  // Se direction for row, deixamos alignSelf como auto para que o alignItems do pai controle a vertical.
   const isColumn = parentDirection.includes('column');
   const alignSelf = isColumn 
     ? (alignMap[resolvedSettings.align] || resolvedSettings.alignSelf || 'auto')
@@ -49,13 +53,21 @@ export default function WidgetRenderer({ widget, parentDirection = 'column' }) {
     height: resolvedSettings.height || 'auto',
     alignSelf: alignSelf,
     flexGrow: resolvedSettings.flexGrow || 0,
+    margin: resolvedSettings.margin || '0px',
+    padding: resolvedSettings.padding || '0px',
+    backgroundColor: resolvedSettings.backgroundColor || 'transparent',
+    borderStyle: resolvedSettings.borderStyle || 'none',
+    borderWidth: resolvedSettings.borderWidth || '0px',
+    borderColor: resolvedSettings.borderColor || 'transparent',
+    borderRadius: resolvedSettings.borderRadius || '0px',
     boxSizing: 'border-box'
   };
 
   return (
     <div 
+      id={resolvedSettings.cssId}
       data-widget-id={id} 
-      className="widget-wrapper"
+      className={`widget-wrapper ${resolvedSettings.cssClasses || ''}`}
       style={wrapperStyle}
     >
       <WidgetComponent settings={resolvedSettings} />

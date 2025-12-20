@@ -34,7 +34,9 @@ export default function HeadingWidget({ settings }) {
     fontSize: fontSize || theme.typography.headings[tag]?.fontSize || '1.5rem',
     lineHeight: lineHeight || theme.typography.headings[tag]?.lineHeight || '1.2',
     letterSpacing: letterSpacing || 'normal',
-    textShadow: shadowColor ? `${shadowOffsetX || '0px'} ${shadowOffsetY || '0px'} ${shadowBlur || '0px'} ${shadowColor}` : 'none',
+    textShadow: (shadowOffsetX || shadowOffsetY || shadowBlur || (shadowColor && shadowColor !== 'transparent')) 
+      ? `${shadowOffsetX || '0px'} ${shadowOffsetY || '0px'} ${shadowBlur || '0px'} ${shadowColor || 'rgba(0,0,0,0.3)'}` 
+      : 'none',
     margin: 0,
     width: 'fit-content'
   };

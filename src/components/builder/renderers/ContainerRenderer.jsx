@@ -70,8 +70,16 @@ export default function ContainerRenderer({ container, children }) {
       };
   }
 
-  // Restore the "Visual Marking" that was lost from DropZone
-  const visualStyles = {
+  // Responsive Visibility
+  const isHidden = (viewMode === 'desktop' && getProp('hideOnDesktop', false)) ||
+                   (viewMode === 'tablet' && getProp('hideOnTablet', false)) ||
+                   (viewMode === 'mobile' && getProp('hideOnMobile', false));
+
+  if (isHidden) return null;
+
+  // Visual Marking (Defaults) - Only apply if no custom background/border is set
+  const hasCustomStyle = settings?.backgroundColor || settings?.borderStyle;
+  const visualStyles = hasCustomStyle ? {} : {
     border: '1px dashed #e0e0e0',
     borderRadius: '4px',
     backgroundColor: 'rgba(250, 250, 250, 0.3)',
@@ -82,9 +90,15 @@ export default function ContainerRenderer({ container, children }) {
     width: width,
     minHeight: minHeight,
     padding: getProp('padding', '20px'),
+    margin: getProp('margin', '0px'),
+    backgroundColor: getProp('backgroundColor', 'transparent'),
+    borderStyle: getProp('borderStyle', 'none'),
+    borderWidth: getProp('borderWidth', '0px'),
+    borderColor: getProp('borderColor', 'transparent'),
+    borderRadius: getProp('borderRadius', '0px'),
     boxSizing: 'border-box',
     position: 'relative',
-    ...visualStyles // Apply the markings
+    ...visualStyles // Apply defaults only if needed, otherwise custom styles above take precedence (logic handled by visualStyles definition)
   };
 
   const isEmpty = !children && (!widgets || widgets.length === 0);
@@ -138,8 +152,9 @@ export default function ContainerRenderer({ container, children }) {
 
   return (
     <div 
+      id={getProp('cssId', undefined)}
       data-container-id={id}
-      className="builder-container"
+      className={`builder-container ${getProp('cssClasses', '')}`}
       style={{
         ...boxStyles,
         ...layoutStyles,

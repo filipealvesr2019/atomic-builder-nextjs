@@ -483,30 +483,37 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
     const currentProp = block.props?.[key];
     let newValue = value;
 
+    // Auto-append 'px' for specific numeric keys if value is a number (and not empty)
+    const pxProps = [
+        'fontSize', 'letterSpacing', 'gap', 
+        'borderRadius', 'borderWidth', 
+        'margin', 'padding', 'width', 'height', 
+        'shadowOffsetX', 'shadowOffsetY', 'shadowBlur'
+    ];
+
+    if (pxProps.includes(key) && value && !isNaN(value) && value.trim() !== '') {
+        newValue = `${value}px`;
+    }
+
     if (viewMode !== 'desktop') {
         // Modo responsivo (tablet/mobile)
-        if (typeof currentProp === 'object' && currentProp !== null && !Array.isArray(currentProp) && !Array.isArray(value)) {
-            newValue = { ...currentProp, [viewMode]: value };
+        if (typeof currentProp === 'object' && currentProp !== null && !Array.isArray(currentProp) && !Array.isArray(newValue)) {
+            newValue = { ...currentProp, [viewMode]: newValue };
         } else {
             // Tenta preservar valor anterior como desktop se existia, senão usa o value
-            const desktopValue = currentProp !== undefined ? currentProp : value; 
-            newValue = { desktop: desktopValue, [viewMode]: value };
+            const desktopValue = currentProp !== undefined ? currentProp : newValue; 
+            newValue = { desktop: desktopValue, [viewMode]: newValue };
             
-            // Special case: If value is active array, we might want to override behavior? 
-            // For now, let's just ensure if it's an array we treat it as non-responsive or handle it carefully.
-            // Actually, for this specific bug fix:
             if (Array.isArray(value)) {
-                 newValue = value; // Force array to be pure array, disabling responsive arrays for now to fix corruption
+                 newValue = value; // Force array to be pure array
             }
         }
     } else {
          // Modo Desktop
-         // If it's an array, we overwrite. If it's an object (and not array), we merge.
-         if (typeof currentProp === 'object' && currentProp !== null && !Array.isArray(currentProp) && !Array.isArray(value)) {
-            newValue = { ...currentProp, desktop: value };
-         } else {
-            newValue = value;
-         }
+         if (typeof currentProp === 'object' && currentProp !== null && !Array.isArray(currentProp) && !Array.isArray(newValue)) {
+            newValue = { ...currentProp, desktop: newValue };
+         } 
+         // else newValue is already set
     }
     onPropsChange({ [key]: newValue });
   };
@@ -3339,25 +3346,43 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
 
         {activeTab === 'advanced' && (
           <>
-            <Section title="Layout">
-              {/* IMPORTANT: Default width is now empty (auto), not 100% */}
+            <Section title="Spacing">
               <StyledInput
-                label="Width"
-                value={getValue('width', '')} 
-                onChange={(val) => handleChange('width', val)}
-                placeholder="auto"
+                label="Margin"
+                value={getValue('margin', '0px')}
+                onChange={(val) => handleChange('margin', val)}
+                placeholder="e.g. 10px 0"
+                responsive={true}
                 activeViewMode={viewMode}
               />
               <StyledInput
                 label="Padding"
                 value={getValue('padding', '0px')}
                 onChange={(val) => handleChange('padding', val)}
-                placeholder="0px"
+                placeholder="e.g. 15px"
+                responsive={true}
                 activeViewMode={viewMode}
               />
             </Section>
-            
-            <Section title="Flex Child">
+
+            <Section title="Layout">
+              <StyledInput
+                label="Width"
+                value={getValue('width', '')} 
+                onChange={(val) => handleChange('width', val)}
+                placeholder="auto"
+                responsive={true}
+                activeViewMode={viewMode}
+              />
+              <StyledInput
+                label="Height"
+                value={getValue('height', '')} 
+                onChange={(val) => handleChange('height', val)}
+                placeholder="auto"
+                responsive={true}
+                activeViewMode={viewMode}
+              />
+              <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
               <StyledInput
                 label="Flex Grow"
                 value={getValue('flexGrow', '0')}
@@ -3377,6 +3402,103 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                   { label: 'Stretch', value: 'stretch' }
                 ]}
                 responsive={false}
+              />
+            </Section>
+
+            <Section title="Background & Border">
+               <StyledColorInput
+                label="Background Color"
+                value={getValue('backgroundColor', 'transparent')}
+                onChange={(val) => handleChange('backgroundColor', val)}
+                responsive={false}
+              />
+
+              <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
+
+              <StyledSelect
+                label="Border Style"
+                value={getValue('borderStyle', 'none')}
+                onChange={(val) => handleChange('borderStyle', val)}
+                responsive={false}
+                options={[
+                  { label: 'None', value: 'none' },
+                  { label: 'Solid', value: 'solid' },
+                  { label: 'Double', value: 'double' },
+                  { label: 'Dashed', value: 'dashed' },
+                  { label: 'Dotted', value: 'dotted' }
+                ]}
+              />
+
+              {getValue('borderStyle') !== 'none' && (
+                <>
+                  <StyledInput
+                    label="Border Width"
+                    value={getValue('borderWidth', '1px')}
+                    onChange={(val) => handleChange('borderWidth', val)}
+                    responsive={false}
+                  />
+                  <StyledColorInput
+                    label="Border Color"
+                    value={getValue('borderColor', '#000000')}
+                    onChange={(val) => handleChange('borderColor', val)}
+                    responsive={false}
+                  />
+                </>
+              )}
+
+              <StyledInput
+                label="Border Radius"
+                value={getValue('borderRadius', '0px')}
+                onChange={(val) => handleChange('borderRadius', val)}
+                responsive={true}
+                activeViewMode={viewMode}
+                placeholder="0px"
+              />
+            </Section>
+
+            <Section title="Responsive">
+               <div className={styles.responsiveToggleGroup} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={getValue('hideOnDesktop', false)} 
+                      onChange={(e) => handleChange('hideOnDesktop', e.target.checked)} 
+                    />
+                    Hide on Desktop
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={getValue('hideOnTablet', false)} 
+                      onChange={(e) => handleChange('hideOnTablet', e.target.checked)} 
+                    />
+                    Hide on Tablet
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={getValue('hideOnMobile', false)} 
+                      onChange={(e) => handleChange('hideOnMobile', e.target.checked)} 
+                    />
+                    Hide on Mobile
+                  </label>
+               </div>
+            </Section>
+
+            <Section title="Attributes">
+               <StyledInput
+                label="CSS ID"
+                value={getValue('cssId', '')}
+                onChange={(val) => handleChange('cssId', val)}
+                responsive={false}
+                placeholder="e.g. section-anchor"
+              />
+              <StyledInput
+                label="CSS Classes"
+                value={getValue('cssClasses', '')}
+                onChange={(val) => handleChange('cssClasses', val)}
+                responsive={false}
+                placeholder="e.g. custom-style-1 custom-style-2"
               />
             </Section>
           </>
