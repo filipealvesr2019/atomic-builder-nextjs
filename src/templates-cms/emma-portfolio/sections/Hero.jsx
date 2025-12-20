@@ -6,16 +6,20 @@ export default function Hero({
     subtitle = "Subtitle",
     text = "Description text here",
     buttonText = "Click Me",
-    image = ""
+    backgroundImage = "",
+    overlayImage = ""
 }) {
-    // If no image provided, we can use a placeholder div or default
     return (
         <section className={styles.hero}>
             <div className={styles.imageSide}>
-                {image ? (
-                    <img src={image} alt={title} className={styles.image} />
+                {backgroundImage ? (
+                    <img src={backgroundImage} alt="Background" className={styles.bgImage} />
                 ) : (
-                    <div style={{width:'100%', height:'100%', background:'#ddd', display:'flex', alignItems:'center', justifyContent:'center'}}>Image</div>
+                    <div className={styles.bgImage} style={{background:'#eee'}}></div>
+                )}
+                
+                {overlayImage && (
+                    <img src={overlayImage} alt="Overlay" className={styles.overlayImage} />
                 )}
             </div>
             <div className={styles.contentSide}>
@@ -35,6 +39,7 @@ Hero.cmsConfig = {
         subtitle: { type: "string", label: "Subtitle" },
         text: { type: "text", label: "Description" },
         buttonText: { type: "string", label: "Button Text" },
-        image: { type: "image", label: "Hero Image" }
+        backgroundImage: { type: "image", label: "Background Image" },
+        overlayImage: { type: "image", label: "Overlay Image" }
     }
 };

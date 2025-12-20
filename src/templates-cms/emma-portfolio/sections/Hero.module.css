@@ -2,60 +2,79 @@
     display: flex;
     min-height: 80vh;
     overflow: hidden;
+    position: relative;
+    background-color: #fffaf5; /* Base color */
 }
 
 .imageSide {
     flex: 1;
     position: relative;
-    background-color: #f5f5f5; /* Fallback */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 500px;
 }
 
-.image {
-    width: 100%;
-    height: 100%;
+/* Background image filling the top-left area or similar */
+.bgImage {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 80%;
+    height: 90%;
     object-fit: cover;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+/* Overlay image (the 'profile' one) */
+.overlayImage {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 320px;
+    height: 400px;
+    object-fit: cover;
+    z-index: 2;
+    border: 10px solid white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
 .contentSide {
-    flex: 1.2;
-    padding: 80px;
+    flex: 1;
+    padding: 80px 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #fffaf5; /* Slight cream tint */
+    z-index: 3;
 }
 
 .subtitle {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.5rem;
-    color: #666;
+    color: #e67e22;
     margin-bottom: 20px;
 }
 
 .title {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-size: 4.5rem;
     line-height: 1.1;
     margin-bottom: 30px;
     color: #1a1a1a;
 }
 
 .text {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
     margin-bottom: 40px;
-    max-width: 500px;
+    max-width: 450px;
 }
 
 .button {
     display: inline-block;
     padding: 15px 40px;
-    background-color: #e67e22; /* Orange accent */
+    background-color: #e67e22; 
     color: white;
     text-decoration: none;
     text-transform: uppercase;
@@ -72,21 +91,34 @@
     background-color: #d35400;
 }
 
-@media (max-width: 900px) {
+/* Decorative line path if needed - using pseudo-element or separate SVG */
+
+@media (max-width: 1000px) {
     .hero {
         flex-direction: column;
     }
-    .imageSide, .contentSide {
+    .imageSide {
         width: 100%;
+        height: 500px;
         flex: none;
     }
-    .imageSide {
-        height: 300px;
+    .bgImage {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    .overlayImage {
+        right: 50%;
+        transform: translate(50%, -50%); /* Centered */
+        top: 60%; 
     }
     .contentSide {
-        padding: 40px 20px;
+        padding: 60px 20px;
+        text-align: center;
+        align-items: center;
     }
     .title {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 }

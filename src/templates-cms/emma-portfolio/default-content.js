@@ -30,7 +30,8 @@ export const emmaDefaultContent = {
             subtitle: 'Available now for 10$',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             buttonText: 'SHOP NOW',
-            image: 'https://images.unsplash.com/photo-1521369792376-79c7b9c9f76a?w=800&q=80'
+            backgroundImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80', // Desk/Flowers
+            overlayImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80' // Woman portrait
           }
         },
         {
