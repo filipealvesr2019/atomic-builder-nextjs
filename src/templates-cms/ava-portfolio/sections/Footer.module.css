@@ -1,0 +1,87 @@
+.footer {
+  background-color: #ebeae6;
+  padding-top: 60px;
+}
+
+.newsletter {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.newsletterTitle {
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.instaGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: 250px;
+}
+
+.instaItem {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s;
+}
+
+.instaItem:hover {
+    opacity: 0.8;
+}
+
+.bottom {
+    padding: 60px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.1em;
+    color: #333;
+}
+
+.links {
+    display: flex;
+    gap: 30px;
+}
+
+.links a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: #000;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+@media (max-width: 768px) {
+    .instaGrid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cols on mobile */
+        height: auto;
+    }
+    .instaItem {
+        height: 200px;
+    }
+    .links {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

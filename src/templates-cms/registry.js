@@ -1,4 +1,15 @@
 // Sistema de registro de templates CMS-compatíveis
+import AvaPortfolioHome from './ava-portfolio/layouts/HomePage';
+import AvaHeader from './ava-portfolio/sections/Header';
+import AvaHero from './ava-portfolio/sections/Hero';
+import AvaIntroduction from './ava-portfolio/sections/Introduction';
+import AvaCollage from './ava-portfolio/sections/Collage';
+import AvaServices from './ava-portfolio/sections/Services';
+import AvaAboutIntro from './ava-portfolio/sections/AboutIntro';
+import AvaTestimonials from './ava-portfolio/sections/Testimonials';
+import AvaBlogGrid from './ava-portfolio/sections/BlogGrid';
+import AvaFooter from './ava-portfolio/sections/Footer';
+import { avaDefaultContent } from './ava-portfolio/default-content';
 import MinimalBusinessHome from './minimal-business/layouts/HomePage';
 import MinimalBusinessHero from './minimal-business/sections/Hero';
 import MinimalBusinessFeatures from './minimal-business/sections/Features';
@@ -172,6 +183,25 @@ const templates = {
         'image-cta': EmmaImageCTA,
         'exclusive-content': EmmaExclusiveContent,
         footer: EmmaFooter
+    }
+  },
+  'ava-portfolio': {
+    name: 'Ava Portfolio',
+    category: 'portfolio',
+    defaultContent: avaDefaultContent,
+    layouts: {
+        home: AvaPortfolioHome
+    },
+    sections: {
+        header: AvaHeader,
+        hero: AvaHero,
+        introduction: AvaIntroduction,
+        collage: AvaCollage,
+        services: AvaServices,
+        'about-intro': AvaAboutIntro,
+        testimonials: AvaTestimonials,
+        'blog-grid': AvaBlogGrid,
+        footer: AvaFooter
     }
   }
 };

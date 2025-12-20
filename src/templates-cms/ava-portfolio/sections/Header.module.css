@@ -1,0 +1,74 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 60px;
+  background-color: #ebeae6; /* Beige background from image */
+  font-family: 'Playfair Display', serif;
+}
+
+.logo {
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #555;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  font-family: 'Open Sans', sans-serif; /* Fallback sans-serif for menu if needed, but keeping consistent for now */
+}
+
+.navLink:hover {
+  color: #000;
+}
+
+.social {
+  display: flex;
+  gap: 15px;
+}
+
+.socialIcon {
+  color: #555;
+  transition: color 0.3s;
+  display: flex; /* Fix alignment */
+  align-items: center;
+}
+
+.socialIcon:hover {
+  color: #000;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .rightSection {
+      flex-direction: column;
+      gap: 20px;
+  }
+  
+  .nav {
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+}

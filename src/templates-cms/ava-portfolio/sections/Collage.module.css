@@ -1,0 +1,155 @@
+.collageSection {
+  padding: 80px 60px;
+  background-color: #ebeae6; 
+  /* Or white if the image implies a section break, but looks like continuous beige */
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collageGrid {
+  flex: 1.5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  position: relative;
+}
+
+/* Image 1: Table - Needs to be lower down? Or just left column */
+.imageWrapper1 {
+  grid-column: 1;
+  grid-row: 1 / span 2; /* Takes up left side? Or customized */
+  align-self: flex-end; /* Push to bottom? */
+  margin-bottom: -40px; /* Offset effect */
+  z-index: 1;
+}
+
+/* Image 2: Couple - Top Right of grid */
+.imageWrapper2 {
+  grid-column: 2;
+  grid-row: 1;
+  z-index: 2;
+  margin-left: -30px; /* Overlap left */
+  margin-bottom: 20px;
+}
+
+/* Image 3: Woman - Bottom Right or overlapping */
+.imageWrapper3 {
+  grid-column: 2;
+  grid-row: 2;
+  z-index: 3;
+  margin-top: -60px; /* Overlap upwards */
+  margin-left: -60px; /* Overlap left significantly */
+}
+
+/* General Image Styles */
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* box-shadow: 0 10px 30px rgba(0,0,0,0.05); */ /* Optional shadow */
+}
+
+/* Specific sizing to match reference */
+.imageWrapper1 img {
+    height: 350px; /* Approximation */
+    width: 250px;
+}
+.imageWrapper2 img {
+    height: 300px;
+    width: 250px;
+}
+.imageWrapper3 img {
+    height: 350px;
+    width: 250px;
+}
+
+
+/* Text Content Side */
+.textContent {
+  flex: 1;
+  padding-left: 40px;
+}
+
+.subheading {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  color: #333;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #d1bfa7; /* Beige/Gold button color */
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #c4ae93;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column-reverse; /* Text on top on mobile? Or bottom. Usually Text top or bottom. Image implies Text right on desktop. */
+    gap: 40px;
+    padding: 40px 20px;
+  }
+  
+  .collageGrid {
+      width: 100%;
+      /* Reset specific positioning for mobile if needed, or keep it */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+  
+  .imageWrapper1, .imageWrapper2, .imageWrapper3 {
+      grid-column: auto;
+      grid-row: auto;
+      margin: 0;
+      align-self: auto;
+  }
+  
+  .imageWrapper1 img, .imageWrapper2 img, .imageWrapper3 img {
+      width: 100%;
+      height: auto;
+      max-width: 400px;
+  }
+  
+  .textContent {
+      padding-left: 0;
+      text-align: center;
+  }
+}

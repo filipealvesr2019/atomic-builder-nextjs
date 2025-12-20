@@ -1,0 +1,60 @@
+.servicesSection {
+  padding: 100px 60px;
+  background-color: #ebeae6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; /* Center the cards */
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 60px 40px;
+  text-align: center;
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.number {
+  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  color: #ccc; /* Light grey number */
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Open Sans', sans-serif; /* Or Playfair if preferred */
+  font-weight: 600;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.6;
+  font-family: 'Open Sans', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .servicesSection {
+      padding: 60px 20px;
+  }
+}

@@ -1,0 +1,50 @@
+.introduction {
+  padding: 80px 20px;
+  background-color: #ebeae6;
+  text-align: center;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subheading {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.heading {
+  font-size: 3rem;
+  font-family: 'Playfair Display', serif;
+  color: #333;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  font-weight: 400; /* Regular weight for elegance */
+}
+
+.link {
+  font-size: 0.9rem;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2px;
+  font-family: 'Playfair Display', serif; /* Or sans-serif depending on preference, serif looks nice */
+  font-style: italic;
+  transition: opacity 0.3s;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,59 @@
+.testimonialSection {
+  padding: 100px 60px;
+  background-color: #ebeae6; /* Beige background */
+  text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  color: #333;
+  margin-bottom: 50px;
+  font-weight: 400;
+}
+
+.quote {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.8;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 30px;
+}
+
+.authorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.author {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #333;
+    font-weight: bold;
+}
