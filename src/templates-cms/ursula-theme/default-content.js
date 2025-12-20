@@ -47,9 +47,9 @@ export const ursulaDefaultContent = {
             title: 'Browse the Categories',
             subtitle: 'Home & Decor Ideas',
             categories: [
-                { name: 'Bolero', image: 'https://images.unsplash.com/photo-1540221652346-e5dd6b50f3e7?w=500&q=80', link: '#' },
-                { name: 'Lifestyle', image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&q=80', link: '#' },
-                { name: 'Stories', image: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500&q=80', link: '#' }
+                { name: 'Lifestyle', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500&q=80', link: '/admin/demo-preview/ursula-demo/category/lifestyle' },
+                { name: 'Fashion', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80', link: '/admin/demo-preview/ursula-demo/category/fashion' },
+                { name: 'Stories', image: 'https://images.unsplash.com/photo-1544207240-8b1025eb7aeb?w=500&q=80', link: '/admin/demo-preview/ursula-demo/category/stories' }
             ]
           }
         },
