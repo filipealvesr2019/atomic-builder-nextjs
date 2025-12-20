@@ -9,7 +9,8 @@ export default function Header({
   logoText = "Ursula", 
   logoSub = "",
   logoImage = "",
-  links = []
+  links = [],
+  forceMobile = false
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,7 +20,7 @@ export default function Header({
   const rightLinks = links.slice(midPoint);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${forceMobile ? styles.forcedMobile : ''}`}>
       {/* Mobile Header */}
       <div className={styles.mobileHeader}>
           <button className={styles.mobileToggle} onClick={() => setIsMenuOpen(!isMenuOpen)}>

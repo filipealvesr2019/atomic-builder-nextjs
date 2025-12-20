@@ -49,15 +49,20 @@ export default function BlueprintPreview() {
     // Mobile simulation on desktop
     return { 
       width: '375px', 
+      height: '800px', // Fixed height to simulate device screen
+      overflowY: 'auto', // Scroll inside the device
       margin: '0 auto',
       boxShadow: '0 0 40px rgba(0,0,0,0.15)',
-      borderRadius: '8px',
-      overflow: 'hidden'
+      borderRadius: '24px', // More rounded like a phone
+      border: '8px solid #333', // Bezel
+      backgroundColor: '#fff',
+      transform: 'translate3d(0,0,0)', // Creates containing block for fixed position children
+      position: 'relative'
     };
   };
 
   return (
-    <div className="relative min-h-screen bg-gray-100">
+    <div className="relative min-h-screen bg-gray-100 flex flex-col">
         {/* Sticky Header for Actions */}
         <div style={{
             position: 'sticky',
@@ -172,6 +177,7 @@ export default function BlueprintPreview() {
                     <HomeLayout 
                         sections={sections}
                         theme={{}} 
+                        forceMobile={viewport === 'mobile' && !isMobileDevice}
                     />
                 ) : (
                     <div className="p-10 text-center text-red-500">

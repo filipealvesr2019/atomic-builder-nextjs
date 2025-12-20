@@ -6,10 +6,10 @@ import ClientLove from '../sections/ClientLove';
 import LatestPosts from '../sections/LatestPosts';
 import Footer from '../sections/Footer';
 
-export default function HomePage({ sections = {} }) {
+export default function HomePage({ sections = {}, forceMobile = false }) {
   return (
     <div>
-      <Header {...(sections.header || {})} />
+      <Header {...(sections.header || {})} forceMobile={forceMobile} />
       <Hero {...(sections.hero || {})} />
       <CategoryGrid {...(sections.categories || {})} />
       <FeaturedContent {...(sections['featured-content'] || {})} />

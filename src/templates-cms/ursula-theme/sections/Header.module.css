@@ -189,3 +189,57 @@
         display: none;
     }
 }
+
+/* Simulation of Mobile View on Desktop */
+.forcedMobile .container {
+    display: none;
+}
+
+.forcedMobile .container.showMenu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 100;
+    height: auto;
+    padding: 2rem;
+    align-items: center;
+    gap: 2rem;
+}
+
+.forcedMobile .mobileHeader {
+    display: flex;
+}
+
+.forcedMobile .mobileLogo {
+    font-family: 'Allura', cursive;
+    font-size: 2.5rem;
+}
+
+.forcedMobile .centerNav {
+    flex-direction: column;
+    width: 100%;
+}
+
+.forcedMobile .navGroup {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.forcedMobile .socials {
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.forcedMobile .logoWrapper {
+    display: none;
+}
+
+.forcedMobile .search {
+    display: none;
+}
