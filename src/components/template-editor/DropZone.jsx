@@ -31,6 +31,25 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
   const width = getProp('width');
   const align = getProp('align');
   const alignSelf = getProp('alignSelf');
+  
+  // Layout & Spacing
+  const margin = getProp('margin');
+  const padding = getProp('padding');
+  const zIndex = getProp('zIndex');
+
+  // Background & Border
+  const backgroundColor = getProp('backgroundColor');
+  const backgroundImage = getProp('backgroundImage');
+  const backgroundSize = getProp('backgroundSize');
+  const backgroundPosition = getProp('backgroundPosition');
+  const backgroundRepeat = getProp('backgroundRepeat');
+  
+  const border = getProp('border');
+  const borderWidth = getProp('borderWidth');
+  const borderStyle = getProp('borderStyle');
+  const borderColor = getProp('borderColor');
+  const borderRadius = getProp('borderRadius');
+  const boxShadow = getProp('boxShadow');
 
   // Map align to alignSelf
   const alignMap = {
@@ -47,12 +66,49 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     ? (alignMap[align] || alignSelf || 'auto')
     : 'auto';
 
-  const style = {
+  // WIDGETS THAT HANDLE THEIR OWN STYLES (Padding/Background/Border)
+  // For these, we pass the styles DOWN to the component and set 0 on the wrapper.
+  const DELEGATED_STYLES_WIDGETS = ['button'];
+  const shouldDelegate = DELEGATED_STYLES_WIDGETS.includes(block.type);
+
+  // Split Styles:
+  // 1. Layout & Positioning (Applied to Outer DND Wrapper)
+  const outerStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
     width: width || 'auto',
     alignSelf: finalAlignSelf,
-    maxWidth: '100%'
+    maxWidth: '100%',
+    margin: margin || '0px', // Margin ALWAYS stays on wrapper for spacing
+    zIndex: zIndex || 'auto',
+    position: 'relative',
+    borderRadius: borderRadius || '0px', // Match radius for selection ring
+  };
+
+  // 2. Visual Box Model (Applied to Inner Styling Wrapper)
+  const innerStyle = {
+    display: 'flex', // Ensure it acts as a container
+    flexDirection: 'column', 
+    width: '100%',
+    height: '100%',
+    
+    // If delegated, these should be transparent/0 on the wrapper
+    padding: shouldDelegate ? '0px' : (padding || '0px'),
+    backgroundColor: shouldDelegate ? 'transparent' : (backgroundColor || 'transparent'),
+    backgroundImage: shouldDelegate ? 'none' : (backgroundImage ? `url(${backgroundImage})` : 'none'),
+    backgroundSize: backgroundSize || 'cover',
+    backgroundPosition: backgroundPosition || 'center',
+    backgroundRepeat: backgroundRepeat || 'no-repeat',
+    
+    border: shouldDelegate ? 'none' : (border || 'none'),
+    borderWidth: shouldDelegate ? '0px' : (borderWidth || (borderStyle && borderStyle !== 'none' ? '1px' : '0px')),
+    borderStyle: shouldDelegate ? 'none' : (borderStyle || 'none'),
+    borderColor: shouldDelegate ? 'transparent' : (borderColor || 'transparent'),
+    borderRadius: borderRadius || '0px', // Wrapper always needs radius to clip correctly or match shape
+    
+    boxShadow: shouldDelegate ? 'none' : (boxShadow || 'none'),
+    
+    boxSizing: 'border-box'
   };
 
   let BlockComponent = null;
@@ -74,11 +130,34 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
   }
 
   // Wrapper Props for atomic components
+  // If delegated, we pass the REAL values. If NOT delegated, we override with 0/none.
+  const overrideStyle = shouldDelegate ? {} : {
+      padding: '0px',
+      backgroundColor: 'transparent',
+      backgroundImage: 'none',
+      border: 'none',
+      borderWidth: '0px',
+      borderRadius: '0px',
+      boxShadow: 'none'
+  };
+  
+  // Implicitly, if delegated, the component receives the original visual props from 'block.props'
+  // But we still need to make sure we don't pass 'margin' down, as wrapper handles it.
+  const overrides = {
+      margin: '0px', // Margin always handled by wrapper
+      ...overrideStyle
+  };
+
   const componentProps = {
     id: block.id,
-    settings: block.props, // Atomic components expect 'settings'
+    settings: {
+        ...block.props,
+        ...overrides 
+    }, 
     ...block.props,       // Legacy components expect spread props
-    container: block.category === NODE_TYPES.CONTAINER ? { ...block, settings: block.props } : undefined,
+    ...overrides,         // Legacy override
+    
+    container: block.category === NODE_TYPES.CONTAINER ? { ...block, settings: { ...block.props, ...overrides } } : undefined,
     section: block.category === NODE_TYPES.SECTION ? block : undefined,
     onUpdateBlock: onUpdateBlock // Pass update function
   };
@@ -86,7 +165,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
   return (
     <div
       ref={setNodeRef}
-      style={style}
+      style={outerStyle}
       className={`${styles.blockWrapper} ${
         isSelected ? styles.blockWrapperSelected : ''
       } ${isOver ? styles.blockWrapperOver : ''}`}
@@ -95,40 +174,43 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
         onClick(block);
       }}
     >
-      {/* Action Overlay */}
-      <div className={styles.actionOverlay}>
-        <div 
-          {...attributes} 
-          {...listeners}
-          className={styles.dragHandle}
-          title="Arrastar"
-        >
-          <GripVertical size={14} />
-        </div>
-        <span className={styles.blockType}>{block.type}</span>
-        <button 
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(block.id);
-          }}
-          className={styles.deleteButton}
-          title="Excluir"
-        >
-          <Trash2 size={14} />
-        </button>
-      </div>
-
-      {/* Render Block Content */}
-      <div style={{ display: 'contents' }}>
-        {BlockComponent ? (
-          <BlockComponent {...componentProps}>
-            {children}
-          </BlockComponent>
-        ) : (
-          <div className={styles.unknownBlock}>
-            Unknown Block: {block.type}
+      {/* Inner Visual Wrapper */}
+      <div style={innerStyle} className="visual-wrapper">
+          {/* Action Overlay */}
+          <div className={styles.actionOverlay}>
+            <div 
+              {...attributes} 
+              {...listeners}
+              className={styles.dragHandle}
+              title="Arrastar"
+            >
+              <GripVertical size={14} />
+            </div>
+            <span className={styles.blockType}>{block.type}</span>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(block.id);
+              }}
+              className={styles.deleteButton}
+              title="Excluir"
+            >
+              <Trash2 size={14} />
+            </button>
           </div>
-        )}
+
+          {/* Render Block Content */}
+          <div style={{ display: 'contents' }}>
+            {BlockComponent ? (
+              <BlockComponent {...componentProps}>
+                {children}
+              </BlockComponent>
+            ) : (
+              <div className={styles.unknownBlock}>
+                Unknown Block: {block.type}
+              </div>
+            )}
+          </div>
       </div>
     </div>
   );

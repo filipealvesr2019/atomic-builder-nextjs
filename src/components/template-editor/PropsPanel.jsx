@@ -484,6 +484,7 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
     let newValue = value;
 
     // Auto-append 'px' for specific numeric keys if value is a number (and not empty)
+    // Auto-append 'px' for specific numeric keys
     const pxProps = [
         'fontSize', 'letterSpacing', 'gap', 
         'borderRadius', 'borderWidth', 
@@ -491,8 +492,20 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
         'shadowOffsetX', 'shadowOffsetY', 'shadowBlur'
     ];
 
-    if (pxProps.includes(key) && value && !isNaN(value) && value.trim() !== '') {
-        newValue = `${value}px`;
+    if (pxProps.includes(key) && value && typeof value === 'string') {
+        // Case 1: Single number (e.g. "20") -> "20px"
+        if (!isNaN(value) && value.trim() !== '') {
+             newValue = `${value}px`;
+        } 
+        // Case 2: Space separated numbers (e.g. "20 50") -> "20px 50px"
+        // Regex looks for groups of digits not followed by letters (units)
+        else if (/^[\d\s]+$/.test(value)) {
+             const parts = value.split(/\s+/).filter(p => p.trim() !== '');
+             // If all parts are just numbers, append px to each
+             if (parts.length > 0 && parts.every(p => !isNaN(p))) {
+                 newValue = parts.map(p => `${p}px`).join(' ');
+             }
+        }
     }
 
     if (viewMode !== 'desktop') {

@@ -10,7 +10,8 @@ export default function ContainerRenderer({ container, children }) {
 
   if (!container) return null;
 
-  const { settings, widgets = [], id } = container;
+  const { settings: legacySettings, props, widgets = [], id } = container;
+  const settings = props || legacySettings || {};
   
   // Revised getProp: defaults if value is empty string
   const getProp = (key, defaultValue) => {

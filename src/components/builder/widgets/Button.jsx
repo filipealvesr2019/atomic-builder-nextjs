@@ -48,17 +48,25 @@ export default function ButtonWidget({ settings }) {
 
   // Styles for the button itself
   const buttonStyle = {
-    padding: '0.75rem 1.5rem',
-    borderRadius: theme.borderRadius.button,
+    padding: settings.padding || '0.75rem 1.5rem',
+    borderRadius: settings.borderRadius || theme.borderRadius.button,
     fontFamily: theme.typography.fontFamily,
     fontWeight: 600,
     textDecoration: 'none',
     display: 'inline-block',
     cursor: 'pointer',
     transition: 'all 0.2s',
-    backgroundColor: bg,
+    
+    // Allow override
+    backgroundColor: settings.backgroundColor && settings.backgroundColor !== 'transparent' ? settings.backgroundColor : bg,
     color: color,
-    border: border,
+    
+    border: settings.borderStyle && settings.borderStyle !== 'none' 
+            ? `${settings.borderWidth || '1px'} ${settings.borderStyle} ${settings.borderColor || 'black'}`
+            : border,
+    
+    boxShadow: settings.boxShadow || 'none',
+    width: settings.width || 'auto'
   };
 
   return (

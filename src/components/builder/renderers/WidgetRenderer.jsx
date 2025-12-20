@@ -12,7 +12,8 @@ export default function WidgetRenderer({ widget, parentDirection = 'column' }) {
 
   if (!widget) return null;
 
-  const { type, settings, id } = widget;
+  const { type, settings: legacySettings, props, id } = widget;
+  const settings = props || legacySettings || {};
   const WidgetComponent = getWidgetComponent(type);
 
   if (!WidgetComponent) {
