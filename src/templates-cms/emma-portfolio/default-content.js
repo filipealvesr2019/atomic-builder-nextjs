@@ -571,7 +571,7 @@ export const emmaDefaultContent = {
                     {
                         title: "Blog article",
                         excerpt: "The future of digital marketing. Trends to watch out for in 2025.",
-                        image: "https://images.unsplash.com/photo-1499750310159-5254f4127278?w=500&q=80",
+                        image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80", // Changed to reliable fashion/blog image
                         category: "AYURVEDA",
                         date: "17 OCTOBER 2024",
                         comments: "NO COMMENTS"
