@@ -135,6 +135,17 @@
     cursor: pointer;
 }
 
+.mobileToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 1024px) {
     .container {
         display: none; /* Hide desktop menu */
@@ -151,9 +162,10 @@
         background: #fff;
         z-index: 100;
         height: auto;
-        padding: 2rem;
+        padding: 4rem 2rem; /* More top padding */
         align-items: center;
-        gap: 2rem;
+        gap: 3rem;
+        justify-content: flex-start; /* Start from top, don't space between */
     }
 
     .mobileHeader {
@@ -168,12 +180,13 @@
     .centerNav {
         flex-direction: column;
         width: 100%;
+        gap: 3rem;
     }
     
     .navGroup {
         flex-direction: column;
         align-items: center;
-        gap: 1.5rem;
+        gap: 2rem;
     }
 
     .socials {
@@ -191,6 +204,17 @@
 }
 
 /* Simulation of Mobile View on Desktop */
+.forcedMobile .mobileToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .forcedMobile .container {
     display: none;
 }
@@ -206,9 +230,10 @@
     background: #fff;
     z-index: 100;
     height: auto;
-    padding: 2rem;
+    padding: 4rem 2rem; /* More top padding */
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
+    justify-content: flex-start; /* Start from top */
 }
 
 .forcedMobile .mobileHeader {
@@ -223,12 +248,13 @@
 .forcedMobile .centerNav {
     flex-direction: column;
     width: 100%;
+    gap: 3rem;
 }
 
 .forcedMobile .navGroup {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .forcedMobile .socials {
