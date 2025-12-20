@@ -1,6 +1,5 @@
-'use client';
-
 import React from 'react';
+import { Playfair_Display } from 'next/font/google';
 import Header from '../sections/Header';
 import Hero from '../sections/Hero';
 import Introduction from '../sections/Introduction';
@@ -14,9 +13,11 @@ import Impact from '../sections/Impact';
 import ExclusiveContent from '../sections/ExclusiveContent';
 import Footer from '../sections/Footer';
 
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '700', '900'], style: ['normal', 'italic'] });
+
 export default function HomePage({ sections = {} }) {
   return (
-    <div className="emma-theme-wrapper" style={{ fontFamily: 'Georgia, serif', color: '#1a1a1a' }}>
+    <div className={`emma-theme-wrapper ${playfair.className}`} style={{ color: '#1a1a1a' }}>
         <Header {...(sections['header'] || {})} />
         <Hero {...(sections['hero'] || {})} />
         <Introduction {...(sections['introduction'] || {})} />
