@@ -17,7 +17,11 @@ export default function HeadingWidget({ settings }) {
     fontSize,
     fontWeight,
     lineHeight,
-    letterSpacing
+    letterSpacing,
+    shadowColor,
+    shadowOffsetX,
+    shadowOffsetY,
+    shadowBlur
   } = settings;
 
   const Tag = tag;
@@ -30,6 +34,7 @@ export default function HeadingWidget({ settings }) {
     fontSize: fontSize || theme.typography.headings[tag]?.fontSize || '1.5rem',
     lineHeight: lineHeight || theme.typography.headings[tag]?.lineHeight || '1.2',
     letterSpacing: letterSpacing || 'normal',
+    textShadow: shadowColor ? `${shadowOffsetX || '0px'} ${shadowOffsetY || '0px'} ${shadowBlur || '0px'} ${shadowColor}` : 'none',
     margin: 0,
     width: 'fit-content'
   };

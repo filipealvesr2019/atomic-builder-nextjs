@@ -2920,6 +2920,39 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                         activeViewMode={viewMode}
                         placeholder="e.g. 1px"
                     />
+
+                    <div style={{ height: '1px', background: '#eee', margin: '15px 0' }}></div>
+                    <span className={styles.labelText} style={{display:'block', marginBottom:'10px'}}>Text Shadow</span>
+                    
+                    <StyledColorInput
+                        label="Shadow Color"
+                        value={getValue('shadowColor', 'rgba(0,0,0,0.3)')}
+                        onChange={(val) => handleChange('shadowColor', val)}
+                        responsive={false}
+                    />
+
+                    <StyledInput
+                        label="Offset X"
+                        value={getValue('shadowOffsetX', '0px')}
+                        onChange={(val) => handleChange('shadowOffsetX', val)}
+                        responsive={false}
+                        placeholder="0px"
+                    />
+                    <StyledInput
+                        label="Offset Y"
+                        value={getValue('shadowOffsetY', '0px')}
+                        onChange={(val) => handleChange('shadowOffsetY', val)}
+                        responsive={false}
+                        placeholder="0px"
+                    />
+
+                    <StyledInput
+                        label="Blur"
+                        value={getValue('shadowBlur', '0px')}
+                        onChange={(val) => handleChange('shadowBlur', val)}
+                        responsive={false}
+                        placeholder="0px"
+                    />
                 </Section>
             )}
 
