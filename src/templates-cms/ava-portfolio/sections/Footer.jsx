@@ -7,11 +7,11 @@ export default function Footer({
     copyright = "© 2024 Ava Portfolio. All rights reserved."
 }) {
    const defaultInsta = [
-       "https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=1000&auto=format&fit=crop",
-       "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1000&auto=format&fit=crop",
-       "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1976&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
+       "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop", // Wedding Party
+       "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1000&auto=format&fit=crop", // Couple holding hands (Wedding)
+       "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1000&auto=format&fit=crop", // Couple Kissing
+       "https://images.unsplash.com/photo-1519225421980-715cb0202128?q=80&w=1000&auto=format&fit=crop", // Wedding Flowers/Details
+       "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop"  // Wedding Cake/Table
    ];
    
    const displayInsta = instagramImages.length > 0 ? instagramImages : defaultInsta;

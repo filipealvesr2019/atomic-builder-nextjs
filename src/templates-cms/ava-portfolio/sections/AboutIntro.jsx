@@ -6,7 +6,7 @@ export default function AboutIntro({
     name = "Ave Rose!", // Changed to match "Ava" but "Rose" adds elegance
     description = "Capturing life's perfect moments with grace and style. I turn your memories into timeless art that you will cherish forever.",
     buttonText = "Read My Story",
-    imageUrl = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
+    imageUrl = "https://images.unsplash.com/photo-1546193430-c2d207739ed7?q=80&w=1887&auto=format&fit=crop"
 }) {
   return (
     <section className={styles.aboutSection}>

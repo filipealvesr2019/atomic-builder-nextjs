@@ -9,7 +9,7 @@ export default function BlogGrid({
     const defaultPosts = [
         { id: 1, title: "Big Day Title One", category: "Wedding", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" },
         { id: 2, title: "Big Day Title Two", category: "Elopement", image: "https://images.unsplash.com/photo-1519225421980-715cb0202128?q=80&w=2070&auto=format&fit=crop" },
-        { id: 3, title: "Big Day Title Three", category: "Engagement", image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" }
+        { id: 3, title: "Big Day Title Three", category: "Engagement", image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop" }
     ];
 
     const displayPosts = posts.length > 0 ? posts : defaultPosts;
