@@ -114,7 +114,7 @@ export const avaDefaultContent = {
                     {
                         title: "Big Day Title Two",
                         category: "Elopement",
-                        image: "https://images.unsplash.com/photo-1519225421980-715cb0202128?q=80&w=2070&auto=format&fit=crop"
+                        image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop"
                     },
                     {
                         title: "Big Day Title Three",
