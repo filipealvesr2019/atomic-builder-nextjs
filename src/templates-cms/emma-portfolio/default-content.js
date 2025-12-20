@@ -274,14 +274,16 @@ export const emmaDefaultContent = {
                 title: '',
                 testimonials: [
                     {
-                        text: '« I love so much Emma »',
+                        text: 'I love so much Emma',
                         author: 'ANNA BLAIR',
-                        role: 'DESIGNER'
+                        role: 'DESIGNER',
+                        image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80'
                     },
                     {
-                        text: '« This girl is really awesome »',
+                        text: 'This girl is really awesome',
                         author: 'SARA GREEN',
-                        role: 'DEVELOPER'
+                        role: 'DEVELOPER',
+                        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80'
                     }
                 ]
             }
