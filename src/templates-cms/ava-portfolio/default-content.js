@@ -1,8 +1,8 @@
 
 export const avaDefaultContent = {
     header: {
-      logo: "Ava",
-      navItems: [
+      logoText: "Ava",
+      links: [
         { label: "ABOUT", href: "#about" },
         { label: "WORKSHOPS", href: "#workshops" },
         { label: "SERVICES", href: "#services" },
