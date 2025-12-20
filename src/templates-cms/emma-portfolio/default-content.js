@@ -28,7 +28,7 @@ export const emmaDefaultContent = {
           props: {
             title: 'Launch your business easily!',
             subtitle: 'Available now for 10$',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            text: 'Transform your passion into a profitable business with our comprehensive step-by-step coaching program designed for creative entrepreneurs.',
             buttonText: 'SHOP NOW',
             backgroundImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80',
             overlayImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80'
@@ -40,7 +40,7 @@ export const emmaDefaultContent = {
           props: {
             title: 'Hello!',
             subtitle: 'Not only with coaching!',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            text: 'I am Emma, a business coach passionate about helping women build businesses they love. With over 10 years of experience, I provide the tools and strategies you need to succeed.',
             buttonText: 'READ MORE',
             image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80'
           }
@@ -90,7 +90,7 @@ export const emmaDefaultContent = {
           props: {
             title: 'The Podcast',
             subtitle: 'About EMMA',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            text: 'Join us every week as we discuss the latest trends in business, marketing and personal growth. Real stories, real advice.',
             buttonText: 'LISTEN NOW',
             image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500&q=80'
           }
