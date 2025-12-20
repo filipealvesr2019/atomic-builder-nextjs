@@ -237,21 +237,21 @@ export const emmaDefaultContent = {
                         subtitle: "Let's create your brand!",
                         description: "Standardize your brand identity with our comprehensive brand service. We cover logo design, color palette, typography and more.",
                         buttonText: "READ MORE",
-                        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" // Woman in cafe/office
+                        image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600&q=80" // Woman/Desk (Verified from Hero)
                     },
                     {
                         title: "Strategy service",
                         subtitle: "Build your foundation",
                         description: "Our strategy service helps you define your target audience, analyze your competitors, and create a roadmap for success.",
                         buttonText: "READ MORE",
-                        image: "https://images.unsplash.com/photo-1513258496098-3ec40b407524?w=600&q=80" // Palm shadows
+                        image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=80" // Palm/Greenery (Verified from Podcast)
                     },
                     {
                         title: "Another service",
                         subtitle: "Another catchy subtitle",
                         description: "Describe your other services here. Maybe social media management, content creation, or website design.",
                         buttonText: "READ MORE",
-                        image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" // Fashion/Palm vibe
+                        image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=600&q=80" // Desktop/Creative (Verified)
                     }
                 ]
             }

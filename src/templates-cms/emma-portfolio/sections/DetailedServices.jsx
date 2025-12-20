@@ -17,7 +17,12 @@ export default function DetailedServices({ services = [] }) {
                     <div className={styles.imageSide}>
                         <div className={styles.imageContainer}>
                             <div className={styles.blob} style={{ backgroundColor: index % 2 === 0 ? '#fcd5c5' : '#e0e0e0' }}></div>
-                            <img src={service.image} alt={service.title} className={styles.image} />
+                            <img 
+                                src={service.image} 
+                                alt={service.title} 
+                                className={styles.image} 
+                                onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600&q=80'; }}
+                            />
                         </div>
                     </div>
                 </div>
