@@ -165,7 +165,7 @@ export const ursulaDefaultContent = {
             title: 'About Us',
             subtitle: '',
             buttonText: '',
-            backgroundImage: 'https://images.unsplash.com/photo-1517639493569-5666a7482836?w=1350&q=80' // Dog/Cozy image
+            backgroundImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1350&q=80'
           }
         },
         {
