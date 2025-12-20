@@ -12,7 +12,7 @@ export const ursulaDefaultContent = {
              logoText: 'Ursula',
              logoSub: 'Theme',
              links: [
-                 { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
+                 { text: 'Home', href: '/admin/store/preview/ursula-theme' },
                  { 
                      text: 'Categories', 
                      href: '#',
@@ -145,7 +145,7 @@ export const ursulaDefaultContent = {
           props: {
              logoText: 'Ursula',
              links: [
-                 { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
+                 { text: 'Home', href: '/admin/store/preview/ursula-theme' },
                  { text: 'Categories', href: '#', subItems: [
                      { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
                      { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
@@ -230,7 +230,7 @@ export const ursulaDefaultContent = {
           props: {
              logoText: 'Ursula',
              links: [
-                 { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
+                 { text: 'Home', href: '/admin/store/preview/ursula-theme' },
                  { text: 'Categories', href: '#', subItems: [
                      { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
                      { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
@@ -297,7 +297,7 @@ export const ursulaDefaultContent = {
           props: {
              logoText: 'Ursula',
              links: [
-                 { text: 'Home', href: '/admin/demo-preview/ursula-demo' },
+                 { text: 'Home', href: '/admin/store/preview/ursula-theme' },
                  { text: 'Categories', href: '#', subItems: [
                      { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
                      { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
