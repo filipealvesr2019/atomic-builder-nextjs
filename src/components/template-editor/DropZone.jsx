@@ -172,8 +172,9 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
   return (
     <div
       ref={setNodeRef}
+      id={block.props?.cssId || undefined}
       style={outerStyle}
-      className={`${styles.blockWrapper} ${uniqueClass} ${
+      className={`${styles.blockWrapper} ${uniqueClass} ${block.props?.cssClasses || ''} ${
         isSelected ? styles.blockWrapperSelected : ''
       } ${isOver ? styles.blockWrapperOver : ''}`}
       onClick={(e) => {
