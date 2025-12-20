@@ -23,6 +23,7 @@ export default function HeadingWidget({ settings }) {
     fontFamily: theme.typography.headings.fontFamily,
     fontWeight: theme.typography.headings.fontWeight,
     margin: 0, // Reset margin to let container handle spacing
+    width: 'fit-content'
   };
 
   return <Tag style={style}>{text}</Tag>;

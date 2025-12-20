@@ -36,7 +36,7 @@ export default function ButtonWidget({ settings }) {
   const wrapperStyle = {
     display: 'flex',
     justifyContent: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
-    width: '100%'
+    width: 'auto'
   };
 
   // Styles for the button itself

@@ -20,7 +20,7 @@ export default function ImageWidget({ settings }) {
   const wrapperStyle = {
     display: 'flex',
     justifyContent: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
-    width: '100%'
+    width: 'auto'
   };
 
   const imgStyle = {

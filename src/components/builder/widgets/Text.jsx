@@ -26,14 +26,25 @@ export default function TextWidget({ settings }) {
     letterSpacing: getProp('letterSpacing', 'normal'),
     margin: getProp('margin'),
     padding: getProp('padding'),
-    zIndex: getProp('zIndex')
+    zIndex: getProp('zIndex'),
+    width: 'fit-content'
   };
 
   console.log('TextWidget Content:', content);
 
   return (
-    <div style={style} className={styles.textWidgetContent}>
-      {typeof content === 'string' ? parse(content) : content}
+    <div 
+      style={{
+        display: 'flex',
+        justifyContent: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
+        width: 'auto',
+        boxSizing: 'border-box'
+      }}
+      className={styles.textWidgetContainer}
+    >
+      <div style={style} className={styles.textWidgetContent}>
+        {typeof content === 'string' ? parse(content) : content}
+      </div>
     </div>
   );
 }
