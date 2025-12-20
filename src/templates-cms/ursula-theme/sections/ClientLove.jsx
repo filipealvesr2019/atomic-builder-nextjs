@@ -13,7 +13,7 @@ export default function ClientLove({
       <div className={styles.container}>
         <div className={styles.imageColumn}>
              <img src={image} alt="Client" className={styles.image} />
-             <h2 className={styles.titleOverlay}>{title}</h2>
+        
         </div>
         
         <div className={styles.textColumn}>

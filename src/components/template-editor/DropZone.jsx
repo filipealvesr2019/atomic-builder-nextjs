@@ -29,6 +29,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
   // Resolve layout props for the wrapper
   const getProp = (key) => resolveResponsiveProp(block.props?.[key], viewMode);
   const width = getProp('width');
+  const height = getProp('height'); // Added height
   const align = getProp('align');
   const alignSelf = getProp('alignSelf');
   
@@ -91,6 +92,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     transform: CSS.Transform.toString(transform),
     transition,
     width: width || 'auto',
+    height: height || 'auto', // Added height
     alignSelf: finalAlignSelf,
     maxWidth: '100%',
     margin: margin || '0px', // Margin ALWAYS stays on wrapper for spacing
