@@ -270,7 +270,7 @@ export const ursulaDefaultContent = {
             type: 'instagram-row',
             props: {
                 images: [
-                    'https://images.unsplash.com/photo-1497215842964-222b430dc0a8?w=300&q=80',
+                    'https://images.unsplash.com/photo-1512331283953-19967202267a?w=300&q=80',
                     'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80',
                     'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=300&q=80',
                     'https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=300&q=80',
