@@ -91,8 +91,9 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
   const outerStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
-    width: width || 'auto',
-    height: height || 'auto', // Added height
+    // If delegated, let the child determine its own size
+    width: shouldDelegate ? 'auto' : (width || 'auto'),
+    height: shouldDelegate ? 'auto' : (height || 'auto'),
     alignSelf: finalAlignSelf,
     maxWidth: '100%',
     margin: margin || '0px', // Margin ALWAYS stays on wrapper for spacing

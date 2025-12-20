@@ -66,7 +66,8 @@ export default function ButtonWidget({ settings }) {
             : border,
     
     boxShadow: settings.boxShadow || 'none',
-    width: settings.width || 'auto'
+    width: settings.width || 'auto',
+    height: settings.height || 'auto'
   };
 
   return (

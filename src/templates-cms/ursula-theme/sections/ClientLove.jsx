@@ -3,7 +3,6 @@
 import styles from './ClientLove.module.css';
 
 export default function ClientLove({
-  title = "Client Love",
   quote = "Ursula is a fantastic theme. It helped me create the blog of my dreams in minutes. The design is elegant and the features are just what I needed.",
   author = "Sarah J.",
   image = "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80"
