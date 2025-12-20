@@ -1,0 +1,68 @@
+.podcast {
+    display: flex;
+    padding: 100px 50px;
+    align-items: center;
+    gap: 60px;
+}
+
+.content {
+    flex: 1;
+    text-align: right; /* Based on image, text seems possibly right-aligned or centered, let's keep it standard but switch order */
+}
+
+/* Actually looking at image, Podcast has text on right, image on left.
+   But "The Podcast" title is big serif.
+*/
+
+.imageContainer {
+    flex: 1;
+}
+
+.image {
+    width: 100%;
+    max-width: 400px;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.button {
+    background: #1a1a1a;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .podcast {
+        flex-direction: column;
+        text-align: center;
+    }
+    .content {
+        text-align: center;
+    }
+}

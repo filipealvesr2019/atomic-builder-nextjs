@@ -1,0 +1,51 @@
+.exclusive {
+    background-color: #1a1a1a; /* Dark/Black */
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    display: block;
+    opacity: 0.7;
+}
+
+.form {
+    display: inline-flex;
+    max-width: 600px;
+    width: 100%;
+}
+
+.input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    font-size: 1rem;
+}
+
+.button {
+    background: #e67e22;
+    color: white;
+    border: none;
+    padding: 0 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .form {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,48 @@
+.footer {
+    padding: 50px 20px;
+    background: #fffaf5;
+    text-align: center;
+    border-top: 1px solid #eaeaea;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+    display: inline-block;
+}
+
+.social {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.socialIcon {
+    width: 25px;
+    height: 25px;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.links {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.link {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}

@@ -28,8 +28,24 @@ import UrsulaCategoryGrid from './ursula-theme/sections/CategoryGrid';
 import UrsulaFeaturedContent from './ursula-theme/sections/FeaturedContent';
 import UrsulaClientLove from './ursula-theme/sections/ClientLove';
 import UrsulaLatestPosts from './ursula-theme/sections/LatestPosts';
+
 import UrsulaFooter from './ursula-theme/sections/Footer';
 import { ursulaDefaultContent } from './ursula-theme/default-content';
+
+import EmmaPortfolioHome from './emma-portfolio/layouts/HomePage';
+import EmmaHeader from './emma-portfolio/sections/Header';
+import EmmaHero from './emma-portfolio/sections/Hero';
+import EmmaIntroduction from './emma-portfolio/sections/Introduction';
+import EmmaServices from './emma-portfolio/sections/Services';
+import EmmaStepsNewsletter from './emma-portfolio/sections/StepsNewsletter';
+import EmmaPodcast from './emma-portfolio/sections/Podcast';
+import EmmaTestimonials from './emma-portfolio/sections/Testimonials';
+import EmmaRecentPosts from './emma-portfolio/sections/RecentPosts';
+import EmmaQuote from './emma-portfolio/sections/Quote';
+import EmmaImpact from './emma-portfolio/sections/Impact';
+import EmmaExclusiveContent from './emma-portfolio/sections/ExclusiveContent';
+import EmmaFooter from './emma-portfolio/sections/Footer';
+import { emmaDefaultContent } from './emma-portfolio/default-content';
 
 const templates = {
   'rustic-store-cms': {
@@ -91,6 +107,28 @@ const templates = {
       'client-love': UrsulaClientLove,
       'latest-posts': UrsulaLatestPosts,
       footer: UrsulaFooter
+    }
+  },
+  'emma-portfolio': {
+    name: 'Emma Portfolio',
+    category: 'portfolio',
+    defaultContent: emmaDefaultContent,
+    layouts: {
+      home: EmmaPortfolioHome
+    },
+    sections: {
+        header: EmmaHeader,
+        hero: EmmaHero,
+        introduction: EmmaIntroduction,
+        services: EmmaServices,
+        'steps-newsletter': EmmaStepsNewsletter,
+        podcast: EmmaPodcast,
+        testimonials: EmmaTestimonials,
+        'recent-posts': EmmaRecentPosts,
+        quote: EmmaQuote,
+        impact: EmmaImpact,
+        'exclusive-content': EmmaExclusiveContent,
+        footer: EmmaFooter
     }
   }
 };

@@ -1,0 +1,15 @@
+.quote {
+    background-color: #e67e22; /* Orange */
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+}
+
+.text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-style: italic;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.4;
+}

@@ -1,0 +1,84 @@
+.steps {
+    background-color: #e67e22; /* Orange */
+    padding: 80px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    gap: 60px;
+}
+
+.imageContainer {
+    flex: 1;
+}
+
+.image {
+    width: 100%;
+    margin-top: -120px; /* Pull image up to overlap */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
+}
+
+.content {
+    flex: 1.5;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.form {
+    display: flex;
+    gap: 10px;
+}
+
+.input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.button {
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 0 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .image {
+        margin-top: 0;
+        transform: none;
+        max-width: 300px;
+    }
+    .form {
+        flex-direction: column;
+    }
+}
