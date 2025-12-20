@@ -73,8 +73,29 @@
     padding: 0.5rem 0;
 }
 
-.navItemWrapper:hover .dropdown {
-    display: flex;
+/* Only allow hover on desktop and when NOT simulating mobile */
+@media (min-width: 1025px) {
+    .navItemWrapper:hover .dropdown {
+        display: flex; /* Default desktop hover behavior */
+    }
+}
+
+/* Explicitly disable hover-based display on mobile */
+@media (max-width: 1024px) {
+    .navItemWrapper:not(.activeDropdown):hover .dropdown {
+        display: none;
+    }
+}
+
+/* Also disable for forced mobile simulation */
+.forcedMobile .navItemWrapper:not(.activeDropdown):hover .dropdown {
+    display: none !important;
+}
+
+/* Ensure active state works */
+.activeDropdown .dropdown,
+.forcedMobile .activeDropdown .dropdown {
+    display: flex !important;
 }
 
 .dropdownLink {
@@ -203,6 +224,27 @@
     .search {
         display: none;
     }
+
+    /* Mobile Dropdown Behavior */
+    .navItemWrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .activeDropdown .dropdown {
+        display: flex;
+        position: relative;
+        top: 0;
+        left: 0;
+        box-shadow: none;
+        border-top: none;
+        background: #f9f9f9;
+        width: 100%;
+        align-items: center;
+        margin-top: 1rem;
+    }
 }
 
 /* Simulation of Mobile View on Desktop */
@@ -272,4 +314,25 @@
 
 .forcedMobile .search {
     display: none;
+}
+
+/* Forced Mobile Dropdown Behavior */
+.forcedMobile .navItemWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forcedMobile .activeDropdown .dropdown {
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    border-top: none;
+    background: #f9f9f9;
+    width: 100%;
+    align-items: center;
+    margin-top: 1rem;
 }

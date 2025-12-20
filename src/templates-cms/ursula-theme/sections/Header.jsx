@@ -13,6 +13,15 @@ export default function Header({
   forceMobile = false
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const toggleDropdown = (label) => {
+    if (openDropdown === label) {
+        setOpenDropdown(null);
+    } else {
+        setOpenDropdown(label);
+    }
+  };
 
   // Split links for desktop layout (first 3 left, rest right)
   const midPoint = Math.ceil(links.length / 2);
@@ -44,10 +53,25 @@ export default function Header({
         <div className={styles.centerNav}>
             <nav className={styles.navGroup}>
                 {leftLinks.map((link, idx) => (
-                    <div key={idx} className={styles.navItemWrapper}>
-                        <Link href={link.href} className={styles.navLink}>
-                            {link.text} {link.subItems && <span style={{fontSize: 10, marginLeft: 2}}>▼</span>}
-                        </Link>
+                    <div key={idx} className={`${styles.navItemWrapper} ${openDropdown === link.text ? styles.activeDropdown : ''}`}>
+                        <div 
+                            className={styles.navLink} 
+                            onClick={(e) => {
+                                if(link.subItems) {
+                                    e.preventDefault();
+                                    toggleDropdown(link.text);
+                                }
+                            }}
+                        >
+                            {link.href && !link.subItems ? (
+                                <Link href={link.href}>{link.text}</Link>
+                            ) : (
+                                <span style={{cursor: 'pointer'}}>{link.text}</span>
+                            )}
+                            
+                            {link.subItems && <span style={{fontSize: 10, marginLeft: 4}}>▼</span>}
+                        </div>
+
                         {link.subItems && (
                             <div className={styles.dropdown}>
                                 {link.subItems.map((sub, sIdx) => (
@@ -71,10 +95,23 @@ export default function Header({
 
             <nav className={styles.navGroup}>
                 {rightLinks.map((link, idx) => (
-                    <div key={idx} className={styles.navItemWrapper}>
-                        <Link href={link.href} className={styles.navLink}>
-                             {link.text} {link.subItems && <span style={{fontSize: 10, marginLeft: 2}}>▼</span>}
-                        </Link>
+                    <div key={idx} className={`${styles.navItemWrapper} ${openDropdown === link.text ? styles.activeDropdown : ''}`}>
+                        <div 
+                            className={styles.navLink} 
+                            onClick={(e) => {
+                                if(link.subItems) {
+                                    e.preventDefault();
+                                    toggleDropdown(link.text);
+                                }
+                            }}
+                        >
+                             {link.href && !link.subItems ? (
+                                <Link href={link.href}>{link.text}</Link>
+                            ) : (
+                                <span style={{cursor: 'pointer'}}>{link.text}</span>
+                            )}
+                             {link.subItems && <span style={{fontSize: 10, marginLeft: 4}}>▼</span>}
+                        </div>
                          {link.subItems && (
                             <div className={styles.dropdown}>
                                 {link.subItems.map((sub, sIdx) => (
