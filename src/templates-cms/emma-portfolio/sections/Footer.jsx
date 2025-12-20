@@ -1,5 +1,19 @@
 'use client';
 import styles from './Footer.module.css';
+import { Instagram, Facebook, Youtube, Twitter, Linkedin, Pin } from 'lucide-react';
+
+const SocialIcon = ({ platform }) => {
+    switch (platform?.toLowerCase()) {
+        case 'instagram': return <Instagram size={18} />;
+        case 'facebook': return <Facebook size={18} />;
+        case 'youtube': return <Youtube size={18} />;
+        case 'twitter': return <Twitter size={18} />;
+        case 'linkedin': return <Linkedin size={18} />;
+        case 'pinterest': return <Pin size={18} />;
+        case 'tiktok': return <span style={{fontWeight:'bold', fontSize:'10px'}}>TK</span>; // Custom for tiktok if needed or generic
+        default: return <div style={{width: 14, height: 14, borderRadius: '50%', background: '#fff'}}></div>;
+    }
+};
 
 export default function Footer({
     logoText = "EMMA",
@@ -16,15 +30,10 @@ export default function Footer({
             </div>
             <div className={styles.social}>
                 {socialLinks.map((s, i) => (
-                    <div key={i} className={styles.socialIcon}></div>
+                    <a key={i} href={s.url || '#'} className={styles.socialIcon}>
+                         <SocialIcon platform={s.platform} />
+                    </a>
                 ))}
-                 {socialLinks.length === 0 && (
-                     <>
-                     <div className={styles.socialIcon}></div>
-                     <div className={styles.socialIcon}></div>
-                     <div className={styles.socialIcon}></div>
-                     </>
-                 )}
             </div>
             <p className={styles.copyright}>{copyright}</p>
         </footer>

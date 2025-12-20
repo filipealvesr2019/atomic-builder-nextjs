@@ -1,0 +1,39 @@
+.section {
+    padding: 80px 20px 40px;
+    background-color: #fffbf7; /* Very light cream/peach */
+    text-align: center;
+}
+
+.title {
+    font-family: inherit; /* Rely on layout font or import specific if needed */
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    font-family: inherit;
+    font-size: 2rem;
+    font-style: italic;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.description {
+    font-size: 1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 3rem;
+    }
+    .subtitle {
+        font-size: 1.5rem;
+    }
+}

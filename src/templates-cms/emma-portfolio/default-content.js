@@ -12,8 +12,8 @@ export const emmaDefaultContent = {
             links: [
               { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
               { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
-              { text: 'ABOUT', href: '#about' },
-              { text: 'CONTACT', href: '#contact' }
+              { text: 'ABOUT', href: '#' },
+              { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
             ],
             socialLinks: [
               { platform: 'instagram', url: '#' },
@@ -199,8 +199,8 @@ export const emmaDefaultContent = {
                 links: [
                     { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
                     { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
-                    { text: 'ABOUT', href: '#about' },
-                    { text: 'CONTACT', href: '#contact' }
+                    { text: 'ABOUT', href: '#' },
+                    { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
                 ],
                 socialLinks: [
                     { platform: 'instagram', url: '#' },
@@ -300,6 +300,73 @@ export const emmaDefaultContent = {
         },
         {
             id: 'emma-footer-services',
+            type: 'footer',
+            props: {
+                logoText: 'EMMA',
+                copyright: '© 2024 Emma Theme. All rights reserved.',
+                socialLinks: [
+                    { platform: 'instagram', url: '#' },
+                    { platform: 'tiktok', url: '#' },
+                    { platform: 'facebook', url: '#' }
+                ]
+            }
+        }
+      ]
+    },
+    {
+      slug: 'contact',
+      layout: 'contact',
+      content: [
+        {
+            id: 'emma-header-contact',
+            type: 'header',
+            props: {
+                links: [
+                    { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
+                    { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
+                    { text: 'ABOUT', href: '#' },
+                    { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
+                ],
+                socialLinks: [
+                    { platform: 'instagram', url: '#' },
+                    { platform: 'pinterest', url: '#' },
+                    { platform: 'youtube', url: '#' }
+                ]
+            }
+        },
+        {
+            id: 'emma-contact-hero',
+            type: 'contact-hero',
+            props: {
+                title: 'Contact me',
+                subtitle: 'Need more info about my services ?',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.'
+            }
+        },
+        {
+            id: 'emma-contact-form',
+            type: 'contact-form-section',
+            props: {
+                image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80',
+                name: 'Emma Best',
+                bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
+                buttonText: 'SEND'
+            }
+        },
+        {
+            id: 'emma-contact-info',
+            type: 'contact-info-bar',
+            props: {
+                addressTitle: 'Meet me',
+                address: 'Rue de la Paix\n75000 PARIS',
+                phoneTitle: "Let's chat",
+                phone: '+33 6 00 00 00 00',
+                hoursTitle: 'Office hours',
+                hours: '9:00 - 12:00 AM\n2:00 - 6:00 PM'
+            }
+        },
+        {
+            id: 'emma-contact-footer',
             type: 'footer',
             props: {
                 logoText: 'EMMA',

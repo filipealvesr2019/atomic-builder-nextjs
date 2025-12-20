@@ -1,0 +1,144 @@
+.section {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+    gap: 0; /* They touch in reference */
+    background-color: #fffbf7; /* Should match page bg */
+}
+
+.sidebar {
+    background-color: #1a1a1a;
+    color: white;
+    width: 350px;
+    padding: 40px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sidebarImage {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 30px;
+    border: 5px solid white; /* Possible white border frame from ref image style */
+}
+
+.sidebarName {
+    font-family: inherit;
+    font-size: 2rem;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.sidebarText {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 15px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    cursor: pointer;
+}
+
+.formContainer {
+    flex: 1;
+    background: white;
+    padding: 60px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.formRow {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.formGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.input, .textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+}
+
+.submitButton {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.submitButton:hover {
+    background-color: #d35400;
+}
+
+.privacyText {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center; /* Or left */
+}
+
+@media (max-width: 900px) {
+    .section {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+    }
+    .formRow {
+        flex-direction: column;
+    }
+}
