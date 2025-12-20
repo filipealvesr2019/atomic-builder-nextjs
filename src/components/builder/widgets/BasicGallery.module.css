@@ -1,11 +1,9 @@
 
 .galleryContainer {
-    width: 100%;
 }
 
 .galleryGrid {
     display: grid;
-    width: 100%;
 }
 
 .galleryItemWrapper {

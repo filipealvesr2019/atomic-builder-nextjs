@@ -30,10 +30,19 @@ export default function WidgetRenderer({ widget }) {
   // 2. Estilo do Wrapper
   // IMPORTANTE: width padrão é 'auto' para permitir que o Flexbox do pai controle (align-items).
   // Se o usuário definir width explícito, usamos ele.
+  
+  // Mapear alinhamento horizontal (align) para alignSelf
+  const alignMap = {
+    'left': 'flex-start',
+    'center': 'center',
+    'right': 'flex-end',
+    'stretch': 'stretch'
+  };
+
   const wrapperStyle = {
     width: resolvedSettings.width || 'auto', 
     height: resolvedSettings.height || 'auto',
-    alignSelf: resolvedSettings.alignSelf || 'auto',
+    alignSelf: alignMap[resolvedSettings.align] || resolvedSettings.alignSelf || 'auto',
     flexGrow: resolvedSettings.flexGrow || 0,
     boxSizing: 'border-box'
   };

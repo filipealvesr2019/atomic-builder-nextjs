@@ -17,7 +17,9 @@ export default function ImageGallery({ settings }) {
         caption = false,
         shuffle = false,
         columnGap, // sometimes separated
-        rowGap
+        rowGap,
+        align = 'center', // left, center, right
+        width // remove default 100%
     } = settings || {};
 
     // Generate valid images array
@@ -100,8 +102,26 @@ export default function ImageGallery({ settings }) {
         if (enableLightbox) setLightboxIndex(index);
     };
 
+    const alignVal = align || 'left';
+    const isJustified = alignVal === 'stretch';
+
+    const wrapperStyle = {
+        display: 'flex',
+        justifyContent: alignVal === 'center' ? 'center' : alignVal === 'right' ? 'flex-end' : 'flex-start',
+        width: '100%',
+        padding: settings.padding || '0px',
+        boxSizing: 'border-box'
+    };
+
+    const galleryContainerStyle = {
+        width: isJustified ? '100%' : (width || 'auto'),
+        maxWidth: '100%',
+        display: isJustified ? 'block' : 'inline-block' // inline-block allows the flex wrapper to center it
+    };
+
     return (
-        <div className={styles.galleryContainer}>
+        <div style={wrapperStyle} className="image-gallery-widget-outer-wrapper">
+            <div style={galleryContainerStyle} className={styles.galleryContainer}>
             <div 
                 className={`${styles[layout]} ${layout === 'grid' ? styles[`ratio_${aspectRatio.replace('/', '_')}`] : ''}`}
                 style={{
@@ -117,11 +137,7 @@ export default function ImageGallery({ settings }) {
                     // Style for individual item logic
                     const itemStyle = {};
                     if (layout === 'justified') {
-                        // Trick for justified: flex-grow based on aspect ratio (if known) or just basic 1
-                        // Real justified needs image dimensions. 
-                        // MVP: Equal height rows, let browser fit. 
                         itemStyle.height = rowHeight;
-                        // itemStyle.flexGrow = 1; // Handled in CSS
                     }
 
                     return (
@@ -169,6 +185,7 @@ export default function ImageGallery({ settings }) {
                     />
                 </div>
             )}
+            </div>
         </div>
     );
 }

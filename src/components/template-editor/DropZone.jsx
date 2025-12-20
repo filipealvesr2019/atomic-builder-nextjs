@@ -10,9 +10,13 @@ import { NODE_TYPES, WIDGET_TYPES } from '@/components/builder/constants';
 import { getWidgetComponent } from '@/components/builder/WidgetRegistry';
 import ContainerRenderer from '@/components/builder/renderers/ContainerRenderer';
 import SectionRenderer from '@/components/builder/renderers/SectionRenderer';
+import { useAtomValue } from 'jotai';
+import { viewModeAtom, resolveResponsiveProp } from '@/store/viewModeStore';
 import styles from './DropZone.module.css';
 
 function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpdateBlock, children }) {
+  const viewMode = useAtomValue(viewModeAtom);
+
   const {
     attributes,
     listeners,
@@ -22,9 +26,26 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     isOver,
   } = useSortable({ id: block.id });
 
+  // Resolve layout props for the wrapper
+  const getProp = (key) => resolveResponsiveProp(block.props?.[key], viewMode);
+  const width = getProp('width');
+  const align = getProp('align');
+  const alignSelf = getProp('alignSelf');
+
+  // Map align to alignSelf
+  const alignMap = {
+    'left': 'flex-start',
+    'center': 'center',
+    'right': 'flex-end',
+    'stretch': 'stretch'
+  };
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    width: width || 'auto',
+    alignSelf: alignMap[align] || alignSelf || 'auto',
+    maxWidth: '100%'
   };
 
   let BlockComponent = null;
@@ -91,7 +112,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
       </div>
 
       {/* Render Block Content */}
-      <div>
+      <div style={{ display: 'contents' }}>
         {BlockComponent ? (
           <BlockComponent {...componentProps}>
             {children}

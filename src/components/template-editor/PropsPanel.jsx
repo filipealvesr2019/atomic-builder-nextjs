@@ -583,41 +583,69 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
 
       <div className={styles.content}>
   
-        {activeTab === 'layout' && isContainer && (
+        {activeTab === 'layout' && (
           <>
-            {/* Container Section */}
-            <Section title="Container">
-              {/* Moved Min Height to top for better visibility */}
+            {/* Container/Widget Layout Section */}
+            <Section title={isContainer ? "Container" : "Widget Layout"}>
+              {isContainer && (
+                <>
+                  <StyledInput
+                    label="Min Height"
+                    value={getValue('minHeight', '300px')}
+                    onChange={(val) => handleChange('minHeight', val)}
+                    placeholder="300px"
+                    activeViewMode={viewMode}
+                  />
+
+                  <StyledSelect
+                    label="Container Layout"
+                    value={getValue('layoutType', 'flex')}
+                    onChange={(val) => handleChange('layoutType', val)}
+                    activeViewMode={viewMode}
+                    options={[
+                      { label: 'Flexbox', value: 'flex' },
+                      { label: 'Grid', value: 'grid' }
+                    ]}
+                  />
+                </>
+              )}
+
               <StyledInput
-                label="Min Height"
-                value={getValue('minHeight', '300px')}
-                onChange={(val) => handleChange('minHeight', val)}
-                placeholder="300px"
+                label={isContainer ? "Content Width" : "Width"}
+                value={getValue('width', isContainer ? '100%' : '')}
+                onChange={(val) => handleChange('width', val)}
+                placeholder={isContainer ? "100%" : "auto"}
                 activeViewMode={viewMode}
               />
 
-              <StyledSelect
-                label="Container Layout"
-                value={getValue('layoutType', 'flex')}
-                onChange={(val) => handleChange('layoutType', val)}
+              <IconButtonGroup
+                label="Horizontal Alignment"
+                value={getValue('align', 'left')}
+                onChange={(val) => {
+                  handleChange('align', val);
+                  if (isContainer) {
+                    // Map to alignSelf for containers to be consistent with CSS
+                    const alignSelfMap = {
+                      'left': 'flex-start',
+                      'center': 'center',
+                      'right': 'flex-end',
+                      'stretch': 'stretch'
+                    };
+                    handleChange('alignSelf', alignSelfMap[val] || 'auto');
+                  }
+                }}
                 activeViewMode={viewMode}
                 options={[
-                  { label: 'Flexbox', value: 'flex' },
-                  { label: 'Grid', value: 'grid' }
+                  { value: 'left', label: 'Left', icon: <AlignStartHorizontal size={16} /> },
+                  { value: 'center', label: 'Center', icon: <AlignCenterHorizontal size={16} /> },
+                  { value: 'right', label: 'Right', icon: <AlignEndHorizontal size={16} /> },
+                  { value: 'stretch', label: 'Justify', icon: <Columns size={16} /> }
                 ]}
-              />
-
-              <StyledInput
-                label="Content Width"
-                value={getValue('width', '100%')}
-                onChange={(val) => handleChange('width', val)}
-                placeholder="100%"
-                activeViewMode={viewMode}
               />
             </Section>
 
-            {/* Items Section (Flex properties) */}
-            {getValue('layoutType', 'flex') !== 'grid' && (
+            {/* Items Section (Flex properties) - Only for Containers */}
+            {isContainer && getValue('layoutType', 'flex') !== 'grid' && (
               <Section title="Items">
                 <IconButtonGroup
                   label="Direction"
@@ -2543,6 +2571,19 @@ export default function PropsPanel({ block, templateId, onPropsChange, pages = [
                             responsive={true}
                             activeViewMode={viewMode}
                             placeholder="4"
+                        />
+                        <StyledSelect
+                            label="Horizontal Alignment"
+                            value={getValue('align', 'left')}
+                            onChange={(val) => handleChange('align', val)}
+                            responsive={true}
+                            activeViewMode={viewMode}
+                            options={[
+                                { label: 'Left', value: 'left' },
+                                { label: 'Center', value: 'center' },
+                                { label: 'Right', value: 'right' },
+                                { label: 'Justify (Fill)', value: 'stretch' }
+                            ]}
                         />
                         <StyledInput
                             label="Gap"

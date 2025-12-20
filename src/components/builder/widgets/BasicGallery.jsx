@@ -28,6 +28,10 @@ export default function BasicGallery({ settings }) {
         captionSpacing = '10px',
         captionFontSize = '14px',
         captionFontWeight = '400',
+
+        // Layout Props (handled by renderer/PropsPanel)
+        align = 'left',
+        width = ''
         
     } = settings || {};
 
@@ -36,11 +40,11 @@ export default function BasicGallery({ settings }) {
 
     useEffect(() => {
         const handleResize = () => {
-            const width = window.innerWidth;
+            const widthVal = window.innerWidth;
             let count = 4;
             if (typeof columns === 'object' && columns !== null) {
-                if (width >= 1024) count = parseInt(columns.desktop) || 4;
-                else if (width >= 768) count = parseInt(columns.tablet) || 3;
+                if (widthVal >= 1024) count = parseInt(columns.desktop) || 4;
+                else if (widthVal >= 768) count = parseInt(columns.tablet) || 3;
                 else count = parseInt(columns.mobile) || 1;
             } else {
                 count = parseInt(columns) || 4;
@@ -86,9 +90,24 @@ export default function BasicGallery({ settings }) {
         return '';
     };
 
+    // --- Alignment Styles ---
+    const isJustified = align === 'stretch';
+    const wrapperStyle = {
+        display: 'flex',
+        justifyContent: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
+        width: '100%',
+        boxSizing: 'border-box'
+    };
+
+    const containerStyle = {
+        width: isJustified ? '100%' : (width || 'auto'),
+        maxWidth: '100%'
+    };
+
     // --- Render ---
     return (
-        <div className={styles.galleryContainer}>
+        <div style={wrapperStyle} className="basic-gallery-wrapper">
+            <div className={styles.galleryContainer} style={containerStyle}>
             <div 
                 className={styles.galleryGrid}
                 style={{
@@ -165,6 +184,7 @@ export default function BasicGallery({ settings }) {
                      </div>
                 </div>
             )}
+            </div>
         </div>
     );
 }

@@ -89,10 +89,6 @@ export default function ContainerRenderer({ container, children }) {
 
   const isEmpty = !children && (!widgets || widgets.length === 0);
 
-  // DEBUG LOG
-  console.log(`[Container ${container.id}]`);
-  console.log(`-- Height applied:`, minHeight);
-
   const { setNodeRef, isOver } = useDroppable({
     id: `temp-drop-${container.id}`,
     disabled: !isEmpty, // Only active when empty

@@ -1,5 +1,5 @@
 .galleryContainer {
-    width: 100%;
+    /* Removed width: 100% to allow alignment via wrapper */
 }
 
 /* --- GRID LAYOUT --- */

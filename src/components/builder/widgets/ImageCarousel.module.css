@@ -1,6 +1,5 @@
 .carouselContainer {
   position: relative;
-  width: 100%;
   overflow: hidden;
   user-select: none;
 }

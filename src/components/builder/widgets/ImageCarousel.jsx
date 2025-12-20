@@ -238,13 +238,38 @@ export default function ImageCarousel({ settings }) {
     };
 
 
+    const {
+        align = 'left',
+        width = ''
+    } = settings || {};
+
+    const alignVal = align || 'left';
+    const isJustified = alignVal === 'stretch';
+
+    const wrapperStyle = {
+        display: 'flex',
+        justifyContent: alignVal === 'center' ? 'center' : alignVal === 'right' ? 'flex-end' : 'flex-start',
+        width: '100%',
+        boxSizing: 'border-box'
+    };
+
+    const containerStyle = {
+        height: height, 
+        borderRadius: borderRadius, 
+        boxShadow: shadow,
+        width: isJustified ? '100%' : (width || 'auto'),
+        maxWidth: '100%',
+        display: isJustified ? 'block' : 'inline-block'
+    };
+
     return (
-        <div 
-            className={styles.carouselContainer} 
-            style={{ height: height, borderRadius: borderRadius, boxShadow: shadow }}
-            onMouseEnter={stopAutoplay}
-            onMouseLeave={startAutoplay}
-        >
+        <div style={wrapperStyle} className="image-carousel-wrapper">
+            <div 
+                className={styles.carouselContainer} 
+                style={containerStyle}
+                onMouseEnter={stopAutoplay}
+                onMouseLeave={startAutoplay}
+            >
             <div 
                 className={styles.carouselTrack}
                 ref={trackRef}
@@ -315,6 +340,7 @@ export default function ImageCarousel({ settings }) {
                     ))}
                 </div>
             )}
+            </div>
         </div>
     );
 }
