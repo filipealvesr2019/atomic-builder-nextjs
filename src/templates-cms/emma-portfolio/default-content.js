@@ -10,8 +10,8 @@ export const emmaDefaultContent = {
           type: 'header',
           props: {
             links: [
-              { text: 'HOME', href: '#' },
-              { text: 'SERVICES', href: '#services' },
+              { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
+              { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
               { text: 'ABOUT', href: '#about' },
               { text: 'CONTACT', href: '#contact' }
             ],
@@ -30,8 +30,8 @@ export const emmaDefaultContent = {
             subtitle: 'Available now for 10$',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             buttonText: 'SHOP NOW',
-            backgroundImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80', // Desk/Flowers
-            overlayImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80' // Woman portrait
+            backgroundImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80',
+            overlayImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80'
           }
         },
         {
@@ -185,6 +185,129 @@ export const emmaDefaultContent = {
                { platform: 'youtube', url: '#' }
              ]
           }
+        }
+      ]
+    },
+    {
+      slug: 'services',
+      name: 'Services',
+      content: [
+        {
+            id: 'emma-header-services',
+            type: 'header',
+            props: {
+                links: [
+                    { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
+                    { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
+                    { text: 'ABOUT', href: '#about' },
+                    { text: 'CONTACT', href: '#contact' }
+                ],
+                socialLinks: [
+                    { platform: 'instagram', url: '#' },
+                    { platform: 'pinterest', url: '#' },
+                    { platform: 'youtube', url: '#' }
+                ]
+            }
+        },
+        {
+            id: 'emma-services-hero',
+            type: 'services-hero',
+            props: {
+                title: "Let's work together",
+                subtitle: "Ready to grow your biz?",
+                text: "We provide easy steps to help you start your business today. Our custom coaching sessions are here to help you get started.",
+                buttonText: "BOOK A CALL",
+                image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80"
+            }
+        },
+        {
+            id: 'emma-guidance-quote',
+            type: 'quote',
+            props: {
+                text: "I'm here to guide you"
+            }
+        },
+        {
+            id: 'emma-detailed-services',
+            type: 'detailed-services',
+            props: {
+                services: [
+                    {
+                        title: "Brand service",
+                        subtitle: "Let's create your brand!",
+                        description: "Standardize your brand identity with our comprehensive brand service. We cover logo design, color palette, typography and more.",
+                        buttonText: "READ MORE",
+                        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" // Woman in cafe/office
+                    },
+                    {
+                        title: "Strategy service",
+                        subtitle: "Build your foundation",
+                        description: "Our strategy service helps you define your target audience, analyze your competitors, and create a roadmap for success.",
+                        buttonText: "READ MORE",
+                        image: "https://images.unsplash.com/photo-1513258496098-3ec40b407524?w=600&q=80" // Palm shadows
+                    },
+                    {
+                        title: "Another service",
+                        subtitle: "Another catchy subtitle",
+                        description: "Describe your other services here. Maybe social media management, content creation, or website design.",
+                        buttonText: "READ MORE",
+                        image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" // Fashion/Palm vibe
+                    }
+                ]
+            }
+        },
+        {
+            id: 'emma-steps-services',
+            type: 'steps-newsletter',
+            props: {
+                title: '5 easy steps to create your brand',
+                subtitle: 'Get our free guide on how to launch your products perfectly.',
+                placeholder: 'Your email address',
+                buttonText: 'SEND ME THE LIST',
+                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80'
+            }
+        },
+        {
+            id: 'emma-testimonials-services',
+            type: 'testimonials',
+            props: {
+                title: '',
+                testimonials: [
+                    {
+                        text: '« I love so much Emma »',
+                        author: 'ANNA BLAIR',
+                        role: 'DESIGNER'
+                    },
+                    {
+                        text: '« This girl is really awesome »',
+                        author: 'SARA GREEN',
+                        role: 'DEVELOPER'
+                    }
+                ]
+            }
+        },
+        {
+            id: 'emma-cta-image',
+            type: 'image-cta',
+            props: {
+                title: "Let's talk about your project",
+                subtitle: "I'm here to launch your dream business!",
+                buttonText: "BOOK A CALL",
+                image: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=1200&q=80"
+            }
+        },
+        {
+            id: 'emma-footer-services',
+            type: 'footer',
+            props: {
+                logoText: 'EMMA',
+                copyright: '© 2024 Emma Theme. All rights reserved.',
+                socialLinks: [
+                    { platform: 'instagram', url: '#' },
+                    { platform: 'tiktok', url: '#' },
+                    { platform: 'facebook', url: '#' }
+                ]
+            }
         }
       ]
     }

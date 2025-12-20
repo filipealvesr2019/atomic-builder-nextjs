@@ -47,6 +47,11 @@ import EmmaExclusiveContent from './emma-portfolio/sections/ExclusiveContent';
 import EmmaFooter from './emma-portfolio/sections/Footer';
 import { emmaDefaultContent } from './emma-portfolio/default-content';
 
+import EmmaServicesPage from './emma-portfolio/layouts/ServicesPage';
+import EmmaServicesHero from './emma-portfolio/sections/ServicesHero';
+import EmmaDetailedServices from './emma-portfolio/sections/DetailedServices';
+import EmmaImageCTA from './emma-portfolio/sections/ImageCTA';
+
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
@@ -114,19 +119,23 @@ const templates = {
     category: 'portfolio',
     defaultContent: emmaDefaultContent,
     layouts: {
-      home: EmmaPortfolioHome
+      home: EmmaPortfolioHome,
+      services: EmmaServicesPage
     },
     sections: {
         header: EmmaHeader,
         hero: EmmaHero,
+        'services-hero': EmmaServicesHero,
         introduction: EmmaIntroduction,
         services: EmmaServices,
+        'detailed-services': EmmaDetailedServices,
         'steps-newsletter': EmmaStepsNewsletter,
         podcast: EmmaPodcast,
         testimonials: EmmaTestimonials,
         'recent-posts': EmmaRecentPosts,
         quote: EmmaQuote,
         impact: EmmaImpact,
+        'image-cta': EmmaImageCTA,
         'exclusive-content': EmmaExclusiveContent,
         footer: EmmaFooter
     }

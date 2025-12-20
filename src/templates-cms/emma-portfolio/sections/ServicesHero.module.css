@@ -1,0 +1,114 @@
+.hero {
+    display: flex;
+    min-height: 80vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to right, #ffffff 35%, #fcd5c5 35%); /* Split background */
+    padding-top: 50px; /* Space for header if needed */
+}
+
+.imageSide {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 50px;
+}
+
+.imageWrapper {
+    position: relative;
+    border: 15px solid white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 2;
+    width: 100%;
+    max-width: 450px;
+    height: 550px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contentSide {
+    flex: 1.2;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    font-family: inherit;
+    font-style: italic;
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+}
+
+.text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #e67e22; /* CTA Color */
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+/* Decorative line path approximation */
+.decorativeLine {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 150px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        background: #fcd5c5;
+    }
+    .imageSide {
+        padding: 40px 20px;
+    }
+    .contentSide {
+        padding: 40px 20px;
+        align-items: center;
+        text-align: center;
+    }
+    .imageWrapper {
+        height: 400px;
+    }
+    .title {
+        font-size: 3rem;
+    }
+}

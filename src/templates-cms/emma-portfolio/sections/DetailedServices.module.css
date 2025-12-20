@@ -1,0 +1,131 @@
+.section {
+    padding: 100px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 150px;
+    gap: 80px;
+}
+
+.row:last-child {
+    margin-bottom: 0;
+}
+
+.rowReverse {
+    flex-direction: row-reverse;
+}
+
+.contentSide {
+    flex: 1;
+}
+
+.imageSide {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    font-family: inherit;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.description {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #e67e22;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #d35400;
+}
+
+.imageContainer {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+/* Blob background shapes - specific colored blobs for each row can be handled by props or nth-child */
+.blob {
+    position: absolute;
+    top: 50px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    background-color: #fcd5c5; /* Default peach */
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    z-index: 1;
+}
+
+.image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    border-radius: 4px; /* Slight roundness or square as per design */
+}
+
+@media (max-width: 900px) {
+    .row {
+        flex-direction: column;
+        gap: 40px;
+        margin-bottom: 100px;
+        padding: 0 20px;
+    }
+    .rowReverse {
+        flex-direction: column;
+    }
+    .title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    .subtitle {
+        text-align: center;
+    }
+    .contentSide {
+        text-align: center;
+    }
+    .imageSide {
+        width: 100%;
+    }
+    .imageContainer {
+        width: 100%;
+        max-width: 350px;
+        height: 350px;
+    }
+}
