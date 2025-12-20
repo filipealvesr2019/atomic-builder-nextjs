@@ -23,13 +23,7 @@ export const ursulaDefaultContent = {
                          { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
                      ]
                  },
-                 { 
-                     text: 'Our Blog', 
-                     href: '#', 
-                     subItems: [
-                         { text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog' }
-                     ] 
-                 },
+                 { text: 'Our Blog', href: '/admin/demo-preview/ursula-demo/blog' },
 
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
@@ -158,7 +152,7 @@ export const ursulaDefaultContent = {
                      { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
                      { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
                  ]},
-                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
+                 { text: 'Our Blog', href: '/admin/demo-preview/ursula-demo/blog' },
 
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
@@ -243,7 +237,7 @@ export const ursulaDefaultContent = {
                      { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
                      { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
                  ]},
-                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
+                 { text: 'Our Blog', href: '/admin/demo-preview/ursula-demo/blog' },
 
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
@@ -310,7 +304,7 @@ export const ursulaDefaultContent = {
                      { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
                      { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
                  ]},
-                 { text: 'Our Blog', href: '#', subItems: [{text: 'All Posts', href: '/admin/demo-preview/ursula-demo/blog'}] },
+                 { text: 'Our Blog', href: '/admin/demo-preview/ursula-demo/blog' },
                  { text: 'Single Post', href: '/admin/demo-preview/ursula-demo/single-post' },
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
