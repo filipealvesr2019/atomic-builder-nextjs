@@ -47,7 +47,7 @@ export const avaDefaultContent = {
             props: {
                 images: [
                      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
-                     "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1976&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop",
                      "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
                 ],
                 title: "Every Part of Your Love Story",
@@ -114,7 +114,7 @@ export const avaDefaultContent = {
                     {
                         title: "Big Day Title Two",
                         category: "Elopement",
-                        image: "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1976&auto=format&fit=crop"
+                        image: "https://images.unsplash.com/photo-1519225421980-715cb0202128?q=80&w=2070&auto=format&fit=crop"
                     },
                     {
                         title: "Big Day Title Three",

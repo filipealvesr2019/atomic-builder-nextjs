@@ -9,7 +9,7 @@ export default function Collage({
 }) {
     // Ensure we have at least 3 images or fallbacks
     const img1 = images[0] || "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"; // Table
-    const img2 = images[1] || "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1976&auto=format&fit=crop"; // Couple
+    const img2 = images[1] || "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop"; // Wedding Couple
     const img3 = images[2] || "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"; // Woman
 
   return (
