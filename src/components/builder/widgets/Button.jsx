@@ -10,7 +10,7 @@ export default function ButtonWidget({ settings }) {
   const { 
     text = "Click Me", 
     variant = "primary", // primary, secondary, outline, text
-    align = "left",
+    align,
     url = "#"
   } = settings;
 
@@ -33,9 +33,16 @@ export default function ButtonWidget({ settings }) {
   }
 
   // Base styles for the wrapper ensuring alignment
+  const justifyMap = {
+    'left': 'flex-start',
+    'center': 'center',
+    'right': 'flex-end',
+    'stretch': 'stretch'
+  };
+
   const wrapperStyle = {
     display: 'flex',
-    justifyContent: align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start',
+    justifyContent: justifyMap[align] || 'inherit',
     width: 'auto'
   };
 

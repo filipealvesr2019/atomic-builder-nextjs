@@ -11,18 +11,20 @@ export default function HeadingWidget({ settings }) {
   const { 
     text = "Heading Text", 
     tag = "h2", 
-    align = "left",
+    align,
     color
   } = settings;
 
   const Tag = tag;
 
   const style = {
-    textAlign: align,
+    textAlign: align || 'left',
     color: color || theme.colors.text,
     fontFamily: theme.typography.headings.fontFamily,
     fontWeight: theme.typography.headings.fontWeight,
-    margin: 0, // Reset margin to let container handle spacing
+    fontSize: theme.typography.headings[tag]?.fontSize || '1.5rem',
+    lineHeight: theme.typography.headings[tag]?.lineHeight || '1.2',
+    margin: 0,
     width: 'fit-content'
   };
 

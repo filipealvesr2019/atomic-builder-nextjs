@@ -215,10 +215,10 @@ export default function TemplateEditorPage() {
       let children = [];
 
       if (category === 'widget') {
-        if (type === 'text') initialProps = { content: 'Novo texto', align: 'left', fontSize: '1rem', color: '#4b5563' };
-        if (type === 'button') initialProps = { text: 'Clique Aqui', variant: 'primary', align: 'left', url: '#' };
-        if (type === 'heading') initialProps = { text: 'Novo Título', tag: 'h2', align: 'left', color: '#1f2937' };
-        if (type === 'image') initialProps = { src: 'https://placehold.co/600x400', width: '100%', borderRadius: '0px', align: 'center', alt: 'Image' };
+        if (type === 'text') initialProps = { content: 'Novo texto', fontSize: '1rem', color: '#4b5563' };
+        if (type === 'button') initialProps = { text: 'Clique Aqui', variant: 'primary', url: '#' };
+        if (type === 'heading') initialProps = { text: 'Novo Título', tag: 'h2', color: '#1f2937' };
+        if (type === 'image') initialProps = { src: 'https://placehold.co/600x400', width: '100%', borderRadius: '0px', alt: 'Image' };
       }
       
       if (category === 'container') {

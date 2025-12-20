@@ -25,7 +25,7 @@ export default function ContainerRenderer({ container, children }) {
   // Flex Props
   const direction = getProp('direction', 'column');
   const justifyContent = getProp('justifyContent', 'flex-start');
-  const alignItems = getProp('alignItems', 'stretch');
+  const alignItems = getProp('alignItems', 'center');
   
   // Grid Props
   let gridColumns = getProp('gridTemplateColumns', '1fr');
