@@ -51,6 +51,20 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
   const borderRadius = getProp('borderRadius');
   const boxShadow = getProp('boxShadow');
 
+  // Responsive Visibility
+  const hideOnDesktop = block.props?.hideOnDesktop;
+  const hideOnTablet = block.props?.hideOnTablet;
+  const hideOnMobile = block.props?.hideOnMobile;
+
+  const isHidden = (viewMode === 'desktop' && hideOnDesktop) ||
+                   (viewMode === 'tablet' && hideOnTablet) ||
+                   (viewMode === 'mobile' && hideOnMobile);
+
+  // If hidden in current viewMode, render nothing (or a faint indicator in edit mode)
+  // For editor, we might want to show a "hidden" indicator instead of null
+  // For now, we'll just reduce opacity and show a label
+  const hiddenStyle = isHidden ? { opacity: 0.3, pointerEvents: 'none' } : {};
+
   // Map align to alignSelf
   const alignMap = {
     'left': 'flex-start',
@@ -173,7 +187,7 @@ function SortableBlock({ block, templateId, isSelected, onClick, onDelete, onUpd
     <div
       ref={setNodeRef}
       id={block.props?.cssId || undefined}
-      style={outerStyle}
+      style={{ ...outerStyle, ...hiddenStyle }}
       className={`${styles.blockWrapper} ${uniqueClass} ${block.props?.cssClasses || ''} ${
         isSelected ? styles.blockWrapperSelected : ''
       } ${isOver ? styles.blockWrapperOver : ''}`}
