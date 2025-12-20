@@ -64,6 +64,11 @@ import EmmaAboutThings from './emma-portfolio/sections/AboutThings';
 import EmmaAboutBehindScenes from './emma-portfolio/sections/AboutBehindScenes';
 import EmmaAboutPassion from './emma-portfolio/sections/AboutPassion';
 
+import EmmaBlogPage from './emma-portfolio/layouts/BlogPage';
+import EmmaBlogHero from './emma-portfolio/sections/BlogHero';
+import EmmaBlogGrid from './emma-portfolio/sections/BlogGrid';
+import EmmaInstagramTitle from './emma-portfolio/sections/InstagramTitle';
+
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
@@ -135,20 +140,25 @@ const templates = {
       services: EmmaServicesPage,
       services: EmmaServicesPage,
       contact: EmmaContactPage,
-      about: EmmaAboutPage
+      about: EmmaAboutPage,
+      blog: EmmaBlogPage
     },
     sections: {
         header: EmmaHeader,
         hero: EmmaHero,
         'services-hero': EmmaServicesHero,
         'contact-hero': EmmaContactHero,
+        'blog-hero': EmmaBlogHero,
+        'instagram-title': EmmaInstagramTitle,
         'about-intro': EmmaAboutIntro,
         'about-story': EmmaAboutStory,
         'about-things': EmmaAboutThings,
         'about-behind': EmmaAboutBehindScenes,
         'about-passion': EmmaAboutPassion,
         'about-quote': EmmaQuote,
+        'blog-grid': EmmaBlogGrid,
         introduction: EmmaIntroduction,
+
         services: EmmaServices,
         'detailed-services': EmmaDetailedServices,
         'contact-form-section': EmmaContactFormSection,

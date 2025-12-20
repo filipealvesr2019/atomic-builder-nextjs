@@ -1,0 +1,13 @@
+.section {
+    padding: 60px 20px 20px;
+    background-color: white; /* Or transparent if sitting on footer */
+    text-align: center;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-style: italic;
+    color: #e67e22; /* Matches reference peach/orange */
+    font-weight: 500;
+}

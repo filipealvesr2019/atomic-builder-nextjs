@@ -13,6 +13,7 @@ export const emmaDefaultContent = {
                     { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
                     { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
                     { text: 'ABOUT', href: '/admin/store/preview/emma-portfolio/about' },
+                    { text: 'BLOG', href: '/admin/store/preview/emma-portfolio/blog' },
                     { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
                 ],
             socialLinks: [
@@ -177,14 +178,24 @@ export const emmaDefaultContent = {
           id: 'emma-footer',
           type: 'footer',
           props: {
-             logoText: 'EMMA',
-             copyright: '© 2024 Emma Theme. All rights reserved.',
-             socialLinks: [
-               { platform: 'instagram', url: '#' },
-               { platform: 'tiktok', url: '#' },
-               { platform: 'youtube', url: '#' }
-             ]
-          }
+              logoText: 'EMMA',
+              aboutTitle: 'Emma',
+              aboutText: 'I help creative entrepreneurs build businesses they love.',
+              servicesTitle: 'Services',
+              services: [
+                { text: 'Program', href: '#' },
+                { text: 'Coaching', href: '#' },
+                { text: 'Resources', href: '#' }
+              ],
+              followTitle: 'Follow me',
+              copyright: '© 2024 Emma Theme',
+              credits: 'TEMPLATE BY ANTIGRAVITY',
+              socialLinks: [
+                { platform: 'instagram', url: '#' },
+                { platform: 'tiktok', url: '#' },
+                { platform: 'youtube', url: '#' }
+              ]
+           }
         }
       ]
     },
@@ -199,7 +210,8 @@ export const emmaDefaultContent = {
                 links: [
                     { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
                     { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
-                    { text: 'ABOUT', href: '#' },
+                    { text: 'ABOUT', href: '/admin/store/preview/emma-portfolio/about' },
+                    { text: 'BLOG', href: '/admin/store/preview/emma-portfolio/blog' },
                     { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
                 ],
                 socialLinks: [
@@ -324,7 +336,8 @@ export const emmaDefaultContent = {
                 links: [
                     { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
                     { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
-                    { text: 'ABOUT', href: '#' },
+                    { text: 'ABOUT', href: '/admin/store/preview/emma-portfolio/about' },
+                    { text: 'BLOG', href: '/admin/store/preview/emma-portfolio/blog' },
                     { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
                 ],
                 socialLinks: [
@@ -392,6 +405,7 @@ export const emmaDefaultContent = {
                     { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
                     { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
                     { text: 'ABOUT', href: '/admin/store/preview/emma-portfolio/about' },
+                    { text: 'BLOG', href: '/admin/store/preview/emma-portfolio/blog' },
                     { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
                 ],
                 socialLinks: [
@@ -476,6 +490,123 @@ export const emmaDefaultContent = {
                     { platform: 'tiktok', url: '#' },
                     { platform: 'facebook', url: '#' }
                 ]
+            }
+        }
+      ]
+    },
+    {
+      slug: 'blog',
+      layout: 'blog',
+      content: [
+         {
+            id: 'emma-header-blog',
+            type: 'header',
+            props: {
+                links: [
+                    { text: 'HOME', href: '/admin/store/preview/emma-portfolio' },
+                    { text: 'SERVICES', href: '/admin/store/preview/emma-portfolio/services' },
+                    { text: 'ABOUT', href: '/admin/store/preview/emma-portfolio/about' },
+                    { text: 'BLOG', href: '/admin/store/preview/emma-portfolio/blog' },
+                    { text: 'CONTACT', href: '/admin/store/preview/emma-portfolio/contact' }
+                ],
+                socialLinks: [
+                    { platform: 'instagram', url: '#' },
+                    { platform: 'pinterest', url: '#' },
+                    { platform: 'youtube', url: '#' }
+                ]
+            }
+        },
+        {
+            id: 'emma-blog-hero',
+            type: 'blog-hero',
+            props: {
+                title: 'Blog'
+            }
+        },
+        {
+            id: 'emma-blog-grid',
+            type: 'blog-grid',
+            props: {
+                posts: [
+                    {
+                        title: "Healthcare podcast",
+                        excerpt: "Discover how to balance your health and business life with our latest podcast episode featuring expert guests.",
+                        image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500&q=80",
+                        category: "AYURVEDA",
+                        date: "18 OCTOBER 2024",
+                        comments: "NO COMMENTS"
+                    },
+                    {
+                        title: "Spiritual podcast",
+                        excerpt: "Exploring the connection between mindfulness and productivity. Listen to our new spiritual journey.",
+                        image: "https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=500&q=80",
+                        category: "AYURVEDA",
+                        date: "18 OCTOBER 2024",
+                        comments: "NO COMMENTS"
+                    },
+                    {
+                        title: "New podcast",
+                        excerpt: "Launching your first product? Here is everything you need to know before you start.",
+                        image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=500&q=80",
+                        category: "AYURVEDA",
+                        date: "18 OCTOBER 2024",
+                        comments: "NO COMMENTS"
+                    },
+                    {
+                        title: "Third blog article",
+                        excerpt: "Why networking is crucial for your business growth. Read our top tips for successful networking events.",
+                        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&q=80",
+                        category: "AYURVEDA",
+                        date: "17 OCTOBER 2024",
+                        comments: "NO COMMENTS"
+                    },
+                    {
+                        title: "Second blog article",
+                        excerpt: "Content creation made easy. Tools and strategies to streamline your social media planning.",
+                        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&q=80",
+                        category: "AYURVEDA",
+                        date: "17 OCTOBER 2024",
+                        comments: "NO COMMENTS"
+                    },
+                    {
+                        title: "Blog article",
+                        excerpt: "The future of digital marketing. Trends to watch out for in 2025.",
+                        image: "https://images.unsplash.com/photo-1499750310159-5254f4127278?w=500&q=80",
+                        category: "AYURVEDA",
+                        date: "17 OCTOBER 2024",
+                        comments: "NO COMMENTS"
+                    }
+                ]
+            }
+        },
+        {
+            id: 'emma-instagram-title',
+            type: 'instagram-title',
+            props: {
+                title: 'Instagram'
+            }
+        },
+        {
+            id: 'emma-blog-footer',
+            type: 'footer',
+            props: {
+              logoText: 'EMMA',
+              aboutTitle: 'Emma',
+              aboutText: 'I help creative entrepreneurs build businesses they love.',
+              servicesTitle: 'Services',
+              services: [
+                { text: 'Program', href: '#' },
+                { text: 'Coaching', href: '#' },
+                { text: 'Resources', href: '#' }
+              ],
+              followTitle: 'Follow me',
+              copyright: '© 2024 Emma Theme',
+              credits: 'TEMPLATE BY ANTIGRAVITY',
+              socialLinks: [
+                  { platform: 'instagram', url: '#' },
+                  { platform: 'tiktok', url: '#' },
+                  { platform: 'facebook', url: '#' }
+              ]
             }
         }
       ]
