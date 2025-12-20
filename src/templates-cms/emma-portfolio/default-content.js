@@ -30,7 +30,7 @@ export const emmaDefaultContent = {
             subtitle: 'Available now for 10$',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             buttonText: 'SHOP NOW',
-            image: '/images/emma-hero.jpg' // Placeholder will be used or user uploaded image
+            image: 'https://images.unsplash.com/photo-1521369792376-79c7b9c9f76a?w=800&q=80'
           }
         },
         {
@@ -41,7 +41,7 @@ export const emmaDefaultContent = {
             subtitle: 'Not only with coaching!',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             buttonText: 'READ MORE',
-            image: '/images/emma-intro.jpg'
+            image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80'
           }
         },
         {
@@ -55,19 +55,19 @@ export const emmaDefaultContent = {
                 title: 'My awesome Program',
                 description: 'We help you launch your business in 5 easy steps.',
                 buttonText: 'SEE MORE',
-                image: '/images/emma-service1.jpg'
+                image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=500&q=80'
               },
               {
                 title: 'Coaching 1:1',
                 description: 'Get personal guidance to grow your business.',
                 buttonText: 'READ MORE',
-                image: '/images/emma-service2.jpg'
+                image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&q=80'
               },
               {
                 title: 'My guides to help you grow',
                 description: 'Download our free guides to boost your sales.',
                 buttonText: 'SEE GUIDES',
-                image: '/images/emma-service3.jpg'
+                image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=500&q=80'
               }
             ]
           }
@@ -80,7 +80,7 @@ export const emmaDefaultContent = {
             subtitle: 'Get our free guide on how to build your business from scratch.',
             placeholder: 'Your email address...',
             buttonText: 'SUBSCRIBE',
-            image: '/images/emma-steps.jpg'
+            image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&q=80'
           }
         },
         {
@@ -88,10 +88,10 @@ export const emmaDefaultContent = {
           type: 'podcast',
           props: {
             title: 'The Podcast',
-            subtitle: 'ABout EMMA',
+            subtitle: 'About EMMA',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             buttonText: 'LISTEN NOW',
-            image: '/images/emma-podcast.jpg'
+            image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500&q=80'
           }
         },
         {
@@ -121,21 +121,21 @@ export const emmaDefaultContent = {
             subtitle: 'From the blog',
             posts: [
               {
-                title: 'My Winter pcks',
+                title: 'My Winter picks',
                 excerpt: 'My favorite items for this winter season.',
-                image: '/images/emma-post1.jpg',
+                image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=500&q=80',
                 link: '#'
               },
               {
                 title: 'Spring podcast',
                 excerpt: 'Listen to our new episode about spring trends.',
-                image: '/images/emma-post2.jpg',
+                image: 'https://images.unsplash.com/photo-1478737270239-2f02b77ac618?w=500&q=80',
                 link: '#'
               },
               {
                 title: 'New podcast',
                 excerpt: 'How to start your own podcast in 2024.',
-                image: '/images/emma-post3.jpg',
+                image: 'https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=500&q=80',
                 link: '#'
               }
             ]
@@ -156,9 +156,9 @@ export const emmaDefaultContent = {
             text: 'Join our community of creative entrepreneurs and start your journey today.',
             buttonText: 'JOIN NOW',
             images: [
-              '/images/emma-impact1.jpg',
-              '/images/emma-impact2.jpg',
-              '/images/emma-impact3.jpg'
+              'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80',
+              'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=80',
+              'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&q=80'
             ]
           }
         },
