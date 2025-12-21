@@ -7,7 +7,8 @@ export const translations = {
       templates: 'Templates',
       settings: 'Settings',
       products: 'Products',
-      pages: 'Pages'
+      pages: 'Pages',
+      support: 'Support'
     },
     dashboard: {
       welcome: 'Welcome back',
@@ -169,7 +170,8 @@ export const translations = {
       templates: 'Templates',
       settings: 'Configurações',
       products: 'Produtos',
-      pages: 'Páginas'
+      pages: 'Páginas',
+      support: 'Suporte'
     },
     dashboard: {
       welcome: 'Bem-vindo de volta',

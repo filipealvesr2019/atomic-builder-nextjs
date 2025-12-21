@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, ShoppingBag, Settings, Layers, DownloadCloud, Plug } from 'lucide-react';
+import { LayoutDashboard, FileText, ShoppingBag, Settings, Layers, DownloadCloud, Plug, HelpCircle } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { clsx } from 'clsx';
 import { useAtom } from 'jotai';
@@ -15,6 +15,7 @@ const menuItems = [
   { icon: Plug, key: 'plugins', href: '/admin/plugins' },
   { icon: Layers, key: 'templates', href: '/admin/templates' },
   { icon: Settings, key: 'settings', href: '/admin/settings' },
+  { icon: HelpCircle, key: 'support', href: '/admin/support' },
 ];
 
 export default function Sidebar() {
