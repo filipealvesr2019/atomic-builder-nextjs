@@ -98,3 +98,19 @@
         height: 400px;
     }
 }
+
+/* Force Mobile in Simulator */
+:global(.is-mobile-preview) .container {
+    flex-direction: column !important;
+    gap: 2rem !important;
+}
+
+:global(.is-mobile-preview) .textColumn {
+    padding-right: 0 !important;
+    text-align: center !important;
+}
+
+:global(.is-mobile-preview) .imageColumn {
+    width: 100% !important;
+    height: 400px !important;
+}

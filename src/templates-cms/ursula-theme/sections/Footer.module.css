@@ -147,3 +147,26 @@
         text-align: center;
     }
 }
+
+/* Force Mobile in Simulator */
+:global(.is-mobile-preview) .container {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3rem !important;
+}
+
+:global(.is-mobile-preview) .centerColumn {
+    border: none !important;
+    border-top: 1px solid #333 !important;
+    border-bottom: 1px solid #333 !important;
+    padding: 2rem 0 !important;
+    width: 100% !important;
+}
+
+:global(.is-mobile-preview) .bottomBar {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    text-align: center !important;
+}

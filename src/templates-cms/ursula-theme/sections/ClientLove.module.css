@@ -87,3 +87,21 @@
         white-space: nowrap;
     }
 }
+
+/* Force Mobile in Simulator */
+:global(.is-mobile-preview) .container {
+    flex-direction: column-reverse !important;
+    gap: 3rem !important;
+}
+
+:global(.is-mobile-preview) .textColumn {
+    padding-left: 0 !important;
+    text-align: center !important;
+}
+
+:global(.is-mobile-preview) .titleOverlay {
+    right: 50% !important;
+    transform: translate(50%, -50%) !important;
+    font-size: 2.5rem !important;
+    white-space: nowrap !important;
+}
