@@ -633,9 +633,9 @@ export const avaDefaultContent = {
             title: "From the Journal",
             subtitle: "READ THE LATEST",
             posts: [
-                { id: 1, title: "Wedding Day at the Cliffs", category: "WEDDING, COASTAL", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
-                { id: 2, title: "The Art of Natural Light", category: "PHOTOGRAPHY, TIPS", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
-                { id: 3, title: "Mountain Elopement Guide", category: "ELOPEMENT, TRAVEL", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" }
+                { id: 1, title: "Wedding Day at the Cliffs", category: "WEDDING, COASTAL", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
+                { id: 2, title: "The Art of Natural Light", category: "PHOTOGRAPHY, TIPS", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
+                { id: 3, title: "Mountain Elopement Guide", category: "ELOPEMENT, TRAVEL", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" }
             ]
           }
         },
@@ -696,7 +696,7 @@ export const avaDefaultContent = {
             title: "The Art of Natural Light in Modern Weddings",
             category: "PHOTOGRAPHY, WEDDING",
             date: "JANUARY 4, 2024",
-            mainImage: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1600&auto=format&fit=crop",
+            mainImage: "https://images.unsplash.com/photo-1470252649358-96949c836b8a?q=80&w=1600&auto=format&fit=crop",
             content: [
                 "Natural light is the most versatile and beautiful tool a photographer has. It can create drama, softness, and a sense of timelessness that flash often struggles to replicate. In this post, we explore how to harness the sun's power throughout a wedding day.",
                 "From the soft, blue-hued light of a pre-dawn preparation to the harsh, direct sun of a noon-time ceremony, understanding how to position your subjects and your camera is key. We'll look at techniques for 'open shade' and the magic of the golden hour.",
@@ -725,8 +725,8 @@ export const avaDefaultContent = {
                 "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop"
             ],
             recentPosts: [
-                { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=200&auto=format&fit=crop" },
-                { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=200&auto=format&fit=crop" }
+                { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&w=200&auto=format&fit=crop" },
+                { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1522673607200-164883eeca48?q=80&w=200&auto=format&fit=crop" }
             ]
           }
         },
@@ -736,8 +736,8 @@ export const avaDefaultContent = {
             props: {
                 title: "You May Also Like",
                 posts: [
-                    { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" },
-                    { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" }
+                    { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&w=600&auto=format&fit=crop" },
+                    { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1522673607200-164883eeca48?q=80&w=600&auto=format&fit=crop" }
                 ]
             }
         },
