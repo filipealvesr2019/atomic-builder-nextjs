@@ -10,28 +10,30 @@
 }
 
 .title {
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-family: 'Playfair Display', serif;
     color: #333;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     font-weight: 400;
-    line-height: 1.2;
-    max-width: 800px;
+    line-height: 1.15;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    letter-spacing: -0.02rem;
 }
 
 .bridge {
-    font-size: 0.8rem;
-    letter-spacing: 0.15rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
     text-transform: uppercase;
-    color: #666;
-    margin-bottom: 80px;
-    font-weight: 400;
-    line-height: 1.6;
-    max-width: 700px;
+    color: #888;
+    margin-bottom: 90px;
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .grid {
@@ -47,17 +49,18 @@
 }
 
 .icon {
-    color: #c4b5a2;
+    color: #d1c7bc;
     margin-bottom: 25px;
 }
 
 .text {
-    font-size: 0.95rem;
-    color: #333;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    color: #444;
     line-height: 1.6;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 300;
+    max-width: 280px;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
