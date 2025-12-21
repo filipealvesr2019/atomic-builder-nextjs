@@ -20,7 +20,8 @@
 
 
 .imageWrapper:nth-child(2) {
-    height: 80%; /* Middle image takes full container height */
+    flex: 1.5; /* Makes the middle image wider */
+    height: 80%; /* Adjusted height according to user change */
 }
 
 .image {
