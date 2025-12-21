@@ -54,3 +54,8 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* ROBUST MOBILE OVERRIDES */
+:global(.ursula-mobile-insta) {
+    grid-template-columns: repeat(2, 1fr) !important;
+}
