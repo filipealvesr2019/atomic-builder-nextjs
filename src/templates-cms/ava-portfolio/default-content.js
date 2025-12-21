@@ -110,17 +110,20 @@ export const avaDefaultContent = {
                     {
                         title: "Big Day Title One",
                         category: "Wedding",
-                        image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
+                        image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=2070&auto=format&fit=crop",
+                        link: "/admin/store/preview/ava-portfolio/blog-post"
                     },
                     {
                         title: "Big Day Title Two",
                         category: "Elopement",
-                        image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop"
+                        image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=1000&auto=format&fit=crop",
+                        link: "/admin/store/preview/ava-portfolio/blog-post"
                     },
                     {
                         title: "Big Day Title Three",
                         category: "Engagement",
-                        image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop"
+                        image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+                        link: "/admin/store/preview/ava-portfolio/blog-post"
                     }
                 ]
             }
@@ -633,9 +636,9 @@ export const avaDefaultContent = {
             title: "From the Journal",
             subtitle: "READ THE LATEST",
             posts: [
-                { id: 1, title: "Wedding Day at the Cliffs", category: "WEDDING, COASTAL", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
-                { id: 2, title: "The Art of Natural Light", category: "PHOTOGRAPHY, TIPS", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
-                { id: 3, title: "Mountain Elopement Guide", category: "ELOPEMENT, TRAVEL", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" }
+                { id: 1, title: "Wedding Day at the Cliffs", category: "WEDDING, COASTAL", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/wedding-cliffs" },
+                { id: 2, title: "The Art of Natural Light", category: "PHOTOGRAPHY, TIPS", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=870&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/natural-light" },
+                { id: 3, title: "Mountain Elopement Guide", category: "ELOPEMENT, TRAVEL", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/mountain-elopement" }
             ]
           }
         },
@@ -665,12 +668,12 @@ export const avaDefaultContent = {
       ]
     },
     {
-      slug: 'blog-post',
-      name: 'Single Post',
+      slug: 'wedding-cliffs',
+      name: 'Wedding Day at the Cliffs',
       layout: 'single-post',
       content: [
         {
-          id: 'post-header',
+          id: 'post-header-1',
           type: 'header',
           props: {
             logoText: "Ava",
@@ -690,11 +693,104 @@ export const avaDefaultContent = {
           }
         },
         {
-          id: 'post-content',
+          id: 'post-content-1',
+          type: 'post-content',
+          props: {
+            title: "Wedding Day at the Cliffs",
+            category: "WEDDING, COASTAL",
+            date: "JANUARY 5, 2024",
+            mainImage: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=1600&auto=format&fit=crop",
+            content: [
+                "There is nothing quite like the raw energy of the coastline. The sound of crashing waves and the salty mist provide a dramatic backdrop for a love story. This wedding at the rugged cliffs was a true testament to nature's beauty.",
+                "The ceremony took place on a windswept plateau, where the couple exchanged vows with the vast ocean as their only witness. We captured intimate moments amidst the granite rocks and the golden grass of late afternoon.",
+                "As the sun dipped below the horizon, the sky turned into a canvas of pink and indigo. It was a day filled with adventure, emotion, and the kind of magic that only happens when you embrace the elements."
+            ],
+            author: {
+                name: "Ava",
+                bio: "Hi, I'm Ava! I'm a wedding photographer based in the Bay Area. I love capturing honest moments and helping other photographers find their unique voice.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
+            }
+          }
+        },
+        {
+          id: 'post-sidebar-1',
+          type: 'post-sidebar',
+          props: {
+            author: {
+                name: "Ava",
+                bio: "I love capturing honest moments and beautiful stories through my lens.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
+            },
+            instagramImages: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop"
+            ],
+            recentPosts: [
+                { title: "The Art of Natural Light", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=200&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/natural-light" },
+                { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=200&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/mountain-elopement" }
+            ]
+          }
+        },
+        {
+            id: 'post-recommendations-1',
+            type: 'post-recommendations',
+            props: {
+                title: "You May Also Like",
+                posts: [
+                    { title: "The Art of Natural Light", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/natural-light" },
+                    { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/mountain-elopement" }
+                ]
+            }
+        },
+        {
+          id: 'post-footer-1',
+          type: 'footer',
+          props: {
+            instagramImages: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=400&auto=format&fit=crop"
+            ],
+            copyright: "© 2024 Ava Portfolio. All rights reserved."
+          }
+        }
+      ]
+    },
+    {
+      slug: 'natural-light',
+      name: 'The Art of Natural Light',
+      layout: 'single-post',
+      content: [
+        {
+          id: 'post-header-2',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
+                { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+          id: 'post-content-2',
           type: 'post-content',
           props: {
             title: "The Art of Natural Light in Modern Weddings",
-            category: "PHOTOGRAPHY, WEDDING",
+            category: "PHOTOGRAPHY, TIPS",
             date: "JANUARY 4, 2024",
             mainImage: "https://images.unsplash.com/photo-1470252649358-96949c836b8a?q=80&w=1600&auto=format&fit=crop",
             content: [
@@ -710,7 +806,7 @@ export const avaDefaultContent = {
           }
         },
         {
-          id: 'post-sidebar',
+          id: 'post-sidebar-2',
           type: 'post-sidebar',
           props: {
             author: {
@@ -725,24 +821,117 @@ export const avaDefaultContent = {
                 "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop"
             ],
             recentPosts: [
-                { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&w=200&auto=format&fit=crop" },
-                { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1522673607200-164883eeca48?q=80&w=200&auto=format&fit=crop" }
+                { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=200&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/wedding-cliffs" },
+                { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=200&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/mountain-elopement" }
             ]
           }
         },
         {
-            id: 'post-recommendations',
+            id: 'post-recommendations-2',
             type: 'post-recommendations',
             props: {
                 title: "You May Also Like",
                 posts: [
-                    { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&w=600&auto=format&fit=crop" },
-                    { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1522673607200-164883eeca48?q=80&w=600&auto=format&fit=crop" }
+                    { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/wedding-cliffs" },
+                    { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/mountain-elopement" }
                 ]
             }
         },
         {
-          id: 'post-footer',
+          id: 'post-footer-2',
+          type: 'footer',
+          props: {
+            instagramImages: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=400&auto=format&fit=crop"
+            ],
+            copyright: "© 2024 Ava Portfolio. All rights reserved."
+          }
+        }
+      ]
+    },
+    {
+      slug: 'mountain-elopement',
+      name: 'Mountain Elopement Guide',
+      layout: 'single-post',
+      content: [
+        {
+          id: 'post-header-3',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
+                { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+          id: 'post-content-3',
+          type: 'post-content',
+          props: {
+            title: "Mountain Elopement Guide",
+            category: "ELOPEMENT, TRAVEL",
+            date: "JANUARY 3, 2024",
+            mainImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600&auto=format&fit=crop",
+            content: [
+                "Eloping in the mountains offers a sense of solitude and grandeur that is hard to find elsewhere. Whether it's the high peaks of the Rockies or the misty hills of the Pacific Northwest, a mountain ceremony is an unforgettable experience.",
+                "In this guide, we discuss everything from finding the perfect trail-side altar to navigating unpredictable weather. We also share tips on how to keep your attire trail-ready while still looking stunning for your photos.",
+                "It's about the journey as much as the destination. A mountain elopement is for the couple who loves adventure and wants their wedding day to be a reflection of their shared passion for the great outdoors."
+            ],
+            author: {
+                name: "Ava",
+                bio: "Hi, I'm Ava! I'm a wedding photographer based in the Bay Area. I love capturing honest moments and helping other photographers find their unique voice.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
+            }
+          }
+        },
+        {
+          id: 'post-sidebar-3',
+          type: 'post-sidebar',
+          props: {
+            author: {
+                name: "Ava",
+                bio: "I love capturing honest moments and beautiful stories through my lens.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
+            },
+            instagramImages: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop"
+            ],
+            recentPosts: [
+                { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=200&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/wedding-cliffs" },
+                { title: "The Art of Natural Light", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=200&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/natural-light" }
+            ]
+          }
+        },
+        {
+            id: 'post-recommendations-3',
+            type: 'post-recommendations',
+            props: {
+                title: "You May Also Like",
+                posts: [
+                    { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/wedding-cliffs" },
+                    { title: "The Art of Natural Light", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/natural-light" }
+                ]
+            }
+        },
+        {
+          id: 'post-footer-3',
           type: 'footer',
           props: {
             instagramImages: [

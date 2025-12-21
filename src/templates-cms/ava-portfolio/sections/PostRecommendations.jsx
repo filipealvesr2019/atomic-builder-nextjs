@@ -14,8 +14,8 @@ export default function PostRecommendations({
       <div className={styles.container}>
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.grid}>
-            {posts.map(post => (
-                <div key={post.id} className={styles.recCard}>
+            {posts.map((post, idx) => (
+                <a key={post.id || idx} href={post.link} className={styles.recCard}>
                     <div className={styles.imageWrapper}>
                         <img src={post.image} alt={post.title} className={styles.image} />
                     </div>
@@ -23,7 +23,7 @@ export default function PostRecommendations({
                         <h4 className={styles.postTitle}>{post.title}</h4>
                         <span className={styles.date}>{post.date}</span>
                     </div>
-                </div>
+                </a>
             ))}
         </div>
       </div>

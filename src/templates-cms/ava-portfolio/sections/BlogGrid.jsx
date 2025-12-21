@@ -1,38 +1,58 @@
 'use client';
+import React from 'react';
 import styles from './BlogGrid.module.css';
 
 export default function BlogGrid({ 
     title = "From the Journal",
-    posts = []
+    subtitle = "READ THE LATEST",
+    posts = [
+        { 
+            id: 1, 
+            title: "Wedding Day at the Cliffs", 
+            category: "WEDDING, COASTAL", 
+            date: "JANUARY 5, 2024", 
+            image: "https://images.unsplash.com/photo-1549417229-aa67d3263c09?q=80&w=1600&auto=format&fit=crop",
+            link: "/admin/store/preview/ava-portfolio/blog-post"
+        },
+        { 
+            id: 2, 
+            title: "The Art of Natural Light", 
+            category: "PHOTOGRAPHY, TIPS", 
+            date: "JANUARY 4, 2024", 
+            image: "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?q=80&w=1600&auto=format&fit=crop",
+            link: "/admin/store/preview/ava-portfolio/blog-post"
+        },
+        { 
+            id: 3, 
+            title: "Mountain Elopement Guide", 
+            category: "ELOPEMENT, TRAVEL", 
+            date: "JANUARY 3, 2024", 
+            image: "https://images.unsplash.com/photo-1522673607200-164883eeca48?q=80&w=1600&auto=format&fit=crop",
+            link: "/admin/store/preview/ava-portfolio/blog-post"
+        }
+    ]
 }) {
-    // Fallback posts if none provided via props
-    const defaultPosts = [
-        { id: 1, title: "Big Day Title One", category: "Wedding", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" },
-        { id: 2, title: "Big Day Title Two", category: "Elopement", image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop" },
-        { id: 3, title: "Big Day Title Three", category: "Engagement", image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop" }
-    ];
-
-    const displayPosts = posts.length > 0 ? posts : defaultPosts;
-
   return (
-    <section className={styles.blogSection}>
-      <h4 className={styles.subtitle}>LATEST POSTS</h4>
-      <h2 className={styles.heading}>{title}</h2>
-      
-      <div className={styles.grid}>
-        {displayPosts.map((post, index) => (
-            <div key={index} className={styles.card}>
-                <div 
-                    className={styles.imageWrapper}
-                    style={{ backgroundImage: `url(${post.image})` }}
-                >
-                </div>
-                <div className={styles.content}>
-                    <span className={styles.category}>{post.category}</span>
-                    <h3 className={styles.postTitle}>{post.title}</h3>
-                </div>
-            </div>
-        ))}
+    <section className={styles.blogGridSection}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+            <span className={styles.subtitle}>{subtitle}</span>
+            <h2 className={styles.title}>{title}</h2>
+        </div>
+        <div className={styles.grid}>
+            {posts.map((post, idx) => (
+                <a key={post.id || idx} href={post.link} className={styles.postCard}>
+                    <div className={styles.imageWrapper}>
+                        <img src={post.image} alt={post.title} className={styles.image} />
+                    </div>
+                    <div className={styles.postMeta}>
+                        <span className={styles.category}>{post.category}</span>
+                        <h3 className={styles.postTitle}>{post.title}</h3>
+                        {post.date && <span className={styles.date}>{post.date}</span>}
+                    </div>
+                </a>
+            ))}
+        </div>
       </div>
     </section>
   );
@@ -42,13 +62,16 @@ BlogGrid.cmsConfig = {
     name: "Ava Blog Grid",
     props: {
         title: { type: "string", label: "Title" },
-        posts: { 
-            type: "array", 
-            label: "Blog Posts",
+        subtitle: { type: "string", label: "Subtitle" },
+        posts: {
+            type: "array",
+            label: "Posts",
             itemSchema: {
                 title: { type: "string", label: "Post Title" },
                 category: { type: "string", label: "Category" },
-                image: { type: "image", label: "Image" }
+                date: { type: "string", label: "Date" },
+                image: { type: "string", label: "Image URL" },
+                link: { type: "string", label: "Link" }
             }
         }
     }

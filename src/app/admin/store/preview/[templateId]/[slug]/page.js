@@ -46,11 +46,11 @@ export default function TemplatePagePreview() {
   }
 
   // Determine Layout
-  // Check if there is a specific layout for this slug, otherwise use a generic 'page' layout or fallback to 'home' (though likely not desired for inner pages)
-  // For Emma, we defined 'services' layout in registry.
-  let PageLayout = templateConfig.layouts?.[slug];
+  // Use the layout property from page content if specified, otherwise fall back to slug
+  const layoutKey = pageContent?.layout || slug;
+  let PageLayout = templateConfig.layouts?.[layoutKey];
   
-  // If no specific layout for this slug, maybe there's a generic 'page' layout?
+  // If no specific layout found, check for a generic 'page' layout or fallback to 'home'
   if (!PageLayout) {
       PageLayout = templateConfig.layouts?.page || templateConfig.layouts?.home;
   }
