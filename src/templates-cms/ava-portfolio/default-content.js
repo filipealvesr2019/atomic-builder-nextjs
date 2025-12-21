@@ -193,22 +193,22 @@ export const avaDefaultContent = {
           id: 'work-steps',
           type: 'workshop-steps',
           props: {
-            title: "THE CURRICULUM",
+            title: "What You Can Expect",
             steps: [
               {
                 number: "01",
-                title: "Vision & Style",
-                description: "Deep dive into developing a signature aesthetic that attracts your dream clientele."
+                title: "VISION & STYLE",
+                description: "Master the art of visual storytelling and develop a unique style that resonates with your ideal clients."
               },
               {
                 number: "02",
-                title: "Hands-on Shooting",
-                description: "Live editorial session with a professional couple, focusing on posing and light direction."
+                title: "HANDS-ON SHOOTING",
+                description: "Step behind the lens in a guided editorial session, perfecting your posing and lighting techniques."
               },
               {
                 number: "03",
-                title: "The Edit",
-                description: "Comprehensive workflow session using Lightroom and Photoshop to achieve a timeless look."
+                title: "THE EDIT",
+                description: "Learn a refined post-production workflow to create consistent, high-end galleries that stand out."
               }
             ]
           }
