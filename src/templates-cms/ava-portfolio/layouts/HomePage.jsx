@@ -15,7 +15,7 @@ const openSans = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '600'] }
 
 export default function HomePage({ sections = {} }) {
   return (
-    <div className={`ava-theme-wrapper ${playfair.className}`} style={{ color: '#333', backgroundColor: '#ebeae6' }}>
+    <div className={`ava-theme-wrapper ${playfair.className} ${openSans.className}`} style={{ color: '#333', backgroundColor: '#ebeae6' }}>
         <Header {...(sections['header'] || {})} />
         <Hero {...(sections['hero'] || {})} />
         <Introduction {...(sections['introduction'] || {})} />

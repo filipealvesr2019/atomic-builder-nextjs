@@ -53,10 +53,12 @@
 
 .description {
     font-size: 1.1rem;
+    font-family: 'Open Sans', sans-serif;
     color: #555;
     line-height: 1.6;
     margin-bottom: 40px;
     max-width: 500px;
+    font-weight: 300;
 }
 
 .button {
