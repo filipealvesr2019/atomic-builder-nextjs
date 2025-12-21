@@ -12,7 +12,6 @@ export default function Header({
   links = [],
   forceMobile = false
 }) {
-  console.log('Ursula Header Links:', links);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
 
