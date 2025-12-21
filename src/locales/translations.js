@@ -29,7 +29,7 @@ export const translations = {
       deleteConfirm: 'Are you sure you want to delete this template?',
       viewTheme: 'View Theme',
       edit: 'Edit',
-      config: 'Config',
+      config: 'Modules',
       delete: 'Delete',
       pagesCount: 'page(s)'
     },
