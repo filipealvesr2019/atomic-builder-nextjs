@@ -15,7 +15,7 @@ export const avaDefaultContent = {
                 { label: "ABOUT", href: "#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
-                { label: "PORTFOLIO", href: "#portfolio" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
                 { label: "CONTACT", href: "#contact" },
                 { label: "THE BLOG", href: "#blog" }
             ],
@@ -155,7 +155,7 @@ export const avaDefaultContent = {
                 { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
-                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/home#portfolio" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
                 { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
             ],
@@ -354,7 +354,7 @@ export const avaDefaultContent = {
                 { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
-                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/home#portfolio" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
                 { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
             ],
@@ -521,6 +521,87 @@ export const avaDefaultContent = {
                 ],
                 copyright: "© 2024 Ava Portfolio. All rights reserved."
             }
+        }
+      ]
+    },
+    {
+      slug: 'portfolio',
+      name: 'Portfolio',
+      layout: 'portfolio',
+      content: [
+        {
+          id: 'ava-header-port',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
+                { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+          id: 'port-grid',
+          type: 'portfolio-grid',
+          props: {
+            title: "Selected Works",
+            categories: ["WEDDINGS", "ELOPEMENTS", "DESTINATIONS", "LIFESTYLE"],
+            images: [
+              { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop', category: 'WEDDINGS' },
+              { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop', category: 'WEDDINGS' },
+              { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop', category: 'ELOPEMENTS' },
+              { url: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop', category: 'ELOPEMENTS' },
+              { url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop', category: 'DESTINATIONS' },
+              { url: 'https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop', category: 'LIFESTYLE' }
+            ]
+          }
+        },
+        {
+          id: 'port-slider',
+          type: 'portfolio-slider',
+          props: {
+            images: [
+              { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' },
+              { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop' },
+              { url: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop' }
+            ]
+          }
+        },
+        {
+          id: 'port-masonry',
+          type: 'portfolio-masonry',
+          props: {
+            images: [
+              { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop' },
+              { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop' },
+              { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' },
+              { url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop' },
+              { url: 'https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop' }
+            ]
+          }
+        },
+        {
+          id: 'ava-footer-port',
+          type: 'footer',
+          props: {
+              instagramImages: [
+                   "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"
+              ],
+              copyright: "© 2024 Ava Portfolio. All rights reserved."
+          }
         }
       ]
     }
