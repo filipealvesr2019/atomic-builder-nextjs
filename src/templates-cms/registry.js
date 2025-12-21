@@ -20,6 +20,7 @@ import WorkshopGridTopics from './ava-portfolio/sections/WorkshopGridTopics';
 import WorkshopImageOverlap from './ava-portfolio/sections/WorkshopImageOverlap';
 import WorkshopInfoRow from './ava-portfolio/sections/WorkshopInfoRow';
 import WorkshopAccordion from './ava-portfolio/sections/WorkshopAccordion';
+import WorkshopValueProp from './ava-portfolio/sections/WorkshopValueProp';
 import AvaHomePage from './ava-portfolio/layouts/HomePage';
 import AvaWorkshopsPage from './ava-portfolio/layouts/WorkshopsPage';
 import { avaDefaultContent } from './ava-portfolio/default-content';
@@ -226,7 +227,8 @@ const templates = {
         'workshop-grid-topics': WorkshopGridTopics,
         'workshop-image-overlap': WorkshopImageOverlap,
         'workshop-info-row': WorkshopInfoRow,
-        'workshop-accordion': WorkshopAccordion
+        'workshop-accordion': WorkshopAccordion,
+        'workshop-value-prop': WorkshopValueProp
     }
   }
 };

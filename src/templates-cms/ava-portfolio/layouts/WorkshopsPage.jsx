@@ -11,6 +11,7 @@ import WorkshopGridTopics from '../sections/WorkshopGridTopics';
 import WorkshopImageOverlap from '../sections/WorkshopImageOverlap';
 import WorkshopInfoRow from '../sections/WorkshopInfoRow';
 import WorkshopAccordion from '../sections/WorkshopAccordion';
+import WorkshopValueProp from '../sections/WorkshopValueProp';
 
 const SECTION_MAP = {
     'header': Header,
@@ -25,7 +26,8 @@ const SECTION_MAP = {
     'workshop-grid-topics': WorkshopGridTopics,
     'workshop-image-overlap': WorkshopImageOverlap,
     'workshop-info-row': WorkshopInfoRow,
-    'workshop-accordion': WorkshopAccordion
+    'workshop-accordion': WorkshopAccordion,
+    'workshop-value-prop': WorkshopValueProp
 };
 
 export default function WorkshopsPage({ content = [] }) {

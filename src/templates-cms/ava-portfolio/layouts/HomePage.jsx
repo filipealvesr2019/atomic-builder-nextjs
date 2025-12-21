@@ -10,12 +10,12 @@ import Testimonials from '../sections/Testimonials';
 import BlogGrid from '../sections/BlogGrid';
 import Footer from '../sections/Footer';
 
-const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '700'], style: ['normal', 'italic'], variable: '--font-playfair' });
-const openSans = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '600'], variable: '--font-opensans' });
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '700'], style: ['normal', 'italic'] });
+const openSans = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '600'] });
 
 export default function HomePage({ sections = {} }) {
   return (
-    <div className={`ava-theme-wrapper ${playfair.className} ${playfair.variable} ${openSans.variable}`} style={{ color: '#333', backgroundColor: '#ebeae6' }}>
+    <div className={`ava-theme-wrapper ${playfair.className} ${openSans.variable}`} style={{ color: '#333', backgroundColor: '#ebeae6' }}>
         <Header {...(sections['header'] || {})} />
         <Hero {...(sections['hero'] || {})} />
         <Introduction {...(sections['introduction'] || {})} />

@@ -1,0 +1,72 @@
+.valueSection {
+    padding: 120px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 3.2rem;
+    font-family: 'Playfair Display', serif;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bridge {
+    font-size: 0.8rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 80px;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon {
+    color: #c4b5a2;
+    margin-bottom: 25px;
+}
+
+.text {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
+    line-height: 1.6;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.2rem;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

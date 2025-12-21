@@ -183,6 +183,19 @@ export const avaDefaultContent = {
           }
         },
         {
+            id: 'work-value-prop',
+            type: 'workshop-value-prop',
+            props: {
+                title: "You're Ready to Transform your Business from a Part-Time Hobby to the Real Deal",
+                bridgeStatement: "I'VE WORKED WITH HUNDREDS OF PHOTOGRAPHERS WHO ARE LOOKING FOR THAT EXTRA PUSH WHEN IT COMES TO GROWING A BUSINESS",
+                items: [
+                    { text: "You want to learn how to find and book more high-quality clients" },
+                    { text: "You want to confidently charge higher rates for services" },
+                    { text: "You want help with invoicing, accounting, and marketing." }
+                ]
+            }
+        },
+        {
           id: 'work-steps',
           type: 'workshop-steps',
           props: {
