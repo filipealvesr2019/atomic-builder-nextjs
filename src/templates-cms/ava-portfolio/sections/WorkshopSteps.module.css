@@ -15,6 +15,7 @@
     text-transform: uppercase;
     color: #666;
     margin-bottom: 60px;
+    font-weight: 400;
 }
 
 .grid {
@@ -33,10 +34,11 @@
 }
 
 .number {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-family: 'Playfair Display', serif;
     color: #333;
     margin-bottom: 20px;
+    font-weight: 400;
 }
 
 .stepTitle {
@@ -45,6 +47,7 @@
     text-transform: uppercase;
     color: #333;
     margin-bottom: 15px;
+    font-weight: 400;
 }
 
 .description {

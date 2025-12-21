@@ -44,6 +44,7 @@
     letter-spacing: 0.15rem;
     text-transform: uppercase;
     margin-bottom: 30px;
+    font-weight: 400;
 }
 
 .priceContainer {
@@ -51,9 +52,10 @@
 }
 
 .price {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-family: 'Playfair Display', serif;
     display: block;
+    font-weight: 400;
 }
 
 .tax {

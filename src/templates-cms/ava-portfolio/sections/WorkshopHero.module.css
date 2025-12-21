@@ -39,14 +39,15 @@
     color: #666;
     margin-bottom: 20px;
     text-transform: uppercase;
+    font-weight: 400;
 }
 
 .title {
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-family: 'Playfair Display', serif;
     color: #333;
     margin-bottom: 30px;
-    line-height: 1.2;
+    line-height: 1.1;
     font-weight: 400;
 }
 
