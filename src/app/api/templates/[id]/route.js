@@ -35,6 +35,10 @@ const updateTemplateSchema = z.object({
     digitalProductCover: z.any().optional(),
     digitalProductCoverPublicId: z.string().optional()
   })).optional(),
+  plugins: z.array(z.object({
+    id: z.string(),
+    installedAt: z.string().or(z.date()).optional()
+  })).optional(),
 });
 
 export async function GET(req, { params }) {

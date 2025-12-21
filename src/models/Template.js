@@ -58,6 +58,12 @@ const TemplateSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  plugins: [
+    {
+      id: String,
+      installedAt: { type: Date, default: Date.now }
+    }
+  ],
   isPublic: {
     type: Boolean,
     default: false,
