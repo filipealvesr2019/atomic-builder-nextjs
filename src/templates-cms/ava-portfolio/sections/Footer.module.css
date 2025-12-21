@@ -84,4 +84,170 @@
         flex-direction: column;
         gap: 15px;
     }
+    .modalContent {
+        flex-direction: column;
+        width: 95%;
+        height: 90vh;
+        max-height: none;
+    }
+    .modalImageContainer, .modalInfo {
+        width: 100%;
+        height: 50%;
+    }
+}
+
+.instaItem {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s;
+    position: relative;
+    cursor: pointer;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.instaItem:hover .overlay {
+    opacity: 1;
+}
+
+.icon {
+    color: white;
+    font-size: 2rem;
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background-color: white;
+    width: 900px;
+    height: 600px;
+    display: flex;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    color: #333;
+}
+
+.modalImageContainer {
+    width: 60%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modalInfo {
+    width: 40%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #efefef;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    /* Placeholder color if no image */
+    background-color: #ccc; 
+    background-size: cover;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    color: #262626;
+}
+
+.followLink {
+    color: #0095f6;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.caption {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #262626;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.time {
+    font-size: 0.7rem;
+    color: #8e8e8e;
+    text-transform: uppercase;
+    margin-top: 5px;
+    display: block;
+}
+
+.modalFooter {
+    border-top: 1px solid #efefef;
+    padding-top: 15px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.actionIcons {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
