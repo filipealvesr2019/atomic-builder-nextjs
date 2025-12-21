@@ -27,9 +27,11 @@ export default function WorkshopSteps({
                 <div className={styles.grid}>
                     {steps.map((step, index) => (
                         <div key={index} className={styles.card}>
-                            <span className={styles.number}>{step.number}</span>
-                            <h3 className={styles.stepTitle}>{step.title}</h3>
-                            <p className={styles.description}>{step.description}</p>
+                            <div className={styles.innerBorder}>
+                                <span className={styles.number}>{step.number}</span>
+                                <h3 className={styles.stepTitle}>{step.title}</h3>
+                                <p className={styles.description}>{step.description}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
