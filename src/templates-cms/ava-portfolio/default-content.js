@@ -15,6 +15,7 @@ export const avaDefaultContent = {
                 { label: "ABOUT", href: "#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "#portfolio" },
                 { label: "CONTACT", href: "#contact" },
                 { label: "THE BLOG", href: "#blog" }
             ],
@@ -154,6 +155,7 @@ export const avaDefaultContent = {
                 { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/home#portfolio" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
                 { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
             ],
@@ -352,6 +354,7 @@ export const avaDefaultContent = {
                 { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/home#portfolio" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
                 { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
             ],
