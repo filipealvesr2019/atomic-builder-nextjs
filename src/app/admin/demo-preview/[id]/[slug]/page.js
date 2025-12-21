@@ -66,7 +66,7 @@ export default function GenericPage() {
 
   return (
     <PreviewWrapper templateName={`Ursula ${page.name || ''}`}>
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
             {page.content?.map((block, idx) => {
                 const Component = SECTION_MAP[block.type];
                 if (!Component) return <div key={idx} style={{padding:'20px', textAlign:'center'}}>Feature {block.type} not implemented yet</div>;

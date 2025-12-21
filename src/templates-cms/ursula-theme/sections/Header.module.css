@@ -355,7 +355,7 @@
 :global(.is-mobile-preview) .container.showMenu {
     display: flex !important;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     top: 60px;
     left: 0;
     right: 0;
@@ -363,6 +363,7 @@
     background: #fff;
     z-index: 100;
     height: auto;
+    min-height: calc(100% - 60px);
     padding: 2rem 2rem;
     align-items: center;
     gap: 2rem;
