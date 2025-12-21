@@ -10,12 +10,13 @@
 }
 
 .mainTitle {
-    font-size: 0.85rem;
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-    color: #666;
+    font-size: 3.2rem;
+    font-family: 'Playfair Display', serif;
+    color: #333;
     margin-bottom: 60px;
     font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 .grid {
@@ -34,10 +35,10 @@
 }
 
 .number {
-    font-size: 1.8rem;
+    font-size: 3.2rem;
     font-family: 'Playfair Display', serif;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: 400;
 }
 
