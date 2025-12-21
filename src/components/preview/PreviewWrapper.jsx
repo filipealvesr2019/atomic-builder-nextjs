@@ -123,7 +123,10 @@ export default function PreviewWrapper({ children, templateName = "Ursula" }) {
         }}>
              <div style={getViewportStyle()} className={viewport === 'mobile' ? 'is-mobile-preview' : ''}>
                  <div style={{ width: '100%', height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>
-                    {children}
+                    {typeof children === 'function' 
+                        ? children({ forceMobile: viewport === 'mobile' }) 
+                        : children
+                    }
                  </div>
              </div>
         </div>
