@@ -144,14 +144,16 @@
     }
 }
 
-/* Force Mobile in Simulator */
+/* Force Mobile in Simulator - HIGH SPECIFICITY */
 :global(.is-mobile-preview) .section {
     padding: 3rem 1.5rem;
 }
 
 :global(.is-mobile-preview) .grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3rem !important;
 }
 
 :global(.is-mobile-preview) .title {

@@ -32,9 +32,43 @@ body {
   margin: 0;
 }
 
+/* Ensure images don't overflow */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* NUCLEAR OPTION: Global Mobile Overrides for Ursula Theme */
+/* This targets the simulator class and specific hook classes we added */
+
+/* Grid Stacking (CategoryGrid, LatestPosts) */
+body .is-mobile-preview .ursula-mobile-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+    width: 100% !important;
+}
+
+/* Content Stacking (FeaturedContent, ClientLove) */
+body .is-mobile-preview .ursula-mobile-stack {
+    display: flex !important;
+    flex-direction: column !important; /* Stack vertically */
+    gap: 3rem !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+body .is-mobile-preview .ursula-mobile-stack > div {
+    width: 100% !important;
+    padding: 0 1rem !important;
+    text-align: center !important;
 }
 
 @media (prefers-color-scheme: dark) {

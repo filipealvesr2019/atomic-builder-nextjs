@@ -11,7 +11,7 @@ export default function FeaturedContent({
 }) {
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <div className={`${styles.container} ursula-mobile-stack`}>
         {/* Text Content */}
         <div className={styles.textColumn}>
             <h2 className={styles.title}>{title}</h2>

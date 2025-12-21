@@ -19,7 +19,7 @@ export default function CategoryGrid({
           <h2 className={styles.title}>{title}</h2>
       </header>
       
-      <div className={styles.grid}>
+      <div className={`${styles.grid} ursula-mobile-grid`}>
           {categories.map((cat, idx) => (
              <Link key={idx} href={cat.link || '#'} className={styles.card}>
                  <div className={styles.imageContainer}>

@@ -9,7 +9,7 @@ export default function ClientLove({
 }) {
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <div className={`${styles.container} ursula-mobile-stack`}>
         <div className={styles.imageColumn}>
              <img src={image} alt="Client" className={styles.image} />
         

@@ -43,7 +43,7 @@ export default function LatestPosts({
           <h2 className={styles.title}>{title}</h2>
       </header>
       
-      <div className={styles.grid}>
+      <div className={`${styles.grid} ursula-mobile-grid`}>
           {posts.map((post, idx) => (
              <article key={idx} className={styles.post}>
                  <Link href="/admin/demo-preview/ursula-demo/single-post" className={styles.linkWrapper}>
