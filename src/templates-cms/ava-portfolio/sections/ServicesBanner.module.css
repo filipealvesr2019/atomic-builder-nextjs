@@ -1,0 +1,50 @@
+.bannerSection {
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.quote {
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.author {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .bannerSection {
+        height: 400px;
+        background-attachment: scroll;
+    }
+    .quote {
+        font-size: 24px;
+    }
+}

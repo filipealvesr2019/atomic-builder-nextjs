@@ -1,0 +1,37 @@
+.processSection {
+    padding: 100px 40px;
+    background-color: #ebeae6;
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 32px;
+    margin-bottom: 40px;
+    font-weight: 400;
+    color: #4a4a4a;
+}
+
+.textGrid {
+    display: flex;
+    gap: 40px;
+}
+
+.text {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #555;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .textGrid {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

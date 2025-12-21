@@ -14,7 +14,7 @@ export const avaDefaultContent = {
             links: [
                 { label: "ABOUT", href: "#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
-                { label: "SERVICES", href: "#services" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
                 { label: "CONTACT", href: "#contact" },
                 { label: "THE BLOG", href: "#blog" }
             ],
@@ -83,7 +83,7 @@ export const avaDefaultContent = {
             type: 'about-intro',
             props: {
                 title: "It's Nice to Meet You, I'm",
-                name: "Ave Rose!",
+                name: "Ava Rose!",
                 description: "Capturing life's perfect moments with grace and style. I turn your memories into timeless art that you will cherish forever.",
                 buttonText: "Read My Story",
                 imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
@@ -153,7 +153,7 @@ export const avaDefaultContent = {
             links: [
                 { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
                 { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
-                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/home#services" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
                 { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
             ],
@@ -335,6 +335,136 @@ export const avaDefaultContent = {
               ],
               copyright: "© 2024 Ava Portfolio. All rights reserved."
           }
+        }
+      ]
+    },
+    {
+      slug: 'services',
+      name: 'Services',
+      layout: 'services',
+      content: [
+        {
+          id: 'ava-header-serv',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+            id: 'serv-triple-hero',
+            type: 'services-triple-hero',
+            props: {
+                images: [
+                    "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+                    "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop"
+                ]
+            }
+        },
+        {
+            id: 'serv-intro',
+            type: 'services-intro-ref',
+            props: {
+                title: "Artfully Capturing the Most Important Moments of your Story",
+                description: "We believe that your love story deserves to be told with elegance and authenticity. Our approach is focused on capturing the genuine emotions and beautiful details that make your day unique.",
+                buttonText: "BOOK NOW"
+            }
+        },
+        {
+            id: 'serv-process',
+            type: 'services-process',
+            props: {
+                title: "What to Expect When we Work Together",
+                text1: "Your wedding day is one of the most significant moments in your life. Our goal is to provide an experience that is as seamless as it is memorable, ensuring every detail is captured with care.",
+                text2: "From our initial consultation to the final gallery delivery, we are here to support you and make sure your vision comes to life exactly as you imagined."
+            }
+        },
+        {
+            id: 'serv-wedding-pkg',
+            type: 'services-overlap',
+            props: {
+                title: "The Wedding Package",
+                subtitle: "TAKING BOOKINGS FOR 2025",
+                description: "A comprehensive package designed to capture every moment of your big day. From the first look to the final dance, we'll be there to document it all, ensuring no detail goes unnoticed.",
+                buttonText: "VIEW PORTFOLIO",
+                imageLarge: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+                imageSmall: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop",
+                mirrored: false
+            }
+        },
+        {
+            id: 'serv-banner',
+            type: 'services-banner',
+            props: {
+                backgroundImage: "https://images.unsplash.com/photo-1510076857177-74700760be15?q=80&w=2072&auto=format&fit=crop",
+                quote: "“Where Memories Captured every Detail of our Special Day.”",
+                author: "ALEX & JAMES | WEDDING"
+            }
+        },
+        {
+            id: 'serv-engaged-pkg',
+            type: 'services-overlap',
+            props: {
+                title: "Getting Engaged",
+                subtitle: "LET'S CELEBRATE YOUR LOVE",
+                description: "Capture the excitement and intimacy of your engagement with a session that truly reflects your connection. We'll find a location that means something to you and create memories you'll treasure.",
+                buttonText: "LEARN MORE",
+                imageLarge: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop",
+                imageSmall: "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop",
+                mirrored: true
+            }
+        },
+        {
+            id: 'serv-faq',
+            type: 'services-faq',
+            props: {
+                title: "Common Questions",
+                questions: [
+                    { q: "HOW DO WE BOOK OUR DATE?", a: "To secure your date, we require a signed agreement and a retainer. Contact us to check availability." },
+                    { q: "DO YOU TRAVEL FOR WEDDINGS?", a: "Yes! We love to travel and are available for weddings worldwide." },
+                    { q: "WHEN WILL WE RECEIVE OUR PHOTOS?", a: "Full galleries are typically delivered within 6-8 weeks after your wedding day." },
+                    { q: "HOW MANY PHOTOS DO WE GET?", a: "We typically deliver between 500-800 edited high-resolution images." }
+                ]
+            }
+        },
+        {
+            id: 'serv-featured',
+            type: 'services-featured',
+            props: {
+                title: "Featured Galleries",
+                subtitle: "VIEW PORTFOLIO",
+                items: [
+                    { title: "WEDDINGS", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" },
+                    { title: "ENGAGEMENTS", image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop" },
+                    { title: "ELOPEMENTS", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop" }
+                ]
+            }
+        },
+        {
+            id: 'ava-footer-serv',
+            type: 'footer',
+            props: {
+                instagramImages: [
+                     "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"
+                ],
+                copyright: "© 2024 Ava Portfolio. All rights reserved."
+            }
         }
       ]
     }

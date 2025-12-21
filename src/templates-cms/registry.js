@@ -23,6 +23,16 @@ import WorkshopAccordion from './ava-portfolio/sections/WorkshopAccordion';
 import WorkshopValueProp from './ava-portfolio/sections/WorkshopValueProp';
 import AvaHomePage from './ava-portfolio/layouts/HomePage';
 import AvaWorkshopsPage from './ava-portfolio/layouts/WorkshopsPage';
+import AvaServicesPage from './ava-portfolio/layouts/ServicesPage';
+
+import ServicesTripleHero from './ava-portfolio/sections/ServicesTripleHero';
+import ServicesIntroRef from './ava-portfolio/sections/ServicesIntroRef';
+import ServicesProcess from './ava-portfolio/sections/ServicesProcess';
+import ServicesOverlap from './ava-portfolio/sections/ServicesOverlap';
+import ServicesBanner from './ava-portfolio/sections/ServicesBanner';
+import ServicesFAQ from './ava-portfolio/sections/ServicesFAQ';
+import ServicesFeatured from './ava-portfolio/sections/ServicesFeatured';
+
 import { avaDefaultContent } from './ava-portfolio/default-content';
 import MinimalBusinessHome from './minimal-business/layouts/HomePage';
 import MinimalBusinessHero from './minimal-business/sections/Hero';
@@ -205,7 +215,8 @@ const templates = {
     defaultContent: avaDefaultContent,
     layouts: {
         home: AvaPortfolioHome,
-        workshops: AvaWorkshopsPage
+        workshops: AvaWorkshopsPage,
+        services: AvaServicesPage
     },
     sections: {
         header: AvaHeader,
@@ -228,7 +239,14 @@ const templates = {
         'workshop-image-overlap': WorkshopImageOverlap,
         'workshop-info-row': WorkshopInfoRow,
         'workshop-accordion': WorkshopAccordion,
-        'workshop-value-prop': WorkshopValueProp
+        'workshop-value-prop': WorkshopValueProp,
+        'services-triple-hero': ServicesTripleHero,
+        'services-intro-ref': ServicesIntroRef,
+        'services-process': ServicesProcess,
+        'services-overlap': ServicesOverlap,
+        'services-banner': ServicesBanner,
+        'services-faq': ServicesFAQ,
+        'services-featured': ServicesFeatured
     }
   }
 };
