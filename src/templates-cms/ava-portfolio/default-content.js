@@ -501,6 +501,7 @@ export const avaDefaultContent = {
             props: {
                 title: "Featured Galleries",
                 subtitle: "VIEW PORTFOLIO",
+                href: "/admin/store/preview/ava-portfolio/portfolio",
                 items: [
                     { title: "WEDDINGS", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" },
                     { title: "ENGAGEMENTS", image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop" },

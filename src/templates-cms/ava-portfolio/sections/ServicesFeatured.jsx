@@ -5,6 +5,7 @@ import styles from './ServicesFeatured.module.css';
 export default function ServicesFeatured({ 
     title = "Featured Galleries",
     subtitle = "VIEW PORTFOLIO",
+    href = "/admin/store/preview/ava-portfolio/portfolio",
     items = [
         { title: "WEDDINGS", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" },
         { title: "ENGAGEMENTS", image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop" },
@@ -14,7 +15,13 @@ export default function ServicesFeatured({
   return (
     <section className={styles.featuredSection}>
       <div className={styles.container}>
-        <span className={styles.topSubtitle}>{subtitle}</span>
+        {href ? (
+            <a href={href} className={styles.topSubtitleLink}>
+                <span className={styles.topSubtitle}>{subtitle}</span>
+            </a>
+        ) : (
+            <span className={styles.topSubtitle}>{subtitle}</span>
+        )}
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.grid}>
             {items.slice(0, 3).map((item, idx) => (
