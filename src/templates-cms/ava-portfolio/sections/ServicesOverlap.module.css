@@ -80,7 +80,7 @@
     font-size: 36px;
     margin-bottom: 30px;
     font-weight: 400;
-    color: #4a4a4a;
+    color: #333; /* Darker title */
 }
 
 .description {
@@ -92,7 +92,7 @@
 
 .button {
     background-color: #d1ccbd;
-    color: #fff;
+    color: #1a1a1a; /* Dark color for better contrast */
     border: none;
     padding: 12px 30px;
     font-size: 13px;
