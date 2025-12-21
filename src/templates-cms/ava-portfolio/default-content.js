@@ -577,19 +577,6 @@ export const avaDefaultContent = {
           }
         },
         {
-          id: 'port-masonry',
-          type: 'portfolio-masonry',
-          props: {
-            images: [
-              { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop' },
-              { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop' },
-              { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' },
-              { url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop' },
-              { url: 'https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop' }
-            ]
-          }
-        },
-        {
           id: 'ava-footer-port',
           type: 'footer',
           props: {

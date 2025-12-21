@@ -3,7 +3,6 @@ import { Playfair_Display, Open_Sans } from 'next/font/google';
 import Header from '../sections/Header';
 import PortfolioGrid from '../sections/PortfolioGrid';
 import PortfolioSlider from '../sections/PortfolioSlider';
-import PortfolioMasonry from '../sections/PortfolioMasonry';
 import PortfolioModal from '../sections/PortfolioModal';
 import Footer from '../sections/Footer';
 
@@ -33,10 +32,6 @@ export default function PortfolioPage({ sections = {} }) {
             onImageClick={handleImageClick}
         />
 
-        <PortfolioMasonry 
-            {...(sections['portfolio-masonry'] || {})} 
-            onImageClick={handleImageClick}
-        />
 
         <PortfolioModal 
             isOpen={modalOpen}
