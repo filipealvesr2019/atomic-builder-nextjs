@@ -97,22 +97,25 @@
     }
 }
 
-/* Force Mobile in Simulator */
-:global(.is-mobile-preview) .section {
-    flex-direction: column;
+/* ROBUST MOBILE OVERRIDES */
+:global(.ursula-mobile-split) {
+    flex-direction: column !important;
 }
 
-:global(.is-mobile-preview) .content {
-    padding: 3rem 1.5rem;
-    text-align: center;
+:global(.ursula-mobile-split) [class*="NewsletterSplit_content"],
+:global(.ursula-mobile-split) .content {
+    padding: 3rem 1.5rem !important;
+    text-align: center !important;
 }
 
-:global(.is-mobile-preview) .form {
-    margin: 0 auto;
-    width: 100%;
+:global(.ursula-mobile-split) [class*="NewsletterSplit_form"],
+:global(.ursula-mobile-split) .form {
+    margin: 0 auto !important;
+    width: 100% !important;
 }
 
-:global(.is-mobile-preview) .button {
-    margin: 1rem auto 0;
+:global(.ursula-mobile-split) [class*="NewsletterSplit_button"],
+:global(.ursula-mobile-split) .button {
+    margin: 1rem auto 0 !important;
 }
 

@@ -2,10 +2,11 @@
 import styles from './NewsletterSplit.module.css';
 
 export default function NewsletterSplit({ 
-    title, subtitle, text, buttonText, image 
+    title, subtitle, text, buttonText, image,
+    forceMobile
 }) {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} ${forceMobile ? 'ursula-mobile-split' : ''}`}>
         <div className={styles.imageContainer}>
             <img src={image} alt="Newsletter" className={styles.image} />
         </div>

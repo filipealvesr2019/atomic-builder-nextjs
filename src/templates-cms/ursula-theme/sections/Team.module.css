@@ -105,21 +105,25 @@
 }
 
 /* Force Mobile in Simulator */
-:global(.is-mobile-preview) .section {
-    padding: 3rem 1.5rem;
+/* ROBUST MOBILE OVERRIDES - CONDITIONAL CLASS */
+:global(.ursula-mobile-grid) {
+    padding: 3rem 1.5rem !important;
 }
 
-:global(.is-mobile-preview) .grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+:global(.ursula-mobile-grid) [class*="Team_grid"],
+:global(.ursula-mobile-grid) .grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
 }
 
-:global(.is-mobile-preview) .title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+:global(.ursula-mobile-grid) [class*="Team_title"],
+:global(.ursula-mobile-grid) .title {
+    font-size: 2rem !important;
+    margin-bottom: 2rem !important;
 }
 
-:global(.is-mobile-preview) .member {
-    margin-bottom: 1rem;
+:global(.ursula-mobile-grid) [class*="Team_member"],
+:global(.ursula-mobile-grid) .member {
+    margin-bottom: 1rem !important;
 }
 

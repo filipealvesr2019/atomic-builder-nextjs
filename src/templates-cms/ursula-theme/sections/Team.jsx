@@ -5,10 +5,11 @@ export default function Team({
     title = "Our Team",
     subtitle = "We Are Ursula Theme",
     members = [],
-    backgroundImage = ""
+    backgroundImage = "",
+    forceMobile
 }) {
   return (
-    <section className={styles.section} style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <section className={`${styles.section} ${forceMobile ? 'ursula-mobile-grid' : ''}`} style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className={styles.overlay}></div>
         <div className={styles.content}>
             <header className={styles.header}>
