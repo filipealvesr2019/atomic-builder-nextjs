@@ -1,0 +1,30 @@
+.mainContent {
+  padding: 60px 0;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 60px;
+}
+
+.postArea {
+  min-width: 0;
+}
+
+.sidebarArea {
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .layoutGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,206 @@
+.postSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.widget {
+  width: 100%;
+}
+
+.widgetTitle {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 25px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* About Box */
+.aboutBox {
+  background-color: #f7f6f2;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.aboutImageWrapper {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 25px;
+}
+
+.aboutImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aboutBio {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.moreLink {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2px;
+}
+
+/* Search Form */
+.searchForm {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.searchInput {
+  flex: 1;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  outline: none;
+}
+
+.searchBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+}
+
+.searchBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Instagram Grid */
+.instagramGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.instaItem {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+.instaImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instaHandle {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: #aaa;
+  text-align: center;
+}
+
+/* Location Box */
+.locationBox {
+  text-align: center;
+  padding: 30px;
+  background-color: #ebeae6;
+}
+
+.locationBox svg {
+  width: 24px;
+  height: 24px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.locationTitle {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.locationDetail {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+/* Category List */
+.catList {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.catList li {
+  margin-bottom: 15px;
+}
+
+.catList a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.catList a:hover {
+  color: #333;
+}
+
+/* Recent Posts */
+.recentPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recentItem {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.recentImgWrapper {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.recentImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recentInfo {
+  flex: 1;
+}
+
+.recentTitle {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 5px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.recentDate {
+  font-size: 0.7rem;
+  color: #bbb;
+  text-transform: uppercase;
+}

@@ -1,0 +1,187 @@
+.postContent {
+  padding: 80px 40px;
+  background-color: #fff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.category {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: #999;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 3rem;
+  color: #333;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.date {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+.imageWrapper {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.mainImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.body {
+  max-width: 800px;
+  margin: 0 auto 80px;
+}
+
+.paragraph {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.authorSection {
+  max-width: 800px;
+  margin: 0 auto 80px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  padding: 40px;
+  background-color: #f7f6f2;
+}
+
+.authorImageWrapper {
+  flex-shrink: 0;
+  width: 200px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.authorImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authorInfo {
+  flex: 1;
+}
+
+.authorName {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+.authorBio {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  font-style: italic;
+}
+
+.commentSection {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 80px;
+  border-top: 1px solid #ebeae6;
+}
+
+.commentTitle {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.textarea {
+  width: 100%;
+  height: 150px;
+  padding: 15px;
+  background-color: #f7f6f2;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: none;
+  outline: none;
+}
+
+.inputRow {
+  display: flex;
+  gap: 20px;
+}
+
+.input {
+  flex: 1;
+  padding: 15px;
+  background-color: #f7f6f2;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkboxLabel {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.submitBtn {
+  align-self: flex-start;
+  padding: 15px 40px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.submitBtn:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .postContent {
+    padding: 60px 20px;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+  .authorSection {
+    flex-direction: column;
+    text-align: center;
+  }
+  .inputRow {
+    flex-direction: column;
+  }
+}

@@ -17,7 +17,7 @@ export const avaDefaultContent = {
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
                 { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
                 { label: "CONTACT", href: "#contact" },
-                { label: "THE BLOG", href: "#blog" }
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
             ],
             socialLinks: [
                 { icon: "instagram", href: "#" },
@@ -157,7 +157,7 @@ export const avaDefaultContent = {
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
                 { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
-                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
             ],
             socialLinks: [
                 { icon: "instagram", href: "#" },
@@ -356,7 +356,7 @@ export const avaDefaultContent = {
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
                 { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
-                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
             ],
             socialLinks: [
                 { icon: "instagram", href: "#" },
@@ -541,7 +541,7 @@ export const avaDefaultContent = {
                 { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
                 { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
                 { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
-                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
             ],
             socialLinks: [
                 { icon: "instagram", href: "#" },
@@ -589,6 +589,170 @@ export const avaDefaultContent = {
                    "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"
               ],
               copyright: "© 2024 Ava Portfolio. All rights reserved."
+          }
+        }
+      ]
+    },
+    {
+      slug: 'blog',
+      name: 'Blog',
+      layout: 'blog',
+      content: [
+        {
+          id: 'blog-header',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
+                { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+          id: 'blog-hero',
+          type: 'blog-hero',
+          props: {
+            title: "The Blog",
+            backgroundImage: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?q=80&w=2070&auto=format&fit=crop"
+          }
+        },
+        {
+          id: 'blog-grid',
+          type: 'blog-grid',
+          props: {
+            title: "From the Journal",
+            subtitle: "READ THE LATEST",
+            posts: [
+                { id: 1, title: "Wedding Day at the Cliffs", category: "WEDDING, COASTAL", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
+                { id: 2, title: "The Art of Natural Light", category: "PHOTOGRAPHY, TIPS", date: "JANUARY 4, 2024", image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" },
+                { id: 3, title: "Mountain Elopement Guide", category: "ELOPEMENT, TRAVEL", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1600&auto=format&fit=crop", link: "/admin/store/preview/ava-portfolio/blog-post" }
+            ]
+          }
+        },
+        {
+          id: 'blog-newsletter',
+          type: 'blog-newsletter',
+          props: {
+            title: "Get Early Access to Photo Sessions",
+            subtitle: "JOIN THE LIST",
+            description: "Be the first to know about new session dates, workshops, and exclusive photography tips delivered straight to your inbox."
+          }
+        },
+        {
+          id: 'blog-footer',
+          type: 'footer',
+          props: {
+            instagramImages: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=400&auto=format&fit=crop"
+            ],
+            copyright: "© 2024 Ava Portfolio. All rights reserved."
+          }
+        }
+      ]
+    },
+    {
+      slug: 'blog-post',
+      name: 'Single Post',
+      layout: 'single-post',
+      content: [
+        {
+          id: 'post-header',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/services" },
+                { label: "PORTFOLIO", href: "/admin/store/preview/ava-portfolio/portfolio" },
+                { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+          id: 'post-content',
+          type: 'post-content',
+          props: {
+            title: "The Art of Natural Light in Modern Weddings",
+            category: "PHOTOGRAPHY, WEDDING",
+            date: "JANUARY 4, 2024",
+            mainImage: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1600&auto=format&fit=crop",
+            content: [
+                "Natural light is the most versatile and beautiful tool a photographer has. It can create drama, softness, and a sense of timelessness that flash often struggles to replicate. In this post, we explore how to harness the sun's power throughout a wedding day.",
+                "From the soft, blue-hued light of a pre-dawn preparation to the harsh, direct sun of a noon-time ceremony, understanding how to position your subjects and your camera is key. We'll look at techniques for 'open shade' and the magic of the golden hour.",
+                "Ultimately, it's about emotion. Light should enhance the story you're telling, not distract from it. Whether it's a sliver of light illuminating a bride's veil or the warm glow of a sunset reception, natural light brings a level of authenticity to your wedding galleries."
+            ],
+            author: {
+                name: "Ava",
+                bio: "Hi, I'm Ava! I'm a wedding photographer based in the Bay Area. I love capturing honest moments and helping other photographers find their unique voice.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
+            }
+          }
+        },
+        {
+          id: 'post-sidebar',
+          type: 'post-sidebar',
+          props: {
+            author: {
+                name: "Ava",
+                bio: "I love capturing honest moments and beautiful stories through my lens.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
+            },
+            instagramImages: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop"
+            ],
+            recentPosts: [
+                { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=200&auto=format&fit=crop" },
+                { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=200&auto=format&fit=crop" }
+            ]
+          }
+        },
+        {
+            id: 'post-recommendations',
+            type: 'post-recommendations',
+            props: {
+                title: "You May Also Like",
+                posts: [
+                    { title: "Wedding Day at the Cliffs", date: "JANUARY 5, 2024", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" },
+                    { title: "Mountain Elopement Guide", date: "JANUARY 3, 2024", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" }
+                ]
+            }
+        },
+        {
+          id: 'post-footer',
+          type: 'footer',
+          props: {
+            instagramImages: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=400&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=400&auto=format&fit=crop"
+            ],
+            copyright: "© 2024 Ava Portfolio. All rights reserved."
           }
         }
       ]

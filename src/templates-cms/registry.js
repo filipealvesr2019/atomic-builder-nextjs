@@ -37,6 +37,13 @@ import PortfolioPage from './ava-portfolio/layouts/PortfolioPage';
 import PortfolioGrid from './ava-portfolio/sections/PortfolioGrid';
 import PortfolioSlider from './ava-portfolio/sections/PortfolioSlider';
 import PortfolioMasonry from './ava-portfolio/sections/PortfolioMasonry';
+import BlogHero from './ava-portfolio/sections/BlogHero';
+import BlogNewsletter from './ava-portfolio/sections/BlogNewsletter';
+import PostContent from './ava-portfolio/sections/PostContent';
+import PostSidebar from './ava-portfolio/sections/PostSidebar';
+import PostRecommendations from './ava-portfolio/sections/PostRecommendations';
+import BlogPage from './ava-portfolio/layouts/BlogPage';
+import SinglePostPage from './ava-portfolio/layouts/SinglePostPage';
 
 
 import { avaDefaultContent } from './ava-portfolio/default-content';
@@ -223,7 +230,9 @@ const templates = {
         home: AvaPortfolioHome,
         workshops: AvaWorkshopsPage,
         services: AvaServicesPage,
-        portfolio: PortfolioPage
+        portfolio: PortfolioPage,
+        blog: BlogPage,
+        'single-post': SinglePostPage
     },
     sections: {
         header: AvaHeader,
@@ -257,7 +266,12 @@ const templates = {
         'services-grid-detailed': ServicesGridDetailed,
         'portfolio-grid': PortfolioGrid,
         'portfolio-slider': PortfolioSlider,
-        'portfolio-masonry': PortfolioMasonry
+        'portfolio-masonry': PortfolioMasonry,
+        'blog-hero': BlogHero,
+        'blog-newsletter': BlogNewsletter,
+        'post-content': PostContent,
+        'post-sidebar': PostSidebar,
+        'post-recommendations': PostRecommendations
     }
   }
 };
