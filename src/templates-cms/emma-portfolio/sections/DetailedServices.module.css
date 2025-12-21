@@ -100,7 +100,12 @@
     border-radius: 4px; /* Slight roundness or square as per design */
 }
 
-@media (max-width: 900px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 900px) {
     .row {
         flex-direction: column;
         gap: 40px;

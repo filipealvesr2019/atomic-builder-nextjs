@@ -12,7 +12,12 @@
     letter-spacing: -1px;
 }
 
-@media (max-width: 768px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 768px) {
     .title {
         font-size: 3rem;
     }

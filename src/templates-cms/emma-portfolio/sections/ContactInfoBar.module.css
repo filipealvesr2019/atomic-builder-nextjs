@@ -43,7 +43,12 @@
     width: 100%;
 }
 
-@media (max-width: 768px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 768px) {
     .grid {
         flex-direction: column;
         gap: 40px;

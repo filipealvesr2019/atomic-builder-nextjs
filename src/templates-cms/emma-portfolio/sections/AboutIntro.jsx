@@ -8,19 +8,21 @@ export default function AboutIntro({
   subtitle = "Have we met?",
   bio = "I'm a passionate brand strategist and business coach. I help creative entrepreneurs build businesses they love."
 }) {
-  return (
-    <section className={styles.section}>
-      <div className={styles.contentSide}>
-         <img src={profileImage} alt={name} className={styles.floaterImage} />
-         <h1 className={styles.title}>{name}</h1>
-         <h2 className={styles.subtitle}>{subtitle}</h2>
-         <div className={styles.text} dangerouslySetInnerHTML={{ __html: bio }} />
-      </div>
-      <div className={styles.imageSide}>
-         <img src={heroImage} alt="About Emma" className={styles.image} />
-      </div>
-    </section>
-  );
+    return (
+        <div className={styles.container}>
+            <section className={styles.section}>
+                <div className={styles.contentSide}>
+                    <img src={profileImage} alt={name} className={styles.floaterImage} />
+                    <h1 className={styles.title}>{name}</h1>
+                    <h2 className={styles.subtitle}>{subtitle}</h2>
+                    <div className={styles.text} dangerouslySetInnerHTML={{ __html: bio }} />
+                </div>
+                <div className={styles.imageSide}>
+                    <img src={heroImage} alt="About Emma" className={styles.image} />
+                </div>
+            </section>
+        </div>
+    );
 }
 
 AboutIntro.cmsConfig = {

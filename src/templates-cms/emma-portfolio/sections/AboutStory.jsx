@@ -9,17 +9,19 @@ export default function AboutStory({
     buttonText = "READ MORE"
 }) {
     return (
-        <section className={styles.section}>
-            <div className={styles.imageSide}>
-                <img src={image} alt="Story" className={styles.image} />
-            </div>
-            <div className={styles.contentSide}>
-                <h2 className={styles.title}>{title}</h2>
-                <span className={styles.subtitle}>{subtitle}</span>
-                <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
-                <button className={styles.button}>{buttonText}</button>
-            </div>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.section}>
+                <div className={styles.imageSide}>
+                    <img src={image} alt="Story" className={styles.image} />
+                </div>
+                <div className={styles.contentSide}>
+                    <h2 className={styles.title}>{title}</h2>
+                    <span className={styles.subtitle}>{subtitle}</span>
+                    <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
+                    <button className={styles.button}>{buttonText}</button>
+                </div>
+            </section>
+        </div>
     );
 }
 

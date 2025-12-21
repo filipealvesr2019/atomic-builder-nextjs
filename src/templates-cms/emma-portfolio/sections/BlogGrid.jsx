@@ -15,25 +15,27 @@ export default function BlogGrid({
     ]
 }) {
     return (
-        <section className={styles.section}>
-            <div className={styles.grid}>
-                {posts.map((post, index) => (
-                    <div key={index} className={styles.card}>
-                        <div className={styles.imageWrapper}>
-                             <img src={post.image} alt={post.title} className={styles.image} />
-                             <span className={styles.tag}>{post.category}</span>
+        <div className={styles.container}>
+            <section className={styles.section}>
+                <div className={styles.grid}>
+                    {posts.map((post, index) => (
+                        <div key={index} className={styles.card}>
+                            <div className={styles.imageWrapper}>
+                                 <img src={post.image} alt={post.title} className={styles.image} />
+                                 <span className={styles.tag}>{post.category}</span>
+                            </div>
+                            <h3 className={styles.title}>{post.title}</h3>
+                            <p className={styles.excerpt}>{post.excerpt}</p>
+                            <div className={styles.meta}>
+                                <span>{post.date}</span>
+                                <span>•</span>
+                                <span>{post.comments}</span>
+                            </div>
                         </div>
-                        <h3 className={styles.title}>{post.title}</h3>
-                        <p className={styles.excerpt}>{post.excerpt}</p>
-                        <div className={styles.meta}>
-                            <span>{post.date}</span>
-                            <span>•</span>
-                            <span>{post.comments}</span>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </section>
+                    ))}
+                </div>
+            </section>
+        </div>
     );
 }
 

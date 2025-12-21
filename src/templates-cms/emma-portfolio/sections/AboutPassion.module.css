@@ -89,7 +89,12 @@
     border: 5px solid white;
 }
 
-@media (max-width: 900px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 900px) {
     .section {
         flex-direction: column;
     }

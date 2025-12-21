@@ -8,15 +8,17 @@ export default function ImageCTA({
     image = ""
 }) {
     return (
-        <section className={styles.section}>
-            {image && <img src={image} alt="Background" className={styles.bgImage} />}
-            <div className={styles.overlay}></div>
-            <div className={styles.content}>
-                <h2 className={styles.title}>{title}</h2>
-                <p className={styles.subtitle}>{subtitle}</p>
-                {buttonText && <button className={styles.button}>{buttonText}</button>}
-            </div>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.section}>
+                {image && <img src={image} alt="Background" className={styles.bgImage} />}
+                <div className={styles.overlay}></div>
+                <div className={styles.content}>
+                    <h2 className={styles.title}>{title}</h2>
+                    <p className={styles.subtitle}>{subtitle}</p>
+                    {buttonText && <button className={styles.button}>{buttonText}</button>}
+                </div>
+            </section>
+        </div>
     );
 }
 

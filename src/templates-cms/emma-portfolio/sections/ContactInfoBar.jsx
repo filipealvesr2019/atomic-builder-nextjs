@@ -10,22 +10,24 @@ export default function ContactInfoBar({
     hours = "9:00 - 12:00 AM\n2:00 - 6:00 PM"
 }) {
     return (
-        <section className={styles.section}>
-            <div className={styles.grid}>
-                <div className={styles.item}>
-                    <h3 className={styles.title}>{addressTitle}</h3>
-                    <p className={styles.text} style={{whiteSpace: 'pre-line'}}>{address}</p>
+        <div className={styles.container}>
+            <section className={styles.section}>
+                <div className={styles.grid}>
+                    <div className={styles.item}>
+                        <h3 className={styles.title}>{addressTitle}</h3>
+                        <p className={styles.text} style={{whiteSpace: 'pre-line'}}>{address}</p>
+                    </div>
+                    <div className={styles.item}>
+                        <h3 className={styles.title}>{phoneTitle}</h3>
+                        <p className={styles.text}>{phone}</p>
+                    </div>
+                    <div className={styles.item}>
+                        <h3 className={styles.title}>{hoursTitle}</h3>
+                        <p className={styles.text} style={{whiteSpace: 'pre-line'}}>{hours}</p>
+                    </div>
                 </div>
-                <div className={styles.item}>
-                    <h3 className={styles.title}>{phoneTitle}</h3>
-                    <p className={styles.text}>{phone}</p>
-                </div>
-                <div className={styles.item}>
-                    <h3 className={styles.title}>{hoursTitle}</h3>
-                    <p className={styles.text} style={{whiteSpace: 'pre-line'}}>{hours}</p>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
     );
 }
 

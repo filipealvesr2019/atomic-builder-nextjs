@@ -92,7 +92,12 @@
     z-index: 1;
 }
 
-@media (max-width: 900px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 900px) {
     .hero {
         flex-direction: column;
         background: #fcd5c5;

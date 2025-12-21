@@ -5,9 +5,11 @@ export default function BlogHero({
     title = "Blog"
 }) {
     return (
-        <section className={styles.section}>
-            <h1 className={styles.title}>{title}</h1>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.section}>
+                <h1 className={styles.title}>{title}</h1>
+            </section>
+        </div>
     );
 }
 

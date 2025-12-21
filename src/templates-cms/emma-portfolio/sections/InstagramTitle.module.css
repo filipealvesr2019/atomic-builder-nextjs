@@ -1,3 +1,8 @@
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
 .section {
     padding: 60px 20px 20px;
     background-color: white; /* Or transparent if sitting on footer */

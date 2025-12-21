@@ -21,19 +21,21 @@ export default function AboutThings({
     };
 
     return (
-        <section className={styles.section}>
-            <h2 className={styles.mainTitle}>{title}</h2>
-            <p className={styles.subText}>{subtitle}</p>
-            <div className={styles.grid}>
-                {things.map((thing, index) => (
-                    <div key={index} className={styles.card}>
-                        <div className={styles.iconWrapper}>{getIcon(thing.icon)}</div>
-                        <h3 className={styles.cardTitle}>{thing.title}</h3>
-                        <p className={styles.cardText}>{thing.text}</p>
-                    </div>
-                ))}
-            </div>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.section}>
+                <h2 className={styles.mainTitle}>{title}</h2>
+                <p className={styles.subText}>{subtitle}</p>
+                <div className={styles.grid}>
+                    {things.map((thing, index) => (
+                        <div key={index} className={styles.card}>
+                            <div className={styles.iconWrapper}>{getIcon(thing.icon)}</div>
+                            <h3 className={styles.cardTitle}>{thing.title}</h3>
+                            <p className={styles.cardText}>{thing.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </div>
     );
 }
 

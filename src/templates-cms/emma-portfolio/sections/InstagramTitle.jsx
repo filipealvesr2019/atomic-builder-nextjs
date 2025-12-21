@@ -5,9 +5,11 @@ export default function InstagramTitle({
     title = "Instagram"
 }) {
     return (
-        <section className={styles.section}>
-            <h2 className={styles.title}>{title}</h2>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.section}>
+                <h2 className={styles.title}>{title}</h2>
+            </section>
+        </div>
     );
 }
 
