@@ -1,5 +1,5 @@
 .heroSection {
-    padding: 40px 40px 80px 40px;
+    padding: 0px 40px 80px 0px;
     background-color: #fdfcf9;
 }
 
@@ -18,8 +18,9 @@
     overflow: hidden;
 }
 
+
 .imageWrapper:nth-child(2) {
-    height: 100%; /* Middle image takes full container height */
+    height: 80%; /* Middle image takes full container height */
 }
 
 .image {
