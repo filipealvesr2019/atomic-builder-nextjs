@@ -78,11 +78,15 @@ export default function TemplateStore() {
       <div className={styles.grid}>
         {filteredTemplates.map((template) => (
           <div key={template.id} className={styles.card}>
-            {/* Preview Image Placeholder */}
             <div className={styles.cardPreview}>
-                <div className={styles.previewPlaceholder}>
-                    <span>{t.items[template.id]?.name || template.name} {t.preview}</span>
-                </div>
+              <iframe 
+                src={`/iframe-preview/${template.id}`}
+                className={styles.previewIframe}
+                title={`${template.name} preview`}
+                scrolling="no"
+              />
+              {/* Overlay to capture clicks and prevent iframe interaction in the grid */}
+              <div className={styles.previewOverlay} />
             </div>
 
             <div className={styles.cardBody}>
@@ -91,7 +95,7 @@ export default function TemplateStore() {
               
               <div className={styles.actions}>
                 <a 
-                    href={`/admin/store/preview/${template.id}`} 
+                    href={`/iframe-preview/${template.id}`} 
                     target="_blank" 
                     className={styles.previewButton}
                 >

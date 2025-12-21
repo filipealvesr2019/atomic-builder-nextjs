@@ -1,6 +1,6 @@
 .container {
   padding: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -23,8 +23,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 2.5rem;
 }
 
 .card {
@@ -43,12 +43,30 @@
 }
 
 .cardPreview {
-  aspect-ratio: 16/9;
+  height: 400px; /* Fixed height for more content visibility */
   background: #f3f4f6;
   border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.previewIframe {
+  width: 200%;
+  height: 200%;
+  border: none;
+  transform: scale(0.5);
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.previewOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 10;
 }
 
 .previewPlaceholder {
