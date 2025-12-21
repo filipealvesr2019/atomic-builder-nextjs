@@ -9,6 +9,8 @@
   align-items: center;
   transition: all 0.3s ease;
   background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(0px);
 }
 
 .header.scrolled {
@@ -42,7 +44,7 @@
   gap: 2.5rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .nav {
     display: flex;
   }
@@ -51,13 +53,15 @@
 .navLink {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
-  color: #D1D5DB;
+  color: #FFFFFF;
   text-decoration: none;
   font-size: 0.9375rem;
-  transition: color 0.2s;
+  transition: all 0.2s;
+  opacity: 0.8;
 }
 
 .navLink:hover {
+  opacity: 1;
   color: #6366F1;
 }
 
@@ -117,7 +121,7 @@
   align-items: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .mobileMenuBtn {
     display: none;
   }

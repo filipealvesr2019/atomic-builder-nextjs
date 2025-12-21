@@ -23,7 +23,12 @@ const Header = ({ logo, menu, cta }) => {
         </a>
 
         <nav className={styles.nav}>
-          {menu?.map((item, index) => (
+          {(menu || [
+            { label: "Home", href: "/" },
+            { label: "Products", href: "/products" },
+            { label: "Categories", href: "#categories" },
+            { label: "About", href: "/about" }
+          ]).map((item, index) => (
             <a key={index} href={item.href} className={styles.navLink}>
               {item.label}
             </a>
