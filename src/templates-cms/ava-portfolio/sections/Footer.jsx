@@ -8,11 +8,11 @@ export default function Footer({
     copyright = "© 2024 Ava Portfolio. All rights reserved."
 }) {
    const defaultInsta = [
-       "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1000&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1000&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1507206130118-b5907f907167?q=80&w=1000&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop"
+       "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop", 
+       "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop", 
+       "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop", 
+       "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop", 
+       "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"
    ];
    
    const displayInsta = instagramImages.length > 0 ? instagramImages : defaultInsta;
@@ -67,36 +67,7 @@ export default function Footer({
                 <button className={styles.closeButton} onClick={closeModal}>
                     <X />
                 </button>
-                <div className={styles.modalImageContainer}>
-                    <img src={selectedImage} alt="Instagram Post" className={styles.modalImage} />
-                </div>
-                <div className={styles.modalInfo}>
-                    <div className={styles.header}>
-                        <div className={styles.avatar} style={{backgroundImage: `url(https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop)`}}></div>
-                        <div>
-                            <span className={styles.username}>ava_rose_photography</span>
-                            <span style={{margin: '0 5px'}}>•</span>
-                            <span className={styles.followLink}>Follow</span>
-                        </div>
-                        <MoreHorizontal size={20} style={{marginLeft: 'auto', cursor: 'pointer'}} />
-                    </div>
-                    <div className={styles.caption}>
-                        <p><span className={styles.username}>ava_rose_photography</span> Capturing the most beautiful moments of your special day. #wedding #love #photography #memories</p>
-                        <span className={styles.time}>2 HOURS AGO</span>
-                    </div>
-                    <div className={styles.modalFooter}>
-                        <div style={{width: '100%'}}>
-                            <div className={styles.actionIcons} style={{display: 'flex', gap: '15px'}}>
-                                <Heart size={24} style={{cursor: 'pointer'}} />
-                                <MessageCircle size={24} style={{cursor: 'pointer'}} />
-                                <div style={{marginLeft: 'auto'}}>
-                                    <Bookmark size={24} style={{cursor: 'pointer'}} />
-                                </div>
-                            </div>
-                            <div style={{fontWeight: '600', fontSize: '0.9rem'}}>1,234 likes</div>
-                        </div>
-                    </div>
-                </div>
+                <img src={selectedImage} alt="Instagram Post" className={styles.modalFullImage} />
             </div>
         </div>
     )}
