@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getTemplateLayout, getTemplate } from '@/templates-cms/registry';
 import styles from '../demo-preview.module.css'; 
+import PreviewWrapper from '@/components/preview/PreviewWrapper'; 
 
 export default function BlogPage() {
   const params = useParams(); // { id }
@@ -92,36 +93,38 @@ export default function BlogPage() {
       }
 
       return (
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            {/* Header */}
-            {HeaderComponent && <HeaderComponent {...(sectionProps.header || {})} />}
-            
-            {/* Blog Hero */}
-            {HeroComponent && (
-                <HeroComponent 
-                    title="Our Blog"
-                    subtitle=""
-                    buttonText="" 
-                    backgroundImage="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                />
-            )}
-            
-            {/* Main Content: All Posts */}
-            <main style={{ flex: 1, background: '#fff' }}>
-                 {LatestPostsComponent ? (
-                     <LatestPostsComponent 
+        <PreviewWrapper templateName="Ursula Blog">
+            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+                {/* Header */}
+                {HeaderComponent && <HeaderComponent {...(sectionProps.header || {})} />}
+                
+                {/* Blog Hero */}
+                {HeroComponent && (
+                    <HeroComponent 
+                        title="Our Blog"
                         subtitle=""
-                        title="Latest Articles"
-                        posts={allPosts}
-                     />
-                 ) : (
-                     <div style={{padding: '4rem'}}>No Component for Posts</div>
-                 )}
-            </main>
+                        buttonText="" 
+                        backgroundImage="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    />
+                )}
+                
+                {/* Main Content: All Posts */}
+                <main style={{ flex: 1, background: '#fff' }}>
+                     {LatestPostsComponent ? (
+                         <LatestPostsComponent 
+                            subtitle=""
+                            title="Latest Articles"
+                            posts={allPosts}
+                         />
+                     ) : (
+                         <div style={{padding: '4rem'}}>No Component for Posts</div>
+                     )}
+                </main>
 
-            {/* Footer */}
-            {FooterComponent && <FooterComponent {...(sectionProps.footer || {})} />}
-        </div>
+                {/* Footer */}
+                {FooterComponent && <FooterComponent {...(sectionProps.footer || {})} />}
+            </div>
+        </PreviewWrapper>
       );
   }
 

@@ -3,15 +3,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import BlockRenderer from '@/components/editor/BlockRenderer';
-import { Monitor, Tablet, Smartphone } from 'lucide-react';
 import styles from './demo-preview.module.css';
+import PreviewWrapper from '@/components/preview/PreviewWrapper';
 
 export default function DemoPreviewPage() {
   const params = useParams();
   const searchParams = useSearchParams();
   const [template, setTemplate] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [viewport, setViewport] = useState('desktop'); // 'mobile', 'tablet', 'desktop'
 
   useEffect(() => {
     if (params.id) {
@@ -252,68 +251,9 @@ export default function DemoPreviewPage() {
     );
   };
 
-  // Definir largura do viewport
-  const getViewportWidth = () => {
-    switch (viewport) {
-      case 'mobile':
-        return '375px';
-      case 'tablet':
-        return '768px';
-      case 'desktop':
-      default:
-        return '100%';
-    }
-  };
-
   return (
-    <div className={styles.previewContainer}>
-      {/* Barra de Ferramentas no Topo */}
-      <div className={styles.toolbar}>
-        <div className={styles.viewportButtons}>
-          <button
-            className={`${styles.viewportBtn} ${viewport === 'mobile' ? styles.active : ''}`}
-            onClick={() => setViewport('mobile')}
-            title="Mobile (375px)"
-          >
-            <Smartphone size={20} />
-            <span>Mobile</span>
-          </button>
-          <button
-            className={`${styles.viewportBtn} ${viewport === 'tablet' ? styles.active : ''}`}
-            onClick={() => setViewport('tablet')}
-            title="Tablet (768px)"
-          >
-            <Tablet size={20} />
-            <span>Tablet</span>
-          </button>
-          <button
-            className={`${styles.viewportBtn} ${viewport === 'desktop' ? styles.active : ''}`}
-            onClick={() => setViewport('desktop')}
-            title="Desktop (100%)"
-          >
-            <Monitor size={20} />
-            <span>Desktop</span>
-          </button>
-        </div>
-        <div className={styles.templateInfo}>
-          <span className={styles.templateName}>{template.name}</span>
-        </div>
-      </div>
-
-      {/* Área de Preview com Viewport Responsivo */}
-      <div className={styles.previewWrapper}>
-        <div 
-          className={styles.previewContent}
-          style={{ 
-            width: getViewportWidth(),
-            maxWidth: '100%',
-            margin: viewport === 'desktop' ? '0' : '0 auto',
-            transition: 'width 0.3s ease'
-          }}
-        >
-          {renderContent()}
-        </div>
-      </div>
-    </div>
+    <PreviewWrapper templateName={template.name}>
+        {renderContent()}
+    </PreviewWrapper>
   );
 }

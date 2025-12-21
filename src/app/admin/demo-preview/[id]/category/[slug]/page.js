@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getTemplateLayout, getTemplate } from '@/templates-cms/registry';
 import styles from '../../demo-preview.module.css'; // Reuse preview styles
+import PreviewWrapper from '@/components/preview/PreviewWrapper';
 
 export default function CategoryPage() {
   const params = useParams(); // { id, slug } "slug" here is the category name
@@ -113,41 +114,43 @@ export default function CategoryPage() {
       );
 
       return (
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            {/* Header */}
-            {HeaderComponent && <HeaderComponent {...(sectionProps.header || {})} />}
-            
-            {/* Category Hero */}
-            {HeroComponent && (
-                <HeroComponent 
-                    title={categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1)}
-                    subtitle="Category Archive"
-                    buttonText="" // Hide button
-                    backgroundImage="https://images.unsplash.com/photo-1459156212016-c812468e2115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                />
-            )}
-            
-            {/* Main Content: Post Grid */}
-            <main style={{ flex: 1, background: '#fff' }}>
-                 {/* Re-use LatestPosts component but override title/posts */}
-                 {LatestPostsComponent ? (
-                     <LatestPostsComponent 
-                        subtitle=""
-                        title="Latest Articles"
-                        posts={filteredPosts}
-                     />
-                 ) : (
-                     <div style={{padding: '4rem'}}>No Component for Posts</div>
-                 )}
-                 
-                 {filteredPosts.length === 0 && (
-                     <p style={{textAlign:'center', paddingBottom: '4rem', color: '#999'}}>No posts found in this category.</p>
-                 )}
-            </main>
+        <PreviewWrapper templateName={`Category: ${categorySlug}`}>
+            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+                {/* Header */}
+                {HeaderComponent && <HeaderComponent {...(sectionProps.header || {})} />}
+                
+                {/* Category Hero */}
+                {HeroComponent && (
+                    <HeroComponent 
+                        title={categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1)}
+                        subtitle="Category Archive"
+                        buttonText="" // Hide button
+                        backgroundImage="https://images.unsplash.com/photo-1459156212016-c812468e2115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    />
+                )}
+                
+                {/* Main Content: Post Grid */}
+                <main style={{ flex: 1, background: '#fff' }}>
+                     {/* Re-use LatestPosts component but override title/posts */}
+                     {LatestPostsComponent ? (
+                         <LatestPostsComponent 
+                            subtitle=""
+                            title="Latest Articles"
+                            posts={filteredPosts}
+                         />
+                     ) : (
+                         <div style={{padding: '4rem'}}>No Component for Posts</div>
+                     )}
+                     
+                     {filteredPosts.length === 0 && (
+                         <p style={{textAlign:'center', paddingBottom: '4rem', color: '#999'}}>No posts found in this category.</p>
+                     )}
+                </main>
 
-            {/* Footer */}
-            {FooterComponent && <FooterComponent {...(sectionProps.footer || {})} />}
-        </div>
+                {/* Footer */}
+                {FooterComponent && <FooterComponent {...(sectionProps.footer || {})} />}
+            </div>
+        </PreviewWrapper>
       );
   }
 

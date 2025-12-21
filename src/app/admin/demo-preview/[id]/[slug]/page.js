@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getTemplate } from '@/templates-cms/registry';
 import styles from '../demo-preview.module.css'; 
+import PreviewWrapper from '@/components/preview/PreviewWrapper'; 
 
 // Import Sections
 // Note: We need to ensure these components exist or this will crash. 
@@ -64,13 +65,15 @@ export default function GenericPage() {
   if (!page) return <div className={styles.error}>Page "{params.slug}" not found</div>;
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-        {page.content?.map((block, idx) => {
-            const Component = SECTION_MAP[block.type];
-            if (!Component) return <div key={idx} style={{padding:'20px', textAlign:'center'}}>Feature {block.type} not implemented yet</div>;
-            
-            return <Component key={idx} {...block.props} />;
-        })}
-    </div>
+    <PreviewWrapper templateName={`Ursula ${page.name || ''}`}>
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            {page.content?.map((block, idx) => {
+                const Component = SECTION_MAP[block.type];
+                if (!Component) return <div key={idx} style={{padding:'20px', textAlign:'center'}}>Feature {block.type} not implemented yet</div>;
+                
+                return <Component key={idx} {...block.props} />;
+            })}
+        </div>
+    </PreviewWrapper>
   );
 }
