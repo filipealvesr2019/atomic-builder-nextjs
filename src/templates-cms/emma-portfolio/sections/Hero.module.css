@@ -96,7 +96,12 @@
 
 /* Decorative line path if needed - using pseudo-element or separate SVG */
 
-@media (max-width: 1000px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 1000px) {
     .hero {
         flex-direction: column;
     }

@@ -8,22 +8,25 @@ export default function Podcast({
     buttonText = "Listen Now",
     image = ""
 }) {
+
     return (
-        <section className={styles.podcast}>
-             <div className={styles.imageContainer}>
-                {image ? (
-                    <img src={image} alt={title} className={styles.image} />
-                ) : (
-                    <div style={{width:'300px', height:'300px', background:'#eee', borderRadius:'50%'}}></div>
-                )}
-            </div>
-            <div className={styles.content}>
-                <h2 className={styles.title}>{title}</h2>
-                <span className={styles.subtitle}>{subtitle}</span>
-                <p className={styles.text}>{text}</p>
-                {buttonText && <button className={styles.button}>{buttonText}</button>}
-            </div>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.podcast}>
+                 <div className={styles.imageContainer}>
+                    {image ? (
+                        <img src={image} alt={title} className={styles.image} />
+                    ) : (
+                        <div style={{width:'300px', height:'300px', background:'#eee', borderRadius:'50%'}}></div>
+                    )}
+                </div>
+                <div className={styles.content}>
+                    <h2 className={styles.title}>{title}</h2>
+                    <span className={styles.subtitle}>{subtitle}</span>
+                    <p className={styles.text}>{text}</p>
+                    {buttonText && <button className={styles.button}>{buttonText}</button>}
+                </div>
+            </section>
+        </div>
     );
 }
 

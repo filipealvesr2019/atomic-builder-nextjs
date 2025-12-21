@@ -57,7 +57,12 @@
     cursor: pointer;
 }
 
-@media (max-width: 900px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 900px) {
     .podcast {
         flex-direction: column;
         text-align: center;

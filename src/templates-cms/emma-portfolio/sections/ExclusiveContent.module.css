@@ -3,6 +3,8 @@
     padding: 100px 20px;
     text-align: center;
     color: white;
+    container-type: inline-size;
+    width: 100%;
 }
 
 .title {
@@ -43,7 +45,7 @@
     cursor: pointer;
 }
 
-@media (max-width: 600px) {
+@container (max-width: 600px) {
     .form {
         flex-direction: column;
         gap: 10px;

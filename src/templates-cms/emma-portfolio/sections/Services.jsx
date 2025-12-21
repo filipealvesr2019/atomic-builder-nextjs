@@ -7,26 +7,28 @@ export default function Services({
     services = []
 }) {
     return (
-        <section className={styles.services}>
-            <div className={styles.header}>
-                <h2 className={styles.title}>{title}</h2>
-                <p className={styles.subtitle}>{subtitle}</p>
-            </div>
-            <div className={styles.grid}>
-                {services.map((service, index) => (
-                    <div key={index} className={styles.card}>
-                        {service.image ? (
-                           <img src={service.image} alt={service.title} className={styles.cardImage} />
-                        ) : (
-                           <div style={{height:'250px', background:'#f0f0f0', marginBottom:'20px'}}></div>
-                        )}
-                        <h3 className={styles.cardTitle}>{service.title}</h3>
-                        <p className={styles.cardDesc}>{service.description}</p>
-                        {service.buttonText && <button className={styles.cardButton}>{service.buttonText}</button>}
-                    </div>
-                ))}
-            </div>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.services}>
+                <div className={styles.header}>
+                    <h2 className={styles.title}>{title}</h2>
+                    <p className={styles.subtitle}>{subtitle}</p>
+                </div>
+                <div className={styles.grid}>
+                    {services.map((service, index) => (
+                        <div key={index} className={styles.card}>
+                            {service.image ? (
+                            <img src={service.image} alt={service.title} className={styles.cardImage} />
+                            ) : (
+                            <div style={{height:'250px', background:'#f0f0f0', marginBottom:'20px'}}></div>
+                            )}
+                            <h3 className={styles.cardTitle}>{service.title}</h3>
+                            <p className={styles.cardDesc}>{service.description}</p>
+                            {service.buttonText && <button className={styles.cardButton}>{service.buttonText}</button>}
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </div>
     );
 }
 

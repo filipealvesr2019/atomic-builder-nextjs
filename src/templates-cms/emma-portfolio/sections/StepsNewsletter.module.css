@@ -5,6 +5,8 @@
     align-items: center;
     justify-content: center;
     color: white;
+    container-type: inline-size;
+    width: 100%;
 }
 
 .container {
@@ -68,7 +70,7 @@
     letter-spacing: 1px;
 }
 
-@media (max-width: 900px) {
+@container (max-width: 900px) {
     .container {
         flex-direction: column;
         text-align: center;

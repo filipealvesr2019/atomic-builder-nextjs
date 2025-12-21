@@ -10,25 +10,27 @@ export default function Hero({
     overlayImage = ""
 }) {
     return (
-        <section className={styles.hero}>
-            <div className={styles.imageSide}>
-                {backgroundImage ? (
-                    <img src={backgroundImage} alt="Background" className={styles.bgImage} />
-                ) : (
-                    <div className={styles.bgImage} style={{background:'#eee'}}></div>
-                )}
-                
-                {overlayImage && (
-                    <img src={overlayImage} alt="Overlay" className={styles.overlayImage} />
-                )}
-            </div>
-            <div className={styles.contentSide}>
-                <h1 className={styles.title}>{title}</h1>
-                <span className={styles.subtitle}>{subtitle}</span>
-                <p className={styles.text}>{text}</p>
-                {buttonText && <button className={styles.button}>{buttonText}</button>}
-            </div>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.hero}>
+                <div className={styles.imageSide}>
+                    {backgroundImage ? (
+                        <img src={backgroundImage} alt="Background" className={styles.bgImage} />
+                    ) : (
+                        <div className={styles.bgImage} style={{background:'#eee'}}></div>
+                    )}
+                    
+                    {overlayImage && (
+                        <img src={overlayImage} alt="Overlay" className={styles.overlayImage} />
+                    )}
+                </div>
+                <div className={styles.contentSide}>
+                    <h1 className={styles.title}>{title}</h1>
+                    <span className={styles.subtitle}>{subtitle}</span>
+                    <p className={styles.text}>{text}</p>
+                    {buttonText && <button className={styles.button}>{buttonText}</button>}
+                </div>
+            </section>
+        </div>
     );
 }
 

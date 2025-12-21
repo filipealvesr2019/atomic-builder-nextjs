@@ -70,7 +70,12 @@
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 768px) {
     .services {
         padding: 50px 20px;
     }

@@ -69,7 +69,12 @@
     margin-left: 10px;
 }
 
-@media (max-width: 768px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 768px) {
     .testimonials {
         padding: 60px 20px;
     }

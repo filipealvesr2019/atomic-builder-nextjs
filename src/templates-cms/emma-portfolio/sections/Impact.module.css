@@ -54,7 +54,12 @@
     margin-top: 40px;
 }
 
-@media (max-width: 900px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 900px) {
     .impact {
         flex-direction: column;
         text-align: center;

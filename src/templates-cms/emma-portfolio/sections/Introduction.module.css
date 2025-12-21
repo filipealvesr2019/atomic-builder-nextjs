@@ -61,7 +61,12 @@
     background: #000;
 }
 
-@media (max-width: 900px) {
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
+@container (max-width: 900px) {
     .intro {
         flex-direction: column-reverse; /* Stack content above image on mobile if desired, or standard column */
         padding: 50px 20px;

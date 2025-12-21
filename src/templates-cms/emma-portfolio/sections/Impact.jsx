@@ -8,25 +8,27 @@ export default function Impact({
     images = []
 }) {
     return (
-        <section className={styles.impact}>
-            <div className={styles.content}>
-                <h2 className={styles.title}>{title}</h2>
-                <p className={styles.text}>{text}</p>
-                {buttonText && <button className={styles.button}>{buttonText}</button>}
-            </div>
-            <div className={styles.images}>
-                {images.map((img, index) => (
-                    <img key={index} src={img} alt="Impact" className={styles.img} />
-                ))}
-                {images.length === 0 && (
-                    <>
-                    <div className={styles.img} style={{background:'#eee'}}></div>
-                    <div className={styles.img} style={{background:'#ddd'}}></div>
-                    <div className={styles.img} style={{background:'#ccc'}}></div>
-                    </>
-                )}
-            </div>
-        </section>
+        <div className={styles.container}>
+            <section className={styles.impact}>
+                <div className={styles.content}>
+                    <h2 className={styles.title}>{title}</h2>
+                    <p className={styles.text}>{text}</p>
+                    {buttonText && <button className={styles.button}>{buttonText}</button>}
+                </div>
+                <div className={styles.images}>
+                    {images.map((img, index) => (
+                        <img key={index} src={img} alt="Impact" className={styles.img} />
+                    ))}
+                    {images.length === 0 && (
+                        <>
+                        <div className={styles.img} style={{background:'#eee'}}></div>
+                        <div className={styles.img} style={{background:'#ddd'}}></div>
+                        <div className={styles.img} style={{background:'#ccc'}}></div>
+                        </>
+                    )}
+                </div>
+            </section>
+        </div>
     );
 }
 
