@@ -23,24 +23,49 @@
 }
 
 .item {
-    border-bottom: 1px solid #ccc;
-    padding: 20px 0;
+    border-bottom: 1px solid #d1ccbd;
+    padding: 30px 0;
     text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .question {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    color: #4a4a4a;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #333;
     font-weight: 400;
 }
 
 .plus {
-    font-size: 18px;
+    font-size: 20px;
     color: #999;
+}
+
+.answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin 0.3s ease;
+    margin-top: 0;
+}
+
+.active .answer {
+    max-height: 200px;
+    margin-top: 20px;
+}
+
+.active .plus {
+    color: #333;
+}
+
+.answer p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {

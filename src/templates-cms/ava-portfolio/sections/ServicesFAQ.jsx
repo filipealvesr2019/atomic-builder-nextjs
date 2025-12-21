@@ -1,5 +1,4 @@
-'use client';
-import React from 'react';
+import { useState } from 'react';
 import styles from './ServicesFAQ.module.css';
 
 export default function ServicesFAQ({ 
@@ -11,16 +10,29 @@ export default function ServicesFAQ({
         { q: "HOW MANY PHOTOS DO WE GET?", a: "We typically deliver between 500-800 edited high-resolution images." }
     ]
 }) {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggle = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   return (
     <section className={styles.faqSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.grid}>
             {questions.map((item, idx) => (
-                <div key={idx} className={styles.item}>
+                <div 
+                    key={idx} 
+                    className={`${styles.item} ${activeIndex === idx ? styles.active : ''}`}
+                    onClick={() => toggle(idx)}
+                >
                     <div className={styles.question}>
                         <span>{item.q}</span>
-                        <span className={styles.plus}>+</span>
+                        <span className={styles.plus}>{activeIndex === idx ? '−' : '+'}</span>
+                    </div>
+                    <div className={styles.answer}>
+                        <p>{item.a}</p>
                     </div>
                 </div>
             ))}

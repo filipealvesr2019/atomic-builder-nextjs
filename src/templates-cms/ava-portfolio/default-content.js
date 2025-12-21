@@ -441,9 +441,9 @@ export const avaDefaultContent = {
             id: 'serv-banner',
             type: 'services-banner',
             props: {
-                backgroundImage: "https://images.unsplash.com/photo-1510076857177-74700760be15?q=80&w=2072&auto=format&fit=crop",
-                quote: "“Where Memories Captured every Detail of our Special Day.”",
-                author: "ALEX & JAMES | WEDDING"
+                backgroundImage: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop",
+                quote: "“The beauty of a moment is that it only happens once.”",
+                author: "AVA ROSE | WEDDING PHOTOGRAPHER"
             }
         },
         {
@@ -465,10 +465,30 @@ export const avaDefaultContent = {
             props: {
                 title: "Common Questions",
                 questions: [
-                    { q: "HOW DO WE BOOK OUR DATE?", a: "To secure your date, we require a signed agreement and a retainer. Contact us to check availability." },
-                    { q: "DO YOU TRAVEL FOR WEDDINGS?", a: "Yes! We love to travel and are available for weddings worldwide." },
-                    { q: "WHEN WILL WE RECEIVE OUR PHOTOS?", a: "Full galleries are typically delivered within 6-8 weeks after your wedding day." },
-                    { q: "HOW MANY PHOTOS DO WE GET?", a: "We typically deliver between 500-800 edited high-resolution images." }
+                    { 
+                        q: "HOW DO WE BOOK OUR DATE?", 
+                        a: "To secure your date, we require a signed agreement and a non-refundable retainer. Once both are received, your date is officially reserved in our calendar!" 
+                    },
+                    { 
+                        q: "DO YOU TRAVEL FOR WEDDINGS?", 
+                        a: "Absolutely! We love to travel and are available for destination weddings worldwide. Travel fees or specialized packages can be discussed during our consultation." 
+                    },
+                    { 
+                        q: "WHEN WILL WE RECEIVE OUR PHOTOS?", 
+                        a: "We provide a 'Sneak Peek' within 48 hours of your wedding. The full high-resolution gallery is typically delivered within 6 to 8 weeks." 
+                    },
+                    { 
+                        q: "HOW MANY PHOTOS DO WE GET?", 
+                        a: "For a full wedding day, you can expect between 500 and 800 fully edited images. For engagement sessions, the count is usually between 50 and 70 images." 
+                    },
+                    { 
+                        q: "DO YOU PROVIDE RAW FILES?", 
+                        a: "We do not provide RAW or unedited files. We believe that the editing process is a crucial part of our artistic vision and the final product you hired us to create." 
+                    },
+                    { 
+                        q: "CAN WE PROVIDE A SHOT LIST?", 
+                        a: "We certainly take requests for family groupings or specific sentimental details, but we prefer to document the day organically as it unfolds to capture true emotion." 
+                    }
                 ]
             }
         },
