@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './Footer.module.css';
 
-const Footer = ({ content }) => {
-  const { brandName, description, links, social } = content || {};
+const Footer = ({ brandName, description, links, social }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -12,7 +11,7 @@ const Footer = ({ content }) => {
           <div className={styles.brand}>
             <a href="/" className={styles.logo}>{brandName || "DIGITAL BRAND"}</a>
             <p className={styles.description}>
-              {description || "Sua fonte premium de ativos digitais para o desenvolvimento moderno."}
+              {description || "Your premium source of digital assets for modern development."}
             </p>
           </div>
 
@@ -32,7 +31,7 @@ const Footer = ({ content }) => {
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            &copy; {currentYear} {brandName}. Todos os direitos reservados.
+            &copy; {currentYear} {brandName || "Digital Brand"}. All rights reserved.
           </p>
           <div className={styles.social}>
             {social?.map((item, idx) => (

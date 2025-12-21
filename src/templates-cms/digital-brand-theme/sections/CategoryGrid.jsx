@@ -2,14 +2,12 @@ import React from 'react';
 import * as Icons from 'lucide-react';
 import styles from './CategoryGrid.module.css';
 
-const CategoryGrid = ({ content }) => {
-  const { title, items } = content || {};
-
+const CategoryGrid = ({ title, items }) => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>{title || "Navegue por Categoria"}</h2>
+          <h2 className={styles.title}>{title || "Browse by Category"}</h2>
         </div>
         
         <div className={styles.grid}>

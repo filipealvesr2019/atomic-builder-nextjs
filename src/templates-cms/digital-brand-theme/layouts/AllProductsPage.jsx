@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../sections/Header';
-import FeaturedProducts from '../sections/FeaturedProducts'; // Reuse product grid logic
+import FeaturedProducts from '../sections/FeaturedProducts';
 import Footer from '../sections/Footer';
 
-const AllProductsPage = ({ content }) => {
+const AllProductsPage = ({ sections = {} }) => {
   return (
     <div className="digital-brand-theme">
-      <Header content={content?.header} />
+      <Header {...(sections.header || {})} />
       <main style={{ paddingTop: '100px', backgroundColor: '#FFFFFF' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem' }}>
           <h1 style={{ 
@@ -16,16 +16,16 @@ const AllProductsPage = ({ content }) => {
             color: '#0F172A',
             marginBottom: '3rem'
           }}>
-            Nossos Produtos
+            Our Products
           </h1>
         </div>
-        <FeaturedProducts content={{
-          title: "",
-          subtitle: "Explore nossa coleção completa de ativos digitais.",
-          products: content?.products || []
-        }} />
+        <FeaturedProducts 
+          title="" 
+          subtitle="Explore our full collection of digital assets." 
+          products={sections.featured?.products || []} 
+        />
       </main>
-      <Footer content={content?.footer} />
+      <Footer {...(sections.footer || {})} />
     </div>
   );
 };

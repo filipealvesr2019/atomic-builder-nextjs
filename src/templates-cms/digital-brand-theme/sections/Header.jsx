@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
 
-const Header = ({ content }) => {
+const Header = ({ logo, menu, buttons }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { logo, menu, buttons } = content || {};
 
   return (
     <header className={styles.header}>
@@ -23,10 +22,10 @@ const Header = ({ content }) => {
 
         <div className={styles.actions}>
           <a href="/login" className={styles.loginBtn}>
-            {buttons?.login || "Entrar"}
+            {buttons?.login || "Login"}
           </a>
           <a href="/checkout" className={styles.buyBtn}>
-            {buttons?.buy || "Comprar agora"}
+            {buttons?.buy || "Buy Now"}
           </a>
           <button 
             className={styles.mobileMenuBtn}
@@ -37,7 +36,6 @@ const Header = ({ content }) => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay - Simple implementation */}
       {isMobileMenuOpen && (
         <div style={{
           position: 'absolute',
@@ -53,7 +51,7 @@ const Header = ({ content }) => {
           zIndex: 999
         }}>
           {menu?.map((item, index) => (
-            <a key={index} href={item.href} className={styles.navLink}>
+            <a key={index} href={item.href} className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
               {item.label}
             </a>
           ))}

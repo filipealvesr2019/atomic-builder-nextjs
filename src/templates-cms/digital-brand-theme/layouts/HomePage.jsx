@@ -6,17 +6,17 @@ import FeaturedProducts from '../sections/FeaturedProducts';
 import Benefits from '../sections/Benefits';
 import Footer from '../sections/Footer';
 
-const HomePage = ({ content }) => {
+const HomePage = ({ sections = {}, forceMobile = false }) => {
   return (
-    <div className="digital-brand-theme">
-      <Header content={content?.header} />
+    <div className={`digital-brand-theme ${forceMobile ? 'force-mobile' : ''}`}>
+      <Header {...(sections.header || {})} />
       <main>
-        <Hero content={content?.hero} />
-        <CategoryGrid content={content?.categories} />
-        <FeaturedProducts content={content?.featured} />
-        <Benefits content={content?.benefits} />
+        <Hero {...(sections.hero || {})} />
+        <CategoryGrid {...(sections.categories || {})} />
+        <FeaturedProducts {...(sections.featured || {})} />
+        <Benefits {...(sections.benefits || {})} />
       </main>
-      <Footer content={content?.footer} />
+      <Footer {...(sections.footer || {})} />
     </div>
   );
 };

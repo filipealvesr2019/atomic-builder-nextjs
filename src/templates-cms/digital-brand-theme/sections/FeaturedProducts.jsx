@@ -1,16 +1,14 @@
 import React from 'react';
-import { ShoppingCart, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import styles from './FeaturedProducts.module.css';
 
-const FeaturedProducts = ({ content }) => {
-  const { title, subtitle, products } = content || {};
-
+const FeaturedProducts = ({ title, subtitle, products }) => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>{title || "Produtos em Destaque"}</h2>
-          <p className={styles.subtitle}>{subtitle || "Confira nossas soluções mais populares"}</p>
+          <h2 className={styles.title}>{title || "Featured Products"}</h2>
+          <p className={styles.subtitle}>{subtitle || "Check out our most popular solutions"}</p>
         </div>
 
         <div className={styles.grid}>
@@ -29,9 +27,9 @@ const FeaturedProducts = ({ content }) => {
                 <h3 className={styles.productName}>{product.name}</h3>
                 <div className={styles.footer}>
                   <span className={styles.price}>
-                    {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price)}
+                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
                   </span>
-                  <button className={styles.buyBtn} title="Adicionar ao carrinho">
+                  <button className={styles.buyBtn} title="Add to cart">
                     <Plus size={20} />
                   </button>
                 </div>

@@ -2,9 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import styles from './Hero.module.css';
 
-const Hero = ({ content }) => {
-  const { badge, headline, subheadline, primaryCTA, secondaryCTA, image } = content || {};
-
+const Hero = ({ badge, headline, subheadline, primaryCTA, secondaryCTA, image }) => {
   return (
     <section className={styles.hero}>
       <div className={styles.decoration} />
@@ -12,18 +10,18 @@ const Hero = ({ content }) => {
         <div className={styles.content}>
           {badge && <span className={styles.badge}>{badge}</span>}
           <h1 className={styles.headline}>
-            {headline || "Impulsione seu projeto com nossos ativos digitais"}
+            {headline || "Elevate your project with our premium digital assets"}
           </h1>
           <p className={styles.subheadline}>
-            {subheadline || "Templates, cursos e ferramentas exclusivas criadas para acelerar seu fluxo de trabalho."}
+            {subheadline || "Templates, courses, and exclusive tools created to speed up your workflow."}
           </p>
           <div className={styles.actions}>
             <a href="/products" className={styles.primaryBtn}>
-              {primaryCTA || "Ver produtos"}
+              {primaryCTA || "View products"}
               <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
             </a>
             <a href="/categories" className={styles.secondaryBtn}>
-              {secondaryCTA || "Explorar categorias"}
+              {secondaryCTA || "Explore categories"}
             </a>
           </div>
         </div>

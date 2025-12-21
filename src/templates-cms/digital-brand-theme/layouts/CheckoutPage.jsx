@@ -3,10 +3,10 @@ import Header from '../sections/Header';
 import Footer from '../sections/Footer';
 import { CreditCard, Lock } from 'lucide-react';
 
-const CheckoutPage = ({ content }) => {
+const CheckoutPage = ({ sections = {} }) => {
   return (
     <div className="digital-brand-theme">
-      <Header content={content?.header} />
+      <Header {...(sections.header || {})} />
       <main style={{ paddingTop: '100px', paddingBottom: '100px', backgroundColor: '#F8FAFC' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 2rem' }}>
           <h1 style={{ 
@@ -17,7 +17,7 @@ const CheckoutPage = ({ content }) => {
             marginBottom: '2rem',
             textAlign: 'center'
           }}>
-            Finalizar Compra
+            Checkout
           </h1>
 
           <div style={{ 
@@ -28,15 +28,15 @@ const CheckoutPage = ({ content }) => {
             boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.05)'
           }}>
             <div style={{ marginBottom: '2rem' }}>
-              <h2 style={{ fontFamily: 'Poppins', fontSize: '1.25rem', marginBottom: '1.5rem' }}>Informações de Pagamento</h2>
+              <h2 style={{ fontFamily: 'Poppins', fontSize: '1.25rem', marginBottom: '1.5rem' }}>Payment Information</h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <input type="email" placeholder="Seu e-mail profissional" style={{ padding: '1rem', borderRadius: '10px', border: '1px solid #E5E7EB', outline: 'none' }} />
+                <input type="email" placeholder="Your professional email" style={{ padding: '1rem', borderRadius: '10px', border: '1px solid #E5E7EB', outline: 'none' }} />
                 <div style={{ position: 'relative' }}>
-                  <input type="text" placeholder="Número do cartão" style={{ padding: '1rem', paddingRight: '3rem', borderRadius: '10px', border: '1px solid #E5E7EB', width: '100%', outline: 'none' }} />
+                  <input type="text" placeholder="Card number" style={{ padding: '1rem', paddingRight: '3rem', borderRadius: '10px', border: '1px solid #E5E7EB', width: '100%', outline: 'none' }} />
                   <CreditCard size={20} style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#64748B' }} />
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  <input type="text" placeholder="MM/AA" style={{ padding: '1rem', borderRadius: '10px', border: '1px solid #E5E7EB', outline: 'none' }} />
+                  <input type="text" placeholder="MM/YY" style={{ padding: '1rem', borderRadius: '10px', border: '1px solid #E5E7EB', outline: 'none' }} />
                   <input type="text" placeholder="CVC" style={{ padding: '1rem', borderRadius: '10px', border: '1px solid #E5E7EB', outline: 'none' }} />
                 </div>
               </div>
@@ -59,15 +59,15 @@ const CheckoutPage = ({ content }) => {
               gap: '0.5rem'
             }}>
               <Lock size={18} />
-              Pagar Agora
+              Pay Now
             </button>
             <p style={{ textAlign: 'center', color: '#64748B', fontSize: '0.875rem', marginTop: '1.5rem' }}>
-              Pagamento 100% seguro processado por Stripe.
+              100% secure payment processed by Stripe.
             </p>
           </div>
         </div>
       </main>
-      <Footer content={content?.footer} />
+      <Footer {...(sections.footer || {})} />
     </div>
   );
 };

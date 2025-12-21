@@ -2,16 +2,22 @@ import React from 'react';
 import Header from '../sections/Header';
 import FeaturedProducts from '../sections/FeaturedProducts';
 import Footer from '../sections/Footer';
+import { ChevronRight } from 'lucide-react';
 
-const CategoryPage = ({ content, categoryName }) => {
+const CategoryPage = ({ sections = {}, categoryId = "Templates" }) => {
   return (
     <div className="digital-brand-theme">
-      <Header content={content?.header} />
-      <main style={{ paddingTop: '100px', backgroundColor: '#F8FAFC' }}>
+      <Header {...(sections.header || {})} />
+      <main style={{ paddingTop: '100px', backgroundColor: '#FFFFFF' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem' }}>
-          <div style={{ marginBottom: '2rem', color: '#64748B', fontSize: '0.875rem' }}>
-            Início &rarr; Categorias &rarr; {categoryName}
-          </div>
+          <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748B', fontSize: '14px', marginBottom: '24px' }}>
+            <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Home</a>
+            <ChevronRight size={14} />
+            <a href="/products" style={{ textDecoration: 'none', color: 'inherit' }}>Products</a>
+            <ChevronRight size={14} />
+            <span style={{ color: '#0F172A', fontWeight: 500 }}>{categoryId}</span>
+          </nav>
+          
           <h1 style={{ 
             fontFamily: 'Poppins, sans-serif', 
             fontSize: '3rem', 
@@ -19,24 +25,20 @@ const CategoryPage = ({ content, categoryName }) => {
             color: '#0F172A',
             marginBottom: '1rem'
           }}>
-            {categoryName}
+            {categoryId}
           </h1>
-          <p style={{ 
-            fontFamily: 'Inter, sans-serif', 
-            fontSize: '1.25rem', 
-            color: '#475569',
-            marginBottom: '3rem'
-          }}>
-            Confira todos os ativos digitais na categoria {categoryName}.
+          <p style={{ color: '#475569', fontSize: '1.25rem', marginBottom: '3rem', maxWidth: '600px' }}>
+            Browse our selection of high-quality products in the {categoryId} category.
           </p>
         </div>
-        <FeaturedProducts content={{
-          title: "",
-          subtitle: "",
-          products: content?.products || []
-        }} />
+
+        <FeaturedProducts 
+          title="" 
+          subtitle="" 
+          products={sections.featured?.products?.filter(p => p.category === categoryId) || []} 
+        />
       </main>
-      <Footer content={content?.footer} />
+      <Footer {...(sections.footer || {})} />
     </div>
   );
 };
