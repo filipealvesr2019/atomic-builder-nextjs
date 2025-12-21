@@ -5,15 +5,21 @@
 
 .container {
     display: flex;
-    gap: 15px;
+    gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
-    height: 750px;
+    height: 850px;
+    align-items: flex-end; /* Sides at the bottom */
 }
 
 .imageWrapper {
     flex: 1;
+    height: 95%; /* Shorter than container */
     overflow: hidden;
+}
+
+.imageWrapper:nth-child(2) {
+    align-self: flex-start; /* Middle at the top */
 }
 
 .image {
