@@ -438,13 +438,15 @@
 }
 
 /* Disable hover interaction in mobile preview */
-:global(.is-mobile-preview) .navItemWrapper:hover .dropdown {
+/* Crucial: We must prevent hover from showing it, BUT allow active state to show it */
+/* So we only hide on hover IF it is NOT active */
+:global(.is-mobile-preview) .navItemWrapper:not(.activeDropdown):hover .dropdown {
     display: none !important;
 }
 
 :global(.is-mobile-preview) .activeDropdown .dropdown {
     display: flex !important;
-    position: relative !important; /* Force relative to push content down */
+    position: relative !important;
     top: auto !important;
     left: auto !important;
     box-shadow: none !important;
@@ -454,6 +456,9 @@
     align-items: center;
     margin-top: 0.5rem;
     padding: 0;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 :global(.is-mobile-preview) .dropdownLink {
