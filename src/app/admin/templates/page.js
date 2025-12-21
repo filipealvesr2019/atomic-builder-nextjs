@@ -132,6 +132,12 @@ export default function TemplatesList() {
     }
   };
 
+  const [loadedIframes, setLoadedIframes] = useState({});
+
+  const handleIframeLoad = (id) => {
+    setLoadedIframes(prev => ({ ...prev, [id]: true }));
+  };
+
   if (loading) return <div>{t.loading}</div>;
 
   return (
@@ -154,11 +160,13 @@ export default function TemplatesList() {
             className={styles.card}
           >
             <div className={styles.cardPreview}>
+              {!loadedIframes[template._id] && <div className={styles.loadingSpinner} />}
               <iframe 
                 src={`/user-iframe-preview/${template._id}`}
-                className={styles.previewIframe}
+                className={`${styles.previewIframe} ${loadedIframes[template._id] ? styles.previewIframeVisible : ''}`}
                 title={`${template.name} preview`}
                 scrolling="no"
+                onLoad={() => handleIframeLoad(template._id)}
               />
               <div className={styles.previewOverlay} />
             </div>

@@ -13,6 +13,7 @@ export default function TemplateStore() {
   const router = useRouter();
   const [installing, setInstalling] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [loadedIframes, setLoadedIframes] = useState({});
   const [language] = useAtom(languageAtom);
   const t = translations[language].store;
 
@@ -56,6 +57,10 @@ export default function TemplateStore() {
     }
   };
 
+  const handleIframeLoad = (id) => {
+    setLoadedIframes(prev => ({ ...prev, [id]: true }));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -79,11 +84,13 @@ export default function TemplateStore() {
         {filteredTemplates.map((template) => (
           <div key={template.id} className={styles.card}>
             <div className={styles.cardPreview}>
+              {!loadedIframes[template.id] && <div className={styles.loadingSpinner} />}
               <iframe 
                 src={`/iframe-preview/${template.id}`}
-                className={styles.previewIframe}
+                className={`${styles.previewIframe} ${loadedIframes[template.id] ? styles.previewIframeVisible : ''}`}
                 title={`${template.name} preview`}
                 scrolling="no"
+                onLoad={() => handleIframeLoad(template.id)}
               />
               {/* Overlay to capture clicks and prevent iframe interaction in the grid */}
               <div className={styles.previewOverlay} />
