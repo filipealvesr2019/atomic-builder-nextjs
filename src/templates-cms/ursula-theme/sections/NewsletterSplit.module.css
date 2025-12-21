@@ -85,6 +85,34 @@
         flex-direction: column;
     }
     .content {
-        padding: 3rem 2rem;
+        padding: 3rem 1.5rem;
+        text-align: center;
+    }
+    .form {
+        margin: 0 auto;
+        width: 100%;
+    }
+    .button {
+        margin: 1rem auto 0;
     }
 }
+
+/* Force Mobile in Simulator */
+:global(.is-mobile-preview) .section {
+    flex-direction: column;
+}
+
+:global(.is-mobile-preview) .content {
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+:global(.is-mobile-preview) .form {
+    margin: 0 auto;
+    width: 100%;
+}
+
+:global(.is-mobile-preview) .button {
+    margin: 1rem auto 0;
+}
+

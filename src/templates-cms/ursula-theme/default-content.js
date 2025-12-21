@@ -296,21 +296,26 @@ export const ursulaDefaultContent = {
           type: 'header',
           props: {
              logoText: 'Ursula',
+             logoSub: 'Theme',
              links: [
                  { text: 'Home', href: '/admin/store/preview/ursula-theme' },
-                 { text: 'Categories', href: '#', subItems: [
-                     { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
-                     { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
-                     { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
-                     { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
-                 ]},
+                 {
+                     text: 'Categories',
+                     href: '#',
+                     subItems: [
+                         { text: 'Lifestyle', href: '/admin/demo-preview/ursula-demo/category/lifestyle' },
+                         { text: 'Fashion', href: '/admin/demo-preview/ursula-demo/category/fashion' },
+                         { text: 'Stories', href: '/admin/demo-preview/ursula-demo/category/stories' },
+                         { text: 'Featured', href: '/admin/demo-preview/ursula-demo/category/featured' }
+                     ]
+                 },
                  { text: 'Our Blog', href: '/admin/demo-preview/ursula-demo/blog' },
                  { text: 'Single Post', href: '/admin/demo-preview/ursula-demo/single-post' },
                  { text: 'About Me', href: '/admin/demo-preview/ursula-demo/about' },
                  { text: 'Contact Us', href: '/admin/demo-preview/ursula-demo/contact' }
              ]
-          }
-        },
+           }
+         },
         {
             type: 'single-post',
             props: {

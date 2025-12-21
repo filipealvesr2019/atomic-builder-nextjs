@@ -62,7 +62,7 @@ export default function PreviewWrapper({ children, templateName = "Ursula" }) {
             justifyContent: 'center',
             overflowY: 'auto'
         }}>
-             <div style={getViewportStyle()}>
+             <div style={getViewportStyle()} className={viewport === 'mobile' ? 'is-mobile-preview' : ''}>
                  <div style={{ width: '100%', height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>
                     {children}
                  </div>

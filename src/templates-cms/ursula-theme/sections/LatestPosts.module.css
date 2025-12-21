@@ -130,7 +130,31 @@
 }
 
 @media (max-width: 768px) {
+    .section {
+        padding: 3rem 1.5rem;
+    }
+    
     .grid {
         grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .title {
+        font-size: 2rem;
     }
 }
+
+/* Force Mobile in Simulator */
+:global(.is-mobile-preview) .section {
+    padding: 3rem 1.5rem;
+}
+
+:global(.is-mobile-preview) .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+:global(.is-mobile-preview) .title {
+    font-size: 2rem;
+}
+

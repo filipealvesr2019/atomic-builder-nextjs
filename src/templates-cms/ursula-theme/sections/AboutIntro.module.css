@@ -72,10 +72,39 @@
 }
 
 @media (max-width: 900px) {
+    .section {
+        padding: 3rem 1.5rem;
+    }
+
     .container {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
+    
     .col3 {
         padding-top: 0;
     }
+
+    .title {
+        font-size: 1.8rem;
+    }
 }
+
+/* Force Mobile in Simulator */
+:global(.is-mobile-preview) .section {
+    padding: 3rem 1.5rem;
+}
+
+:global(.is-mobile-preview) .container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+:global(.is-mobile-preview) .col3 {
+    padding-top: 0;
+}
+
+:global(.is-mobile-preview) .title {
+    font-size: 1.8rem;
+}
+
