@@ -14,7 +14,7 @@ export default function Footer({
        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop"  // Wedding Cake/Table
    ];
    
-   const displayInsta = instagramImages.length >= 5 ? instagramImages : defaultInsta;
+   const displayInsta = instagramImages.length > 0 ? instagramImages : defaultInsta;
 
   return (
     <footer className={styles.footer}>
@@ -22,8 +22,8 @@ export default function Footer({
         <h4 className={styles.newsletterTitle}>Follow Us</h4>
       </div>
       
-      <div className={styles.instaGrid}>
-         {displayInsta.slice(0, 5).map((img, i) => (
+      <div className={styles.instaGrid} style={{ display: 'grid', gridTemplateColumns: `repeat(${displayInsta.length}, 1fr)` }}>
+         {displayInsta.map((img, i) => (
              <div key={i} className={styles.instaItem} style={{backgroundImage: `url(${img})`}}></div>
          ))}
       </div>
