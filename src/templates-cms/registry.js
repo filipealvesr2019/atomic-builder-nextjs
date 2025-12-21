@@ -133,6 +133,20 @@ import DigitalBrandBenefits from './digital-brand-theme/sections/Benefits';
 import DigitalBrandFooter from './digital-brand-theme/sections/Footer';
 import { digitalBrandDefaultContent } from './digital-brand-theme/default-content';
 
+// Creatix Theme
+import CreatixHome from './creatix-theme/layouts/HomePage';
+import CreatixCategory from './creatix-theme/layouts/CategoryPage';
+import CreatixProductDetail from './creatix-theme/layouts/ProductDetailPage';
+import CreatixCheckout from './creatix-theme/layouts/CheckoutPage';
+import CreatixCustomerArea from './creatix-theme/layouts/CustomerAreaPage';
+
+import CreatixHeader from './creatix-theme/sections/Header';
+import CreatixHero from './creatix-theme/sections/Hero';
+import CreatixCategoryGrid from './creatix-theme/sections/CategoryGrid';
+import CreatixFeaturedProducts from './creatix-theme/sections/FeaturedProducts';
+import CreatixFooter from './creatix-theme/sections/Footer';
+import { creatixDefaultContent } from './creatix-theme/default-content';
+
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
@@ -309,6 +323,25 @@ const templates = {
       featured: DigitalBrandFeaturedProducts,
       benefits: DigitalBrandBenefits,
       footer: DigitalBrandFooter
+    }
+  },
+  'creatix-theme': {
+    name: 'Creatix',
+    category: 'ecommerce',
+    defaultContent: creatixDefaultContent,
+    layouts: {
+      home: CreatixHome,
+      category: CreatixCategory,
+      'product-detail': CreatixProductDetail,
+      checkout: CreatixCheckout,
+      'customer-area': CreatixCustomerArea
+    },
+    sections: {
+      header: CreatixHeader,
+      hero: CreatixHero,
+      categories: CreatixCategoryGrid,
+      featured: CreatixFeaturedProducts,
+      footer: CreatixFooter
     }
   }
 };
