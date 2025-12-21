@@ -9,17 +9,17 @@
     max-width: 1400px;
     margin: 0 auto;
     height: 850px;
-    align-items: flex-end; /* Sides at the bottom */
+    align-items: center; /* Center everything vertically */
 }
 
 .imageWrapper {
     flex: 1;
-    height: 95%; /* Shorter than container */
+    height: 70%; /* Side images height */
     overflow: hidden;
 }
 
 .imageWrapper:nth-child(2) {
-    align-self: flex-start; /* Middle at the top */
+    height: 100%; /* Middle image takes full container height */
 }
 
 .image {
