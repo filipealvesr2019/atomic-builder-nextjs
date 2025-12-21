@@ -1,0 +1,121 @@
+.pricing {
+    padding: 100px 20px;
+    background-color: #ebeae6;
+    text-align: center;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 0.85rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 60px;
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 60px 40px;
+    flex: 1;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.highlighted {
+    background-color: #444;
+    color: #fff;
+}
+
+.planName {
+    font-size: 0.75rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.priceContainer {
+    margin-bottom: 40px;
+}
+
+.price {
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    display: block;
+}
+
+.tax {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.highlighted .tax {
+    color: #ccc;
+}
+
+.featuresList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 50px 0;
+    text-align: left;
+    width: 100%;
+}
+
+.featureItem {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon {
+    flex-shrink: 0;
+}
+
+.button {
+    background: transparent;
+    border: 1px solid #333;
+    padding: 15px 30px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #333;
+    width: 100%;
+}
+
+.highlighted .button {
+    border-color: #fff;
+    color: #fff;
+}
+
+.button:hover {
+    background: #333;
+    color: #fff;
+}
+
+.highlighted .button:hover {
+    background: #fff;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}

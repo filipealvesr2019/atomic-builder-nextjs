@@ -9,6 +9,15 @@ import AvaAboutIntro from './ava-portfolio/sections/AboutIntro';
 import AvaTestimonials from './ava-portfolio/sections/Testimonials';
 import AvaBlogGrid from './ava-portfolio/sections/BlogGrid';
 import AvaFooter from './ava-portfolio/sections/Footer';
+import WorkshopHero from './ava-portfolio/sections/WorkshopHero';
+import WorkshopStatement from './ava-portfolio/sections/WorkshopStatement';
+import WorkshopFeatures from './ava-portfolio/sections/WorkshopFeatures';
+import WorkshopSteps from './ava-portfolio/sections/WorkshopSteps';
+import WorkshopAbout from './ava-portfolio/sections/WorkshopAbout';
+import WorkshopPricing from './ava-portfolio/sections/WorkshopPricing';
+import WorkshopFinalCTA from './ava-portfolio/sections/WorkshopFinalCTA';
+import AvaHomePage from './ava-portfolio/layouts/HomePage';
+import AvaWorkshopsPage from './ava-portfolio/layouts/WorkshopsPage';
 import { avaDefaultContent } from './ava-portfolio/default-content';
 import MinimalBusinessHome from './minimal-business/layouts/HomePage';
 import MinimalBusinessHero from './minimal-business/sections/Hero';
@@ -190,10 +199,12 @@ const templates = {
     category: 'portfolio',
     defaultContent: avaDefaultContent,
     layouts: {
-        home: AvaPortfolioHome
+        home: AvaPortfolioHome,
+        workshops: AvaWorkshopsPage
     },
     sections: {
         header: AvaHeader,
+        footer: AvaFooter,
         hero: AvaHero,
         introduction: AvaIntroduction,
         collage: AvaCollage,
@@ -201,7 +212,13 @@ const templates = {
         'about-intro': AvaAboutIntro,
         testimonials: AvaTestimonials,
         'blog-grid': AvaBlogGrid,
-        footer: AvaFooter
+        'workshop-hero': WorkshopHero,
+        'workshop-statement': WorkshopStatement,
+        'workshop-features': WorkshopFeatures,
+        'workshop-steps': WorkshopSteps,
+        'workshop-about': WorkshopAbout,
+        'workshop-pricing': WorkshopPricing,
+        'workshop-final-cta': WorkshopFinalCTA
     }
   }
 };

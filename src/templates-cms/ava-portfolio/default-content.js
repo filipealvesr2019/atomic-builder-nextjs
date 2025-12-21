@@ -13,7 +13,7 @@ export const avaDefaultContent = {
             logoText: "Ava",
             links: [
                 { label: "ABOUT", href: "#about" },
-                { label: "WORKSHOPS", href: "#workshops" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
                 { label: "SERVICES", href: "#services" },
                 { label: "CONTACT", href: "#contact" },
                 { label: "THE BLOG", href: "#blog" }
@@ -137,6 +137,152 @@ export const avaDefaultContent = {
                 ],
                 copyright: "© 2024 Ava Portfolio. All rights reserved."
             }
+        }
+      ]
+    },
+    {
+      slug: 'workshops',
+      name: 'Workshops',
+      layout: 'workshops',
+      content: [
+        {
+          id: 'ava-header-work',
+          type: 'header',
+          props: {
+            logoText: "Ava",
+            links: [
+                { label: "ABOUT", href: "/admin/store/preview/ava-portfolio/home#about" },
+                { label: "WORKSHOPS", href: "/admin/store/preview/ava-portfolio/workshops" },
+                { label: "SERVICES", href: "/admin/store/preview/ava-portfolio/home#services" },
+                { label: "CONTACT", href: "/admin/store/preview/ava-portfolio/home#contact" },
+                { label: "THE BLOG", href: "/admin/store/preview/ava-portfolio/home#blog" }
+            ],
+            socialLinks: [
+                { icon: "instagram", href: "#" },
+                { icon: "pinterest", href: "#" },
+                { icon: "vimeo", href: "#" }
+            ]
+          }
+        },
+        {
+          id: 'work-hero',
+          type: 'workshop-hero',
+          props: {
+            title: "Elevate Your Narrative",
+            subtitle: "MASTERCLASS BY AVA ROSE",
+            description: "Go beyond the basics. Learn how to harness natural light, master artistic composition, and discover your unique voice in the world of high-end wedding photography.",
+            buttonText: "RESERVE YOUR SEAT",
+            imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
+          }
+        },
+        {
+          id: 'work-statement',
+          type: 'workshop-statement',
+          props: {
+            text: "Capturing the raw, unscripted moments that define a lifetime of love and legacy."
+          }
+        },
+        {
+          id: 'work-features',
+          type: 'workshop-features',
+          props: {
+            features: [
+              "Harnessing Golden Hour",
+              "Intentional Storytelling",
+              "Editorial Post-Processing"
+            ]
+          }
+        },
+        {
+          id: 'work-steps',
+          type: 'workshop-steps',
+          props: {
+            title: "THE CURRICULUM",
+            steps: [
+              {
+                number: "01",
+                title: "Vision & Style",
+                description: "Deep dive into developing a signature aesthetic that attracts your dream clientele."
+              },
+              {
+                number: "02",
+                title: "Hands-on Shooting",
+                description: "Live editorial session with a professional couple, focusing on posing and light direction."
+              },
+              {
+                number: "03",
+                title: "The Edit",
+                description: "Comprehensive workflow session using Lightroom and Photoshop to achieve a timeless look."
+              }
+            ]
+          }
+        },
+        {
+            id: 'work-about',
+            type: 'workshop-about',
+            props: {
+                title: "Crafting Timeless Art From Real Life",
+                description: "With over a decade spent documenting love stories across the globe, I've realized that the most powerful images are found in the quiet, in-between moments. My mission is to teach you how to see the beauty in the mundane and the extraordinary in the simple.",
+                buttonText: "LEARN THE PHILOSOPHY",
+                imageUrl: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
+            }
+        },
+        {
+            id: 'work-pricing',
+            type: 'workshop-pricing',
+            props: {
+                title: "SELECT YOUR EXPERIENCE",
+                plans: [
+                    {
+                        name: "The Essentialist",
+                        price: "$450",
+                        features: [
+                            "Full Day Intensive",
+                            "Posing & Lighting Guide",
+                            "Live Group Shooting",
+                            "Artisan Lunch"
+                        ],
+                        buttonText: "SELECT ESSENTIALIST"
+                    },
+                    {
+                        name: "The Visionary",
+                        price: "$850",
+                        features: [
+                            "2-Day Immersive",
+                            "1-on-1 Portfolio Critique",
+                            "Workflow Masterclass",
+                            "Sunset Editorial Session",
+                            "Personal Brand Strategy"
+                        ],
+                        buttonText: "SELECT VISIONARY",
+                        highlighted: true
+                    }
+                ]
+            }
+        },
+        {
+            id: 'work-cta',
+            type: 'workshop-final-cta',
+            props: {
+                title: "Your Journey to Mastery Starts Here",
+                description: "Our Spring 2025 cohort is almost full. Join a community of dedicated artists and transform your creative process in an intimate, 2-day immersive experience.",
+                buttonText: "APPLY FOR THE MASTERCLASS",
+                imageUrl: "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1000&auto=format&fit=crop"
+            }
+        },
+        {
+          id: 'ava-footer-work',
+          type: 'footer',
+          props: {
+              instagramImages: [
+                   "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"
+              ],
+              copyright: "© 2024 Ava Portfolio. All rights reserved."
+          }
         }
       ]
     }

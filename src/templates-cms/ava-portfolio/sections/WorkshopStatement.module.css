@@ -1,0 +1,25 @@
+.statement {
+    padding: 100px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.text {
+    font-size: 2.5rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #333;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+@media (max-width: 768px) {
+    .text {
+        font-size: 1.8rem;
+    }
+}

@@ -198,6 +198,7 @@ export default function TemplatePagePreview() {
                 {PageLayout ? (
                     <PageLayout 
                         sections={sections}
+                        content={pageContent.content}
                         theme={{}} 
                         forceMobile={viewport === 'mobile' && !isMobileDevice}
                     />
