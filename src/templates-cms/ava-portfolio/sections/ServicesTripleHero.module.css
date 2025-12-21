@@ -29,10 +29,6 @@
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.imageWrapper:hover .image {
-    transform: scale(1.05);
-}
-
 @media (max-width: 991px) {
     .container {
         height: 600px;
