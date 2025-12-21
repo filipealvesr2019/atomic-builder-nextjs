@@ -130,9 +130,9 @@ export const avaDefaultContent = {
             props: {
                 instagramImages: [
                      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop",
-                     "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1000&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdlZGRpbmd8ZW58MHx8MHx8fDA%3D?q=80&w=1000&auto=format&fit=crop",
                      "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1000&auto=format&fit=crop",
-                     "https://images.unsplash.com/photo-1507206130118-b5907f907167?q=80&w=1000&auto=format&fit=crop",
+                     "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fHdlZGRpbmd8ZW58MHx8MHx8fDA%3D?q=80&w=1000&auto=format&fit=crop",
                      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000&auto=format&fit=crop"
                 ],
                 copyright: "© 2024 Ava Portfolio. All rights reserved."
