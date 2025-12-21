@@ -8,6 +8,7 @@ import ServicesOverlap from '../sections/ServicesOverlap';
 import ServicesBanner from '../sections/ServicesBanner';
 import ServicesFAQ from '../sections/ServicesFAQ';
 import ServicesFeatured from '../sections/ServicesFeatured';
+import ServicesGridDetailed from '../sections/ServicesGridDetailed';
 import Footer from '../sections/Footer';
 
 const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '700'], style: ['normal', 'italic'] });
@@ -20,6 +21,7 @@ export default function ServicesPage({ sections = {} }) {
         <ServicesTripleHero {...(sections['services-triple-hero'] || {})} />
         <ServicesIntroRef {...(sections['services-intro-ref'] || {})} />
         <ServicesProcess {...(sections['services-process'] || {})} />
+        <ServicesGridDetailed {...(sections['services-grid-detailed'] || {})} />
         
         {/* Wedding Package */}
         <ServicesOverlap {...(sections['wedding-package'] || {})} />

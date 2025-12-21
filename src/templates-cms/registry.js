@@ -32,6 +32,7 @@ import ServicesOverlap from './ava-portfolio/sections/ServicesOverlap';
 import ServicesBanner from './ava-portfolio/sections/ServicesBanner';
 import ServicesFAQ from './ava-portfolio/sections/ServicesFAQ';
 import ServicesFeatured from './ava-portfolio/sections/ServicesFeatured';
+import ServicesGridDetailed from './ava-portfolio/sections/ServicesGridDetailed';
 
 import { avaDefaultContent } from './ava-portfolio/default-content';
 import MinimalBusinessHome from './minimal-business/layouts/HomePage';
@@ -246,7 +247,8 @@ const templates = {
         'services-overlap': ServicesOverlap,
         'services-banner': ServicesBanner,
         'services-faq': ServicesFAQ,
-        'services-featured': ServicesFeatured
+        'services-featured': ServicesFeatured,
+        'services-grid-detailed': ServicesGridDetailed
     }
   }
 };

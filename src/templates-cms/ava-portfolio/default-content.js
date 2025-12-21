@@ -392,6 +392,39 @@ export const avaDefaultContent = {
             }
         },
         {
+            id: 'serv-grid-detailed',
+            type: 'services-grid-detailed',
+            props: {
+                title: "Discover Our Packages",
+                services: [
+                    { 
+                        number: "01", 
+                        name: "THE WEDDING PACKAGE", 
+                        description: "Full day coverage, two photographers, and a premium album to tell your story.",
+                        price: "FROM $3,500"
+                    },
+                    { 
+                        number: "02", 
+                        name: "GETTING ENGAGED", 
+                        description: "An intimate 2-hour session at a location of your choice with 50+ edited images.",
+                        price: "FROM $650"
+                    },
+                    { 
+                        number: "03", 
+                        name: "THE ELOPEMENT", 
+                        description: "4 hours of coverage for your intimate celebration, focusing on raw emotion.",
+                        price: "FROM $1,800"
+                    },
+                    { 
+                        number: "04", 
+                        name: "LIFESTYLE SESSION", 
+                        description: "Documenting your everyday magic in a natural and candid way at home.",
+                        price: "FROM $500"
+                    }
+                ]
+            }
+        },
+        {
             id: 'serv-wedding-pkg',
             type: 'services-overlap',
             props: {
