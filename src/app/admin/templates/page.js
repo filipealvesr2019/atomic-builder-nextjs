@@ -153,50 +153,62 @@ export default function TemplatesList() {
             key={template._id} 
             className={styles.card}
           >
-            <div className={styles.cardHeader}>
-              <h3>{template.name}</h3>
-              <div className={styles.headerRight}>
-                <button
-                  onClick={(e) => handleDelete(e, template._id)}
-                  className={styles.deleteLink}
-                  title={t.delete}
-                >
-                  <Trash size={16} />
-                </button>
-                <span className={styles.type}>{template.type}</span>
-              </div>
+            <div className={styles.cardPreview}>
+              <iframe 
+                src={`/user-iframe-preview/${template._id}`}
+                className={styles.previewIframe}
+                title={`${template.name} preview`}
+                scrolling="no"
+              />
+              <div className={styles.previewOverlay} />
             </div>
-            {template.type === 'theme' && template.pages && (
-              <p style={{ color: '#666', fontSize: '0.875rem', margin: '0.5rem 0' }}>
-                {template.pages.length} {t.pagesCount}
-              </p>
-            )}
-            <div className={styles.actions}>
-              <Link
-                href={`/admin/editor/${template._id}`}
-                className={styles.actionButton}
-              >
-                <Edit size={16} />
-                {t.edit}
-              </Link>
-              
-              <Link 
-                href={`/admin/demo-preview/${template._id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${styles.actionButton} ${styles.previewButton}`}
-              >
-                <Eye size={16} />
-                {t.viewTheme}
-              </Link>
 
-              <Link
-                href={`/admin/templates/${template._id}/settings`}
-                className={`${styles.actionButton} ${styles.configButton}`}
-              >
-                <Settings size={16} />
-                {t.config}
-              </Link>
+            <div className={styles.cardContent}>
+              <div className={styles.cardHeader}>
+                <h3>{template.name}</h3>
+                <div className={styles.headerRight}>
+                  <button
+                    onClick={(e) => handleDelete(e, template._id)}
+                    className={styles.deleteLink}
+                    title={t.delete}
+                  >
+                    <Trash size={16} />
+                  </button>
+                  <span className={styles.type}>{template.type}</span>
+                </div>
+              </div>
+              {template.type === 'theme' && template.pages && (
+                <p style={{ color: '#666', fontSize: '0.875rem', margin: '0.5rem 0' }}>
+                  {template.pages.length} {t.pagesCount}
+                </p>
+              )}
+              <div className={styles.actions}>
+                <Link
+                  href={`/admin/editor/${template._id}`}
+                  className={styles.actionButton}
+                >
+                  <Edit size={16} />
+                  {t.edit}
+                </Link>
+                
+                <Link 
+                  href={`/user-iframe-preview/${template._id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.actionButton} ${styles.previewButton}`}
+                >
+                  <Eye size={16} />
+                  {t.viewTheme}
+                </Link>
+  
+                <Link
+                  href={`/admin/templates/${template._id}/settings`}
+                  className={`${styles.actionButton} ${styles.configButton}`}
+                >
+                  <Settings size={16} />
+                  {t.config}
+                </Link>
+              </div>
             </div>
           </div>
         ))}
