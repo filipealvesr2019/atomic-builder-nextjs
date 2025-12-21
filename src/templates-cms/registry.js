@@ -33,6 +33,11 @@ import ServicesBanner from './ava-portfolio/sections/ServicesBanner';
 import ServicesFAQ from './ava-portfolio/sections/ServicesFAQ';
 import ServicesFeatured from './ava-portfolio/sections/ServicesFeatured';
 import ServicesGridDetailed from './ava-portfolio/sections/ServicesGridDetailed';
+import PortfolioPage from './ava-portfolio/layouts/PortfolioPage';
+import PortfolioGrid from './ava-portfolio/sections/PortfolioGrid';
+import PortfolioSlider from './ava-portfolio/sections/PortfolioSlider';
+import PortfolioMasonry from './ava-portfolio/sections/PortfolioMasonry';
+
 
 import { avaDefaultContent } from './ava-portfolio/default-content';
 import MinimalBusinessHome from './minimal-business/layouts/HomePage';
@@ -217,7 +222,8 @@ const templates = {
     layouts: {
         home: AvaPortfolioHome,
         workshops: AvaWorkshopsPage,
-        services: AvaServicesPage
+        services: AvaServicesPage,
+        portfolio: PortfolioPage
     },
     sections: {
         header: AvaHeader,
@@ -248,7 +254,10 @@ const templates = {
         'services-banner': ServicesBanner,
         'services-faq': ServicesFAQ,
         'services-featured': ServicesFeatured,
-        'services-grid-detailed': ServicesGridDetailed
+        'services-grid-detailed': ServicesGridDetailed,
+        'portfolio-grid': PortfolioGrid,
+        'portfolio-slider': PortfolioSlider,
+        'portfolio-masonry': PortfolioMasonry
     }
   }
 };
