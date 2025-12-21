@@ -10,7 +10,7 @@ export default function Hero({
   buttonLink = "#"
 }) {
   return (
-    <section className={styles.hero} style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <section className={`${styles.hero} ursula-mobile-hero`} style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className={styles.overlay}></div>
       <div className={styles.content}>
         <span className={styles.subtitle}>{subtitle}</span>

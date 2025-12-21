@@ -90,18 +90,21 @@
     }
 }
 
-/* Force Mobile in Simulator */
-:global(.is-mobile-preview) .section {
-    padding: 3rem 1.5rem;
+/* ROBUST MOBILE OVERRIDES - CONDITIONAL CLASS */
+:global(.ursula-mobile-stack) {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    width: 100% !important;
 }
 
-:global(.is-mobile-preview) .container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+:global(.is-mobile-preview) .section {
+    padding: 3rem 1.5rem !important;
 }
 
 :global(.is-mobile-preview) .col3 {
-    padding-top: 0;
+    padding-top: 0 !important; /* Remove stagger on mobile */
 }
 
 :global(.is-mobile-preview) .title {

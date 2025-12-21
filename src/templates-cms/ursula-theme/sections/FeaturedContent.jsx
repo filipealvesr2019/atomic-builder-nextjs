@@ -7,11 +7,12 @@ export default function FeaturedContent({
   text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   buttonText = "Read More",
   image1 = "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80",
-  image2 = "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80"
+  image2 = "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80",
+  forceMobile
 }) {
   return (
     <section className={styles.section}>
-      <div className={`${styles.container} ursula-mobile-stack`}>
+      <div className={`${styles.container} ${forceMobile ? 'ursula-mobile-stack' : ''}`}>
         {/* Text Content */}
         <div className={styles.textColumn}>
             <h2 className={styles.title}>{title}</h2>

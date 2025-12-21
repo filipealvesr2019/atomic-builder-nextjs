@@ -131,7 +131,7 @@
 
 @media (max-width: 768px) {
     .section {
-        padding: 3rem 1.5rem;
+        padding: 3rem 1rem; /* Reduced horizontal padding */
     }
     
     .grid {
@@ -144,19 +144,16 @@
     }
 }
 
-/* Force Mobile in Simulator - HIGH SPECIFICITY */
-:global(.is-mobile-preview) .section {
-    padding: 3rem 1.5rem;
-}
-
-:global(.is-mobile-preview) .grid {
+/* ROBUST MOBILE OVERRIDES - CONDITIONAL CLASS */
+:global(.ursula-mobile-grid) {
     grid-template-columns: 1fr !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 3rem !important;
+    width: 100% !important;
 }
 
-:global(.is-mobile-preview) .title {
-    font-size: 2rem;
+:global(.is-mobile-preview) .section {
+    padding: 3rem 1rem !important; /* Reduced horizontal padding */
 }
 

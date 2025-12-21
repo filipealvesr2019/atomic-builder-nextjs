@@ -129,15 +129,31 @@
 }
 
 @media (max-width: 768px) {
+    .footer {
+        padding: 3rem 1rem 1rem;
+    }
+
     .container {
         grid-template-columns: 1fr;
+        gap: 3rem; /* Increased gap for better separation */
     }
     
     .centerColumn {
         border: none;
         border-top: 1px solid #333;
-        border-bottom: 1px solid #333;
+        padding-top: 2rem;
+        /* No bottom border needed as it stacks with next item */
+        border-bottom: none;
         padding: 2rem 0;
+    }
+
+    .column {
+        text-align: center;
+        align-items: center;
+    }
+
+    .contactDetails p {
+        justify-content: center;
     }
     
     .bottomBar {
@@ -148,7 +164,26 @@
     }
 }
 
+/* ROBUST MOBILE OVERRIDES - CONDITIONAL CLASS */
+:global(.ursula-mobile-footer) {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3rem !important;
+}
+
+:global(.ursula-mobile-footer) .centerColumn {
+    border: none !important;
+    border-top: 1px solid #333 !important;
+    border-bottom: none !important;
+    padding: 2rem 0 !important;
+}
+
 /* Force Mobile in Simulator */
+:global(.is-mobile-preview) .footer {
+    padding: 3rem 1rem 1rem !important;
+}
+
 :global(.is-mobile-preview) .container {
     grid-template-columns: 1fr !important;
     display: flex !important;
@@ -159,7 +194,7 @@
 :global(.is-mobile-preview) .centerColumn {
     border: none !important;
     border-top: 1px solid #333 !important;
-    border-bottom: 1px solid #333 !important;
+    border-bottom: none !important;
     padding: 2rem 0 !important;
     width: 100% !important;
 }

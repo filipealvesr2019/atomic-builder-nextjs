@@ -34,7 +34,8 @@ export default function LatestPosts({
        excerpt: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim...",
        image: "https://images.unsplash.com/photo-1544207240-8b1025eb7aeb?w=500&q=80"
     }
-  ] 
+  ],
+  forceMobile
 }) {
   return (
     <section className={styles.section}>
@@ -43,7 +44,7 @@ export default function LatestPosts({
           <h2 className={styles.title}>{title}</h2>
       </header>
       
-      <div className={`${styles.grid} ursula-mobile-grid`}>
+      <div className={`${styles.grid} ${forceMobile ? 'ursula-mobile-grid' : ''}`}>
           {posts.map((post, idx) => (
              <article key={idx} className={styles.post}>
                  <Link href="/admin/demo-preview/ursula-demo/single-post" className={styles.linkWrapper}>

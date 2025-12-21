@@ -10,12 +10,12 @@ export default function HomePage({ sections = {}, forceMobile = false }) {
   return (
     <div>
       <Header {...(sections.header || {})} forceMobile={forceMobile} />
-      <Hero {...(sections.hero || {})} />
-      <CategoryGrid {...(sections.categories || {})} />
-      <FeaturedContent {...(sections['featured-content'] || {})} />
-      <ClientLove {...(sections['client-love'] || {})} />
-      <LatestPosts {...(sections['latest-posts'] || {})} />
-      <Footer {...(sections.footer || {})} />
+      <Hero {...(sections.hero || {})} forceMobile={forceMobile} />
+      <CategoryGrid {...(sections.categories || {})} forceMobile={forceMobile} />
+      <FeaturedContent {...(sections['featured-content'] || {})} forceMobile={forceMobile} />
+      <ClientLove {...(sections['client-love'] || {})} forceMobile={forceMobile} />
+      <LatestPosts {...(sections['latest-posts'] || {})} forceMobile={forceMobile} />
+      <Footer {...(sections.footer || {})} forceMobile={forceMobile} />
     </div>
   );
 }

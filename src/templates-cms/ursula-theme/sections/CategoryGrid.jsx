@@ -10,7 +10,8 @@ export default function CategoryGrid({
     { name: "Bolero", image: "https://images.unsplash.com/photo-1540221652346-e5dd6b50f3e7?w=500&q=80", link: "#" },
     { name: "Lifestyle", image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&q=80", link: "#" },
     { name: "Stories", image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500&q=80", link: "#" }
-  ] 
+  ],
+  forceMobile
 }) {
   return (
     <section className={styles.categorySection}>
@@ -19,7 +20,7 @@ export default function CategoryGrid({
           <h2 className={styles.title}>{title}</h2>
       </header>
       
-      <div className={`${styles.grid} ursula-mobile-grid`}>
+      <div className={`${styles.grid} ${forceMobile ? 'ursula-mobile-grid' : ''}`}>
           {categories.map((cat, idx) => (
              <Link key={idx} href={cat.link || '#'} className={styles.card}>
                  <div className={styles.imageContainer}>

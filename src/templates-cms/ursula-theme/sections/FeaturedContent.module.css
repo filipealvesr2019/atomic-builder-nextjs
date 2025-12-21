@@ -83,9 +83,13 @@
 }
 
 @media (max-width: 900px) {
+    .section {
+        padding: 4rem 1rem;
+    }
+
     .container {
         flex-direction: column;
-        gap: 2rem;
+        gap: 3rem;
     }
     
     .textColumn {
@@ -99,15 +103,21 @@
     }
 }
 
-/* Force Mobile in Simulator */
-:global(.is-mobile-preview) .container {
+/* ROBUST MOBILE OVERRIDES - CONDITIONAL CLASS */
+:global(.ursula-mobile-stack) {
     flex-direction: column !important;
-    gap: 2rem !important;
+    gap: 3rem !important;
+    display: flex !important;
+}
+
+:global(.is-mobile-preview) .section {
+    padding: 4rem 1rem !important;
 }
 
 :global(.is-mobile-preview) .textColumn {
     padding-right: 0 !important;
     text-align: center !important;
+    width: 100% !important;
 }
 
 :global(.is-mobile-preview) .imageColumn {

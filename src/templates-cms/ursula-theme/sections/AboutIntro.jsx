@@ -5,11 +5,12 @@ export default function AboutIntro({
     title = "We Are Azura", 
     subtitle = "About Us",
     description = "Lorem ipsum dolor sit amet.",
-    images = []
+    images = [],
+    forceMobile
 }) {
   return (
     <section className={styles.section}>
-        <div className={styles.container}>
+        <div className={`${styles.container} ${forceMobile ? 'ursula-mobile-stack' : ''}`}>
             {/* Column 1: Title + Vertical Image */}
             <div className={styles.col1}>
                 <span className={styles.subtitle}>{subtitle}</span>

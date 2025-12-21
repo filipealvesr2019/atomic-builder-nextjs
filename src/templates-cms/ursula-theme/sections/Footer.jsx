@@ -23,7 +23,7 @@ const defaultSections = {
     }
 };
 
-export default function Footer({ sections }) {
+export default function Footer({ sections, forceMobile }) {
   // Merge defaults
   const data = {
       contact: { ...defaultSections.contact, ...(sections?.contact || {}) },
@@ -32,7 +32,7 @@ export default function Footer({ sections }) {
   };
   return (
     <footer className={styles.footer}>
-      <div className={styles.container}>
+      <div className={`${styles.container} ${forceMobile ? 'ursula-mobile-footer' : ''}`}>
         {/* Contact Column */}
         <div className={styles.column}>
             <h3 className={styles.colTitle}>{data.contact.title}</h3>
