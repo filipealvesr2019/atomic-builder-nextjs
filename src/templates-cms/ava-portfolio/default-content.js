@@ -319,7 +319,7 @@ export const avaDefaultContent = {
                 title: "Your Journey to Mastery Starts Here",
                 description: "Our Spring 2025 cohort is almost full. Join a community of dedicated artists and transform your creative process in an intimate, 2-day immersive experience.",
                 buttonText: "APPLY FOR THE MASTERCLASS",
-                imageUrl: "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1000&auto=format&fit=crop"
+                imageUrl: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop"
             }
         },
         {
