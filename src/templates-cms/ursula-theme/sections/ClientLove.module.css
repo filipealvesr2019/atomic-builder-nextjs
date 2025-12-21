@@ -90,7 +90,7 @@
 
 /* ROBUST MOBILE OVERRIDES */
 :global(.ursula-mobile-stack) {
-    flex-direction: column-reverse !important;
+    flex-direction: column !important;
     gap: 3rem !important;
 }
 
