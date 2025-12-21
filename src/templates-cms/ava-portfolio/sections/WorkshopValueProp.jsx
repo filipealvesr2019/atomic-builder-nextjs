@@ -19,7 +19,7 @@ export default function WorkshopValueProp({
                 <div className={styles.grid}>
                     {items.map((item, index) => (
                         <div key={index} className={styles.item}>
-                            <Check className={styles.icon} size={18} strokeWidth={1} />
+                            <Check className={styles.icon} size={18} strokeWidth={1.5} />
                             <p className={styles.text}>{item.text}</p>
                         </div>
                     ))}
