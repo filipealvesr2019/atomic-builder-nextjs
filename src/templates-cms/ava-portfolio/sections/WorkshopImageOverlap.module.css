@@ -1,0 +1,47 @@
+.overlapSection {
+    padding: 100px 0;
+    background-color: #fff;
+}
+
+.imageOverlay {
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentBox {
+    background-color: #fff;
+    padding: 60px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.title {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .contentBox {
+        margin: 0 20px;
+        padding: 40px 30px;
+    }
+    
+    .imageOverlay {
+        height: 500px;
+    }
+}

@@ -7,6 +7,10 @@ import WorkshopSteps from '../sections/WorkshopSteps';
 import WorkshopAbout from '../sections/WorkshopAbout';
 import WorkshopPricing from '../sections/WorkshopPricing';
 import WorkshopFinalCTA from '../sections/WorkshopFinalCTA';
+import WorkshopGridTopics from '../sections/WorkshopGridTopics';
+import WorkshopImageOverlap from '../sections/WorkshopImageOverlap';
+import WorkshopInfoRow from '../sections/WorkshopInfoRow';
+import WorkshopAccordion from '../sections/WorkshopAccordion';
 
 const SECTION_MAP = {
     'header': Header,
@@ -17,7 +21,11 @@ const SECTION_MAP = {
     'workshop-steps': WorkshopSteps,
     'workshop-about': WorkshopAbout,
     'workshop-pricing': WorkshopPricing,
-    'workshop-final-cta': WorkshopFinalCTA
+    'workshop-final-cta': WorkshopFinalCTA,
+    'workshop-grid-topics': WorkshopGridTopics,
+    'workshop-image-overlap': WorkshopImageOverlap,
+    'workshop-info-row': WorkshopInfoRow,
+    'workshop-accordion': WorkshopAccordion
 };
 
 export default function WorkshopsPage({ content = [] }) {

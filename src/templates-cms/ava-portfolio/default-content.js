@@ -183,17 +183,6 @@ export const avaDefaultContent = {
           }
         },
         {
-          id: 'work-features',
-          type: 'workshop-features',
-          props: {
-            features: [
-              "Harnessing Golden Hour",
-              "Intentional Storytelling",
-              "Editorial Post-Processing"
-            ]
-          }
-        },
-        {
           id: 'work-steps',
           type: 'workshop-steps',
           props: {
@@ -225,6 +214,27 @@ export const avaDefaultContent = {
                 description: "With over a decade spent documenting love stories across the globe, I've realized that the most powerful images are found in the quiet, in-between moments. My mission is to teach you how to see the beauty in the mundane and the extraordinary in the simple.",
                 buttonText: "LEARN THE PHILOSOPHY",
                 imageUrl: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop"
+            }
+        },
+        {
+            id: 'work-topics',
+            type: 'workshop-grid-topics',
+            props: {
+                topics: [
+                    { title: "LIGHTING", description: "Mastering the golden hour and working with challenging overcast conditions." },
+                    { title: "COMPOSITION", description: "Finding the perfect angle and framing to pull the viewer into the story." },
+                    { title: "DIRECTION", description: "How to guide couples naturally to capture raw, authentic connection." },
+                    { title: "WORKFLOW", description: "From backup strategies to the final gallery delivery, streamlined for success." }
+                ]
+            }
+        },
+        {
+            id: 'work-overlap',
+            type: 'workshop-image-overlap',
+            props: {
+                backgroundImage: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop",
+                title: "Inspiration Everywhere",
+                description: "We believe that photography is a way of life, not just a job. This workshop is designed to reignite your passion and perspective."
             }
         },
         {
@@ -261,6 +271,41 @@ export const avaDefaultContent = {
             }
         },
         {
+            id: 'work-info',
+            type: 'workshop-info-row',
+            props: {
+                items: [
+                    {
+                        image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
+                        title: "Artistic Vision",
+                        description: "Deepen your creative well and find your unique visual language."
+                    },
+                    {
+                        image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop",
+                        title: "Technical Mastery",
+                        description: "Master the subtle nuances of camera settings and light control."
+                    },
+                    {
+                        image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop",
+                        title: "Client Experience",
+                        description: "Create an unforgettable journey for the couples who trust you."
+                    }
+                ]
+            }
+        },
+        {
+            id: 'work-faq',
+            type: 'workshop-accordion',
+            props: {
+                title: "FREQUENTLY ASKED QUESTIONS",
+                items: [
+                    { question: "Do I need a professional camera?", answer: "Yes, a DSLR or mirrorless camera with full manual control is required for the workshop." },
+                    { question: "Is lunch included?", answer: "Absolutely! We provide artisanal meals and refreshments for both days of the workshop." },
+                    { question: "Will I get to shoot with models?", answer: "Yes, specifically arranged editorial sessions with professional models are included." }
+                ]
+            }
+        },
+        {
             id: 'work-cta',
             type: 'workshop-final-cta',
             props: {
@@ -276,7 +321,7 @@ export const avaDefaultContent = {
           props: {
               instagramImages: [
                    "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
-                   "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop",
+                   "https://images.unsplash.com/photo-1519225468759-61a3346c1a90?q=80&w=1600&auto=format&fit=crop",
                    "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop",
                    "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop",
                    "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"

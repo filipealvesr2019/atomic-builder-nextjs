@@ -1,0 +1,41 @@
+.gridSection {
+    padding: 80px 20px;
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid #ebeae6;
+}
+
+.item {
+    padding: 60px 40px;
+    border: 0.5px solid #ebeae6;
+    text-align: center;
+}
+
+.title {
+    font-size: 0.75rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
