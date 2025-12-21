@@ -12,10 +12,11 @@ export default function SinglePost({
     content = [],
     gallery = [],
     quote,
-    tags = []
+    tags = [],
+    forceMobile
 }) {
   return (
-    <article className={styles.article}>
+    <article className={`${styles.article} ${forceMobile ? 'ursula-mobile-single-post' : ''}`}>
         <div className={styles.container}>
             {/* Header */}
             <header className={styles.header}>

@@ -207,3 +207,24 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ROBUST MOBILE OVERRIDES */
+:global(.ursula-mobile-single-post) [class*="SinglePost_gallery"],
+:global(.ursula-mobile-single-post) .gallery {
+    grid-template-columns: 1fr !important;
+}
+
+:global(.ursula-mobile-single-post) [class*="SinglePost_inputs"],
+:global(.ursula-mobile-single-post) .inputs {
+    grid-template-columns: 1fr !important;
+}
+
+:global(.ursula-mobile-single-post) [class*="SinglePost_title"],
+:global(.ursula-mobile-single-post) .title {
+    font-size: 2rem !important; /* Prevent huge title overflow */
+}
+
+:global(.ursula-mobile-single-post) [class*="SinglePost_article"],
+:global(.ursula-mobile-single-post) .article {
+    padding: 3rem 1rem !important;
+}
