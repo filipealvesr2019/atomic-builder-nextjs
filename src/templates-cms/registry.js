@@ -117,6 +117,22 @@ import EmmaBlogHero from './emma-portfolio/sections/BlogHero';
 import EmmaBlogGrid from './emma-portfolio/sections/BlogGrid';
 import EmmaInstagramTitle from './emma-portfolio/sections/InstagramTitle';
 
+// Digital Brand Theme
+import DigitalBrandHome from './digital-brand-theme/layouts/HomePage';
+import DigitalBrandAllProducts from './digital-brand-theme/layouts/AllProductsPage';
+import DigitalBrandCategory from './digital-brand-theme/layouts/CategoryPage';
+import DigitalBrandProductDetail from './digital-brand-theme/layouts/ProductDetailPage';
+import DigitalBrandCheckout from './digital-brand-theme/layouts/CheckoutPage';
+import DigitalBrandCustomerArea from './digital-brand-theme/layouts/CustomerAreaPage';
+
+import DigitalBrandHeader from './digital-brand-theme/sections/Header';
+import DigitalBrandHero from './digital-brand-theme/sections/Hero';
+import DigitalBrandCategoryGrid from './digital-brand-theme/sections/CategoryGrid';
+import DigitalBrandFeaturedProducts from './digital-brand-theme/sections/FeaturedProducts';
+import DigitalBrandBenefits from './digital-brand-theme/sections/Benefits';
+import DigitalBrandFooter from './digital-brand-theme/sections/Footer';
+import { digitalBrandDefaultContent } from './digital-brand-theme/default-content';
+
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
@@ -272,6 +288,27 @@ const templates = {
         'post-content': PostContent,
         'post-sidebar': PostSidebar,
         'post-recommendations': PostRecommendations
+    }
+  },
+  'digital-brand-theme': {
+    name: 'Digital Brand',
+    category: 'ecommerce',
+    defaultContent: digitalBrandDefaultContent,
+    layouts: {
+      home: DigitalBrandHome,
+      products: DigitalBrandAllProducts,
+      category: DigitalBrandCategory,
+      'product-detail': DigitalBrandProductDetail,
+      checkout: DigitalBrandCheckout,
+      'customer-area': DigitalBrandCustomerArea
+    },
+    sections: {
+      header: DigitalBrandHeader,
+      hero: DigitalBrandHero,
+      categories: DigitalBrandCategoryGrid,
+      featured: DigitalBrandFeaturedProducts,
+      benefits: DigitalBrandBenefits,
+      footer: DigitalBrandFooter
     }
   }
 };

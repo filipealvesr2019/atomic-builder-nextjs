@@ -62,6 +62,10 @@ export const translations = {
          'minimal-business': {
              name: 'Minimal Business',
              description: 'Perfect for minimal business websites. Fully customizable.'
+         },
+         'digital-brand-theme': {
+             name: 'Digital Brand',
+             description: 'Modern e-commerce for digital products (Templates, Courses, E-books).'
          }
       }
     },
@@ -225,6 +229,10 @@ export const translations = {
          'minimal-business': {
              name: 'Negócio Minimalista',
              description: 'Perfeito para sites minimalistas. Totalmente personalizável.'
+         },
+         'digital-brand-theme': {
+             name: 'Digital Brand',
+             description: 'E-commerce moderno para produtos digitais (Templates, Cursos, E-books).'
          }
       }
     },
