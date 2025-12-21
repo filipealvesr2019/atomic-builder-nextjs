@@ -1,3 +1,8 @@
+.container {
+  container-type: inline-size;
+  width: 100%;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -5,6 +10,7 @@
   padding: 20px 50px;
   background: white;
   border-bottom: 1px solid #eaeaea;
+  position: relative; /* Context for overlay */
 }
 
 .logo {
@@ -56,7 +62,13 @@
     color: white;
 }
 
-@media (max-width: 768px) {
+/* Default state (Desktop-ish) - hidden mobile elements */
+.mobileMenuToggle, .mobileMenuOverlay {
+  display: none;
+}
+
+/* Container Query for Mobile */
+@container (max-width: 768px) {
   .header {
     padding: 15px 20px;
     height: 70px;
@@ -81,8 +93,8 @@
 
   /* Mobile Menu Overlay */
   .mobileMenuOverlay {
-    position: fixed;
-    top: 70px; /* Match header height */
+    position: absolute; /* Changed from fixed to absolute to stay within header/preview context if needed, or fixed if global */
+    top: 70px;
     left: 0;
     width: 100%;
     height: calc(100vh - 70px);
@@ -95,6 +107,16 @@
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     border-top: 1px solid #eaeaea;
+  }
+  
+  /* If fixed positioning is preferred for full screen overlay regardless of container */
+  .mobileMenuOverlay {
+      position: fixed;
+      top: 70px; /* Assuming header stays at top or we adjust */
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: auto;
   }
 
   .mobileMenuOpen {
@@ -123,12 +145,5 @@
     gap: 20px;
     margin-top: auto;
     padding-bottom: 40px;
-  }
-}
-
-/* Hide toggle on desktop */
-@media (min-width: 769px) {
-  .mobileMenuToggle, .mobileMenuOverlay {
-    display: none;
   }
 }
