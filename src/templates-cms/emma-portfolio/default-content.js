@@ -30,7 +30,7 @@ export const emmaDefaultContent = {
             title: 'Launch your business easily!',
             subtitle: 'Available now for 10$',
             text: 'Transform your passion into a profitable business with our comprehensive step-by-step coaching program designed for creative entrepreneurs.',
-            buttonText: 'SHOP NOW',
+            buttonText: 'Book NOW',
             backgroundImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80',
             overlayImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80'
           }

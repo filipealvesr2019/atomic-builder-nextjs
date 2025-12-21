@@ -36,7 +36,7 @@ export const ursulaDefaultContent = {
           props: {
             title: 'We are UrsulaTheme',
             subtitle: 'New Collection',
-            buttonText: 'Shop Now',
+            buttonText: 'Book Now',
             backgroundImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
           }
         },
