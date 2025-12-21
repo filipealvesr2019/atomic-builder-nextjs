@@ -106,24 +106,24 @@
 
 /* Force Mobile in Simulator */
 /* ROBUST MOBILE OVERRIDES - CONDITIONAL CLASS */
-:global(.ursula-mobile-grid) {
+:global(.ursula-mobile-team) {
     padding: 3rem 1.5rem !important;
 }
 
-:global(.ursula-mobile-grid) [class*="Team_grid"],
-:global(.ursula-mobile-grid) .grid {
+:global(.ursula-mobile-team) [class*="Team_grid"],
+:global(.ursula-mobile-team) .grid {
     grid-template-columns: 1fr !important;
     gap: 3rem !important;
 }
 
-:global(.ursula-mobile-grid) [class*="Team_title"],
-:global(.ursula-mobile-grid) .title {
+:global(.ursula-mobile-team) [class*="Team_title"],
+:global(.ursula-mobile-team) .title {
     font-size: 2rem !important;
     margin-bottom: 2rem !important;
 }
 
-:global(.ursula-mobile-grid) [class*="Team_member"],
-:global(.ursula-mobile-grid) .member {
+:global(.ursula-mobile-team) [class*="Team_member"],
+:global(.ursula-mobile-team) .member {
     margin-bottom: 1rem !important;
 }
 

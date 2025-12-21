@@ -9,7 +9,7 @@ export default function Team({
     forceMobile
 }) {
   return (
-    <section className={`${styles.section} ${forceMobile ? 'ursula-mobile-grid' : ''}`} style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <section className={`${styles.section} ${forceMobile ? 'ursula-mobile-team' : ''}`} style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className={styles.overlay}></div>
         <div className={styles.content}>
             <header className={styles.header}>
