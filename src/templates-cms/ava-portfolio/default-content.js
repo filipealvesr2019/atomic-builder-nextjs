@@ -175,13 +175,7 @@ export const avaDefaultContent = {
             imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
           }
         },
-        {
-          id: 'work-statement',
-          type: 'workshop-statement',
-          props: {
-            text: "Capturing the raw, unscripted moments that define a lifetime of love and legacy."
-          }
-        },
+  
         {
             id: 'work-value-prop',
             type: 'workshop-value-prop',
