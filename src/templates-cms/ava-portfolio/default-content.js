@@ -455,7 +455,7 @@ export const avaDefaultContent = {
                 description: "Capture the excitement and intimacy of your engagement with a session that truly reflects your connection. We'll find a location that means something to you and create memories you'll treasure.",
                 buttonText: "LEARN MORE",
                 imageLarge: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop",
-                imageSmall: "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop",
+                imageSmall: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop",
                 mirrored: true
             }
         },
