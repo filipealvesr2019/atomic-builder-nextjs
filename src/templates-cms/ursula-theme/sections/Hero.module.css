@@ -78,14 +78,14 @@
     }
 }
 
-/* Force Mobile in Simulator */
-/* Force Mobile in Simulator - HIGH SPECIFICITY */
-:global(.is-mobile-preview) .title {
-    font-size: 2.25rem !important;
+/* ROBUST MOBILE OVERRIDES - CONDITIONAL CLASS */
+:global(.ursula-mobile-hero) .title {
+    font-size: 2rem !important; /* Reduced to prevent overflow */
     margin-bottom: 1.5rem !important;
+    word-break: break-word; /* Safety net */
 }
 
-:global(.is-mobile-preview) .hero {
+:global(.ursula-mobile-hero) {
     height: 350px !important;
     padding: 0 1rem !important;
 }
