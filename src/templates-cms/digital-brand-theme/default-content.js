@@ -62,7 +62,7 @@ export const digitalBrandDefaultContent = {
                 name: "Chronos Display Font",
                 price: 29,
                 category: "Fonts",
-                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=1000",
+                image: "/images/digital-brand/chronos.png",
                 badge: "Trending"
               },
               {
@@ -70,21 +70,21 @@ export const digitalBrandDefaultContent = {
                 name: "Abstract Gradient Pack",
                 price: 18,
                 category: "Textures",
-                image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000"
+                image: "/images/digital-brand/gradient.png"
               },
               {
                 id: "3",
                 name: "Minimalist Brand Kit",
                 price: 45,
                 category: "Templates",
-                image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1000"
+                image: "/images/digital-brand/brandkit.png"
               },
               {
                 id: "4",
                 name: "Film Grain Overlays",
                 price: 15,
                 category: "Effects",
-                image: "https://images.unsplash.com/photo-1542315264-c5a4b77c5f84?auto=format&fit=crop&q=80&w=1000"
+                image: "/images/digital-brand/filmgrain.png"
               }
             ]
           }
