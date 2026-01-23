@@ -16,15 +16,15 @@ export default function TemplateStore() {
   const [language] = useAtom(languageAtom);
   const t = translations[language].store;
 
-  const CATEGORIES = ['all', 'ecommerce', 'landing', 'blog', 'portfolio'];
+  const CATEGORIES = ['all', 'business', 'creative', 'retail', 'technology', 'lifestyle'];
 
   const availableTemplates = Object.entries(templates).map(([key, config]) => ({
     id: key,
     ...config
   }));
 
-  const filteredTemplates = activeCategory === 'all' 
-    ? availableTemplates 
+  const filteredTemplates = activeCategory === 'all'
+    ? availableTemplates
     : availableTemplates.filter(t => t.category === activeCategory);
 
   const handleInstall = async (templateId) => {
@@ -65,13 +65,13 @@ export default function TemplateStore() {
 
       <div className={styles.tabs}>
         {CATEGORIES.map(cat => (
-            <button
-                key={cat}
-                className={`${styles.tabButton} ${activeCategory === cat ? styles.tabButtonActive : ''}`}
-                onClick={() => setActiveCategory(cat)}
-            >
-                {t.categories?.[cat] || cat}
-            </button>
+          <button
+            key={cat}
+            className={`${styles.tabButton} ${activeCategory === cat ? styles.tabButtonActive : ''}`}
+            onClick={() => setActiveCategory(cat)}
+          >
+            {t.categories?.[cat] || cat}
+          </button>
         ))}
       </div>
 
@@ -79,7 +79,7 @@ export default function TemplateStore() {
         {filteredTemplates.map((template) => (
           <div key={template.id} className={styles.card}>
             <div className={styles.cardPreview}>
-              <iframe 
+              <iframe
                 src={`/iframe-preview/${template.id}`}
                 className={styles.previewIframe}
                 title={`${template.name} preview`}
@@ -92,26 +92,26 @@ export default function TemplateStore() {
             <div className={styles.cardBody}>
               <h3>{t.items[template.id]?.name || template.name}</h3>
               <p className={styles.description}>{t.items[template.id]?.description}</p>
-              
+
               <div className={styles.actions}>
-                <a 
-                    href={`/iframe-preview/${template.id}`} 
-                    target="_blank" 
-                    className={styles.previewButton}
+                <a
+                  href={`/iframe-preview/${template.id}`}
+                  target="_blank"
+                  className={styles.previewButton}
                 >
-                    <Eye size={16} />
-                    {t.liveDemo}
+                  <Eye size={16} />
+                  {t.liveDemo}
                 </a>
-                
-                <button 
+
+                <button
                   onClick={() => handleInstall(template.id)}
                   disabled={installing === template.id}
                   className={styles.installButton}
                 >
                   {installing === template.id ? t.installing : (
                     <>
-                        <DownloadCloud size={16} />
-                        {t.install}
+                      <DownloadCloud size={16} />
+                      {t.install}
                     </>
                   )}
                 </button>
