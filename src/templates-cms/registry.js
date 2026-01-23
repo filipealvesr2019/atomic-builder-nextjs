@@ -254,7 +254,7 @@ const templates = {
   },
   'ava-portfolio': {
     name: 'Ava Portfolio',
-    category: 'creative',
+    category: 'weddings',
     defaultContent: avaDefaultContent,
     layouts: {
       home: AvaPortfolioHome,

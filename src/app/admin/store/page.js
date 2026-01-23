@@ -16,7 +16,7 @@ export default function TemplateStore() {
   const [language] = useAtom(languageAtom);
   const t = translations[language].store;
 
-  const CATEGORIES = ['all', 'business', 'creative', 'retail', 'technology', 'lifestyle'];
+  const CATEGORIES = ['all', 'business', 'creative', 'retail', 'technology', 'lifestyle', 'weddings'];
 
   const availableTemplates = Object.entries(templates).map(([key, config]) => ({
     id: key,
