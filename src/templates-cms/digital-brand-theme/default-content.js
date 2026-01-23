@@ -10,18 +10,18 @@ export const digitalBrandDefaultContent = {
           type: 'header',
           props: {
             logo: {
-              text: "DIGITAL BRAND",
+              text: "RELEVATES",
               image: ""
             },
             menu: [
               { label: "Home", href: "/" },
-              { label: "Products", href: "/products" },
-              { label: "About", href: "/about" },
-              { label: "Contact", href: "/contact" }
+              { label: "Shop", href: "/shop" },
+              { label: "Fonts", href: "/category/fonts" },
+              { label: "Graphics", href: "/category/graphics" }
             ],
             buttons: {
               login: "Login",
-              buy: "Buy Now"
+              buy: "All Access Pass"
             }
           }
         },
@@ -29,12 +29,12 @@ export const digitalBrandDefaultContent = {
           id: 'brand-hero',
           type: 'hero',
           props: {
-            badge: "New: Next.js Templates",
-            headline: "Elevate your project with our premium digital assets",
-            subheadline: "Templates, courses, and exclusive tools created to speed up your workflow and take your brand to the next level.",
-            primaryCTA: "View products",
-            secondaryCTA: "Explore categories",
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426"
+            badge: "New Collection: Abstract 3D",
+            headline: "Elevate your visuals with premium digital assets",
+            subheadline: "Curated fonts, textures, and graphic kits designed for modern creators and brands.",
+            primaryCTA: "Browse Collection",
+            secondaryCTA: "View Bundles",
+            image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2400"
           }
         },
         {
@@ -43,10 +43,10 @@ export const digitalBrandDefaultContent = {
           props: {
             title: "Browse by Category",
             items: [
-              { id: "templates", name: "Templates", icon: "Layout", description: "Ready-to-use designs" },
-              { id: "courses", name: "Courses", icon: "BookOpen", description: "Learn new skills" },
-              { id: "ebooks", name: "E-books", icon: "FileText", description: "Knowledge in your hands" },
-              { id: "tools", name: "Tools", icon: "Tool", description: "Scripts and utilities" }
+              { id: "fonts", name: "Fonts", icon: "Type", description: "Serif, Sans & Display" },
+              { id: "graphics", name: "Graphics", icon: "Image", description: "Vectors & Illustrations" },
+              { id: "textures", name: "Textures", icon: "Layers", description: "Paper, Noise & Gradient" },
+              { id: "mockups", name: "Mockups", icon: "Box", description: "High-res Presentations" }
             ]
           }
         },
@@ -54,37 +54,37 @@ export const digitalBrandDefaultContent = {
           id: 'brand-featured',
           type: 'featured',
           props: {
-            title: "Featured Products",
-            subtitle: "Check out our most popular solutions",
+            title: "New Releases",
+            subtitle: "Fresh assets for your next project",
             products: [
               {
                 id: "1",
-                name: "Next.js SaaS Starter",
-                price: 199,
-                category: "Templates",
-                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1000",
-                badge: "Best Seller"
+                name: "Chronos Display Font",
+                price: 29,
+                category: "Fonts",
+                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=1000",
+                badge: "Trending"
               },
               {
                 id: "2",
-                name: "UI Kit - Brand Pro",
-                price: 49,
-                category: "Design",
-                image: "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=1000"
+                name: "Abstract Gradient Pack",
+                price: 18,
+                category: "Textures",
+                image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000"
               },
               {
                 id: "3",
-                name: "Mastering React Native",
-                price: 147,
-                category: "Courses",
-                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=1000"
+                name: "Minimalist Brand Kit",
+                price: 45,
+                category: "Templates",
+                image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1000"
               },
               {
                 id: "4",
-                name: "Dev Performance Guide",
-                price: 29,
-                category: "E-books",
-                image: "https://images.unsplash.com/photo-1544391496-1ca7c97457cd?auto=format&fit=crop&q=80&w=1000"
+                name: "Film Grain Overlays",
+                price: 15,
+                category: "Effects",
+                image: "https://images.unsplash.com/photo-1542315264-c5a4b77c5f84?auto=format&fit=crop&q=80&w=1000"
               }
             ]
           }
@@ -93,27 +93,27 @@ export const digitalBrandDefaultContent = {
           id: 'brand-benefits',
           type: 'benefits',
           props: {
-            title: "Why choose our brand?",
+            title: "Why Relevates?",
             items: [
               {
-                title: "Immediate Download",
-                description: "Get instant access to your files right after payment confirmation.",
-                icon: "Zap"
+                title: "Commercial License",
+                description: "Use our assets in unlimited personal and commercial projects.",
+                icon: "ShieldCheck"
               },
               {
-                title: "100% Digital Content",
-                description: "Products optimized for immediate consumption, no waiting for shipping.",
-                icon: "Download"
+                title: "High Resolution",
+                description: "Crystal clear assets optimized for print and high-DPI screens.",
+                icon: "Maximize"
               },
               {
-                title: "Direct Support",
-                description: "Talk directly to the creators to solve any questions or difficulties.",
-                icon: "Headphones"
+                title: "Curated Quality",
+                description: "Every item is hand-picked to ensure premium design standards.",
+                icon: "Star"
               },
               {
-                title: "Updates Included",
-                description: "Keep your products always up to date with the latest versions and improvements.",
-                icon: "RefreshCw"
+                title: "Free Updates",
+                description: "Get access to future additions and improvements at no extra cost.",
+                icon: "RefreshCcw"
               }
             ]
           }
@@ -122,27 +122,27 @@ export const digitalBrandDefaultContent = {
           id: 'brand-footer',
           type: 'footer',
           props: {
-            brandName: "DIGITAL BRAND",
-            description: "Your premium source of digital assets for modern development.",
+            brandName: "RELEVATES",
+            description: "Premium digital resources for makers, designers, and visionaries.",
             links: [
               {
-                title: "Company",
+                title: "Shop",
                 items: [
-                  { label: "About", href: "/about" },
-                  { label: "Careers", href: "/careers" },
-                  { label: "Contact", href: "/contact" }
+                  { label: "All Products", href: "/shop" },
+                  { label: "New Arrivals", href: "/new" },
+                  { label: "Bundles", href: "/bundles" }
                 ]
               },
               {
                 title: "Support",
                 items: [
-                  { label: "Help Center", href: "/help" },
-                  { label: "Terms", href: "/terms" },
-                  { label: "Privacy", href: "/privacy" }
+                  { label: "License", href: "/license" },
+                  { label: "FAQ", href: "/faq" },
+                  { label: "Contact", href: "/contact" }
                 ]
               }
             ],
-            social: ["Twitter", "Instagram", "GitHub", "LinkedIn"]
+            social: ["Instagram", "Pinterest", "Behance", "Twitter"]
           }
         }
       ]
