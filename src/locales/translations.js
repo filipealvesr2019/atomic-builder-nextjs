@@ -48,7 +48,8 @@ export const translations = {
                 creative: 'Creative',
                 retail: 'Retail',
                 technology: 'Technology',
-                lifestyle: 'Lifestyle'
+                lifestyle: 'Lifestyle',
+                weddings: 'Weddings'
             },
             items: {
                 'rustic-store-cms': {
@@ -215,7 +216,8 @@ export const translations = {
                 creative: 'Criativo',
                 retail: 'Varejo',
                 technology: 'Tecnologia',
-                lifestyle: 'Estilo de Vida'
+                lifestyle: 'Estilo de Vida',
+                weddings: 'Casamentos'
             },
             items: {
                 'rustic-store-cms': {
