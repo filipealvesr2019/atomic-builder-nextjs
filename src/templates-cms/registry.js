@@ -312,8 +312,8 @@ const templates = {
   },
   'digital-brand-theme': {
     name: 'Digital Brand',
-    category: 'technology',
-    type: 'ecommerce',
+    category: 'digital',
+    type: 'graphics',
     defaultContent: digitalBrandDefaultContent,
     layouts: {
       home: DigitalBrandHome,
@@ -334,8 +334,8 @@ const templates = {
   },
   'creatix-theme': {
     name: 'Creatix',
-    category: 'technology',
-    type: 'ecommerce',
+    category: 'digital',
+    type: 'fonts',
     defaultContent: creatixDefaultContent,
     layouts: {
       home: CreatixHome,

@@ -47,7 +47,7 @@ export const translations = {
                 business: 'Business',
                 creative: 'Creative',
                 retail: 'Retail',
-                technology: 'Technology',
+                digital: 'Digital',
                 lifestyle: 'Lifestyle',
                 weddings: 'Weddings'
             },
@@ -57,7 +57,10 @@ export const translations = {
                 landing: 'Landing Page',
                 blog: 'Blog',
                 portfolio: 'Portfolio',
-                institutional: 'Institutional'
+                portfolio: 'Portfolio',
+                institutional: 'Institutional',
+                fonts: 'Fonts',
+                graphics: 'Graphics'
             },
             filterByType: 'Filter by Type',
             items: {
@@ -224,7 +227,8 @@ export const translations = {
                 business: 'Negócios',
                 creative: 'Criativo',
                 retail: 'Varejo',
-                technology: 'Tecnologia',
+                retail: 'Varejo',
+                digital: 'Digital',
                 lifestyle: 'Estilo de Vida',
                 weddings: 'Casamentos'
             },
@@ -234,7 +238,9 @@ export const translations = {
                 landing: 'Landing Page',
                 blog: 'Blog',
                 portfolio: 'Portfólio',
-                institutional: 'Institucional'
+                institutional: 'Institucional',
+                fonts: 'Fontes',
+                graphics: 'Gráficos'
             },
             filterByType: 'Filtrar por Tipo',
             items: {
