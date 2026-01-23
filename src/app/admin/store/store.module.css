@@ -43,7 +43,8 @@
 }
 
 .cardPreview {
-  height: 400px; /* Fixed height for more content visibility */
+  height: 400px;
+  /* Fixed height for more content visibility */
   background: #f3f4f6;
   border-bottom: 1px solid #e5e7eb;
   position: relative;
@@ -70,8 +71,8 @@
 }
 
 .previewPlaceholder {
-    color: #9ca3af;
-    font-weight: 500;
+  color: #9ca3af;
+  font-weight: 500;
 }
 
 .cardBody {
@@ -100,7 +101,8 @@
   gap: 0.75rem;
 }
 
-.previewButton, .installButton {
+.previewButton,
+.installButton {
   flex: 1;
   display: flex;
   align-items: center;
@@ -172,6 +174,42 @@
 }
 
 .tabButtonActive:hover {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.typeFilterContainer {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
+}
+
+.typeSelect {
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  min-width: 200px;
+  transition: all 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+}
+
+.typeSelect:hover {
+  border-color: #d1d5db;
+  background-color: #f9fafb;
+}
+
+.typeSelect:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }

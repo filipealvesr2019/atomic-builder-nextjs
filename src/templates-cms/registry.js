@@ -151,6 +151,7 @@ const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
     category: 'retail',
+    type: 'ecommerce',
     defaultContent: rusticStoreDefaultContent,
     layouts: {
       home: RusticStoreHome
@@ -169,6 +170,7 @@ const templates = {
   'business-theme-cms': {
     name: 'Business Theme',
     category: 'business',
+    type: 'institutional',
     layouts: {
       home: BusinessThemeHome
     },
@@ -182,6 +184,7 @@ const templates = {
   'minimal-business': {
     name: 'Minimal Business',
     category: 'business',
+    type: 'landing',
     layouts: {
       home: MinimalBusinessHome
     },
@@ -195,6 +198,7 @@ const templates = {
   'ursula-theme': {
     name: 'Ursula Blog',
     category: 'lifestyle',
+    type: 'blog',
     defaultContent: ursulaDefaultContent,
     layouts: {
       home: UrsulaHome
@@ -212,6 +216,7 @@ const templates = {
   'emma-portfolio': {
     name: 'Emma Portfolio',
     category: 'creative',
+    type: 'portfolio',
     defaultContent: emmaDefaultContent,
     layouts: {
       home: EmmaPortfolioHome,
@@ -255,6 +260,7 @@ const templates = {
   'ava-portfolio': {
     name: 'Ava Portfolio',
     category: 'weddings',
+    type: 'portfolio',
     defaultContent: avaDefaultContent,
     layouts: {
       home: AvaPortfolioHome,
@@ -307,6 +313,7 @@ const templates = {
   'digital-brand-theme': {
     name: 'Digital Brand',
     category: 'technology',
+    type: 'ecommerce',
     defaultContent: digitalBrandDefaultContent,
     layouts: {
       home: DigitalBrandHome,
@@ -328,6 +335,7 @@ const templates = {
   'creatix-theme': {
     name: 'Creatix',
     category: 'technology',
+    type: 'ecommerce',
     defaultContent: creatixDefaultContent,
     layouts: {
       home: CreatixHome,

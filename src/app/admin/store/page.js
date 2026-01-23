@@ -12,20 +12,35 @@ import { translations } from '@/locales/translations';
 export default function TemplateStore() {
   const router = useRouter();
   const [installing, setInstalling] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('all');
+
+  const [activeCategory, setActiveNiche] = useState('all');
+  const [activeType, setActiveType] = useState('all');
   const [language] = useAtom(languageAtom);
   const t = translations[language].store;
 
   const CATEGORIES = ['all', 'business', 'creative', 'retail', 'technology', 'lifestyle', 'weddings'];
+  const TYPES = ['all', 'ecommerce', 'landing', 'blog', 'portfolio', 'institutional'];
 
   const availableTemplates = Object.entries(templates).map(([key, config]) => ({
     id: key,
     ...config
   }));
 
-  const filteredTemplates = activeCategory === 'all'
-    ? availableTemplates
-    : availableTemplates.filter(t => t.category === activeCategory);
+  const filteredTemplates = activeCategory !== 'all'
+    ? availableTemplates.filter(t => t.category === activeCategory)
+    : activeType !== 'all'
+      ? availableTemplates.filter(t => t.type === activeType)
+      : availableTemplates;
+
+  const handleNicheChange = (niche) => {
+    setActiveNiche(niche);
+    setActiveType('all');
+  };
+
+  const handleTypeChange = (e) => {
+    setActiveType(e.target.value);
+    setActiveNiche('all');
+  };
 
   const handleInstall = async (templateId) => {
     setInstalling(templateId);
@@ -68,11 +83,25 @@ export default function TemplateStore() {
           <button
             key={cat}
             className={`${styles.tabButton} ${activeCategory === cat ? styles.tabButtonActive : ''}`}
-            onClick={() => setActiveCategory(cat)}
+            onClick={() => handleNicheChange(cat)}
           >
             {t.categories?.[cat] || cat}
           </button>
         ))}
+      </div>
+
+      <div className={styles.typeFilterContainer}>
+        <select
+          value={activeType}
+          onChange={handleTypeChange}
+          className={styles.typeSelect}
+        >
+          {TYPES.map(type => (
+            <option key={type} value={type}>
+              {t.types?.[type] || type}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className={styles.grid}>

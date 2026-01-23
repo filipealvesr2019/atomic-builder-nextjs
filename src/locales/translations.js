@@ -51,6 +51,14 @@ export const translations = {
                 lifestyle: 'Lifestyle',
                 weddings: 'Weddings'
             },
+            types: {
+                all: 'All Types',
+                ecommerce: 'E-commerce',
+                landing: 'Landing Page',
+                blog: 'Blog',
+                portfolio: 'Portfolio',
+                institutional: 'Institutional'
+            },
             items: {
                 'rustic-store-cms': {
                     name: 'Rustic Store',
@@ -218,6 +226,14 @@ export const translations = {
                 technology: 'Tecnologia',
                 lifestyle: 'Estilo de Vida',
                 weddings: 'Casamentos'
+            },
+            types: {
+                all: 'Todos os Tipos',
+                ecommerce: 'E-commerce',
+                landing: 'Landing Page',
+                blog: 'Blog',
+                portfolio: 'Portfólio',
+                institutional: 'Institucional'
             },
             items: {
                 'rustic-store-cms': {
