@@ -91,6 +91,7 @@ export default function TemplateStore() {
       </div>
 
       <div className={styles.typeFilterContainer}>
+        <span className={styles.filterLabel}>{t.filterByType}:</span>
         <select
           value={activeType}
           onChange={handleTypeChange}

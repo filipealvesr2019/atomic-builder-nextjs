@@ -59,6 +59,7 @@ export const translations = {
                 portfolio: 'Portfolio',
                 institutional: 'Institutional'
             },
+            filterByType: 'Filter by Type',
             items: {
                 'rustic-store-cms': {
                     name: 'Rustic Store',
@@ -235,6 +236,7 @@ export const translations = {
                 portfolio: 'Portfólio',
                 institutional: 'Institucional'
             },
+            filterByType: 'Filtrar por Tipo',
             items: {
                 'rustic-store-cms': {
                     name: 'Rustic Store',
