@@ -15,6 +15,7 @@ export const digitalBrandDefaultContent = {
             },
             menu: [
               { label: "Home", href: "/" },
+              { label: "Categories", href: "#brand-categories" },
               { label: "Fonts", href: "/category/fonts" },
               { label: "Graphics", href: "/category/graphics" },
               { label: "Textures", href: "/category/textures" },
@@ -127,11 +128,12 @@ export const digitalBrandDefaultContent = {
             description: "Premium digital resources for makers, designers, and visionaries.",
             links: [
               {
-                title: "Shop",
+                title: "Categories",
                 items: [
-                  { label: "All Products", href: "/shop" },
-                  { label: "New Arrivals", href: "/new" },
-                  { label: "Bundles", href: "/bundles" }
+                  { label: "Fonts", href: "/category/fonts" },
+                  { label: "Graphics", href: "/category/graphics" },
+                  { label: "Textures", href: "/category/textures" },
+                  { label: "Mockups", href: "/category/mockups" }
                 ]
               },
               {
