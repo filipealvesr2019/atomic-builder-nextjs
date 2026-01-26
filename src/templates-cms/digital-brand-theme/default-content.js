@@ -15,7 +15,7 @@ export const digitalBrandDefaultContent = {
             },
             menu: [
               { label: "Home", href: "/" },
-              { label: "Categories", href: "#brand-categories" },
+              { label: "Categories", href: "/products" },
               { label: "Fonts", href: "/category/fonts" },
               { label: "Graphics", href: "/category/graphics" },
               { label: "Textures", href: "/category/textures" },
