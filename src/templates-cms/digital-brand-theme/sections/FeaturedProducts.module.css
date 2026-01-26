@@ -142,6 +142,8 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  border: none;
+  cursor: pointer;
 }
 
 .buyBtn:hover {
