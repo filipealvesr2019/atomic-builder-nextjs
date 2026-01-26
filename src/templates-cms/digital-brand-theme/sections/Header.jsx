@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
@@ -27,7 +29,7 @@ const Header = ({ logo, menu, buttons }) => {
           <a href="/checkout" className={styles.buyBtn}>
             {buttons?.buy || "Buy Now"}
           </a>
-          <button 
+          <button
             className={styles.mobileMenuBtn}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >

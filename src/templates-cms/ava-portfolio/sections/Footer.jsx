@@ -1,78 +1,79 @@
+'use client';
 import { useState } from 'react';
 import { Instagram, X, Heart, MessageCircle, Bookmark, MoreHorizontal } from 'lucide-react';
 import styles from './Footer.module.css';
 
-export default function Footer({ 
+export default function Footer({
     instagramImages = [],
     newsletterText = "Subscribe to our newsletter",
     copyright = "© 2024 Ava Portfolio. All rights reserved."
 }) {
-   const defaultInsta = [
-       "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop", 
-       "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"
-   ];
-   
-   const displayInsta = instagramImages.length > 0 ? instagramImages : defaultInsta;
+    const defaultInsta = [
+        "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1481653125770-b78c206c59d4?q=80&w=1600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop"
+    ];
 
-   const [selectedImage, setSelectedImage] = useState(null);
+    const displayInsta = instagramImages.length > 0 ? instagramImages : defaultInsta;
 
-   const handleImageClick = (img) => {
-       setSelectedImage(img);
-   };
+    const [selectedImage, setSelectedImage] = useState(null);
 
-   const closeModal = () => {
-       setSelectedImage(null);
-   };
+    const handleImageClick = (img) => {
+        setSelectedImage(img);
+    };
 
-  return (
-    <>
-    <footer className={styles.footer}>
-      <div className={styles.newsletter}>
-        <h4 className={styles.newsletterTitle}>Follow Us</h4>
-      </div>
-      
-      <div className={styles.instaGrid} style={{ display: 'grid', gridTemplateColumns: `repeat(${displayInsta.length}, 1fr)` }}>
-         {displayInsta.map((img, i) => (
-             <div 
-                key={i} 
-                className={styles.instaItem} 
-                style={{backgroundImage: `url(${img})`}}
-                onClick={() => handleImageClick(img)}
-             >
-                <div className={styles.overlay}>
-                    <Instagram className={styles.icon} />
+    const closeModal = () => {
+        setSelectedImage(null);
+    };
+
+    return (
+        <>
+            <footer className={styles.footer}>
+                <div className={styles.newsletter}>
+                    <h4 className={styles.newsletterTitle}>Follow Us</h4>
                 </div>
-             </div>
-         ))}
-      </div>
 
-      <div className={styles.bottom}>
-        <div className={styles.logo}>AVA ROSE</div>
-        <div className={styles.links}>
-            <a href="#">HOME</a>
-            <a href="#">ABOUT</a>
-            <a href="#">SERVICES</a>
-            <a href="#">CONTACT</a>
-        </div>
-        <div className={styles.copyright}>{copyright}</div>
-      </div>
-    </footer>
+                <div className={styles.instaGrid} style={{ display: 'grid', gridTemplateColumns: `repeat(${displayInsta.length}, 1fr)` }}>
+                    {displayInsta.map((img, i) => (
+                        <div
+                            key={i}
+                            className={styles.instaItem}
+                            style={{ backgroundImage: `url(${img})` }}
+                            onClick={() => handleImageClick(img)}
+                        >
+                            <div className={styles.overlay}>
+                                <Instagram className={styles.icon} />
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
-    {selectedImage && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
-            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <button className={styles.closeButton} onClick={closeModal}>
-                    <X />
-                </button>
-                <img src={selectedImage} alt="Instagram Post" className={styles.modalFullImage} />
-            </div>
-        </div>
-    )}
-    </>
-  );
+                <div className={styles.bottom}>
+                    <div className={styles.logo}>AVA ROSE</div>
+                    <div className={styles.links}>
+                        <a href="#">HOME</a>
+                        <a href="#">ABOUT</a>
+                        <a href="#">SERVICES</a>
+                        <a href="#">CONTACT</a>
+                    </div>
+                    <div className={styles.copyright}>{copyright}</div>
+                </div>
+            </footer>
+
+            {selectedImage && (
+                <div className={styles.modalOverlay} onClick={closeModal}>
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                        <button className={styles.closeButton} onClick={closeModal}>
+                            <X />
+                        </button>
+                        <img src={selectedImage} alt="Instagram Post" className={styles.modalFullImage} />
+                    </div>
+                </div>
+            )}
+        </>
+    );
 }
 
 Footer.cmsConfig = {

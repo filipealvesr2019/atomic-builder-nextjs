@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
@@ -42,7 +43,7 @@ const Header = ({ logo, menu, cta }) => {
           <a href="/shop" className={styles.ctaBtn}>
             {cta || "Shop now"}
           </a>
-          <button 
+          <button
             className={styles.mobileMenuBtn}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -55,9 +56,9 @@ const Header = ({ logo, menu, cta }) => {
       {isMobileMenuOpen && (
         <div className={styles.mobileMenu}>
           {menu?.map((item, index) => (
-            <a 
-              key={index} 
-              href={item.href} 
+            <a
+              key={index}
+              href={item.href}
               className={styles.mobileNavLink}
               onClick={() => setIsMobileMenuOpen(false)}
             >

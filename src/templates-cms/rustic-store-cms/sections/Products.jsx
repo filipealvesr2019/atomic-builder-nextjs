@@ -1,3 +1,4 @@
+'use client';
 import { useState, useMemo } from 'react';
 import { Grid, List, Filter, ShoppingCart } from 'lucide-react';
 import styles from './Products.module.css';
@@ -61,7 +62,7 @@ export default function Products(props) {
 
   const filteredProducts = useMemo(() => {
     let filtered = MOCK_PRODUCTS;
-    
+
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(p => p.category === selectedCategory);
     }
@@ -97,7 +98,7 @@ export default function Products(props) {
             </div>
 
             <div className={styles.controls}>
-              <select 
+              <select
                 className={styles.sortSelect}
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -108,13 +109,13 @@ export default function Products(props) {
               </select>
 
               <div className={styles.viewModeToggle}>
-                <button 
+                <button
                   className={`${styles.viewModeButton} ${viewMode === 'grid' ? styles.viewModeButtonActive : ''}`}
                   onClick={() => setViewMode('grid')}
                 >
                   <Grid size={18} />
                 </button>
-                <button 
+                <button
                   className={`${styles.viewModeButton} ${viewMode === 'list' ? styles.viewModeButtonActive : ''}`}
                   onClick={() => setViewMode('list')}
                 >

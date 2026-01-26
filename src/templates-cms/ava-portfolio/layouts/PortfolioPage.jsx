@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Playfair_Display, Open_Sans } from 'next/font/google';
 import Header from '../sections/Header';
@@ -20,28 +22,28 @@ export default function PortfolioPage({ sections = {} }) {
 
   return (
     <div className={`ava-theme-wrapper ${playfair.className} ${openSans.className}`} style={{ color: '#333', backgroundColor: '#ebeae6' }}>
-        <Header {...(sections['header'] || {})} />
-        
-        <PortfolioGrid 
-            {...(sections['portfolio-grid'] || {})} 
-            onImageClick={handleImageClick}
-        />
+      <Header {...(sections['header'] || {})} />
 
-        <PortfolioSlider 
-            {...(sections['portfolio-slider'] || {})} 
-            onImageClick={handleImageClick}
-        />
+      <PortfolioGrid
+        {...(sections['portfolio-grid'] || {})}
+        onImageClick={handleImageClick}
+      />
+
+      <PortfolioSlider
+        {...(sections['portfolio-slider'] || {})}
+        onImageClick={handleImageClick}
+      />
 
 
-        <PortfolioModal 
-            isOpen={modalOpen}
-            onClose={() => setModalOpen(false)}
-            currentImage={modalData.image}
-            allImages={modalData.allImages}
-            currentIndex={modalData.index}
-        />
+      <PortfolioModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        currentImage={modalData.image}
+        allImages={modalData.allImages}
+        currentIndex={modalData.index}
+      />
 
-        <Footer {...(sections['footer'] || {})} />
+      <Footer {...(sections['footer'] || {})} />
     </div>
   );
 }

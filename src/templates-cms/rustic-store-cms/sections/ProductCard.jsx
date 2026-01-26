@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import { ShoppingCart, Heart, Eye, Star } from 'lucide-react';
 import styles from './ProductCard.module.css';
@@ -29,7 +30,7 @@ const ProductCard = ({ product, onAddToCart }) => {
     setIsFavorite(!isFavorite);
   };
 
-  const discountPercentage = originalPrice 
+  const discountPercentage = originalPrice
     ? Math.round(((originalPrice - price) / originalPrice) * 100)
     : 0;
 
@@ -42,7 +43,7 @@ const ProductCard = ({ product, onAddToCart }) => {
           alt={name}
           className={styles.productImage}
         />
-        
+
         {/* Badge de Desconto */}
         {discountPercentage > 0 && (
           <div className={styles.discountBadge}>
@@ -79,7 +80,7 @@ const ProductCard = ({ product, onAddToCart }) => {
       <div className={styles.infoContainer}>
         {/* Categoria */}
         <p className={styles.category}>{category}</p>
-        
+
         {/* Nome do Produto */}
         <h3 className={styles.productName}>
           {name}
@@ -92,11 +93,10 @@ const ProductCard = ({ product, onAddToCart }) => {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`${styles.starIcon} ${
-                    i < Math.floor(rating)
+                  className={`${styles.starIcon} ${i < Math.floor(rating)
                       ? styles.starFilled
                       : styles.starEmpty
-                  }`}
+                    }`}
                   size={16}
                 />
               ))}

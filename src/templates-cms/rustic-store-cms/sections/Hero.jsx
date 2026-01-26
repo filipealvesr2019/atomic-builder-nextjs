@@ -1,3 +1,4 @@
+'use client';
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import styles from './Hero.module.css';
@@ -168,14 +169,14 @@ Hero.cmsConfig = {
     // Basic props configuration, although 'slides' list is complex to edit individually right now
     // We can expose the first slide's properties for simple editing as a fallback
     title: {
-        type: "string",
-        label: "Title (Slide 1)",
-        default: "Handmade Rustic Furniture"
+      type: "string",
+      label: "Title (Slide 1)",
+      default: "Handmade Rustic Furniture"
     },
     subtitle: {
-        type: "string",
-        label: "Subtitle (Slide 1)",
-        default: "Transform your home with unique pieces"
+      type: "string",
+      label: "Subtitle (Slide 1)",
+      default: "Transform your home with unique pieces"
     }
   }
 };

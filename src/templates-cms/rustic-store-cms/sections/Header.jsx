@@ -1,10 +1,9 @@
 'use client';
-
 import { useState } from 'react';
 import { ShoppingCart, Menu, X, Search, User } from 'lucide-react';
 import styles from './Header.module.css';
 
-export default function Header({ 
+export default function Header({
   topBarText = "Free shipping on orders over $299",
   phoneNumber = "(11) 9999-9999",
   logoText = "Rustic",
@@ -115,9 +114,9 @@ export default function Header({
         <div className={styles.mobileMenu}>
           <nav className={styles.mobileNav}>
             {links.map((link, index) => (
-              <a 
-                key={index} 
-                href={link.href} 
+              <a
+                key={index}
+                href={link.href}
                 className={styles.mobileNavLink}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -139,8 +138,8 @@ Header.cmsConfig = {
     phoneNumber: { type: 'string', label: 'Phone Number' },
     logoText: { type: 'string', label: 'Logo Text' },
     logoAccent: { type: 'string', label: 'Logo Accent' },
-    links: { 
-      type: 'list', 
+    links: {
+      type: 'list',
       label: 'Links',
       itemType: {
         text: { type: 'string', label: 'Text' },

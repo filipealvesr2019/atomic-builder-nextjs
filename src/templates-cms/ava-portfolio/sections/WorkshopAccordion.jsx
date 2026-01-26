@@ -1,4 +1,5 @@
 'use client';
+'use client';
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import styles from './WorkshopAccordion.module.css';
@@ -29,7 +30,7 @@ export default function WorkshopAccordion({
                 <div className={styles.list}>
                     {items.map((item, index) => (
                         <div key={index} className={styles.item}>
-                            <button 
+                            <button
                                 className={styles.header}
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                             >

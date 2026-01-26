@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import styles from './PortfolioModal.module.css';
 
@@ -37,13 +38,13 @@ const PortfolioModal = ({ isOpen, onClose, currentImage, allImages = [], current
   return (
     <div className={styles.modalBackdrop} onClick={handleBackdropClick}>
       <button className={styles.closeBtn} onClick={onClose}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
       </button>
 
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         {allImages.length > 1 && (
           <button className={`${styles.navBtn} ${styles.prev}`} onClick={handlePrev}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 19l-7-7 7-7"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 19l-7-7 7-7" /></svg>
           </button>
         )}
 
@@ -51,7 +52,7 @@ const PortfolioModal = ({ isOpen, onClose, currentImage, allImages = [], current
 
         {allImages.length > 1 && (
           <button className={`${styles.navBtn} ${styles.next}`} onClick={handleNext}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 5l7 7-7 7"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 5l7 7-7 7" /></svg>
           </button>
         )}
       </div>
