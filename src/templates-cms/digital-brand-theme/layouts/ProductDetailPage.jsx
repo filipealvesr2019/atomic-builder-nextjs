@@ -34,49 +34,53 @@ const ProductDetailPage = ({ sections = {}, product }) => {
             <span style={{ color: '#0F172A', fontWeight: 500 }}>{p.name}</span>
           </nav>
 
-          <div className={styles.productGrid}>
+          <div className={styles.grid}>
             <div className={styles.preview}>
-              <div className={styles.imageContainer}>
-                <img src={p.image} alt={p.name} className={styles.mainImage} />
-              </div>
-              <div className={styles.details}>
-                <h2 className={styles.sectionTitle}>Description</h2>
-                <p className={styles.descriptionText}>{p.description}</p>
-                
-                <h2 className={styles.sectionTitle}>Main Features</h2>
-                <ul className={styles.featureList}>
+              <img src={p.image} alt={p.name} className={styles.image} />
+              <div style={{ padding: '2.5rem' }}>
+                <div className={styles.header}>
+                  <span className={styles.category}>{p.category}</span>
+                  <h1 className={styles.title}>{p.name}</h1>
+                </div>
+                <p className={styles.description}>{p.description}</p>
+
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.5rem', color: '#0F172A' }}>
+                  Features & Details
+                </h2>
+                <div className={styles.features}>
                   {p.features?.map((feature, index) => (
-                    <li key={index} className={styles.featureItem}>
-                      <CheckCircle2 size={20} color="#22C55E" />
+                    <div key={index} className={styles.featureItem}>
+                      <CheckCircle2 size={18} color="#6C63FF" />
                       <span>{feature}</span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
 
-            <aside className={styles.sidebar}>
-              <div className={styles.buyCard}>
-                <span className={styles.categoryBadge}>{p.category}</span>
-                <h1 className={styles.productTitle}>{p.name}</h1>
-                <div className={styles.priceContainer}>
-                  <span className={styles.priceSymbol}>$</span>
-                  <span className={styles.priceValue}>{p.price}</span>
-                </div>
-                <button className={styles.mainBuyBtn}>
-                   <ShoppingBag size={20} />
-                   Buy Now
+            <aside>
+              <div className={styles.infoCard}>
+                <span className={styles.category} style={{ fontSize: '0.75rem' }}>License Price</span>
+                <span className={styles.price}>
+                  {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(p.price)}
+                </span>
+                <button className={styles.buyBtn}>
+                  <ShoppingBag size={20} />
+                  Add to Cart
+                </button>
+                <button className={styles.buyBtn} style={{ backgroundColor: '#F1F5F9', color: '#0F172A', border: '1px solid #E2E8F0' }}>
+                  Live Preview
                 </button>
                 <p className={styles.guarantee}>30-Day Money Back Guarantee</p>
-                
-                <div className={styles.metaInfo}>
-                  <div className={styles.metaItem}>
-                    <span className={styles.metaLabel}>Last updated:</span>
-                    <span className={styles.metaValue}>May 2024</span>
+
+                <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #E2E8F0' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                    <span style={{ color: '#64748B', fontSize: '14px' }}>Last updated</span>
+                    <span style={{ color: '#0F172A', fontSize: '14px', fontWeight: 500 }}>May 2024</span>
                   </div>
-                  <div className={styles.metaItem}>
-                    <span className={styles.metaLabel}>Version:</span>
-                    <span className={styles.metaValue}>2.4.0</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ color: '#64748B', fontSize: '14px' }}>File Type</span>
+                    <span style={{ color: '#0F172A', fontSize: '14px', fontWeight: 500 }}>ZIP, SVG, OTF</span>
                   </div>
                 </div>
               </div>

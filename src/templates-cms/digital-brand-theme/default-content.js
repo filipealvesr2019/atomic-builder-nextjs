@@ -62,31 +62,43 @@ export const digitalBrandDefaultContent = {
               {
                 id: "1",
                 name: "Chronos Display Font",
+                slug: "chronos-display-font",
                 price: 29,
                 category: "Fonts",
                 image: "/images/digital-brand/chronos.png",
-                badge: "Trending"
+                badge: "Trending",
+                description: "A luxurious serif typeface designed for high-end branding and editorial design.",
+                features: ["Uppercase & Lowercase", "Alternates & Ligatures", "Multilingual Support", "Web Font Included"]
               },
               {
                 id: "2",
                 name: "Abstract Gradient Pack",
+                slug: "abstract-gradient-pack",
                 price: 18,
                 category: "Textures",
-                image: "/images/digital-brand/gradient.png"
+                image: "/images/digital-brand/gradient.png",
+                description: "A collection of 20 high-resolution vibrant gradient textures for modern backgrounds.",
+                features: ["20 PNG Files", "4000x4000px Resolution", "Noise & Grain Options", "Print Ready"]
               },
               {
                 id: "3",
                 name: "Minimalist Brand Kit",
+                slug: "minimalist-brand-kit",
                 price: 45,
                 category: "Templates",
-                image: "/images/digital-brand/brandkit.png"
+                image: "/images/digital-brand/brandkit.png",
+                description: "Complete visual identity system for professional brands and startups.",
+                features: ["Logo Templates", "Business Cards", "Social Media Kits", "Vector Files Included"]
               },
               {
                 id: "4",
                 name: "Film Grain Overlays",
+                slug: "film-grain-overlays",
                 price: 15,
                 category: "Effects",
-                image: "/images/digital-brand/filmgrain.png"
+                image: "/images/digital-brand/filmgrain.png",
+                description: "Authentic cinematic film grain overlays to add character to your photos and videos.",
+                features: ["10 Unique Overlays", "4K Resolution", "Screen Blend Mode Ready", "Works in any software"]
               }
             ]
           }

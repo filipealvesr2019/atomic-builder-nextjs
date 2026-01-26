@@ -14,17 +14,19 @@ const FeaturedProducts = ({ title, subtitle, products }) => {
         <div className={styles.grid}>
           {products?.map((product, index) => (
             <div key={index} className={styles.card}>
-              <div className={styles.imageWrapper}>
+              <a href={`/product/${product.slug}`} className={styles.imageWrapper}>
                 {product.badge && <span className={styles.badge}>{product.badge}</span>}
-                <img 
-                  src={product.image} 
-                  alt={product.name} 
+                <img
+                  src={product.image}
+                  alt={product.name}
                   className={styles.image}
                 />
-              </div>
+              </a>
               <div className={styles.content}>
                 <span className={styles.category}>{product.category}</span>
-                <h3 className={styles.productName}>{product.name}</h3>
+                <a href={`/product/${product.slug}`} style={{ textDecoration: 'none' }}>
+                  <h3 className={styles.productName}>{product.name}</h3>
+                </a>
                 <div className={styles.footer}>
                   <span className={styles.price}>
                     {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
