@@ -65,6 +65,33 @@
   object-fit: cover;
 }
 
+.galleryNav {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #F8FAFC;
+}
+
+.thumbnail.active {
+  border-color: #6C63FF;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .infoCard {
   background-color: white;
   border-radius: 12px;

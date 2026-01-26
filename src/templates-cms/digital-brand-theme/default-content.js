@@ -66,6 +66,12 @@ export const digitalBrandDefaultContent = {
                 price: 29,
                 category: "Fonts",
                 image: "/images/digital-brand/chronos.png",
+                images: [
+                  "/images/digital-brand/chronos.png",
+                  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&q=80&w=1000"
+                ],
                 badge: "Trending",
                 description: "A luxurious serif typeface designed for high-end branding and editorial design.",
                 features: ["Uppercase & Lowercase", "Alternates & Ligatures", "Multilingual Support", "Web Font Included"]
@@ -77,6 +83,12 @@ export const digitalBrandDefaultContent = {
                 price: 18,
                 category: "Textures",
                 image: "/images/digital-brand/gradient.png",
+                images: [
+                  "/images/digital-brand/gradient.png",
+                  "https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1561715276-a2d087060f1d?auto=format&fit=crop&q=80&w=1000"
+                ],
                 description: "A collection of 20 high-resolution vibrant gradient textures for modern backgrounds.",
                 features: ["20 PNG Files", "4000x4000px Resolution", "Noise & Grain Options", "Print Ready"]
               },
@@ -87,6 +99,12 @@ export const digitalBrandDefaultContent = {
                 price: 45,
                 category: "Templates",
                 image: "/images/digital-brand/brandkit.png",
+                images: [
+                  "/images/digital-brand/brandkit.png",
+                  "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1000"
+                ],
                 description: "Complete visual identity system for professional brands and startups.",
                 features: ["Logo Templates", "Business Cards", "Social Media Kits", "Vector Files Included"]
               },
@@ -97,6 +115,12 @@ export const digitalBrandDefaultContent = {
                 price: 15,
                 category: "Effects",
                 image: "/images/digital-brand/filmgrain.png",
+                images: [
+                  "/images/digital-brand/filmgrain.png",
+                  "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1519750783826-e2420f4d687c?auto=format&fit=crop&q=80&w=1000",
+                  "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=1000"
+                ],
                 description: "Authentic cinematic film grain overlays to add character to your photos and videos.",
                 features: ["10 Unique Overlays", "4K Resolution", "Screen Blend Mode Ready", "Works in any software"]
               }

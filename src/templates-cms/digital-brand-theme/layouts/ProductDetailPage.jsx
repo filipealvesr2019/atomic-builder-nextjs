@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Header from '../sections/Header';
 import Footer from '../sections/Footer';
 import styles from './ProductDetailPage.module.css';
@@ -21,6 +23,9 @@ const ProductDetailPage = ({ sections = {}, product }) => {
     ]
   };
 
+  const productImages = p.images || [p.image];
+  const [activeImage, setActiveImage] = useState(productImages[0]);
+
   return (
     <div className="digital-brand-theme">
       <Header {...(sections.header || {})} />
@@ -42,8 +47,22 @@ const ProductDetailPage = ({ sections = {}, product }) => {
           <div className={styles.mainGrid}>
             <div className={styles.gallery}>
               <div className={styles.mainImageContainer}>
-                <img src={p.image} alt={p.name} className={styles.image} />
+                <img src={activeImage} alt={p.name} className={styles.image} />
               </div>
+
+              {productImages.length > 1 && (
+                <div className={styles.galleryNav}>
+                  {productImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      className={`${styles.thumbnail} ${activeImage === img ? styles.active : ''}`}
+                      onClick={() => setActiveImage(img)}
+                    >
+                      <img src={img} alt={`${p.name} view ${idx + 1}`} />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <aside className={styles.buySection}>
