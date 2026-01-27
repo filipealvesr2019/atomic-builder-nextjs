@@ -1,20 +1,21 @@
 import React from 'react';
 import { Plus, ArrowRight } from 'lucide-react';
 import styles from './FeaturedProducts.module.css';
+import Link from 'next/link'; // Assuming Next.js Link component
 
-const FeaturedProducts = ({ title, subtitle, products }) => {
+const FeaturedProducts = ({ title, subtitle, products, exploreLink }) => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
           <div>
-            <h2 className={styles.title}>{title || "New Releases"}</h2>
-            <p className={styles.subtitle}>{subtitle || "Fresh assets for your next project"}</p>
+            <h2 className={styles.title}>{title}</h2>
+            <p className={styles.subtitle}>{subtitle}</p>
           </div>
-          <a href="/products" className={styles.exploreLink}>
+          <Link href={exploreLink || "/products"} className={styles.exploreLink}>
             Explore Products
             <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
 
         <div className={styles.grid}>
