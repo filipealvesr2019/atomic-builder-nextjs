@@ -11,7 +11,7 @@ const AllProductsPage = ({ sections = {} }) => {
   const [priceFilter, setPriceFilter] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
 
-  const categories = ['all', 'Fonts', 'Graphics', 'Textures', 'Mockups'];
+  const categories = ['all', 'Fonts', 'Graphics', 'Textures', 'Mockups', '3D Assets'];
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
