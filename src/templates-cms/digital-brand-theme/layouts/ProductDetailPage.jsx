@@ -29,7 +29,7 @@ const ProductDetailPage = ({ sections = {}, product }) => {
   return (
     <div className="digital-brand-theme">
       <Header {...(sections.header || {})} />
-      <main style={{ paddingTop: '100px', backgroundColor: '#FFFFFF', paddingBottom: '100px' }}>
+      <main className={styles.page}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem' }}>
           <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748B', fontSize: '14px', marginBottom: '32px' }}>
             <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Home</a>

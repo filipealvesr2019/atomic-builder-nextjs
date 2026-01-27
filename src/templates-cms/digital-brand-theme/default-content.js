@@ -19,7 +19,8 @@ export const digitalBrandDefaultContent = {
               { label: "Fonts", href: "/category/fonts" },
               { label: "Graphics", href: "/category/graphics" },
               { label: "Textures", href: "/category/textures" },
-              { label: "Mockups", href: "/category/mockups" }
+              { label: "Mockups", href: "/category/mockups" },
+              { label: "3D Assets", href: "/category/3d-assets" }
             ],
             buttons: {
               login: "Login",
@@ -48,7 +49,8 @@ export const digitalBrandDefaultContent = {
               { id: "fonts", name: "Fonts", icon: "Type", description: "Serif, Sans & Display" },
               { id: "graphics", name: "Graphics", icon: "Image", description: "Vectors & Illustrations" },
               { id: "textures", name: "Textures", icon: "Layers", description: "Paper, Noise & Gradient" },
-              { id: "mockups", name: "Mockups", icon: "Box", description: "High-res Presentations" }
+              { id: "mockups", name: "Mockups", icon: "Box", description: "High-res Presentations" },
+              { id: "3d-assets", name: "3D Assets", icon: "Box", description: "Abstract Shapes & Icons" }
             ]
           }
         },
@@ -123,6 +125,37 @@ export const digitalBrandDefaultContent = {
                 ],
                 description: "Authentic cinematic film grain overlays to add character to your photos and videos.",
                 features: ["10 Unique Overlays", "4K Resolution", "Screen Blend Mode Ready", "Works in any software"]
+              },
+              {
+                id: "5",
+                name: "Abstract 3D Shapes",
+                slug: "abstract-3d-shapes",
+                price: 35,
+                category: "3D Assets",
+                image: "/images/digital-brand/abstract_3d_shapes_main.png",
+                images: [
+                  "/images/digital-brand/abstract_3d_shapes_main.png",
+                  "/images/digital-brand/abstract_3d_shapes_detail_1.png",
+                  "/images/digital-brand/abstract_3d_shapes_main.png",
+                  "/images/digital-brand/abstract_3d_shapes_detail_1.png"
+                ],
+                description: "A premium collection of high-resolution abstract 3D geometric shapes with soft pastel lightning.",
+                features: ["20 PNG Renders", "4000x4000px Resolution", "Transparent Backgrounds", "Perfect for Landing Pages"]
+              },
+              {
+                id: "6",
+                name: "Glossy 3D Icons",
+                slug: "glossy-3d-icons",
+                price: 24,
+                category: "3D Assets",
+                image: "/images/digital-brand/glossy_3d_icons_main.png",
+                images: [
+                  "/images/digital-brand/glossy_3d_icons_main.png",
+                  "/images/digital-brand/abstract_3d_shapes_main.png",
+                  "/images/digital-brand/glossy_3d_icons_main.png"
+                ],
+                description: "Modern, glossy 3D icons with vibrant gradients. Perfect for apps and SaaS landing pages.",
+                features: ["50+ Icons", "Consistent Lighting", "Multiple Angles", "Figma & PNG"]
               }
             ]
           }
