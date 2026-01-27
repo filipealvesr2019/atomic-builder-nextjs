@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Header from '../sections/Header';
-import FeaturedProducts from '../sections/FeaturedProducts';
+import CollectionGrid from '../sections/CollectionGrid';
 import Footer from '../sections/Footer';
 import { ChevronRight, Filter } from 'lucide-react';
 
@@ -151,9 +151,7 @@ const AllProductsPage = ({ sections = {} }) => {
 
           {/* Product Grid */}
           {filteredProducts.length > 0 ? (
-            <FeaturedProducts
-              title=""
-              subtitle=""
+            <CollectionGrid
               products={filteredProducts}
             />
           ) : (
