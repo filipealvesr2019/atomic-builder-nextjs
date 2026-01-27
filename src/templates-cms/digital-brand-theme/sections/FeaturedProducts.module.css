@@ -11,7 +11,10 @@
 
 .header {
   margin-bottom: 4rem;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  text-align: left;
 }
 
 .title {
@@ -149,4 +152,20 @@
 .buyBtn:hover {
   background-color: #5b54d6;
   transform: scale(1.1);
+}
+
+.exploreLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6C63FF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.exploreLink:hover {
+  gap: 0.75rem;
 }

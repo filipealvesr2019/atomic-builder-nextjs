@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, ArrowRight } from 'lucide-react';
 import styles from './FeaturedProducts.module.css';
 
 const FeaturedProducts = ({ title, subtitle, products }) => {
@@ -7,12 +7,18 @@ const FeaturedProducts = ({ title, subtitle, products }) => {
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>{title || "Featured Products"}</h2>
-          <p className={styles.subtitle}>{subtitle || "Check out our most popular solutions"}</p>
+          <div>
+            <h2 className={styles.title}>{title || "New Releases"}</h2>
+            <p className={styles.subtitle}>{subtitle || "Fresh assets for your next project"}</p>
+          </div>
+          <a href="/products" className={styles.exploreLink}>
+            Explore Products
+            <ArrowRight size={16} />
+          </a>
         </div>
 
         <div className={styles.grid}>
-          {products?.map((product, index) => (
+          {products?.slice(0, 4).map((product, index) => (
             <div key={index} className={styles.card}>
               <a href={`/product/${product.slug}`} className={styles.imageWrapper}>
                 {product.badge && <span className={styles.badge}>{product.badge}</span>}
