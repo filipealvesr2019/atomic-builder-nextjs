@@ -36,7 +36,7 @@ export const digitalBrandDefaultContent = {
             headline: "Elevate your visuals with premium digital assets",
             subheadline: "Curated fonts, textures, and graphic kits designed for modern creators and brands.",
             primaryCTA: "Browse Collection",
-            secondaryCTA: "View Bundles",
+            // secondaryCTA: "View Bundles",
             image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2400"
           }
         },

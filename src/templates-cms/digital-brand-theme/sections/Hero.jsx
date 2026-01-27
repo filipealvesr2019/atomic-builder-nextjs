@@ -20,16 +20,18 @@ const Hero = ({ badge, headline, subheadline, primaryCTA, secondaryCTA, image })
               {primaryCTA || "View products"}
               <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
             </a>
-            <a href="/categories" className={styles.secondaryBtn}>
-              {secondaryCTA || "Explore categories"}
-            </a>
+            {secondaryCTA && (
+              <a href="/categories" className={styles.secondaryBtn}>
+                {secondaryCTA}
+              </a>
+            )}
           </div>
         </div>
         <div className={styles.visual}>
           <div className={styles.imageWrapper}>
-            <img 
-              src={image || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426"} 
-              alt="Digital Products Hero" 
+            <img
+              src={image || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426"}
+              alt="Digital Products Hero"
               className={styles.image}
             />
           </div>
