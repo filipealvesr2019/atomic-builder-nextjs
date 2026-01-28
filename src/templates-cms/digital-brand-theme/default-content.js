@@ -23,8 +23,7 @@ export const digitalBrandDefaultContent = {
               { label: "3D Assets", href: "/category/3d-assets" }
             ],
             buttons: {
-              login: "Login",
-              buy: "All Access Pass"
+              login: "Login"
             }
           }
         },

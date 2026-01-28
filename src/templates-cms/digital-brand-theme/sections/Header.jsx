@@ -26,9 +26,11 @@ const Header = ({ logo, menu, buttons }) => {
           <a href="/login" className={styles.loginBtn}>
             {buttons?.login || "Login"}
           </a>
-          <a href="/checkout" className={styles.buyBtn}>
-            {buttons?.buy || "Buy Now"}
-          </a>
+          {buttons?.buy && (
+            <a href="/checkout" className={styles.buyBtn}>
+              {buttons.buy}
+            </a>
+          )}
           <button
             className={styles.mobileMenuBtn}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
