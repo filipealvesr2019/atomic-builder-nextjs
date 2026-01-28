@@ -2,7 +2,7 @@ import React from 'react';
 import * as Icons from 'lucide-react';
 import styles from './CategoryGrid.module.css';
 
-const CategoryGrid = ({ title, items }) => {
+const CategoryGrid = ({ title, items, baseUrl = "" }) => {
   const scrollRef = React.useRef(null);
   const { ChevronLeft, ChevronRight, HelpCircle } = Icons;
 
@@ -39,7 +39,7 @@ const CategoryGrid = ({ title, items }) => {
           {items?.map((item, index) => {
             const IconComponent = Icons[item.icon] || HelpCircle;
             return (
-              <a key={index} href={`/category/${item.id}`} className={styles.card}>
+              <a key={index} href={`${baseUrl}/category/${item.id}`} className={styles.card}>
                 <div className={styles.iconWrapper}>
                   <IconComponent size={32} />
                 </div>

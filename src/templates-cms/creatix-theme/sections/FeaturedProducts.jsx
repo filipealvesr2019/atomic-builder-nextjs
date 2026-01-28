@@ -35,7 +35,7 @@ const defaultProducts = [
   }
 ];
 
-const FeaturedProducts = ({ title, products }) => {
+const FeaturedProducts = ({ title, products, baseUrl = "" }) => {
   const displayProducts = products && products.length > 0 ? products : defaultProducts;
 
   return (
@@ -46,7 +46,7 @@ const FeaturedProducts = ({ title, products }) => {
             <Star className={styles.star} size={24} />
             <h2 className={styles.title}>{title || "Featured Products"}</h2>
           </div>
-          <a href="/products" className={styles.viewAll}>View all products</a>
+          <a href={`${baseUrl}/products`} className={styles.viewAll}>View all products</a>
         </div>
 
         <div className={styles.grid}>
@@ -62,14 +62,14 @@ const FeaturedProducts = ({ title, products }) => {
                   </button>
                 </div>
               </div>
-              
+
               <div className={styles.info}>
                 <div className={styles.meta}>
                   <span className={styles.category}>{product.category}</span>
                   <span className={styles.price}>${product.price}</span>
                 </div>
                 <h3 className={styles.name}>{product.name}</h3>
-                <a href={`/product/${product.id}`} className={styles.detailLink}>
+                <a href={`${baseUrl}/product/${product.id}`} className={styles.detailLink}>
                   Details and preview
                 </a>
               </div>

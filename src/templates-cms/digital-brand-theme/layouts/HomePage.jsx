@@ -6,14 +6,14 @@ import FeaturedProducts from '../sections/FeaturedProducts';
 import Benefits from '../sections/Benefits';
 import Footer from '../sections/Footer';
 
-const HomePage = ({ sections = {}, forceMobile = false }) => {
+const HomePage = ({ sections = {}, forceMobile = false, baseUrl = "" }) => {
   return (
     <div className={`digital-brand-theme ${forceMobile ? 'force-mobile' : ''}`}>
-      <Header {...(sections.header || {})} />
+      <Header {...(sections.header || {})} baseUrl={baseUrl} />
       <main>
-        <Hero {...(sections.hero || {})} />
-        <CategoryGrid {...(sections.categories || {})} />
-        <FeaturedProducts {...(sections.featured || {})} />
+        <Hero {...(sections.hero || {})} baseUrl={baseUrl} />
+        <CategoryGrid {...(sections.categories || {})} baseUrl={baseUrl} />
+        <FeaturedProducts {...(sections.featured || {})} baseUrl={baseUrl} />
 
         {/* Category Showcases */}
         {(() => {
@@ -29,7 +29,8 @@ const HomePage = ({ sections = {}, forceMobile = false }) => {
                   title="3D Assets"
                   subtitle="Premium 3D models and renders"
                   products={assets3D}
-                  exploreLink="/category/3d-assets"
+                  exploreLink={`${baseUrl}/category/3d-assets`}
+                  baseUrl={baseUrl}
                 />
               )}
               {fonts.length > 0 && (
@@ -37,7 +38,8 @@ const HomePage = ({ sections = {}, forceMobile = false }) => {
                   title="Fonts"
                   subtitle="Unique typefaces for your brand"
                   products={fonts}
-                  exploreLink="/category/fonts"
+                  exploreLink={`${baseUrl}/category/fonts`}
+                  baseUrl={baseUrl}
                 />
               )}
               {graphics.length > 0 && (
@@ -45,15 +47,16 @@ const HomePage = ({ sections = {}, forceMobile = false }) => {
                   title="Graphics"
                   subtitle="Vectors, illustrations, and more"
                   products={graphics}
-                  exploreLink="/category/graphics"
+                  exploreLink={`${baseUrl}/category/graphics`}
+                  baseUrl={baseUrl}
                 />
               )}
             </>
           );
         })()}
-        <Benefits {...(sections.benefits || {})} />
+        <Benefits {...(sections.benefits || {})} baseUrl={baseUrl} />
       </main>
-      <Footer {...(sections.footer || {})} />
+      <Footer {...(sections.footer || {})} baseUrl={baseUrl} />
     </div>
   );
 };

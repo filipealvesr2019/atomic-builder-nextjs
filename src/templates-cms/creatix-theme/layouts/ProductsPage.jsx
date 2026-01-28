@@ -7,7 +7,7 @@ import FeaturedProducts from '../sections/FeaturedProducts';
 import { ChevronRight } from 'lucide-react';
 import styles from './ProductsPage.module.css';
 
-const ProductsPage = ({ sections = {} }) => {
+const ProductsPage = ({ sections = {}, baseUrl = "" }) => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [priceFilter, setPriceFilter] = useState('all');
     const [sortBy, setSortBy] = useState('featured');
@@ -39,13 +39,13 @@ const ProductsPage = ({ sections = {} }) => {
 
     return (
         <div className={styles.page}>
-            <Header {...(sections.header || {})} />
+            <Header {...(sections.header || {})} baseUrl={baseUrl} />
 
             <main className={styles.main}>
                 <div className={styles.container}>
                     {/* Breadcrumbs */}
                     <nav className={styles.breadcrumbs}>
-                        <a href="/">Home</a>
+                        <a href={baseUrl || "/"}>Home</a>
                         <ChevronRight size={14} />
                         <span>Products</span>
                     </nav>
@@ -104,7 +104,7 @@ const ProductsPage = ({ sections = {} }) => {
                     </div>
 
                     {filteredProducts.length > 0 ? (
-                        <FeaturedProducts title="" products={filteredProducts} />
+                        <FeaturedProducts title="" products={filteredProducts} baseUrl={baseUrl} />
                     ) : (
                         <div className={styles.noResults}>
                             <h3 className={styles.noResultsTitle}>No products found</h3>
@@ -123,7 +123,7 @@ const ProductsPage = ({ sections = {} }) => {
                 </div>
             </main>
 
-            <Footer {...(sections.footer || {})} />
+            <Footer {...(sections.footer || {})} baseUrl={baseUrl} />
         </div>
     );
 };

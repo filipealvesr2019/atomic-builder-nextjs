@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Footer.module.css';
 
-const Footer = ({ brandName, description, links, social }) => {
+const Footer = ({ brandName, description, links, social, baseUrl = "" }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -9,7 +9,7 @@ const Footer = ({ brandName, description, links, social }) => {
       <div className={styles.container}>
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <a href="/" className={styles.logo}>{brandName || "DIGITAL BRAND"}</a>
+            <a href={baseUrl || "/"} className={styles.logo}>{brandName || "DIGITAL BRAND"}</a>
             <p className={styles.description}>
               {description || "Your premium source of digital assets for modern development."}
             </p>
@@ -19,11 +19,14 @@ const Footer = ({ brandName, description, links, social }) => {
             <div key={idx}>
               <h4 className={styles.columnTitle}>{column.title}</h4>
               <ul className={styles.linkList}>
-                {column.items.map((item, idy) => (
-                  <li key={idy} className={styles.linkItem}>
-                    <a href={item.href} className={styles.link}>{item.label}</a>
-                  </li>
-                ))}
+                {column.items.map((item, idy) => {
+                  const href = item.href?.startsWith('/') ? `${baseUrl}${item.href}` : item.href;
+                  return (
+                    <li key={idy} className={styles.linkItem}>
+                      <a href={href} className={styles.link}>{item.label}</a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

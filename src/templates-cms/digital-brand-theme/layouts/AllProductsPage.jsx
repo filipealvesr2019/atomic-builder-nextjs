@@ -6,7 +6,7 @@ import CollectionGrid from '../sections/CollectionGrid';
 import Footer from '../sections/Footer';
 import { ChevronRight, Filter } from 'lucide-react';
 
-const AllProductsPage = ({ sections = {} }) => {
+const AllProductsPage = ({ sections = {}, baseUrl = "" }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [priceFilter, setPriceFilter] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
@@ -37,13 +37,13 @@ const AllProductsPage = ({ sections = {} }) => {
 
   return (
     <div className="digital-brand-theme">
-      <Header {...(sections.header || {})} />
+      <Header {...(sections.header || {})} baseUrl={baseUrl} />
 
       <main style={{ paddingTop: '100px', backgroundColor: '#FFFFFF', minHeight: '80vh' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem' }}>
           {/* Breadcrumbs */}
           <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748B', fontSize: '14px', marginBottom: '24px' }}>
-            <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Home</a>
+            <a href={baseUrl || "/"} style={{ textDecoration: 'none', color: 'inherit' }}>Home</a>
             <ChevronRight size={14} />
             <span style={{ color: '#0F172A', fontWeight: 500 }}>All Products</span>
           </nav>

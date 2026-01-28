@@ -3,7 +3,7 @@ import { Plus, ArrowRight } from 'lucide-react';
 import styles from './FeaturedProducts.module.css';
 import Link from 'next/link'; // Assuming Next.js Link component
 
-const FeaturedProducts = ({ title, subtitle, products, exploreLink }) => {
+const FeaturedProducts = ({ title, subtitle, products, exploreLink, baseUrl = "" }) => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -12,7 +12,7 @@ const FeaturedProducts = ({ title, subtitle, products, exploreLink }) => {
             <h2 className={styles.title}>{title}</h2>
             <p className={styles.subtitle}>{subtitle}</p>
           </div>
-          <Link href={exploreLink || "/products"} className={styles.exploreLink}>
+          <Link href={exploreLink || `${baseUrl}/products`} className={styles.exploreLink}>
             Explore Products
             <ArrowRight size={16} />
           </Link>
@@ -21,7 +21,7 @@ const FeaturedProducts = ({ title, subtitle, products, exploreLink }) => {
         <div className={styles.grid}>
           {products?.slice(0, 4).map((product, index) => (
             <div key={index} className={styles.card}>
-              <a href={`/product/${product.slug}`} className={styles.imageWrapper}>
+              <a href={`${baseUrl}/product/${product.slug}`} className={styles.imageWrapper}>
                 {product.badge && <span className={styles.badge}>{product.badge}</span>}
                 <img
                   src={product.image}
@@ -31,7 +31,7 @@ const FeaturedProducts = ({ title, subtitle, products, exploreLink }) => {
               </a>
               <div className={styles.content}>
                 <span className={styles.category}>{product.category}</span>
-                <a href={`/product/${product.slug}`} style={{ textDecoration: 'none' }}>
+                <a href={`${baseUrl}/product/${product.slug}`} style={{ textDecoration: 'none' }}>
                   <h3 className={styles.productName}>{product.name}</h3>
                 </a>
                 <div className={styles.footer}>

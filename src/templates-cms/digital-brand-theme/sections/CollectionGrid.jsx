@@ -2,12 +2,12 @@ import React from 'react';
 import { Plus } from 'lucide-react';
 import styles from './CollectionGrid.module.css';
 
-const CollectionGrid = ({ products }) => {
+const CollectionGrid = ({ products, baseUrl = "" }) => {
     return (
         <div className={styles.grid}>
             {products?.map((product, index) => (
                 <div key={index} className={styles.card}>
-                    <a href={`/product/${product.slug}`} className={styles.imageWrapper}>
+                    <a href={`${baseUrl}/product/${product.slug}`} className={styles.imageWrapper}>
                         {product.badge && <span className={styles.badge}>{product.badge}</span>}
                         <img
                             src={product.image}
@@ -17,7 +17,7 @@ const CollectionGrid = ({ products }) => {
                     </a>
                     <div className={styles.content}>
                         <span className={styles.category}>{product.category}</span>
-                        <a href={`/product/${product.slug}`} style={{ textDecoration: 'none' }}>
+                        <a href={`${baseUrl}/product/${product.slug}`} style={{ textDecoration: 'none' }}>
                             <h3 className={styles.productName}>{product.name}</h3>
                         </a>
                         <div className={styles.footer}>

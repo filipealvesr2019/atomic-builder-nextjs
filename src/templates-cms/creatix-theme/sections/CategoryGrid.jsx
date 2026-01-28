@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './CategoryGrid.module.css';
 
 const defaultItems = [
@@ -10,33 +13,54 @@ const defaultItems = [
   { id: "graphic-assets", name: "Graphic Assets", image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800" }
 ];
 
-const CategoryGrid = ({ title, items }) => {
+const CategoryGrid = ({ title, items, baseUrl = "" }) => {
+  const scrollRef = useRef(null);
   const displayItems = items && items.length > 0 ? items : defaultItems;
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
 
   return (
     <section id="categories" className={styles.categories}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>{title || "Premium Categories"}</h2>
-          <p className={styles.subtitle}>Explore curated digital resources for your next project</p>
+          <div className={styles.headerLeft}>
+            <h2 className={styles.title}>{title || "Premium Categories"}</h2>
+            <p className={styles.subtitle}>Explore curated digital resources for your next project</p>
+          </div>
+          <div className={styles.navButtons}>
+            <button onClick={() => scroll('left')} className={styles.navBtn} aria-label="Previous">
+              <ChevronLeft size={24} />
+            </button>
+            <button onClick={() => scroll('right')} className={styles.navBtn} aria-label="Next">
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
-        
-        <div className={styles.grid}>
-          {displayItems.map((category, index) => (
-            <a 
-              key={index} 
-              href={`/category/${category.id}`} 
-              className={styles.card}
-            >
-              <div className={styles.imageContainer}>
-                <img src={category.image} alt={category.name} className={styles.categoryImage} />
-                <div className={styles.imageOverlay} />
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.name}>{category.name}</h3>
-              </div>
-            </a>
-          ))}
+
+        <div className={styles.carouselWrapper}>
+          <div ref={scrollRef} className={styles.carousel}>
+            {displayItems.map((category, index) => (
+              <a
+                key={index}
+                href={`${baseUrl}/category/${category.id}`}
+                className={styles.card}
+              >
+                <div className={styles.imageContainer}>
+                  <img src={category.image} alt={category.name} className={styles.categoryImage} />
+                  <div className={styles.imageOverlay} />
+                </div>
+                <div className={styles.cardBody}>
+                  <h3 className={styles.name}>{category.name}</h3>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

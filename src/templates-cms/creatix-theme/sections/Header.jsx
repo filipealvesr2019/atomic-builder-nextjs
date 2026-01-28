@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Menu, X, User } from 'lucide-react';
 import styles from './Header.module.css';
 
-const Header = ({ logo, menu, cta }) => {
+const Header = ({ logo, menu, cta, baseUrl = "" }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -19,7 +19,7 @@ const Header = ({ logo, menu, cta }) => {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        <a href="/" className={styles.logo}>
+        <a href={baseUrl || "/"} className={styles.logo}>
           {logo || "CREATIX"}
         </a>
 
@@ -29,18 +29,21 @@ const Header = ({ logo, menu, cta }) => {
             { label: "Products", href: "/products" },
             { label: "Categories", href: "#categories" },
             { label: "About", href: "/about" }
-          ]).map((item, index) => (
-            <a key={index} href={item.href} className={styles.navLink}>
-              {item.label}
-            </a>
-          ))}
+          ]).map((item, index) => {
+            const href = item.href.startsWith('/') ? `${baseUrl}${item.href}` : item.href;
+            return (
+              <a key={index} href={href} className={styles.navLink}>
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         <div className={styles.actions}>
           <button className={styles.cartBtn}>
             <ShoppingCart size={20} />
           </button>
-          <a href="/login" className={styles.cartBtn}>
+          <a href={`${baseUrl}/login`} className={styles.cartBtn}>
             <User size={20} />
           </a>
           <button
@@ -55,17 +58,20 @@ const Header = ({ logo, menu, cta }) => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className={styles.mobileMenu}>
-          {menu?.map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              className={styles.mobileNavLink}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
-          <a href="/login" className={styles.mobileNavLink}>
+          {menu?.map((item, index) => {
+            const href = item.href.startsWith('/') ? `${baseUrl}${item.href}` : item.href;
+            return (
+              <a
+                key={index}
+                href={href}
+                className={styles.mobileNavLink}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+          <a href={`${baseUrl}/login`} className={styles.mobileNavLink}>
             Login
           </a>
         </div>

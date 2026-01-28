@@ -5,20 +5,14 @@ import CategoryGrid from '../sections/CategoryGrid';
 import FeaturedProducts from '../sections/FeaturedProducts';
 import Footer from '../sections/Footer';
 
-const HomePage = ({ content }) => {
-  const header = content?.find(c => c.type === 'header')?.props;
-  const hero = content?.find(c => c.type === 'hero')?.props;
-  const categories = content?.find(c => c.type === 'categories')?.props;
-  const featured = content?.find(c => c.type === 'featured')?.props;
-  const footer = content?.find(c => c.type === 'footer')?.props;
-
+const HomePage = ({ sections = {}, baseUrl = "" }) => {
   return (
     <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
-      <Header {...header} />
-      <Hero {...hero} />
-      <CategoryGrid {...categories} />
-      <FeaturedProducts {...featured} />
-      <Footer {...footer} />
+      <Header {...(sections.header || {})} baseUrl={baseUrl} />
+      <Hero {...(sections.hero || {})} baseUrl={baseUrl} />
+      <CategoryGrid {...(sections.categories || {})} baseUrl={baseUrl} />
+      <FeaturedProducts {...(sections.featured || {})} baseUrl={baseUrl} />
+      <Footer {...(sections.footer || {})} baseUrl={baseUrl} />
     </div>
   );
 };

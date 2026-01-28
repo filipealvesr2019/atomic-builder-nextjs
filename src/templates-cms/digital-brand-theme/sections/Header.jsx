@@ -4,30 +4,33 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
 
-const Header = ({ logo, menu, buttons }) => {
+const Header = ({ logo, menu, buttons, baseUrl = "" }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <a href="/" className={styles.logo}>
+        <a href={baseUrl || "/"} className={styles.logo}>
           {logo?.text || "DIGITAL BRAND"}
         </a>
 
         <nav className={styles.nav}>
-          {menu?.map((item, index) => (
-            <a key={index} href={item.href} className={styles.navLink}>
-              {item.label}
-            </a>
-          ))}
+          {menu?.map((item, index) => {
+            const href = item.href.startsWith('/') ? `${baseUrl}${item.href}` : item.href;
+            return (
+              <a key={index} href={href} className={styles.navLink}>
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         <div className={styles.actions}>
-          <a href="/login" className={styles.loginBtn}>
+          <a href={`${baseUrl}/login`} className={styles.loginBtn}>
             {buttons?.login || "Login"}
           </a>
           {buttons?.buy && (
-            <a href="/checkout" className={styles.buyBtn}>
+            <a href={`${baseUrl}/checkout`} className={styles.buyBtn}>
               {buttons.buy}
             </a>
           )}
@@ -54,11 +57,14 @@ const Header = ({ logo, menu, buttons }) => {
           gap: '1.5rem',
           zIndex: 999
         }}>
-          {menu?.map((item, index) => (
-            <a key={index} href={item.href} className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
-              {item.label}
-            </a>
-          ))}
+          {menu?.map((item, index) => {
+            const href = item.href.startsWith('/') ? `${baseUrl}${item.href}` : item.href;
+            return (
+              <a key={index} href={href} className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
+                {item.label}
+              </a>
+            );
+          })}
         </div>
       )}
     </header>
