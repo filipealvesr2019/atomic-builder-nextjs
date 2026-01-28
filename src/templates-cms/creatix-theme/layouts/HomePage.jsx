@@ -13,7 +13,7 @@ const HomePage = ({ content }) => {
   const footer = content?.find(c => c.type === 'footer')?.props;
 
   return (
-    <div style={{ backgroundColor: '#111827', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
       <Header {...header} />
       <Hero {...hero} />
       <CategoryGrid {...categories} />

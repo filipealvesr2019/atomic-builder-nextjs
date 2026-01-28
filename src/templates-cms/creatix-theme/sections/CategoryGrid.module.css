@@ -1,7 +1,7 @@
 .categories {
   padding: 8rem 0;
-  background-color: #111827;
-  color: white;
+  background-color: #FFFFFF;
+  color: #111827;
 }
 
 .container {
@@ -26,7 +26,7 @@
 .subtitle {
   font-family: 'Inter', sans-serif;
   font-size: 1.125rem;
-  color: #94A3B8;
+  color: #64748B;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -52,7 +52,8 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background-color: #1a1a1a;
+  background-color: #F1F5F9;
+  border-radius: 12px;
 }
 
 .categoryImage {
@@ -72,7 +73,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(17, 24, 39, 0.4));
+  background: linear-gradient(to bottom, transparent 60%, rgba(255, 255, 255, 0.4));
 }
 
 .cardBody {
@@ -86,7 +87,7 @@
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #F9FAFB;
+  color: #111827;
   transition: color 0.3s ease;
 }
 
@@ -98,12 +99,12 @@
   .categories {
     padding: 4rem 0;
   }
-  
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   .name {
     font-size: 0.875rem;
   }

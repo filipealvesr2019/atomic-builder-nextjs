@@ -119,11 +119,12 @@
 }
 
 .summary {
-  background-color: #111827;
-  color: white;
+  background-color: #F9FAFB;
+  color: #111827;
   padding: 2.5rem;
   border-radius: 12px;
   height: fit-content;
+  border: 1px solid #E5E7EB;
 }
 
 .summaryTitle {
@@ -137,7 +138,7 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #E5E7EB;
   margin-bottom: 1.5rem;
 }
 
@@ -172,8 +173,8 @@
 .grandTotal {
   font-size: 1.25rem;
   font-weight: 700;
-  color: white;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #111827;
+  border-top: 1px solid #E5E7EB;
   padding-top: 1.5rem;
 }
 
@@ -181,7 +182,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #22D3EE;
+  color: #6366F1;
   font-size: 0.875rem;
   font-weight: 600;
 }
