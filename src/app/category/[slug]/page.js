@@ -40,8 +40,10 @@ export default async function CategoryPageRoute({ params }) {
         });
     }
 
-    // The category UI expects categoryId to be capitalized for display
-    const categoryId = slug.charAt(0).toUpperCase() + slug.slice(1);
+    // The category UI expects categoryId to match what's in the product data.
+    // We look it up from the categories section to get the correct display name (e.g. "3D Assets" instead of "3d-assets")
+    const categoryMatch = sections.categories?.items?.find(item => item.id === slug);
+    const categoryId = categoryMatch ? categoryMatch.name : (slug.charAt(0).toUpperCase() + slug.slice(1));
 
     return (
         <CategoryLayout
