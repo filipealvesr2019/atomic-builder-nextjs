@@ -13,21 +13,20 @@ export const creatixDefaultContent = {
             menu: [
               { label: "Home", href: "/" },
               { label: "Products", href: "/products" },
-              { label: "Fonts", href: "/category/fonts" },
-              { label: "Graphics", href: "/category/graphics" },
-              { label: "Textures", href: "/category/textures" },
-              { label: "Mockups", href: "/category/mockups" },
-              { label: "3D Assets", href: "/category/3d-assets" }
+              { label: "E-commerce", href: "/category/ecommerce" },
+              { label: "UI Kits", href: "/category/ui-kits" },
+              { label: "Landing Pages", href: "/category/landing" },
+              { label: "Design Systems", href: "/category/design-systems" }
             ],
-            cta: "Shop now"
+            cta: "Login"
           }
         },
         {
           id: 'creatix-hero',
           type: 'hero',
           props: {
-            headline: "Elevate your visuals with premium digital assets",
-            subheadline: "Curated fonts, textures, and graphic kits designed for modern creators and brands.",
+            headline: "Digital design assets that convert",
+            subheadline: "High-quality templates, UI kits and digital resources crafted to elevate your e-commerce and brand presence.",
             primaryCTA: "Explore products",
             secondaryCTA: "Browse categories",
             image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=2000"
@@ -39,11 +38,10 @@ export const creatixDefaultContent = {
           props: {
             title: "Browse by Category",
             items: [
-              { id: "fonts", name: "Fonts", icon: "Type", description: "Serif, Sans & Display" },
-              { id: "graphics", name: "Graphics", icon: "Image", description: "Vectors & Illustrations" },
-              { id: "textures", name: "Textures", icon: "Layers", description: "Paper, Noise & Gradient" },
-              { id: "mockups", name: "Mockups", icon: "Box", description: "High-res Presentations" },
-              { id: "3d-assets", name: "3D Assets", icon: "Box", description: "Abstract Shapes & Icons" }
+              { id: "ecommerce", name: "E-commerce", icon: "ShoppingCart", description: "Storefronts & Checkouts" },
+              { id: "ui-kits", name: "UI Kits", icon: "Layout", description: "Components & Systems" },
+              { id: "landing", name: "Landing Pages", icon: "Monitor", description: "High-converting layouts" },
+              { id: "design-systems", name: "Design Systems", icon: "Grid", description: "Scalable UI foundations" }
             ]
           }
         },
@@ -51,61 +49,42 @@ export const creatixDefaultContent = {
           id: 'creatix-featured',
           type: 'featured',
           props: {
-            title: "New Releases",
+            title: "Featured Products",
             products: [
-              // --- FONTS ---
               {
-                id: "1",
-                name: "Chronos Display Font",
-                slug: "chronos-display-font",
-                price: 29,
-                category: "Fonts",
-                image: "/images/digital-brand/chronos.png",
-                badge: "Trending"
+                id: "c1",
+                name: "Creatix Pro UI Kit",
+                slug: "creatix-pro-ui-kit",
+                price: 59,
+                category: "UI Kits",
+                image: "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800",
+                badge: "Popular"
               },
               {
-                id: "7",
-                name: "Helix Modern Sans",
-                slug: "helix-modern-sans",
-                price: 24,
-                category: "Fonts",
-                image: "/images/digital-brand/helix_modern_sans_font_1769553465607.png"
+                id: "c2",
+                name: "E-commerce React Starter",
+                slug: "ecommerce-react-starter",
+                price: 89,
+                category: "E-commerce",
+                image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800",
+                badge: "Best Seller"
               },
-              // --- GRAPHICS ---
               {
-                id: "3",
-                name: "Minimalist Brand Kit",
-                slug: "minimalist-brand-kit",
-                price: 45,
-                category: "Graphics",
-                image: "/images/digital-brand/brandkit.png"
+                id: "c3",
+                name: "Elite Landing Page",
+                slug: "elite-landing-page",
+                price: 39,
+                category: "Landing Pages",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
               },
-              // --- TEXTURES ---
               {
-                id: "2",
-                name: "Abstract Gradient Pack",
-                slug: "abstract-gradient-pack",
-                price: 18,
-                category: "Textures",
-                image: "/images/digital-brand/gradient.png"
-              },
-              // --- MOCKUPS ---
-              {
-                id: "15",
-                name: "iPhone 15 Clay Mockup",
-                slug: "iphone-15-mockup",
-                price: 16,
-                category: "Mockups",
-                image: "/images/digital-brand/iphone_15_mockup_1769553604476.png"
-              },
-              // --- 3D ASSETS ---
-              {
-                id: "5",
-                name: "Abstract 3D Shapes",
-                slug: "abstract-3d-shapes",
-                price: 35,
-                category: "3D Assets",
-                image: "/images/digital-brand/abstract_3d_shapes_main.png"
+                id: "c4",
+                name: "Brand Master System",
+                slug: "brand-master-system",
+                price: 129,
+                category: "Design Systems",
+                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800",
+                badge: "New"
               }
             ]
           }

@@ -4,13 +4,13 @@ import templates from '@/templates-cms/registry';
 import { notFound } from 'next/navigation';
 
 export const metadata = {
-    title: 'All Products - Relevates',
+    title: 'All Products - CREATIX',
     description: 'Browse our full collection of premium digital assets.'
 };
 
 export default async function ProductsPage() {
     // For now, we simulate finding the template. 
-    const templateId = 'digital-brand-theme';
+    const templateId = 'creatix-theme';
     const templateConfig = templates[templateId];
 
     if (!templateConfig) {

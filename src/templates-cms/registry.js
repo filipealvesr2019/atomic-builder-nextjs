@@ -139,6 +139,7 @@ import CreatixCategory from './creatix-theme/layouts/CategoryPage';
 import CreatixProductDetail from './creatix-theme/layouts/ProductDetailPage';
 import CreatixCheckout from './creatix-theme/layouts/CheckoutPage';
 import CreatixCustomerArea from './creatix-theme/layouts/CustomerAreaPage';
+import CreatixProducts from './creatix-theme/layouts/ProductsPage';
 
 import CreatixHeader from './creatix-theme/sections/Header';
 import CreatixHero from './creatix-theme/sections/Hero';
@@ -340,6 +341,7 @@ const templates = {
     layouts: {
       home: CreatixHome,
       category: CreatixCategory,
+      products: CreatixProducts,
       'product-detail': CreatixProductDetail,
       checkout: CreatixCheckout,
       'customer-area': CreatixCustomerArea

@@ -1,0 +1,154 @@
+.page {
+    background-color: #FFFFFF;
+    min-height: 100vh;
+    color: #111827;
+}
+
+.main {
+    padding-top: 120px;
+    padding-bottom: 8rem;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748B;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.breadcrumbs a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: #6366F1;
+}
+
+.header {
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: #4B5563;
+    font-size: 1.125rem;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.filtersBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-top: 1px solid #E5E7EB;
+    border-bottom: 1px solid #E5E7EB;
+    margin-bottom: 3rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.filterGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filterLabel {
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #111827;
+}
+
+.categoryButtons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.catBtn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+    background: white;
+    color: #4B5563;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.catBtn:hover {
+    border-color: #6366F1;
+    color: #6366F1;
+}
+
+.catBtnActive {
+    background-color: #6366F1;
+    border-color: #6366F1;
+    color: white !important;
+}
+
+.select {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+    background: white;
+    color: #111827;
+    font-size: 0.875rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+.select:focus {
+    border-color: #6366F1;
+}
+
+.noResults {
+    text-align: center;
+    padding: 6rem 0;
+}
+
+.noResultsTitle {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.resetBtn {
+    margin-top: 1.5rem;
+    background-color: #111827;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.resetBtn:hover {
+    opacity: 0.9;
+}
