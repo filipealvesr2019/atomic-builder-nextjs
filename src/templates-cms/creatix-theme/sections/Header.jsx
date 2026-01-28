@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, User } from 'lucide-react';
 import styles from './Header.module.css';
 
 const Header = ({ logo, menu, cta }) => {
@@ -40,8 +40,8 @@ const Header = ({ logo, menu, cta }) => {
           <button className={styles.cartBtn}>
             <ShoppingCart size={20} />
           </button>
-          <a href="/shop" className={styles.ctaBtn}>
-            {cta || "Shop now"}
+          <a href="/login" className={styles.cartBtn}>
+            <User size={20} />
           </a>
           <button
             className={styles.mobileMenuBtn}
@@ -65,8 +65,8 @@ const Header = ({ logo, menu, cta }) => {
               {item.label}
             </a>
           ))}
-          <a href="/shop" className={styles.mobileCtaBtn}>
-            {cta || "Shop now"}
+          <a href="/login" className={styles.mobileNavLink}>
+            Login
           </a>
         </div>
       )}
