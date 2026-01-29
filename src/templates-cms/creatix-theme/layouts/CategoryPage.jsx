@@ -1,18 +1,18 @@
-import React from 'react';
-import Header from '../sections/Header';
-import Footer from '../sections/Footer';
-import { ShoppingBag, ArrowLeft } from 'lucide-react';
+import CollectionGrid from '../sections/CollectionGrid';
+import { ArrowLeft } from 'lucide-react';
 import styles from './CategoryPage.module.css';
 
-const CategoryPage = ({ categoryId, categoryName, products, header, footer }) => {
+const CategoryPage = ({ categoryId, categoryName, products, header, footer, baseUrl = "" }) => {
+  const filteredProducts = products?.filter(p => !categoryId || p.category.toLowerCase() === categoryId.replace('-', ' ')) || [];
+
   return (
     <div className={styles.page}>
-      <Header {...header} />
-      
+      <Header {...header} baseUrl={baseUrl} />
+
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.breadcrumb}>
-            <a href="/" className={styles.backLink}>
+            <a href={baseUrl || "/"} className={styles.backLink}>
               <ArrowLeft size={16} />
               <span>Back to home</span>
             </a>
@@ -25,25 +25,7 @@ const CategoryPage = ({ categoryId, categoryName, products, header, footer }) =>
             </p>
           </header>
 
-          <div className={styles.grid}>
-            {products?.filter(p => !categoryId || p.category.toLowerCase() === categoryId.replace('-', ' '))
-              .map((product, index) => (
-              <div key={index} className={styles.card}>
-                <div className={styles.imageWrapper}>
-                  <img src={product.image} alt={product.name} className={styles.image} />
-                  <div className={styles.overlay}>
-                    <button className={styles.buyBtn}>
-                      <ShoppingBag size={20} />
-                    </button>
-                  </div>
-                </div>
-                <div className={styles.info}>
-                  <h3 className={styles.name}>{product.name}</h3>
-                  <span className={styles.price}>${product.price}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CollectionGrid products={filteredProducts} baseUrl={baseUrl} />
         </div>
       </main>
 
