@@ -39,11 +39,11 @@ export const creatixDefaultContent = {
           props: {
             title: "Browse by Category",
             items: [
-              { id: "fonts", name: "Fonts", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800" },
-              { id: "graphics", name: "Graphics", image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800" },
-              { id: "textures", name: "Textures", image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800" },
-              { id: "mockups", name: "Mockups", image: "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800" },
-              { id: "3d-assets", name: "3D Assets", image: "https://images.unsplash.com/photo-1614850523296-e8c041de4392?auto=format&fit=crop&q=80&w=800" }
+              { id: "fonts", name: "Fonts", image: "/images/creatix-theme/category_fonts_1769726993395.png" },
+              { id: "graphics", name: "Graphics", image: "/images/creatix-theme/category_graphics_1769727006753.png" },
+              { id: "textures", name: "Textures", image: "/images/creatix-theme/category_textures_1769727019982.png" },
+              { id: "mockups", name: "Mockups", image: "/images/creatix-theme/category_mockups_1769727033010.png" },
+              { id: "3d-assets", name: "3D Assets", image: "/images/creatix-theme/category_3d_assets_1769727046314.png" }
             ]
           }
         },
