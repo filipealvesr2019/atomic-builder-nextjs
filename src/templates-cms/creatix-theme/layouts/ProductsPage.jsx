@@ -3,8 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import Header from '../sections/Header';
 import Footer from '../sections/Footer';
-import FeaturedProducts from '../sections/FeaturedProducts';
-import CategoryGrid from '../sections/CategoryGrid';
+import CollectionGrid from '../sections/CollectionGrid';
 import { ChevronRight } from 'lucide-react';
 import styles from './ProductsPage.module.css';
 
@@ -104,8 +103,9 @@ const ProductsPage = ({ sections = {}, baseUrl = "" }) => {
                         </div>
                     </div>
 
-                    <CategoryGrid title="Our Categories" items={sections.categories?.items} baseUrl={baseUrl} />
-                    {filteredProducts.length === 0 && (
+                    {filteredProducts.length > 0 ? (
+                        <CollectionGrid products={filteredProducts} baseUrl={baseUrl} />
+                    ) : (
                         <div className={styles.noResults}>
                             <h3 className={styles.noResultsTitle}>No products found</h3>
                             <p>Try adjusting your category or price filters.</p>
