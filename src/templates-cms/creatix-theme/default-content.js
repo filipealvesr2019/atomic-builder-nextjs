@@ -13,10 +13,11 @@ export const creatixDefaultContent = {
             menu: [
               { label: "Home", href: "/" },
               { label: "Products", href: "/products" },
-              { label: "E-commerce", href: "/category/ecommerce" },
-              { label: "UI Kits", href: "/category/ui-kits" },
-              { label: "Landing Pages", href: "/category/landing" },
-              { label: "Design Systems", href: "/category/design-systems" }
+              { label: "Fonts", href: "/category/fonts" },
+              { label: "Graphics", href: "/category/graphics" },
+              { label: "Textures", href: "/category/textures" },
+              { label: "Mockups", href: "/category/mockups" },
+              { label: "3D Assets", href: "/category/3d-assets" }
             ],
             cta: "Login"
           }
@@ -25,11 +26,11 @@ export const creatixDefaultContent = {
           id: 'creatix-hero',
           type: 'hero',
           props: {
-            headline: "Digital design assets that convert",
-            subheadline: "High-quality templates, UI kits and digital resources crafted to elevate your e-commerce and brand presence.",
-            primaryCTA: "Explore products",
-            secondaryCTA: "Browse categories",
-            image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=2000"
+            headline: "Elevate your visuals with premium digital assets",
+            subheadline: "Curated fonts, textures, and graphic kits designed for modern creators and brands.",
+            primaryCTA: "Browse Collection",
+            secondaryCTA: "View Bundles",
+            image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2400"
           }
         },
         {
@@ -38,10 +39,11 @@ export const creatixDefaultContent = {
           props: {
             title: "Browse by Category",
             items: [
-              { id: "ecommerce", name: "E-commerce", icon: "ShoppingCart", description: "Storefronts & Checkouts" },
-              { id: "ui-kits", name: "UI Kits", icon: "Layout", description: "Components & Systems" },
-              { id: "landing", name: "Landing Pages", icon: "Monitor", description: "High-converting layouts" },
-              { id: "design-systems", name: "Design Systems", icon: "Grid", description: "Scalable UI foundations" }
+              { id: "fonts", name: "Fonts", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800" },
+              { id: "graphics", name: "Graphics", image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800" },
+              { id: "textures", name: "Textures", image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800" },
+              { id: "mockups", name: "Mockups", image: "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800" },
+              { id: "3d-assets", name: "3D Assets", image: "https://images.unsplash.com/photo-1614850523296-e8c041de4392?auto=format&fit=crop&q=80&w=800" }
             ]
           }
         },
@@ -52,39 +54,71 @@ export const creatixDefaultContent = {
             title: "Featured Products",
             products: [
               {
-                id: "c1",
-                name: "Creatix Pro UI Kit",
-                slug: "creatix-pro-ui-kit",
-                price: 59,
-                category: "UI Kits",
-                image: "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800",
+                id: "1",
+                name: "Chronos Display Font",
+                slug: "chronos-display-font",
+                price: 29,
+                category: "Fonts",
+                image: "/images/digital-brand/chronos.png",
+                badge: "Trending"
+              },
+              {
+                id: "7",
+                name: "Helix Modern Sans",
+                slug: "helix-modern-sans",
+                price: 24,
+                category: "Fonts",
+                image: "/images/digital-brand/helix_modern_sans_font_1769553465607.png"
+              },
+              {
+                id: "11",
+                name: "Bauhaus Geometric Pack",
+                slug: "bauhaus-geometric",
+                price: 25,
+                category: "Graphics",
+                image: "/images/digital-brand/bauhaus_geometric_shapes_1769553533343.png"
+              },
+              {
+                id: "12",
+                name: "Street Art Vectors",
+                slug: "street-art-vectors",
+                price: 28,
+                category: "Graphics",
+                image: "/images/digital-brand/street_art_vectors_1769553550292.png",
                 badge: "Popular"
               },
               {
-                id: "c2",
-                name: "E-commerce React Starter",
-                slug: "ecommerce-react-starter",
-                price: 89,
-                category: "E-commerce",
-                image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800",
-                badge: "Best Seller"
+                id: "2",
+                name: "Abstract Gradient Pack",
+                slug: "abstract-gradient-pack",
+                price: 18,
+                category: "Textures",
+                image: "/images/digital-brand/gradient.png"
               },
               {
-                id: "c3",
-                name: "Elite Landing Page",
-                slug: "elite-landing-page",
-                price: 39,
-                category: "Landing Pages",
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+                id: "14",
+                name: "Liquid Marble Textures",
+                slug: "liquid-marble-textures",
+                price: 20,
+                category: "Textures",
+                image: "/images/digital-brand/liquid_marble_textures_1769553591166.png",
+                badge: "Colorful"
               },
               {
-                id: "c4",
-                name: "Brand Master System",
-                slug: "brand-master-system",
-                price: 129,
-                category: "Design Systems",
-                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800",
-                badge: "New"
+                id: "15",
+                name: "iPhone 15 Clay Mockup",
+                slug: "iphone-15-mockup",
+                price: 16,
+                category: "Mockups",
+                image: "/images/digital-brand/iphone_15_mockup_1769553604476.png"
+              },
+              {
+                id: "5",
+                name: "Abstract 3D Shapes",
+                slug: "abstract-3d-shapes",
+                price: 35,
+                category: "3D Assets",
+                image: "/images/digital-brand/abstract_3d_shapes_main.png"
               }
             ]
           }
@@ -94,11 +128,14 @@ export const creatixDefaultContent = {
           type: 'footer',
           props: {
             brandName: "CREATIX",
-            about: "A premium digital product studio focused on modern design and high-performance assets for the next generation of brands.",
+            about: "Premium digital resources for makers, designers, and visionaries. Every item is hand-picked to ensure premium design standards.",
             links: [
-              { label: "Terms & Privacy", href: "/terms" },
-              { label: "Support", href: "/support" },
-              { label: "Contact", href: "/contact" }
+              { label: "Fonts", href: "/category/fonts" },
+              { label: "Graphics", href: "/category/graphics" },
+              { label: "Textures", href: "/category/textures" },
+              { label: "Mockups", href: "/category/mockups" },
+              { label: "3D Assets", href: "/category/3d-assets" },
+              { label: "Support", href: "/contact" }
             ]
           }
         }
