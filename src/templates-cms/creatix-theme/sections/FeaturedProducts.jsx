@@ -35,7 +35,9 @@ const defaultProducts = [
   }
 ];
 
-const FeaturedProducts = ({ title, products, baseUrl = "", limit }) => {
+const FeaturedProducts = ({ title, products, baseUrl = "", limit, viewAllLink, viewAllText, hideIcon = false, variant }) => {
+  if (viewAllLink && (!products || products.length === 0)) return null;
+
   let displayProducts = products && products.length > 0 ? products : defaultProducts;
 
   if (limit) {
@@ -43,14 +45,16 @@ const FeaturedProducts = ({ title, products, baseUrl = "", limit }) => {
   }
 
   return (
-    <section className={styles.featured}>
+    <section className={`${styles.featured} ${variant === 'white' ? styles.white : ''}`}>
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.titleWrapper}>
-            <Star className={styles.star} size={24} />
+            {!hideIcon && <Star className={styles.star} size={24} />}
             <h2 className={styles.title}>{title || "Featured Products"}</h2>
           </div>
-          <a href={`${baseUrl}/products`} className={styles.viewAll}>View all products</a>
+          <a href={viewAllLink || `${baseUrl}/products`} className={styles.viewAll}>
+            {viewAllText || (viewAllLink ? "View category" : "View all products")}
+          </a>
         </div>
 
         <div className={styles.grid}>
