@@ -11,7 +11,7 @@ const HomePage = ({ sections = {}, baseUrl = "" }) => {
       <Header {...(sections.header || {})} baseUrl={baseUrl} />
       <Hero {...(sections.hero || {})} baseUrl={baseUrl} />
       <CategoryGrid {...(sections.categories || {})} baseUrl={baseUrl} />
-      <FeaturedProducts {...(sections.featured || {})} baseUrl={baseUrl} />
+      <FeaturedProducts {...(sections.featured || {})} baseUrl={baseUrl} limit={3} />
       <Footer {...(sections.footer || {})} baseUrl={baseUrl} />
     </div>
   );

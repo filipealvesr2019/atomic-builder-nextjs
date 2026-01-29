@@ -35,8 +35,12 @@ const defaultProducts = [
   }
 ];
 
-const FeaturedProducts = ({ title, products, baseUrl = "" }) => {
-  const displayProducts = products && products.length > 0 ? products : defaultProducts;
+const FeaturedProducts = ({ title, products, baseUrl = "", limit }) => {
+  let displayProducts = products && products.length > 0 ? products : defaultProducts;
+
+  if (limit) {
+    displayProducts = displayProducts.slice(0, limit);
+  }
 
   return (
     <section className={styles.featured}>
