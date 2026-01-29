@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Header from '../sections/Header';
 import Footer from '../sections/Footer';
 import FeaturedProducts from '../sections/FeaturedProducts';
+import CategoryGrid from '../sections/CategoryGrid';
 import { ChevronRight } from 'lucide-react';
 import styles from './ProductsPage.module.css';
 
@@ -12,7 +13,7 @@ const ProductsPage = ({ sections = {}, baseUrl = "" }) => {
     const [priceFilter, setPriceFilter] = useState('all');
     const [sortBy, setSortBy] = useState('featured');
 
-    const categories = ['all', 'E-commerce', 'UI Kits', 'Landing Pages', 'Design Systems'];
+    const categories = ['all', 'Fonts', 'Graphics', 'Textures', 'Mockups', '3D Assets'];
 
     const allProducts = useMemo(() => {
         return sections.featured?.products || [];
@@ -103,9 +104,8 @@ const ProductsPage = ({ sections = {}, baseUrl = "" }) => {
                         </div>
                     </div>
 
-                    {filteredProducts.length > 0 ? (
-                        <FeaturedProducts title="" products={filteredProducts} baseUrl={baseUrl} />
-                    ) : (
+                    <CategoryGrid title="Our Categories" items={sections.categories?.items} baseUrl={baseUrl} />
+                    {filteredProducts.length === 0 && (
                         <div className={styles.noResults}>
                             <h3 className={styles.noResultsTitle}>No products found</h3>
                             <p>Try adjusting your category or price filters.</p>
