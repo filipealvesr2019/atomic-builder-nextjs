@@ -77,48 +77,6 @@ export const creatixDefaultContent = {
                 price: 25,
                 category: "Graphics",
                 image: "/images/digital-brand/bauhaus_geometric_shapes_1769553533343.png"
-              },
-              {
-                id: "12",
-                name: "Street Art Vectors",
-                slug: "street-art-vectors",
-                price: 28,
-                category: "Graphics",
-                image: "/images/digital-brand/street_art_vectors_1769553550292.png",
-                badge: "Popular"
-              },
-              {
-                id: "2",
-                name: "Abstract Gradient Pack",
-                slug: "abstract-gradient-pack",
-                price: 18,
-                category: "Textures",
-                image: "/images/digital-brand/gradient.png"
-              },
-              {
-                id: "14",
-                name: "Liquid Marble Textures",
-                slug: "liquid-marble-textures",
-                price: 20,
-                category: "Textures",
-                image: "/images/digital-brand/liquid_marble_textures_1769553591166.png",
-                badge: "Colorful"
-              },
-              {
-                id: "15",
-                name: "iPhone 15 Clay Mockup",
-                slug: "iphone-15-mockup",
-                price: 16,
-                category: "Mockups",
-                image: "/images/digital-brand/iphone_15_mockup_1769553604476.png"
-              },
-              {
-                id: "5",
-                name: "Abstract 3D Shapes",
-                slug: "abstract-3d-shapes",
-                price: 35,
-                category: "3D Assets",
-                image: "/images/digital-brand/abstract_3d_shapes_main.png"
               }
             ]
           }
