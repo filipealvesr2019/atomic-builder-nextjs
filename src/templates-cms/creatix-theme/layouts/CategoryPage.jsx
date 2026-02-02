@@ -1,8 +1,16 @@
+import React from 'react';
+import Header from '../sections/Header';
+import Footer from '../sections/Footer';
 import CollectionGrid from '../sections/CollectionGrid';
 import { ArrowLeft } from 'lucide-react';
 import styles from './CategoryPage.module.css';
 
-const CategoryPage = ({ categoryId, categoryName, products, header, footer, baseUrl = "" }) => {
+const CategoryPage = ({ sections = {}, category = {}, baseUrl = "" }) => {
+  const { header, footer, featured } = sections;
+  const products = featured?.products || [];
+  const categoryId = category.id;
+  const categoryName = category.name;
+
   const filteredProducts = products?.filter(p => !categoryId || p.category.toLowerCase() === categoryId.replace('-', ' ')) || [];
 
   return (
