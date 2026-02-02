@@ -170,7 +170,7 @@ const templates = {
   },
   'business-theme-cms': {
     name: 'Business Theme',
-    category: 'business',
+    category: 'fitness',
     type: 'institutional',
     layouts: {
       home: BusinessThemeHome
@@ -184,7 +184,7 @@ const templates = {
   },
   'minimal-business': {
     name: 'Minimal Business',
-    category: 'business',
+    category: 'cosmetics',
     type: 'landing',
     layouts: {
       home: MinimalBusinessHome
