@@ -216,7 +216,7 @@ const templates = {
   },
   'emma-portfolio': {
     name: 'Emma Portfolio',
-    category: 'creative',
+    category: 'coaching',
     type: 'portfolio',
     defaultContent: emmaDefaultContent,
     layouts: {

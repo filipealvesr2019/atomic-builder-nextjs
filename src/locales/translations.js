@@ -50,6 +50,7 @@ export const translations = {
                 digital: 'Digital',
                 lifestyle: 'Lifestyle',
                 'home-decor': 'Furniture & Home Decor',
+                coaching: 'Coaching',
                 weddings: 'Weddings'
             },
             types: {
@@ -232,6 +233,7 @@ export const translations = {
                 digital: 'Digital',
                 lifestyle: 'Estilo de Vida',
                 'home-decor': 'Móveis e Decoração',
+                coaching: 'Coaching',
                 weddings: 'Casamentos'
             },
             types: {
