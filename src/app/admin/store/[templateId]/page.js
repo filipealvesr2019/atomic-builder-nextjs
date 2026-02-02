@@ -120,6 +120,20 @@ export default function TemplateDetails() {
                                 ))}
                             </ul>
                         </div>
+
+                        <div className={styles.metaItem}>
+                            <h3>
+                                <CheckCircle2 size={20} />
+                                {language === 'pt' ? 'Seções Inclusas' : 'Included Sections'}
+                            </h3>
+                            <div className={styles.sectionsTags}>
+                                {metadata.sections?.map((section, index) => (
+                                    <span key={index} className={styles.sectionTag}>
+                                        {section}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     <div className={styles.actions}>

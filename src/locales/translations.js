@@ -58,49 +58,57 @@ export const translations = {
                     name: 'Rustic Store',
                     description: 'A premium e-commerce template for high-end furniture and home decor brands. Features a warm, industrial aesthetic that emphasizes craftsmanship.',
                     target: 'Furniture stores, interior designers, and decor boutiques looking for a sophisticated online presence.',
-                    features: ['Product Gallery', 'Inventory Management', 'Responsive Mobile Design', 'Custom Newsletter Section']
+                    features: ['Product Gallery', 'Inventory Management', 'Responsive Mobile Design', 'Custom Newsletter Section'],
+                    sections: ['Hero', 'Product List', 'About Us', 'Newsletter', 'Contact']
                 },
                 'digital-brand-theme': {
                     name: 'Digital Brand',
                     description: 'The ultimate template for selling digital assets like mockup kits, graphics, and templates. Designed for high conversion and visual impact.',
                     target: 'Graphic designers, UI/UX artists, and creative agencies selling digital products.',
-                    features: ['Dynamic Product Grid', 'Shopping Bag Integration', 'Dark/Light Mode Ready', 'Quick Install System']
+                    features: ['Dynamic Product Grid', 'Shopping Bag Integration', 'Dark/Light Mode Ready', 'Quick Install System'],
+                    sections: ['Hero', 'Categories Grid', 'Featured Products', 'Benefits', 'Footer']
                 },
                 'creatix-theme': {
                     name: 'Creatix',
                     description: 'A modern, clean typography-focused template ideal for font foundries and digital product creators.',
                     target: 'Type designers and creative sellers who value minimalism and elite typography.',
-                    features: ['Advanced Font Showcase', 'Interactive Product Detail Page', 'Bespoke Category Filtering', 'Customer Portal']
+                    features: ['Advanced Font Showcase', 'Interactive Product Detail Page', 'Bespoke Category Filtering', 'Customer Portal'],
+                    sections: ['Hero', 'Categories', 'Featured Content', 'Interactive Gallery', 'Product Page']
                 },
                 'emma-portfolio': {
                     name: 'Emma Portfolio',
                     description: 'A high-converting coaching and portfolio template designed to turn visitors into clients. Direct, elegant, and professional.',
                     target: 'Life coaches, business consultants, and professional speakers.',
-                    features: ['Service Breakdown', 'Podcast Integration', 'Client Testimonials', 'Contact Management']
+                    features: ['Service Breakdown', 'Podcast Integration', 'Client Testimonials', 'Contact Management'],
+                    sections: ['Hero', 'Services', 'Podcast Section', 'Testimonials', 'Contact Form']
                 },
                 'business-theme-cms': {
                     name: 'Fitness Pro',
                     description: 'A robust and energetic template designed for fitness professionals and gyms to showcase their programs and services.',
                     target: 'Personal trainers, yoga studios, and gym owners.',
-                    features: ['Class Schedules', 'Training Programs Section', 'Trainer Profiles', 'Contact Form']
+                    features: ['Class Schedules', 'Training Programs Section', 'Trainer Profiles', 'Contact Form'],
+                    sections: ['Hero', 'Features', 'Training Programs', 'Contact Section']
                 },
                 'minimal-business': {
                     name: 'Cosmetic Minimal',
                     description: 'An elegant, minimalist landing page for beauty and cosmetic brands focusing on high-quality product presentation.',
                     target: 'Skincare brands, makeup artists, and beauty influencers.',
-                    features: ['Feature Highlights', 'Clean Product Showcase', 'Responsive Layout', 'CTA Optimized']
+                    features: ['Feature Highlights', 'Clean Product Showcase', 'Responsive Layout', 'CTA Optimized'],
+                    sections: ['Hero', 'Key Features', 'Product Spotlight', 'Footer']
                 },
                 'ursula-theme': {
                     name: 'Ursula Blog',
                     description: 'A sophisticated blog template for lifestyle influencers and content creators who want a classic, editorial feel.',
                     target: 'Lifestyle bloggers, travelers, and editorial writers.',
-                    features: ['Multi-category Support', 'Featured Newsletter', 'Clean Typography', 'Social Media Sync']
+                    features: ['Multi-category Support', 'Featured Newsletter', 'Clean Typography', 'Social Media Sync'],
+                    sections: ['Hero', 'Category Index', 'Featured Posts', 'Newsletter Signup']
                 },
                 'ava-portfolio': {
                     name: 'Ava Portfolio',
                     description: 'A romantic and elegant portfolio template specifically crafted for wedding photographers and event planners.',
                     target: 'Wedding photographers, event planners, and creative professionals.',
-                    features: ['Photo Collage Layout', 'Workshop Management', 'Detailed Service Pages', 'Testimonial Slider']
+                    features: ['Photo Collage Layout', 'Workshop Management', 'Detailed Service Pages', 'Testimonial Slider'],
+                    sections: ['Hero', 'Photo Collage', 'Services', 'Workshops', 'Client Reviews']
                 }
             },
             types: {
@@ -114,25 +122,7 @@ export const translations = {
                 fonts: 'Fonts',
                 graphics: 'Graphics'
             },
-            filterByType: 'Filter by Type',
-            items: {
-                'rustic-store-cms': {
-                    name: 'Rustic Store',
-                    description: 'Perfect for rustic store websites. Fully customizable.'
-                },
-                'business-theme-cms': {
-                    name: 'Business Theme',
-                    description: 'Perfect for business websites. Fully customizable.'
-                },
-                'minimal-business': {
-                    name: 'Minimal Business',
-                    description: 'Perfect for minimal business websites. Fully customizable.'
-                },
-                'digital-brand-theme': {
-                    name: 'Digital Brand',
-                    description: 'Modern e-commerce for digital products (Templates, Courses, E-books).'
-                }
-            }
+            filterByType: 'Filter by Type'
         },
         plugins: {
             title: 'Plugins',
@@ -290,49 +280,57 @@ export const translations = {
                     name: 'Rustic Store',
                     description: 'Um template de e-commerce premium para marcas de móveis e decoração de alto padrão. Possui uma estética industrial acolhedora que enfatiza o artesanato.',
                     target: 'Lojas de móveis, designers de interiores e boutiques de decoração que buscam uma presença online sofisticada.',
-                    features: ['Galeria de Produtos', 'Gerenciamento de Estoque', 'Design Responsivo', 'Seção de Newsletter Personalizada']
+                    features: ['Galeria de Produtos', 'Gerenciamento de Estoque', 'Design Responsivo', 'Seção de Newsletter Personalizada'],
+                    sections: ['Hero', 'Lista de Produtos', 'Sobre Nós', 'Newsletter', 'Contato']
                 },
                 'digital-brand-theme': {
                     name: 'Digital Brand',
                     description: 'O template definitivo para vender ativos digitais como kits de mockup, gráficos e templates. Projetado para alta conversão e impacto visual.',
                     target: 'Designers gráficos, artistas de UI/UX e agências criativas que vendem produtos digitais.',
-                    features: ['Grade de Produtos Dinâmica', 'Integração com Carrinho', 'Pronto para Modo Escuro/Claro', 'Sistema de Instalação Rápida']
+                    features: ['Grade de Produtos Dinâmica', 'Integração com Carrinho', 'Pronto para Modo Escuro/Claro', 'Sistema de Instalação Rápida'],
+                    sections: ['Hero', 'Grade de Categorias', 'Produtos em Destaque', 'Benefícios', 'Rodapé']
                 },
                 'creatix-theme': {
                     name: 'Creatix',
                     description: 'Um template moderno focado em tipografia limpa, ideal para fundições de fontes e criadores de produtos digitais.',
-                    target: 'Designers de tipos e vendedores criativos que valorizam o minimalismo e a tipografia de elite.',
-                    features: ['Vitrine de Fontes Avançada', 'Página de Detalhes Interativa', 'Filtragem por Categoria Sob Medida', 'Portal do Cliente']
+                    target: 'Designers de tipos e vendedores criativos que valorizam o minmalismo e a tipografia de elite.',
+                    features: ['Vitrine de Fontes Avançada', 'Página de Detalhes Interativa', 'Filtragem por Categoria Sob Medida', 'Portal do Cliente'],
+                    sections: ['Hero', 'Categorias', 'Conteúdo em Destaque', 'Galeria Interativa', 'Página de Produto']
                 },
                 'emma-portfolio': {
                     name: 'Emma Portfolio',
                     description: 'Um template de coaching e portfólio de alta conversão, projetado para transformar visitantes em clientes. Direto, elegante e profissional.',
                     target: 'Life coaches, consultores de negócios e palestrantes profissionais.',
-                    features: ['Detalhamento de Serviços', 'Integração com Podcast', 'Depoimentos de Clientes', 'Gerenciamento de Contato']
+                    features: ['Detalhamento de Serviços', 'Integração com Podcast', 'Depoimentos de Clientes', 'Gerenciamento de Contato'],
+                    sections: ['Hero', 'Serviços', 'Seção de Podcast', 'Depoimentos', 'Formulário de Contato']
                 },
                 'business-theme-cms': {
                     name: 'Fitness Pro',
                     description: 'Um template robusto e energético projetado para profissionais de fitness e academias mostrarem seus programas e serviços.',
                     target: 'Personal trainers, estúdios de yoga e donos de academia.',
-                    features: ['Horários de Aulas', 'Seção de Programas de Treino', 'Perfis de Treinadores', 'Formulário de Contato']
+                    features: ['Horários de Aulas', 'Seção de Programas de Treino', 'Perfis de Treinadores', 'Formulário de Contato'],
+                    sections: ['Hero', 'Destaques', 'Programas de Treino', 'Seção de Contato']
                 },
                 'minimal-business': {
                     name: 'Cosmetic Minimal',
                     description: 'Uma landing page elegante e minimalista para marcas de beleza e cosméticos, com foco na apresentação de produtos de alta qualidade.',
                     target: 'Marcas de cuidados com a pele, maquiadores e influenciadores de beleza.',
-                    features: ['Destaques de Recursos', 'Vitrine de Produtos Limpa', 'Layout Responsivo', 'Otimizado para Conversão (CTA)']
+                    features: ['Destaques de Recursos', 'Vitrine de Produtos Limpa', 'Layout Responsivo', 'Otimizado para Conversão (CTA)'],
+                    sections: ['Hero', 'Recursos Chave', 'Destaque de Produto', 'Rodapé']
                 },
                 'ursula-theme': {
                     name: 'Ursula Blog',
                     description: 'Um template de blog sofisticado para influenciadores de estilo de vida e criadores de conteúdo que desejam uma sensação editorial clássica.',
                     target: 'Blogueiros de lifestyle, viajantes e escritores editoriais.',
-                    features: ['Suporte a Múltiplas Categorias', 'Newsletter em Destaque', 'Tipografia Limpa', 'Sincronização com Redes Sociais']
+                    features: ['Suporte a Múltiplas Categorias', 'Newsletter em Destaque', 'Tipografia Limpa', 'Sincronização com Redes Sociais'],
+                    sections: ['Hero', 'Índice de Categorias', 'Posts em Destaque', 'Assinatura de Newsletter']
                 },
                 'ava-portfolio': {
                     name: 'Ava Portfolio',
                     description: 'Um template de portfólio romântico e elegante, criado especificamente para fotógrafos de casamento e organizadores de eventos.',
                     target: 'Fotógrafos de casamento, organizadores de eventos e profissionais criativos.',
-                    features: ['Layout de Colagem de Fotos', 'Gerenciamento de Workshops', 'Páginas de Serviço Detalhadas', 'Slider de Depoimentos']
+                    features: ['Layout de Colagem de Fotos', 'Gerenciamento de Workshops', 'Páginas de Serviço Detalhadas', 'Slider de Depoimentos'],
+                    sections: ['Hero', 'Colagem de Fotos', 'Serviços', 'Workshops', 'Depoimentos']
                 }
             },
             types: {
@@ -345,25 +343,7 @@ export const translations = {
                 fonts: 'Fontes',
                 graphics: 'Gráficos'
             },
-            filterByType: 'Filtrar por Tipo',
-            items: {
-                'rustic-store-cms': {
-                    name: 'Rustic Store',
-                    description: 'Perfeito para lojas rústicas. Totalmente personalizável.'
-                },
-                'business-theme-cms': {
-                    name: 'Tema Empresarial',
-                    description: 'Perfeito para sites empresariais. Totalmente personalizável.'
-                },
-                'minimal-business': {
-                    name: 'Negócio Minimalista',
-                    description: 'Perfeito para sites minimalistas. Totalmente personalizável.'
-                },
-                'digital-brand-theme': {
-                    name: 'Digital Brand',
-                    description: 'E-commerce moderno para produtos digitais (Templates, Cursos, E-books).'
-                }
-            }
+            filterByType: 'Filtrar por Tipo'
         },
         plugins: {
             title: 'Plugins',
