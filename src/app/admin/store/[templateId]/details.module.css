@@ -1,0 +1,239 @@
+.container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.backButton:hover {
+    color: #111827;
+    background: #f3f4f6;
+}
+
+.mainLayout {
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 3rem;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .mainLayout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.previewSection {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.browserToolbar {
+    background: #f3f4f6;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dotRed,
+.dotYellow,
+.dotGreen {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dotRed {
+    background: #ff5f56;
+}
+
+.dotYellow {
+    background: #ffbd2e;
+}
+
+.dotGreen {
+    background: #27c93f;
+}
+
+.addressBar {
+    background: white;
+    flex: 1;
+    padding: 0.25rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+.iframeWrapper {
+    position: relative;
+    padding-top: 56.25%;
+    /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.previewIframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.infoSection {
+    background: white;
+    padding: 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    position: sticky;
+    top: 2rem;
+}
+
+.title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1rem;
+    letter-spacing: -0.025em;
+}
+
+.description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 2rem;
+}
+
+.metaGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.metaItem h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.75rem;
+}
+
+.metaItem p {
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.featuresList {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.featuresList li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
+.checkIcon {
+    color: #10b981;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.installButton {
+    width: 100%;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.installButton:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+}
+
+.installButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.demoButton {
+    width: 100%;
+    background: white;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    padding: 0.875rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.demoButton:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    gap: 1.5rem;
+}

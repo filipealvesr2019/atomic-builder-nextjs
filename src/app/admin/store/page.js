@@ -134,6 +134,13 @@ export default function TemplateStore() {
                 </a>
 
                 <button
+                  onClick={() => router.push(`/admin/store/${template.id}`)}
+                  className={styles.detailsButton}
+                >
+                  {t.viewDetails}
+                </button>
+
+                <button
                   onClick={() => handleInstall(template.id)}
                   disabled={installing === template.id}
                   className={styles.installButton}
