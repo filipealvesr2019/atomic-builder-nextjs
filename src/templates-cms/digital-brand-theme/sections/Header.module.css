@@ -61,6 +61,22 @@
   align-items: center;
 }
 
+.cartBtn {
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.cartBtn:hover {
+  background-color: #F1F5F9;
+  color: #6C63FF;
+}
+
 .loginBtn {
   font-family: 'Inter', sans-serif;
   font-weight: 600;

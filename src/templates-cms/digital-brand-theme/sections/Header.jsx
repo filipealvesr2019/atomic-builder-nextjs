@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 import styles from './Header.module.css';
 
 const Header = ({ logo, menu, buttons, baseUrl = "" }) => {
@@ -26,6 +26,9 @@ const Header = ({ logo, menu, buttons, baseUrl = "" }) => {
         </nav>
 
         <div className={styles.actions}>
+          <a href={`${baseUrl}/checkout`} className={styles.cartBtn}>
+            <ShoppingBag size={22} />
+          </a>
           <a href={`${baseUrl}/login`} className={styles.loginBtn}>
             {buttons?.login || "Login"}
           </a>
