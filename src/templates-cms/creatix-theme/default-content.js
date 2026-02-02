@@ -61,6 +61,19 @@ export const creatixDefaultContent = {
                 price: 29,
                 category: "Fonts",
                 image: "/images/digital-brand/chronos.png",
+                images: [
+                  "/images/digital-brand/chronos.png",
+                  "/images/digital-brand/vintura_script_font_1769553479318.png",
+                  "/images/digital-brand/helix_modern_sans_font_1769553465607.png"
+                ],
+                features: [
+                  "Complete character set",
+                  "Multi-language support",
+                  "OpenType features",
+                  "Numbers & Punctuation",
+                  "Lifetime updates"
+                ],
+                description: "Chronos Display Font is a bold, modern typeface designed for headlines and branding. Its sharp edges and high contrast make it perfect for premium visual identities.",
                 badge: "Trending"
               },
               {
@@ -131,7 +144,20 @@ export const creatixDefaultContent = {
                 slug: "abstract-gradient-pack",
                 price: 18,
                 category: "Textures",
-                image: "/images/digital-brand/gradient.png"
+                image: "/images/digital-brand/gradient.png",
+                images: [
+                  "/images/digital-brand/gradient.png",
+                  "/images/digital-brand/filmgrain.png",
+                  "/images/digital-brand/paper_textures_pack_1769553577086.png"
+                ],
+                features: [
+                  "15 High-res textures",
+                  "6000x4000px resolution",
+                  "Photographic grain",
+                  "Perfect for overlays",
+                  "Commercial license"
+                ],
+                description: "Deeply saturated abstract gradients with subtle noise and grain. Perfect for background hero sections and social media content.",
               },
               {
                 id: "4",
@@ -200,7 +226,20 @@ export const creatixDefaultContent = {
                 slug: "abstract-3d-shapes",
                 price: 35,
                 category: "3D Assets",
-                image: "/images/digital-brand/abstract_3d_shapes_main.png"
+                image: "/images/digital-brand/abstract_3d_shapes_main.png",
+                images: [
+                  "/images/digital-brand/abstract_3d_shapes_main.png",
+                  "/images/digital-brand/glossy_3d_icons_main.png",
+                  "/images/digital-brand/glass_morphism_icons_1769553676603.png"
+                ],
+                features: [
+                  "High-resolution PNGs",
+                  "Fully isolated layers",
+                  "Customizable colors",
+                  "8 unique compositions",
+                  "4K resolution"
+                ],
+                description: "A collection of 20+ abstract 3D shapes for modern UI/UX design and branding. Each shape is rendered with premium lighting and materials.",
               },
               {
                 id: "6",
