@@ -151,7 +151,7 @@ import { creatixDefaultContent } from './creatix-theme/default-content';
 const templates = {
   'rustic-store-cms': {
     name: 'Rustic Store',
-    category: 'retail',
+    category: 'home-decor',
     type: 'ecommerce',
     defaultContent: rusticStoreDefaultContent,
     layouts: {

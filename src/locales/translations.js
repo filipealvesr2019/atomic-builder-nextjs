@@ -49,6 +49,7 @@ export const translations = {
                 retail: 'Retail',
                 digital: 'Digital',
                 lifestyle: 'Lifestyle',
+                'home-decor': 'Furniture & Home Decor',
                 weddings: 'Weddings'
             },
             types: {
@@ -230,6 +231,7 @@ export const translations = {
                 retail: 'Varejo',
                 digital: 'Digital',
                 lifestyle: 'Estilo de Vida',
+                'home-decor': 'Móveis e Decoração',
                 weddings: 'Casamentos'
             },
             types: {
