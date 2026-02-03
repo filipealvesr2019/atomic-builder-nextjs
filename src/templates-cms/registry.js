@@ -148,7 +148,23 @@ import CreatixFeaturedProducts from './creatix-theme/sections/FeaturedProducts';
 import CreatixFooter from './creatix-theme/sections/Footer';
 import { creatixDefaultContent } from './creatix-theme/default-content';
 
+// Iron Strength Theme
+import IronStrengthHome from './iron-strength-cms/layouts/HomePage';
+import { ironStrengthDefaultContent } from './iron-strength-cms/default-content';
+
 const templates = {
+  'iron-strength-cms': {
+    name: 'IronStrength',
+    category: 'fitness',
+    type: 'institutional',
+    defaultContent: ironStrengthDefaultContent,
+    layouts: {
+      home: IronStrengthHome
+    },
+    sections: {
+      // Mapping for dynamic section adding (future proofing)
+    }
+  },
   'rustic-store-cms': {
     name: 'Rustic Store',
     category: 'home-decor',

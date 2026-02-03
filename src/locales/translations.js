@@ -54,6 +54,13 @@ export const translations = {
                 weddings: 'Weddings'
             },
             items: {
+                'iron-strength-cms': {
+                    name: 'IronStrength',
+                    description: 'A high-energy fitness theme designed for gyms, crossfit boxes, and personal trainers. Bold, aggressive, and conversion-focused.',
+                    target: 'Gyms, Crossफिट studios, Personal Trainers, and Fitness Centers.',
+                    features: ['Class Schedule Grid', 'Membership Pricing Tables', 'Trainer Team Showcase', 'High-Impact Hero Section'],
+                    sections: ['Hero', 'Classes Grid', 'Membership Plans', 'Trainer Team', 'Footer']
+                },
                 'rustic-store-cms': {
                     name: 'Rustic Store',
                     description: 'A premium e-commerce template for high-end furniture and home decor brands. Features a warm, industrial aesthetic that emphasizes craftsmanship.',
@@ -276,6 +283,13 @@ export const translations = {
                 weddings: 'Casamentos'
             },
             items: {
+                'iron-strength-cms': {
+                    name: 'IronStrength',
+                    description: 'Um tema de fitness de alta energia projetado para academias, boxes de crossfit e personal trainers. Ousado, agressivo e focado em conversão.',
+                    target: 'Academias, Estúdios de Crossfit, Personal Trainers e Centros de Fitness.',
+                    features: ['Grade de Horários de Aulas', 'Tabelas de Preços de Planos', 'Destaque da Equipe de Treinadores', 'Seção Hero de Alto Impacto'],
+                    sections: ['Hero', 'Grade de Aulas', 'Planos de Afiliação', 'Equipe de Treinadores', 'Rodapé']
+                },
                 'rustic-store-cms': {
                     name: 'Rustic Store',
                     description: 'Um template de e-commerce premium para marcas de móveis e decoração de alto padrão. Possui uma estética industrial acolhedora que enfatiza o artesanato.',

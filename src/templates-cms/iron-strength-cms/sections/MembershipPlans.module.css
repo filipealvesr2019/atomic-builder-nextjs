@@ -1,0 +1,124 @@
+.section {
+    padding: 6rem 2rem;
+    background: #1a1a1a;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #9ca3af;
+    font-size: 1.1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: center;
+}
+
+.card {
+    background: #111;
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.card.highlight {
+    background: #222;
+    border: 1px solid #ff3e3e;
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.planName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: #d1d5db;
+}
+
+.priceWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-bottom: 2rem;
+    color: #ff3e3e;
+}
+
+.price {
+    font-size: 3.5rem;
+    font-weight: 900;
+}
+
+.period {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.features li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #333;
+    color: #d1d5db;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.features li:last-child {
+    border-bottom: none;
+}
+
+.check {
+    color: #ff3e3e;
+}
+
+.button {
+    background: transparent;
+    color: white;
+    border: 1px solid #ff3e3e;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    display: block;
+}
+
+.card.highlight .button {
+    background: #ff3e3e;
+    color: white;
+}
+
+.button:hover {
+    background: #ff3e3e;
+    color: white;
+}
