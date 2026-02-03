@@ -152,6 +152,10 @@ import { creatixDefaultContent } from './creatix-theme/default-content';
 import IronStrengthHome from './iron-strength-cms/layouts/HomePage';
 import { ironStrengthDefaultContent } from './iron-strength-cms/default-content';
 
+// Lumina Glow Theme
+import LuminaGlowHome from './lumina-glow-cms/layouts/HomePage';
+import { luminaGlowDefaultContent } from './lumina-glow-cms/default-content';
+
 const templates = {
   'iron-strength-cms': {
     name: 'IronStrength',
@@ -163,6 +167,18 @@ const templates = {
     },
     sections: {
       // Mapping for dynamic section adding (future proofing)
+    }
+  },
+  'lumina-glow-cms': {
+    name: 'Lumina Glow',
+    category: 'cosmetics',
+    type: 'ecommerce',
+    defaultContent: luminaGlowDefaultContent,
+    layouts: {
+      home: LuminaGlowHome
+    },
+    sections: {
+      // Future proofing
     }
   },
   'rustic-store-cms': {

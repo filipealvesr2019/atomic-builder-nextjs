@@ -1,0 +1,84 @@
+.section {
+    display: flex;
+    min-height: 600px;
+    background: #FFF;
+}
+
+.section.reverse {
+    flex-direction: row-reverse;
+}
+
+.imageSide,
+.textSide {
+    flex: 1;
+}
+
+.imageSide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.textSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem;
+    background: #FAFAFA;
+}
+
+.overline {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #757575;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 3rem;
+    color: #000;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #424242;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+.ctaButton {
+    align-self: flex-start;
+    padding: 1rem 2.5rem;
+    border: 1px solid #000;
+    background: transparent;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+    background: #000;
+    color: #FFF;
+}
+
+@media (max-width: 900px) {
+    .section {
+        flex-direction: column !important;
+    }
+
+    .imageSide {
+        height: 400px;
+    }
+
+    .textSide {
+        padding: 4rem 2rem;
+    }
+}

@@ -1,0 +1,77 @@
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 1.75rem;
+    letter-spacing: 0.1em;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.nav {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav a {
+    color: #1f1f1f;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.nav a:hover {
+    opacity: 0.6;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.iconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #000;
+    transition: opacity 0.2s;
+}
+
+.iconButton:hover {
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav {
+        display: none;
+    }
+}

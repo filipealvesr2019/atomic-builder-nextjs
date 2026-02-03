@@ -1,0 +1,97 @@
+.footer {
+    background: #000;
+    color: #FFF;
+    padding: 6rem 3rem 2rem;
+}
+
+.top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 4rem;
+    margin-bottom: 6rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.column h3 {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #FFF;
+}
+
+.links {
+    list-style: none;
+    padding: 0;
+}
+
+.links li {
+    margin-bottom: 1rem;
+}
+
+.links a {
+    color: #BDBDBD;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.links a:hover {
+    color: #FFF;
+}
+
+.newsletterInput {
+    width: 100%;
+    padding: 1rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #424242;
+    color: #FFF;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.newsletterInput:focus {
+    outline: none;
+    border-bottom: 1px solid #FFF;
+}
+
+.submitBtn {
+    background: transparent;
+    border: 1px solid #FFF;
+    color: #FFF;
+    padding: 0.8rem 2rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid #222;
+    color: #757575;
+    font-size: 0.85rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .top {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .top {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        padding: 4rem 1.5rem 1.5rem;
+    }
+}
