@@ -18,9 +18,11 @@ export default function ProductCarousel({ content }) {
                 {items.map((item) => (
                     <div key={item.id} className={styles.card}>
                         <div className={styles.imageContainer}>
+                            {item.badge && <span className={styles.badge}>{item.badge}</span>}
                             <img src={item.image} alt={item.name} className={styles.image} />
                         </div>
                         <div className={styles.info}>
+                            <span className={styles.category}>{item.category}</span>
                             <span className={styles.productName}>{item.name}</span>
                             <span className={styles.price}>{item.price}</span>
                         </div>
