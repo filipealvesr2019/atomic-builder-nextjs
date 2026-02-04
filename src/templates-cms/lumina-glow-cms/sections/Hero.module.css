@@ -57,12 +57,13 @@
 .content {
     text-align: center;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.4);
-    /* More transparent glass effect */
-    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.15);
+    /* Ultra-transparent glass effect */
+    backdrop-filter: blur(20px);
     padding: 3rem 4rem;
     border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    /* Slightly stronger shadow for depth */
 }
 
 .tagline {
