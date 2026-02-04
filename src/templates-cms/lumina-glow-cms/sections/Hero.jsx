@@ -11,62 +11,52 @@ export default function Hero({ content }) {
 
     if (!slides.length) return null;
 
-    const handleMouseDown = (e) => {
+    useEffect(() => {
+        if (!isDragging) return;
+
+        const onMove = (e) => {
+            const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+            setDragOffset(pageX - startX);
+        };
+
+        const onEnd = () => {
+            setIsDragging(false);
+            const threshold = 80;
+            if (dragOffset < -threshold && current < slides.length - 1) {
+                setCurrent(current + 1);
+            } else if (dragOffset > threshold && current > 0) {
+                setCurrent(current - 1);
+            }
+            setDragOffset(0);
+        };
+
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+        window.addEventListener('touchmove', onMove, { passive: false });
+        window.addEventListener('touchend', onEnd);
+
+        return () => {
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('mouseup', onEnd);
+            window.removeEventListener('touchmove', onMove);
+            window.removeEventListener('touchend', onEnd);
+        };
+    }, [isDragging, dragOffset, startX, current, slides.length]);
+
+    const handleStart = (e) => {
+        const pageX = e.touches ? e.touches[0].pageX : e.pageX;
         setIsDragging(true);
-        setStartX(e.pageX - dragOffset);
-        // Prevent text selection during drag
-        e.preventDefault();
-    };
-
-    const handleMouseMove = (e) => {
-        if (!isDragging) return;
-        const currentX = e.pageX;
-        setDragOffset(currentX - startX);
-    };
-
-    const handleMouseUp = () => {
-        if (!isDragging) return;
-        setIsDragging(false);
-
-        const threshold = 80; // Slightly lower threshold for better feel
-        if (dragOffset < -threshold && current < slides.length - 1) {
-            setCurrent(current + 1);
-        } else if (dragOffset > threshold && current > 0) {
-            setCurrent(current - 1);
-        }
-
-        setDragOffset(0);
-    };
-
-    const handleMouseLeave = () => {
-        if (isDragging) handleMouseUp();
-    };
-
-    // Touch support
-    const handleTouchStart = (e) => {
-        setIsDragging(true);
-        setStartX(e.touches[0].pageX - dragOffset);
-    };
-
-    const handleTouchMove = (e) => {
-        if (!isDragging) return;
-        // Prevent page scroll while dragging carousel
-        if (e.cancelable) e.preventDefault();
-        const currentX = e.touches[0].pageX;
-        setDragOffset(currentX - startX);
+        setStartX(pageX);
+        // Prevent default only for mouse to not break touch scroll if not dragging significantly
+        if (!e.touches) e.preventDefault();
     };
 
     return (
         <section className={styles.heroSection}>
             <div
                 className={`${styles.carouselContainer} ${isDragging ? styles.grabbing : ''}`}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleMouseUp}
+                onMouseDown={handleStart}
+                onTouchStart={handleStart}
             >
                 <div
                     className={styles.slider}

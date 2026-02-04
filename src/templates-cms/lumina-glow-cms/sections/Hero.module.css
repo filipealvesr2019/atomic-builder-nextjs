@@ -13,6 +13,8 @@
     overflow: visible;
     cursor: grab;
     user-select: none;
+    touch-action: pan-y;
+    /* Allow vertical scroll but handle horizontal drag better */
 }
 
 .grabbing {
