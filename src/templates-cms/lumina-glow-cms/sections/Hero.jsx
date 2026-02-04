@@ -14,24 +14,21 @@ export default function Hero({ content }) {
     const handleMouseDown = (e) => {
         setIsDragging(true);
         setStartX(e.pageX - dragOffset);
+        // Prevent text selection during drag
+        e.preventDefault();
     };
 
     const handleMouseMove = (e) => {
         if (!isDragging) return;
         const currentX = e.pageX;
-        const newOffset = currentX - startX;
-
-        // Limit drag to one slide width roughly
-        if (Math.abs(newOffset) < window.innerWidth / 2) {
-            setDragOffset(newOffset);
-        }
+        setDragOffset(currentX - startX);
     };
 
     const handleMouseUp = () => {
         if (!isDragging) return;
         setIsDragging(false);
 
-        const threshold = 100; // px to trigger slide change
+        const threshold = 80; // Slightly lower threshold for better feel
         if (dragOffset < -threshold && current < slides.length - 1) {
             setCurrent(current + 1);
         } else if (dragOffset > threshold && current > 0) {
@@ -53,6 +50,8 @@ export default function Hero({ content }) {
 
     const handleTouchMove = (e) => {
         if (!isDragging) return;
+        // Prevent page scroll while dragging carousel
+        if (e.cancelable) e.preventDefault();
         const currentX = e.touches[0].pageX;
         setDragOffset(currentX - startX);
     };
@@ -85,8 +84,9 @@ export default function Hero({ content }) {
                                     backgroundImage: `url(${slide.image})`,
                                     backgroundColor: slide.bgColor
                                 }}
+                                onDragStart={(e) => e.preventDefault()}
                             >
-                                <div className={styles.overlay}>
+                                <div className={`${styles.overlay} ${styles[slide.align] || styles.center}`}>
                                     <div className={styles.content}>
                                         <span className={styles.tagline}>{slide.tagline}</span>
                                         <h1 className={styles.title}>{slide.title}</h1>

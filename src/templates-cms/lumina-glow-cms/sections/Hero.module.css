@@ -47,23 +47,31 @@
     inset: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    /* Moved to the right */
-    padding-right: 8%;
-    /* Safe distance from edge */
+    padding: 2rem 10%;
+    /* Increased padding for better alignment */
     background: transparent;
+}
+
+.left {
+    justify-content: flex-start;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+.center {
+    justify-content: center;
 }
 
 .content {
     text-align: center;
-    max-width: 500px;
-    background: rgba(255, 255, 255, 0.2);
-    /* Transparent but visible box */
-    backdrop-filter: blur(10px);
-    /* Balanced blur for depth without distortion */
+    max-width: 550px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
     padding: 3rem 4rem;
     border-radius: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
 .tagline {

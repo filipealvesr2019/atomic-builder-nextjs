@@ -25,21 +25,24 @@ const defaultContent = {
                 title: 'Get the skin you want to feel',
                 image: 'https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1974&auto=format&fit=crop',
                 bgColor: '#F3D1C8',
-                cta: { label: 'Shop Now', link: '#shop' }
+                cta: { label: 'Shop Now', link: '#shop' },
+                align: 'right'
             },
             {
                 tagline: 'Pure & Organic',
                 title: 'Nature in every drop',
                 image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1974&auto=format&fit=crop',
                 bgColor: '#E2E8D5',
-                cta: { label: 'Explore All', link: '#about' }
+                cta: { label: 'Explore All', link: '#about' },
+                align: 'right'
             },
             {
                 tagline: 'Sustainable Luxury',
                 title: 'Elegance with a Conscience',
                 image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop',
                 bgColor: '#D4A373',
-                cta: { label: 'Join Us', link: '#journal' }
+                cta: { label: 'Join Us', link: '#journal' },
+                align: 'left'
             }
         ]
     },
