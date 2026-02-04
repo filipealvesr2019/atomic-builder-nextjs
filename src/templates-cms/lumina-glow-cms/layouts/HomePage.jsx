@@ -40,10 +40,10 @@ const defaultContent = {
     productCarousel: {
         title: 'Best Sellers',
         items: [
-            { id: 'p1', name: 'Glow Serum', price: '$48.00', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1887&auto=format&fit=crop' },
-            { id: 'p2', name: 'Daily Moisturizer', price: '$32.00', image: 'https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?q=80&w=1974&auto=format&fit=crop' },
-            { id: 'p3', name: 'Night Cream', price: '$55.00', image: 'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?q=80&w=1887&auto=format&fit=crop' },
-            { id: 'p4', name: 'Purifying Cleanser', price: '$24.00', image: 'https://images.unsplash.com/photo-1556228578-8d89482d8c97?q=80&w=1974&auto=format&fit=crop' }
+            { id: 'p1', category: 'Serum', name: 'Glow Serum', price: '$48.00', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1887&auto=format&fit=crop', badge: 'New' },
+            { id: 'p2', category: 'Cream', name: 'Daily Moisturizer', price: '$32.00', image: 'https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?q=80&w=1974&auto=format&fit=crop' },
+            { id: 'p3', category: 'Cream', name: 'Night Cream', price: '$55.00', image: 'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?q=80&w=1887&auto=format&fit=crop', badge: 'Sold Out' },
+            { id: 'p4', category: 'Cleanser', name: 'Purifying Cleanser', price: '$24.00', image: 'https://images.unsplash.com/photo-1556228578-8d89482d8c97?q=80&w=1974&auto=format&fit=crop' }
         ]
     },
     imageWithText: {

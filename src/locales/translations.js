@@ -290,6 +290,13 @@ export const translations = {
                 weddings: 'Casamentos'
             },
             items: {
+                'lumina-glow-cms': {
+                    name: 'Lumina Glow',
+                    description: 'Um tema de cosméticos minimalista e de alto padrão, inspirado nas grandes marcas de beleza. Linhas limpas, destaque para ingredientes e foco em storytelling visual.',
+                    target: 'Marcas de Skincare, Maquiadores e Boutiques de Beleza.',
+                    features: ['Destaque de Ingredientes', 'Carrossel de Produtos Minimalista', 'Seção de História da Marca', 'Banner Marquee'],
+                    sections: ['Hero', 'Marquee', 'Ingredientes Chave', 'Mais Vendidos', 'História da Marca', 'Rodapé']
+                },
                 'iron-strength-cms': {
                     name: 'IronStrength',
                     description: 'Um tema de fitness de alta energia projetado para academias, boxes de crossfit e personal trainers. Ousado, agressivo e focado em conversão.',
