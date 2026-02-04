@@ -19,10 +19,22 @@ const defaultContent = {
         cta: { label: 'Cart (0)', link: '#cart' }
     },
     hero: {
-        title: 'Radiance meant to be shared.',
-        subtitle: 'Clean, vegan formulations for your best skin yet.',
-        image: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1974&auto=format&fit=crop',
-        cta: { label: 'Shop The Collection', link: '#shop' }
+        slides: [
+            {
+                tagline: 'Blend Beauty In You',
+                title: 'Get the skin you want to feel',
+                image: 'https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1974&auto=format&fit=crop',
+                bgColor: '#F3D1C8',
+                cta: { label: 'Shop Now', link: '#shop' }
+            },
+            {
+                tagline: 'Pure & Organic',
+                title: 'Nature in every drop',
+                image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1974&auto=format&fit=crop',
+                bgColor: '#E2E8D5',
+                cta: { label: 'Explore All', link: '#about' }
+            }
+        ]
     },
     marquee: {
         text: 'CRUELTY FREE • VEGAN • ORGANIC • SUSTAINABLE PACKAGING • DERMATOLOGIST TESTED • '
