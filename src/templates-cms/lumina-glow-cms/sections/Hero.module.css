@@ -57,9 +57,9 @@
 .content {
     text-align: center;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.7);
-    /* Glass effect background */
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.4);
+    /* More transparent glass effect */
+    backdrop-filter: blur(15px);
     padding: 3rem 4rem;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);

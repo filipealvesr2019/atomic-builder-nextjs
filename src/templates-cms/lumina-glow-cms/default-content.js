@@ -43,25 +43,20 @@ export const luminaGlowDefaultContent = {
         hero: {
             slides: [
                 {
-                    tagline: 'Blend Beauty In You',
-                    title: 'Get the skin you want to feel',
+                    tagline: 'ETHICAL • CLEAN • TIMELESS',
+                    title: 'Sustainable Beauty, Elevated',
+                    features: 'Eco Certified • Cruelty-Free',
                     image: 'https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1974&auto=format&fit=crop',
                     bgColor: '#F3D1C8',
-                    cta: { label: 'Shop Now', link: '#shop' }
+                    cta: { label: 'Shop the Collection', link: '#shop' }
                 },
                 {
-                    tagline: 'Pure & Organic',
+                    tagline: 'PURE • ORGANIC • POTENT',
                     title: 'Nature in every drop',
+                    features: '100% Vegan • Plant Based',
                     image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1974&auto=format&fit=crop',
                     bgColor: '#E2E8D5',
-                    cta: { label: 'Explore All', link: '#about' }
-                },
-                {
-                    tagline: 'Sustainable Luxury',
-                    title: 'Elegance with a Conscience',
-                    image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop',
-                    bgColor: '#D4A373',
-                    cta: { label: 'Join Us', link: '#journal' }
+                    cta: { label: 'Explore the Range', link: '#about' }
                 }
             ]
         },
