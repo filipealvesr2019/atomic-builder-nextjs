@@ -55,6 +55,13 @@ export const luminaGlowDefaultContent = {
                     image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1974&auto=format&fit=crop',
                     bgColor: '#E2E8D5',
                     cta: { label: 'Explore All', link: '#about' }
+                },
+                {
+                    tagline: 'Sustainable Luxury',
+                    title: 'Elegance with a Conscience',
+                    image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop',
+                    bgColor: '#D4A373',
+                    cta: { label: 'Join Us', link: '#journal' }
                 }
             ]
         },
