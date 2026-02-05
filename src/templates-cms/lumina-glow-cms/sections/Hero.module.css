@@ -37,43 +37,36 @@
     position: relative;
     width: 100%;
     height: 600px;
-    background-size: cover;
-    background-position: center;
     border-radius: 60px;
-    /* High border-radius as per reference */
     overflow: hidden;
+    display: flex;
+    /* Split layout */
 }
 
-.overlay {
-    position: absolute;
-    inset: 0;
+.textSide {
+    width: 35%;
+    /* Slightly more than 30% for better spacing */
     display: flex;
     align-items: center;
-    padding: 2rem 10%;
-    /* Increased padding for better alignment */
-    background: transparent;
-}
-
-.left {
-    justify-content: flex-start;
-}
-
-.right {
-    justify-content: flex-end;
-}
-
-.center {
     justify-content: center;
+    padding: 3rem 4rem;
+}
+
+.imageSide {
+    width: 65%;
+    height: 100%;
+}
+
+.slideImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .content {
-    text-align: center;
-    max-width: 550px;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px);
-    padding: 3rem 4rem;
-    border-radius: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    /* Changed from center */
+    max-width: 100%;
 }
 
 .tagline {
@@ -139,14 +132,19 @@
 
 @media (max-width: 1024px) {
     .card {
-        height: 500px;
+        height: auto;
+        flex-direction: column;
         border-radius: 40px;
     }
 
-    .overlay {
-        justify-content: center;
-        padding: 2rem;
-        background: rgba(255, 255, 255, 0.2);
+    .textSide {
+        width: 100%;
+        padding: 4rem 3rem;
+    }
+
+    .imageSide {
+        width: 100%;
+        height: 400px;
     }
 
     .title {
@@ -159,8 +157,8 @@
         padding: 1rem;
     }
 
-    .card {
-        height: 400px;
+    .imageSide {
+        height: 300px;
     }
 
     .title {

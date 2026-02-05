@@ -70,13 +70,12 @@ export default function Hero({ content }) {
                         <div key={index} className={styles.slideWrapper}>
                             <div
                                 className={styles.card}
-                                style={{
-                                    backgroundImage: `url(${slide.image})`,
-                                    backgroundColor: slide.bgColor
-                                }}
                                 onDragStart={(e) => e.preventDefault()}
                             >
-                                <div className={`${styles.overlay} ${styles[slide.align] || styles.center}`}>
+                                <div
+                                    className={styles.textSide}
+                                    style={{ backgroundColor: slide.bgColor }}
+                                >
                                     <div className={styles.content}>
                                         <span className={styles.tagline}>{slide.tagline}</span>
                                         <h1 className={styles.title}>{slide.title}</h1>
@@ -88,6 +87,9 @@ export default function Hero({ content }) {
                                             {slide.cta?.label}
                                         </a>
                                     </div>
+                                </div>
+                                <div className={styles.imageSide}>
+                                    <img src={slide.image} alt={slide.title} className={styles.slideImage} />
                                 </div>
                             </div>
                         </div>
