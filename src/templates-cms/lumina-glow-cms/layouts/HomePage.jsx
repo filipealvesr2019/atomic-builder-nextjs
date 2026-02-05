@@ -26,7 +26,7 @@ const defaultContent = {
                 image: 'https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1974&auto=format&fit=crop',
                 bgColor: '#F3D1C8',
                 cta: { label: 'Shop Now', link: '#shop' },
-                align: 'right'
+                align: 'left'
             },
             {
                 tagline: 'Pure & Organic',
@@ -34,7 +34,7 @@ const defaultContent = {
                 image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1974&auto=format&fit=crop',
                 bgColor: '#E2E8D5',
                 cta: { label: 'Explore All', link: '#about' },
-                align: 'right'
+                align: 'left'
             },
             {
                 tagline: 'Sustainable Luxury',
