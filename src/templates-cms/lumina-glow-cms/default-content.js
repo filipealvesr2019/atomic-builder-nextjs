@@ -74,9 +74,9 @@ export const luminaGlowDefaultContent = {
             }
         },
         categories: {
-            subtitle: 'Care For Your Skin',
-            title: 'Natural self care products',
-            description: 'We create safe products that really work and are designed to make you feel good',
+            subtitle: 'Categories',
+            title: 'Shop by Collection',
+            description: 'Explore our curated skincare categories, designed to bring out your natural glow',
             items: [
                 { id: 'c1', name: 'Facial Serums', count: '12 items', image: '/images/lumina-glow/lumina_facial_serum_1770331852127.png' },
                 { id: 'c2', name: 'Moisturizing Creams', count: '15 items', image: '/images/lumina-glow/lumina_moisturizer_cream_1770331710494.png' },
