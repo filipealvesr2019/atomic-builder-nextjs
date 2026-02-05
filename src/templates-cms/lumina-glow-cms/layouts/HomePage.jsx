@@ -54,11 +54,11 @@ const defaultContent = {
         title: 'Natural self care products',
         description: 'We create safe products that really work and are designed to make you feel good',
         items: [
-            { id: 'c1', name: 'Facial Serums', count: '12 items', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop' },
-            { id: 'c2', name: 'Moisturizing Creams', count: '15 items', image: 'https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?q=80&w=1974&auto=format&fit=crop' },
-            { id: 'c3', name: 'Purifying Cleansers', count: '8 items', image: 'https://images.unsplash.com/photo-1556228578-8d89482d8c97?q=80&w=1974&auto=format&fit=crop' },
-            { id: 'c4', name: 'Body Care', count: '10 items', image: 'https://images.unsplash.com/photo-1559599101-f0973ed7a0ca?q=80&w=1974&auto=format&fit=crop' },
-            { id: 'c5', name: 'Skincare Tools', count: '6 items', image: 'https://images.unsplash.com/photo-1590103512987-0fd8701f40f5?q=80&w=1974&auto=format&fit=crop' }
+            { id: 'c1', name: 'Facial Serums', count: '12 items', image: '/images/lumina-glow/lumina_facial_serum_1770331852127.png' },
+            { id: 'c2', name: 'Moisturizing Creams', count: '15 items', image: '/images/lumina-glow/lumina_moisturizer_cream_1770331710494.png' },
+            { id: 'c3', name: 'Purifying Cleansers', count: '8 items', image: '/images/lumina-glow/lumina_purifying_cleanser_1770331727279.png' },
+            { id: 'c4', name: 'Body Care', count: '10 items', image: '/images/lumina-glow/lumina_body_lotion_1770331740635.png' },
+            { id: 'c5', name: 'Skincare Tools', count: '6 items', image: '/images/lumina-glow/lumina_skincare_tools_1770331672860.png' }
         ]
     },
     ingredients: {
