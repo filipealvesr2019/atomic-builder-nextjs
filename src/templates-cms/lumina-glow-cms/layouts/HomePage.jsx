@@ -83,7 +83,7 @@ const defaultContent = {
     imageWithText: {
         title: 'Nature meets Science',
         subtitle: 'We believe in the power of plants backed by clinical results. Our formulas are designed to balance and nourish.',
-        image: 'https://images.unsplash.com/photo-1556228720-1957be83f7be?q=80&w=1974&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1974&auto=format&fit=crop',
         imagePosition: 'left',
         cta: { label: 'Our Story', link: '#about' }
     },
