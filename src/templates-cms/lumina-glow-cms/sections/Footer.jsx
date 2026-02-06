@@ -24,7 +24,6 @@ export default function Footer({ content }) {
                         <li><a href="#">Skincare</a></li>
                         <li><a href="#">Body</a></li>
                         <li><a href="#">Sets</a></li>
-                        <li><a href="#">Gift Cards</a></li>
                     </ul>
                 </div>
 
@@ -32,8 +31,7 @@ export default function Footer({ content }) {
                     <h3>About</h3>
                     <ul className={styles.links}>
                         <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Ingredients</a></li>
-                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Collections</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </div>

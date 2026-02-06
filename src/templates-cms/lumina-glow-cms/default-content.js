@@ -32,7 +32,7 @@ export const luminaGlowDefaultContent = {
             navItems: [
                 { label: 'Shop', href: '#shop' },
                 { label: 'About', href: '#about' },
-                { label: 'Ingredients', href: '#ingredients' },
+                { label: 'Collections', href: '#collections' },
                 { label: 'Journal', href: '#journal' }
             ],
             cta: {
