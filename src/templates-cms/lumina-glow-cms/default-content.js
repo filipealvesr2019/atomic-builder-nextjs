@@ -113,7 +113,7 @@ export const luminaGlowDefaultContent = {
             ]
         },
         footer: {
-            text: '© 2024 Lumina Glow. Designed for radiance.',
+            text: '© 2024 Lumina Glow. This is a fictional store and all products shown are for demonstration purposes only.',
             newsletterTitle: 'Join the inner circle',
             newsletterText: 'Subscribe for exclusive offers and skincare tips.'
         }
