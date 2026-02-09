@@ -75,9 +75,9 @@ const defaultContent = {
         title: 'Best Sellers',
         items: [
             { id: 'p1', category: 'Serum', name: 'Glow Serum', price: '$48.00', image: '/images/lumina-glow/product_1.png', badge: 'New' },
-            { id: 'p2', category: 'Cream', name: 'Daily Moisturizer', price: '$32.00', image: '/images/lumina-glow/product_2.png' },
-            { id: 'p3', category: 'Cream', name: 'Night Cream', price: '$55.00', image: '/images/lumina-glow/product_3.png', badge: 'Sold Out' },
-            { id: 'p4', category: 'Cleanser', name: 'Purifying Cleanser', price: '$24.00', image: '/images/lumina-glow/product_4.png' }
+            { id: 'p2', category: 'Cream', name: 'Daily Moisturizer', price: '$32.00', image: '/images/lumina-glow/product_2.png.png' },
+            { id: 'p3', category: 'Cream', name: 'Night Cream', price: '$55.00', image: '/images/lumina-glow/product_3.png.png', badge: 'Sold Out' },
+            { id: 'p4', category: 'Cleanser', name: 'Purifying Cleanser', price: '$24.00', image: '/images/lumina-glow/product_4.png.png' }
         ]
     },
     imageWithText: {
