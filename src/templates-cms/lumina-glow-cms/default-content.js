@@ -43,20 +43,28 @@ export const luminaGlowDefaultContent = {
         hero: {
             slides: [
                 {
-                    tagline: 'ETHICAL • CLEAN • TIMELESS',
-                    title: 'Sustainable Beauty, Elevated',
-                    features: 'Eco Certified • Cruelty-Free',
-                    image: 'https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1974&auto=format&fit=crop',
-                    bgColor: '#F3D1C8',
-                    cta: { label: 'Shop the Collection', link: '#shop' }
+                    tagline: 'REDEFINE YOUR RADIANCE',
+                    title: 'The Science of Timeless Skin',
+                    features: 'Clinical Results • Pure Ingredients',
+                    image: '/images/lumina-glow/lumina_light_hero_1.png',
+                    bgColor: '#F9F4F2', // Softer, lighter peach
+                    cta: { label: 'Shop the Glow', link: '#shop' }
                 },
                 {
-                    tagline: 'PURE • ORGANIC • POTENT',
-                    title: 'Nature in every drop',
-                    features: '100% Vegan • Plant Based',
-                    image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1974&auto=format&fit=crop',
-                    bgColor: '#E2E8D5',
-                    cta: { label: 'Explore the Range', link: '#about' }
+                    tagline: 'ORGANIC • POWERFUL • PURE',
+                    title: 'Luxury Rooted in Nature',
+                    features: '100% Vegan • Eco-Certified',
+                    image: '/images/lumina-glow/lumina_light_hero_2.png',
+                    bgColor: '#F2F5F0', // Softer, lighter sage
+                    cta: { label: 'Explore More', link: '#about' }
+                },
+                {
+                    tagline: 'MINIMAL • ELEGANT • EFFECTIVE',
+                    title: 'Minimalism for Maximum Glow',
+                    features: 'Tailored Formulas • Expert Care',
+                    image: '/images/lumina-glow/lumina_light_hero_3.png',
+                    bgColor: '#F5F5F7', // Crisp, light grey
+                    cta: { label: 'View Selection', link: '#shop' }
                 }
             ]
         },
