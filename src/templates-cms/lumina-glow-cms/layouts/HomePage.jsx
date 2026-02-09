@@ -21,27 +21,27 @@ const defaultContent = {
     hero: {
         slides: [
             {
-                tagline: 'Blend Beauty In You',
-                title: 'Get the skin you want to feel',
-                image: 'https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1974&auto=format&fit=crop',
-                bgColor: '#F3D1C8',
-                cta: { label: 'Shop Now', link: '#shop' },
+                tagline: 'REDEFINE YOUR RADIANCE',
+                title: 'The Science of Timeless Skin',
+                image: '/images/lumina-glow/lumina_light_hero_1.png.png',
+                bgColor: '#F9F4F2',
+                cta: { label: 'Shop the Glow', link: '#shop' },
                 align: 'left'
             },
             {
-                tagline: 'Pure & Organic',
-                title: 'Nature in every drop',
-                image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?q=80&w=1974&auto=format&fit=crop',
-                bgColor: '#E2E8D5',
-                cta: { label: 'Explore All', link: '#about' },
+                tagline: 'ORGANIC • POWERFUL • PURE',
+                title: 'Luxury Rooted in Nature',
+                image: '/images/lumina-glow/lumina_light_hero_2.png.png',
+                bgColor: '#F2F5F0',
+                cta: { label: 'Explore More', link: '#about' },
                 align: 'left'
             },
             {
-                tagline: 'Sustainable Luxury',
-                title: 'Elegance with a Conscience',
-                image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop',
-                bgColor: '#D4A373',
-                cta: { label: 'Join Us', link: '#journal' },
+                tagline: 'MINIMAL • ELEGANT • EFFECTIVE',
+                title: 'Minimalism for Maximum Glow',
+                image: '/images/lumina-glow/lumina_light_hero_3.png.png',
+                bgColor: '#F5F5F7',
+                cta: { label: 'View Selection', link: '#shop' },
                 align: 'left'
             }
         ]

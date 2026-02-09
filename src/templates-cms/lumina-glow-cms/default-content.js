@@ -46,7 +46,7 @@ export const luminaGlowDefaultContent = {
                     tagline: 'REDEFINE YOUR RADIANCE',
                     title: 'The Science of Timeless Skin',
                     features: 'Clinical Results • Pure Ingredients',
-                    image: '/images/lumina-glow/lumina_light_hero_1.png',
+                    image: '/images/lumina-glow/lumina_light_hero_1.png.png',
                     bgColor: '#F9F4F2', // Softer, lighter peach
                     cta: { label: 'Shop the Glow', link: '#shop' }
                 },
@@ -54,7 +54,7 @@ export const luminaGlowDefaultContent = {
                     tagline: 'ORGANIC • POWERFUL • PURE',
                     title: 'Luxury Rooted in Nature',
                     features: '100% Vegan • Eco-Certified',
-                    image: '/images/lumina-glow/lumina_light_hero_2.png',
+                    image: '/images/lumina-glow/lumina_light_hero_2.png.png',
                     bgColor: '#F2F5F0', // Softer, lighter sage
                     cta: { label: 'Explore More', link: '#about' }
                 },
@@ -62,7 +62,7 @@ export const luminaGlowDefaultContent = {
                     tagline: 'MINIMAL • ELEGANT • EFFECTIVE',
                     title: 'Minimalism for Maximum Glow',
                     features: 'Tailored Formulas • Expert Care',
-                    image: '/images/lumina-glow/lumina_light_hero_3.png',
+                    image: '/images/lumina-glow/lumina_light_hero_3.png.png',
                     bgColor: '#F5F5F7', // Crisp, light grey
                     cta: { label: 'View Selection', link: '#shop' }
                 }
