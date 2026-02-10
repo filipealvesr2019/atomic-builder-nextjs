@@ -30,10 +30,10 @@ export const luminaGlowDefaultContent = {
         header: {
             variant: 'sticky',
             navItems: [
-                { label: 'Shop', href: '#shop' },
-                { label: 'About', href: '#about' },
-                { label: 'Collections', href: '#collections' },
-                { label: 'Journal', href: '#journal' }
+                { label: 'Shop', href: '/iframe-preview/lumina-glow-cms' },
+                { label: 'About', href: '/iframe-preview/lumina-glow-cms/about' },
+                { label: 'Collections', href: '/iframe-preview/lumina-glow-cms#collections' },
+                { label: 'Journal', href: '/iframe-preview/lumina-glow-cms#journal' }
             ],
             cta: {
                 label: 'Cart (0)',
@@ -78,7 +78,7 @@ export const luminaGlowDefaultContent = {
             imagePosition: 'left', // left or right
             cta: {
                 label: 'Our Story',
-                link: '#about'
+                link: '/iframe-preview/lumina-glow-cms/about'
             }
         },
         categories: {
@@ -116,6 +116,37 @@ export const luminaGlowDefaultContent = {
             text: '© 2024 Lumina Glow. This is a fictional store and all products shown are for demonstration purposes only.',
             newsletterTitle: 'Join the inner circle',
             newsletterText: 'Subscribe for exclusive offers and skincare tips.'
+        },
+        aboutPage: {
+            hero: {
+                slides: [
+                    {
+                        tagline: 'OUR PHILOSOPHY',
+                        title: 'Pure Radiance, Rooted in Tradition',
+                        features: 'Heritage • Innovation • Purity',
+                        image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=2070&auto=format&fit=crop',
+                        bgColor: '#F9F4F2',
+                        cta: { label: 'Discover our journey', link: '/iframe-preview/lumina-glow-cms#journey' }
+                    }
+                ]
+            },
+            story: {
+                title: 'The Lumina Story',
+                subtitle: 'Founded on the belief that beauty should be as pure as the nature it comes from. We spent years perfecting formulas that deliver clinical results without compromise.',
+                image: 'https://images.unsplash.com/photo-1556228720-1957be83f7be?q=80&w=1974&auto=format&fit=crop',
+                imagePosition: 'right',
+                cta: { label: 'Explore Our Collections', link: '/iframe-preview/lumina-glow-cms' }
+            },
+            values: {
+                title: 'Our Core Values',
+                subtitle: 'Ethical, Sustainable, and Effective.',
+                items: [
+                    { id: 'v1', name: 'Cruelty Free', image: 'https://images.unsplash.com/photo-1615397349754-08a8031d27fa?q=80&w=1974&auto=format&fit=crop' },
+                    { id: 'v2', name: '100% Vegan', image: 'https://images.unsplash.com/photo-1610449557262-42173f328905?q=80&w=1974&auto=format&fit=crop' },
+                    { id: 'v3', name: 'Sustainable', image: 'https://images.unsplash.com/photo-1596704017389-96e85557d560?q=80&w=1974&auto=format&fit=crop' },
+                    { id: 'v4', name: 'Dermatologist Tested', image: 'https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?q=80&w=1974&auto=format&fit=crop' }
+                ]
+            }
         }
     }
 };

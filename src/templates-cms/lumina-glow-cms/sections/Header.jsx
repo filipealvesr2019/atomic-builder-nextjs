@@ -3,11 +3,11 @@ import styles from './Header.module.css';
 import { ShoppingBag, Search, Menu } from 'lucide-react';
 
 export default function Header({ content }) {
-    const { logo, navItems, cta } = content || {
-        logo: { text: 'LUMINA.' },
-        navItems: [],
-        cta: { label: 'Cart (0)', link: '#' }
-    };
+    const {
+        logo = { text: 'LUMINA.' },
+        navItems = [],
+        cta = { label: 'Cart (0)', link: '#' }
+    } = content || {};
 
     return (
         <header className={styles.header}>
@@ -15,9 +15,9 @@ export default function Header({ content }) {
                 <button className={styles.iconButton} style={{ display: 'none' }}> {/* Mobile Menu Placeholder */}
                     <Menu size={24} />
                 </button>
-                <div className={styles.logo}>
+                <a href="/iframe-preview/lumina-glow-cms" className={styles.logo}>
                     {logo.text}
-                </div>
+                </a>
             </div>
 
             <nav className={styles.nav}>

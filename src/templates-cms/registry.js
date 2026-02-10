@@ -154,6 +154,7 @@ import { ironStrengthDefaultContent } from './iron-strength-cms/default-content'
 
 // Lumina Glow Theme
 import LuminaGlowHome from './lumina-glow-cms/layouts/HomePage';
+import LuminaGlowAbout from './lumina-glow-cms/layouts/AboutPage';
 import { luminaGlowDefaultContent } from './lumina-glow-cms/default-content';
 
 const templates = {
@@ -175,7 +176,8 @@ const templates = {
     type: 'ecommerce',
     defaultContent: luminaGlowDefaultContent,
     layouts: {
-      home: LuminaGlowHome
+      home: LuminaGlowHome,
+      about: LuminaGlowAbout
     },
     sections: {
       // Future proofing
