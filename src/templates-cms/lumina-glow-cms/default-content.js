@@ -146,6 +146,30 @@ export const luminaGlowDefaultContent = {
                     { id: 'v3', name: 'Purely Organic', icon: 'Leaf', description: '100% organic and natural ingredients for your cleanest, purest glow.' },
                     { id: 'v4', name: 'Toxicity Free', icon: 'DropletOff', description: 'Clean formulas without parabens, sulfates, or any harsh chemicals.' }
                 ]
+            },
+            ingredients: {
+                title: 'Naturally Sourced Ingredients',
+                subtitle: 'We select only the most effective botanical extracts for your skin.',
+                items: [
+                    {
+                        id: 'i1',
+                        name: 'Rosemary Leaf',
+                        description: 'Antioxidant-rich extract that helps soothe and protect the skin from environmental stressors.',
+                        image: 'https://images.unsplash.com/photo-1596704017389-96e85557d560?q=80&w=1974&auto=format&fit=crop'
+                    },
+                    {
+                        id: 'i2',
+                        name: 'Aloe Vera',
+                        description: 'Deeply hydrating and calming plant-based extract that restores moisture to all skin types.',
+                        image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=2070&auto=format&fit=crop'
+                    },
+                    {
+                        id: 'i3',
+                        name: 'Green Tea',
+                        description: 'Revitalizing extract known for its calming properties and ability to protect the skin barrier.',
+                        image: 'https://images.unsplash.com/photo-1615397349754-08a8031d27fa?q=80&w=1974&auto=format&fit=crop'
+                    }
+                ]
             }
         }
     }
