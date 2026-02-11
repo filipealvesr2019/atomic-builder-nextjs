@@ -1,0 +1,68 @@
+.section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.iconWrapper {
+    margin-bottom: 24px;
+    color: #1a1a1a;
+}
+
+.itemTitle {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.itemDescription {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

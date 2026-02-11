@@ -141,10 +141,10 @@ export const luminaGlowDefaultContent = {
                 title: 'Our Core Values',
                 subtitle: 'Ethical, Sustainable, and Effective.',
                 items: [
-                    { id: 'v1', name: 'Cruelty Free', image: 'https://images.unsplash.com/photo-1615397349754-08a8031d27fa?q=80&w=1974&auto=format&fit=crop' },
-                    { id: 'v2', name: '100% Vegan', image: 'https://images.unsplash.com/photo-1610449557262-42173f328905?q=80&w=1974&auto=format&fit=crop' },
-                    { id: 'v3', name: 'Sustainable', image: 'https://images.unsplash.com/photo-1596704017389-96e85557d560?q=80&w=1974&auto=format&fit=crop' },
-                    { id: 'v4', name: 'Dermatologist Tested', image: 'https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?q=80&w=1974&auto=format&fit=crop' }
+                    { id: 'v1', name: 'Planet Friendly', icon: 'Globe', description: 'Sustainable packaging and eco-conscious practices in everything we do.' },
+                    { id: 'v2', name: 'Ethically Crafted', icon: 'Atom', description: 'Cruelty-free beauty backed by ethical science and respect for all life.' },
+                    { id: 'v3', name: 'Purely Organic', icon: 'Leaf', description: '100% organic and natural ingredients for your cleanest, purest glow.' },
+                    { id: 'v4', name: 'Toxicity Free', icon: 'DropletOff', description: 'Clean formulas without parabens, sulfates, or any harsh chemicals.' }
                 ]
             }
         }

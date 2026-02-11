@@ -3,14 +3,14 @@ import Header from '../sections/Header';
 import Hero from '../sections/Hero';
 import Marquee from '../sections/Marquee';
 import ImageWithText from '../sections/ImageWithText';
-import Ingredients from '../sections/Ingredients';
+import Values from '../sections/Values';
 import Footer from '../sections/Footer';
 import { luminaGlowDefaultContent } from '../default-content';
 
 const defaultAboutContent = {
     header: luminaGlowDefaultContent.sections.header,
     story: luminaGlowDefaultContent.sections.aboutPage?.story || luminaGlowDefaultContent.sections.imageWithText,
-    values: luminaGlowDefaultContent.sections.aboutPage?.values || luminaGlowDefaultContent.sections.ingredients,
+    values: luminaGlowDefaultContent.sections.aboutPage?.values || {},
     footer: luminaGlowDefaultContent.sections.footer
 };
 
@@ -22,13 +22,7 @@ export default function AboutPage({ sections }) {
         <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', color: '#1f1f1f', paddingTop: '80px' }}>
             <Header content={finalContent.header} />
             <ImageWithText content={finalContent.story} />
-            <Ingredients
-                content={{
-                    title: finalContent.values.title,
-                    subtitle: finalContent.values.subtitle,
-                    items: finalContent.values.items
-                }}
-            />
+            <Values content={finalContent.values} />
             <Footer content={finalContent.footer} />
         </div>
     );
